@@ -6,7 +6,7 @@
 
 Этот документ объясняет логику локальных `helpers` и `partials` проекта `Aerocool` так, чтобы в ней мог быстро разобраться новичок.
 
-Текущая синхронизация документации с Hugo 0.163.0, Tailwind CSS 4.3, SEO/schema и CWV-практиками 2026 зафиксирована в [68-2026-06-11-hugo-0-163-documentation-sync-audit.md](../audits/68-2026-06-11-hugo-0-163-documentation-sync-audit.md). Историческая синхронизация лучших практик 2026 остается в [37-2026-05-13-documentation-2026-best-practices-sync-audit.md](../audits/37-2026-05-13-documentation-2026-best-practices-sync-audit.md).
+Текущая синхронизация документации с Hugo 0.164.0, Tailwind CSS 4.3, SEO/schema и CWV-практиками 2026 зафиксирована в [93-2026-07-07-hugo-0-164-update-audit.md](../audits/93-2026-07-07-hugo-0-164-update-audit.md). Историческая синхронизация лучших практик 2026 остается в [37-2026-05-13-documentation-2026-best-practices-sync-audit.md](../audits/37-2026-05-13-documentation-2026-best-practices-sync-audit.md).
 
 Главная цель:
 

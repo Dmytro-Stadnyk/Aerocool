@@ -4,7 +4,7 @@
 
 Этот документ объясняет, как текущий [hugo.yaml](../../hugo.yaml) влияет на SEO, индексацию, мультиязычность, Core Web Vitals, structured data и готовность проекта `Aerocool Ukraine` к борьбе за сильные позиции в Google Search.
 
-Важно: никакой конфиг, schema.org-разметка, PageSpeed score или объем текста не гарантируют `топ-1`. Цель этого документа - убрать технические причины проигрыша, зафиксировать лучшие практики стека `Hugo 0.163.0`, `Tailwind CSS 4.3`, `Netlify`, `PaperMod`, `Netlify Database` и дать понятный порядок проверки перед production.
+Важно: никакой конфиг, schema.org-разметка, PageSpeed score или объем текста не гарантируют `топ-1`. Цель этого документа - убрать технические причины проигрыша, зафиксировать лучшие практики стека `Hugo 0.164.0`, `Tailwind CSS 4.3`, `Netlify`, `PaperMod`, `Netlify Database` и дать понятный порядок проверки перед production.
 
 ## 1. Официальная База
 
@@ -31,7 +31,7 @@
 
 Почему высоко:
 
-- конфиг валиден для `Hugo 0.163.0`;
+- конфиг валиден для `Hugo 0.164.0`;
 - `baseURL` совпадает с production-доменом `https://aerocool.ua/`;
 - украинская версия живет в корне сайта, русская - в `/ru/`;
 - `locale`, `languages.*.locale` и `direction` заданы явно;
@@ -63,7 +63,7 @@
 | `pagination` | `pagerSize: 6` | Единый размер страниц листингов, без template hardcode | 10 |
 | `enableRobotsTXT` | включен | Корневой `robots.txt` генерируется по environment | 9 |
 | `build.buildStats` | включен | Tailwind видит классы из Hugo-шаблонов и контента | 10 |
-| `module.mounts` | `assets` + `hugo_stats.json` | Связка Hugo 0.163 + Tailwind 4.3 | 10 |
+| `module.mounts` | `assets` + `hugo_stats.json` | Связка Hugo 0.164 + Tailwind 4.3 | 10 |
 | `Goldmark unsafe` | включен | Нужен для контролируемого HTML, но несет риск при плохом контенте | 8 |
 | `params.env` | `development` | Безопасный fallback, но Netlify production нужно переключать отдельно | 8 |
 | `params.assets.inlineCSS` | `true` | Убирает render-blocking CSS request, требует PSI-контроля размера head | 9 |
@@ -169,6 +169,6 @@ public/ru/index.json
 
 ## 7. Итог
 
-Текущий `hugo.yaml` уже сильный для проекта на `Hugo 0.163.0` и `Tailwind CSS 4.3`. Главная оставшаяся работа для перехода от сильной технической базы к реальной SERP-конкуренции - production gate, Search Console, PageSpeed Insights на опубликованных URL, конкурентный анализ по кластерам и постоянное обновление контента по реальным данным.
+Текущий `hugo.yaml` уже сильный для проекта на `Hugo 0.164.0` и `Tailwind CSS 4.3`. Главная оставшаяся работа для перехода от сильной технической базы к реальной SERP-конкуренции - production gate, Search Console, PageSpeed Insights на опубликованных URL, конкурентный анализ по кластерам и постоянное обновление контента по реальным данным.
 
 Итоговая оценка `hugo.yaml` как технического SERP-фундамента: **9.4 / 10**.

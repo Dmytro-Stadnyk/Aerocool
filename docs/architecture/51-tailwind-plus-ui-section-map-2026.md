@@ -10,7 +10,7 @@
 - [Application UI Blocks](https://tailwindcss.com/plus/ui-blocks#product-application-ui)
 - [Ecommerce UI Blocks](https://tailwindcss.com/plus/ui-blocks#product-ecommerce)
 
-Важно: Tailwind Plus используется здесь как **референс структуры и UX-паттернов**, а не как источник для механического копирования. Реализация должна учитывать текущий стек проекта: `Hugo 0.163.0`, `Tailwind CSS 4.3`, локальные overrides в `layouts/`, контент в `content/`, schema.org partials в `layouts/_partials/_schema` и текущий visual layer в `assets/css/main.css`.
+Важно: Tailwind Plus используется здесь как **референс структуры и UX-паттернов**, а не как источник для механического копирования. Реализация должна учитывать текущий стек проекта: `Hugo 0.164.0`, `Tailwind CSS 4.3`, локальные overrides в `layouts/`, контент в `content/`, schema.org partials в `layouts/_partials/_schema` и текущий visual layer в `assets/css/main.css`.
 
 ## Базовые Правила Внедрения
 

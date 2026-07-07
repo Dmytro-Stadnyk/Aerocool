@@ -2,7 +2,7 @@
 
 Дата аудита: 2026-05-07.
 
-> Исторический action-plan snapshot. Он показывает состояние проекта на 2026-05-07; текущие версии Hugo/Node/Tailwind и актуальные маршруты проверки смотреть в [68-2026-06-11-hugo-0-163-documentation-sync-audit.md](68-2026-06-11-hugo-0-163-documentation-sync-audit.md) и [01-documentation-map.md](../01-documentation-map.md).
+> Исторический action-plan snapshot. Он показывает состояние проекта на 2026-05-07; текущие версии Hugo/Node/Tailwind и актуальные маршруты проверки смотреть в [93-2026-07-07-hugo-0-164-update-audit.md](93-2026-07-07-hugo-0-164-update-audit.md) и [01-documentation-map.md](../01-documentation-map.md).
 
 Этот документ фиксирует актуальное состояние документации после интеграции материалов SchemaApp и переводит обновленные знания в практический план для текущего проекта `Aerocool Ukraine`.
 

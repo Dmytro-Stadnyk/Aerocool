@@ -1,6 +1,6 @@
 # Aerocool Ukraine
 
-Обновлено: 2026-06-28.
+Обновлено: 2026-07-07.
 
 `Aerocool Ukraine` — двуязычный маркетинговый и каталоговый сайт на `Hugo` для кресел Aerocool в Украине. Основной язык — украинский (`uk`), второй язык — русский (`ru`). Сайт собирается статически, деплоится через `Netlify` и использует локальные Hugo overrides поверх темы `PaperMod`.
 
@@ -25,13 +25,13 @@
 
 Для работы с текстами и изображениями любой страницы сначала читать [docs/content/79-page-content-design-dna-2026.md](docs/content/79-page-content-design-dna-2026.md): это единый контракт тональности, правил против AI-штампов, доказательности, визуальной ДНК, размеров и контрольных ограничений товарных изображений. Для вопроса “где какой контент должен быть, какие ссылки нужны и как делать литературную обработку” читать [docs/seo/85-content-linking-editorial-standard-2026.md](docs/seo/85-content-linking-editorial-standard-2026.md), а для текущего состояния контента и ссылок — [docs/audits/84-2026-06-24-full-link-content-seo-audit.md](docs/audits/84-2026-06-24-full-link-content-seo-audit.md). Подробные промпты для изображений и технический регламент находятся в [docs/content/67-image-design-playbook-2026.md](docs/content/67-image-design-playbook-2026.md), текущая проверка `image` + служебного `cover`-блока — в [docs/audits/89-2026-06-24-cover-block-image-seo-audit.md](docs/audits/89-2026-06-24-cover-block-image-seo-audit.md), а постраничное состояние слоя изображений — в [docs/audits/80-2026-06-19-full-site-content-image-audit.md](docs/audits/80-2026-06-19-full-site-content-image-audit.md). Аудиты `69`, `70`, `71`, `74` и `77` остаются профильными или историческими детализациями.
 
-Для текущих задач по Hugo, Node, Tailwind и локальным инструментам читать [docs/deploy/15-local-tooling-mise.md](docs/deploy/15-local-tooling-mise.md), актуальный tooling-аудит [docs/audits/68-2026-06-11-hugo-0-163-documentation-sync-audit.md](docs/audits/68-2026-06-11-hugo-0-163-documentation-sync-audit.md) и SERP-контракт [docs/seo/76-hugo-yaml-serp-technical-contract-2026.md](docs/seo/76-hugo-yaml-serp-technical-contract-2026.md), если меняется `hugo.yaml`.
+Для текущих задач по Hugo, Node, Tailwind и локальным инструментам читать [docs/deploy/15-local-tooling-mise.md](docs/deploy/15-local-tooling-mise.md), актуальный tooling-аудит [docs/audits/93-2026-07-07-hugo-0-164-update-audit.md](docs/audits/93-2026-07-07-hugo-0-164-update-audit.md) и SERP-контракт [docs/seo/76-hugo-yaml-serp-technical-contract-2026.md](docs/seo/76-hugo-yaml-serp-technical-contract-2026.md), если меняется `hugo.yaml`.
 
 Проще говоря: `content/` отвечает за текст и данные страниц, `layouts/` отвечает за HTML/SEO/schema-логику, `assets/` отвечает за CSS/JS, а PageSpeed Insights используется для ручной проверки качества опубликованных URL.
 
 Вся документация проекта должна быть русскоязычной, понятной новичку и структурированной. Единый стандарт стиля описан в [docs/architecture/02-documentation-style-guide.md](docs/architecture/02-documentation-style-guide.md).
 
-Последний полный аудит документации, синхронизации с кодом и официальными практиками 2026 года находится в [docs/audits/91-2026-06-26-full-documentation-project-sync-audit-current.md](docs/audits/91-2026-06-26-full-documentation-project-sync-audit-current.md). Итоговая оценка после проверки: **9.8/10**. Более новый документ `92` является профильным UX/UI-аудитом и не заменяет полный документационный аудит `91`. Документы `87` и `88` — профильные документы по расширению ключевых слов, контента и стратегии роста; аудит `89` — профильная проверка `image` + `cover`, размеров, форматов, crop-наборов и дублей главных товарных изображений. Аудиты `78`, `82`, `86` и `90` остаются историческими снимками.
+Последний полный аудит документации, синхронизации с кодом и официальными практиками 2026 года находится в [docs/audits/91-2026-06-26-full-documentation-project-sync-audit-current.md](docs/audits/91-2026-06-26-full-documentation-project-sync-audit-current.md). Итоговая оценка после проверки: **9.8/10**. Текущий Hugo/tooling target после этого полного аудита обновлен отдельно в документе `93`. Более новый документ `92` является профильным UX/UI-аудитом и не заменяет полный документационный аудит `91`. Документы `87` и `88` — профильные документы по расширению ключевых слов, контента и стратегии роста; аудит `89` — профильная проверка `image` + `cover`, размеров, форматов, crop-наборов и дублей главных товарных изображений. Аудиты `78`, `82`, `86` и `90` остаются историческими снимками.
 
 ## 1. Главная идея проекта
 
@@ -44,7 +44,7 @@
 
 ## 2. Стек
 
-- `Hugo 0.163.0`
+- `Hugo 0.164.0`
 - `Node 24.16.0`
 - `Tailwind CSS 4.3` через npm-пакеты `tailwindcss` и `@tailwindcss/cli` версии `4.3.0`
 - `themes/PaperMod` как git-подмодуль
@@ -307,7 +307,7 @@ cover:
 ```
 
 `image` идет в SEO/OG/schema, `cover.image` — в визуальный preview.
-`seo-image` в Hugo `0.163.0` проверяет processable image resource через `reflect.IsImageResourceProcessable`, выводит WebP `srcset` через `<picture>`, fallback `<img>`, размеры и приоритет загрузки. Для типовых статей и новостей главный `preload=true` попадает в `<head>`, если `image` совпадает с `src` shortcode и `cover.hiddenInSingle: true`.
+`seo-image` в Hugo `0.164.0` проверяет processable image resource через `reflect.IsImageResourceProcessable`, выводит WebP `srcset` через `<picture>`, fallback `<img>`, размеры и приоритет загрузки. Для типовых статей и новостей главный `preload=true` попадает в `<head>`, если `image` совпадает с `src` shortcode и `cover.hiddenInSingle: true`.
 Если первое article/news контентное изображение использует нестандартный `sizes`, такое же значение нужно задать во front matter как `seo_image_sizes`, иначе head preload и `<picture>` могут выбрать разные responsive candidates.
 На товарной странице главное изображение не вставляется через `seo-image`. `layouts/_partials/products/gallery.html` берет первый кадр из `image`, выводит его как eager/fetchpriority high LCP-кандидат и дополнительно собирает галерею из файлов изображений рядом с товаром. Product preload в `<head>` использует те же responsive candidates и `sizes`, что gallery. Если главное изображение отсутствует в page bundle или Hugo не может обработать его как processable image resource, сборка должна упасть. Если в page bundle есть только основной файл `image`, лента миниатюр не выводится. Если добавить второе и последующие изображения, они автоматически появятся как компактные миниатюры с lazy loading.
 Для всех `content/**/*.md` в проекте нужен служебный `cover`-блок. `cover.alt` должен описывать тему или объект изображения на языке страницы; не оставляйте пустой `alt` и не превращайте его в список ключевых слов.

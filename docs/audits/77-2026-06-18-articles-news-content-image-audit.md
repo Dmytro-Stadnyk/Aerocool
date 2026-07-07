@@ -37,7 +37,7 @@
 - важны people-first текст, доступный HTML, внутренние ссылки, качественные изображения, согласованная structured data и хороший page experience;
 - изображения должны находиться в HTML через `<img>` / `<picture>`, иметь `src` fallback, descriptive `alt` и быть рядом с релевантным текстом;
 - для `Article` / `NewsArticle` полезен набор representative images **16:9**, **4:3**, **1:1**;
-- WebP полностью поддерживается Google и является processable image resource в Hugo `0.163.0`.
+- WebP полностью поддерживается Google и является processable image resource в Hugo `0.164.0`.
 
 ## 3. Текущее Состояние Текстов
 
@@ -189,7 +189,7 @@
 
 Минимального обязательного веса нет: файл ниже preferred диапазона считается нормальным, если нет banding, blur, color blocking и потери фактуры.
 
-### Delivery Для Hugo 0.163.0
+### Delivery Для Hugo 0.164.0
 
 - page bundle resources и `seo-image` остаются основным pipeline;
 - primary cover: `eager`, `preload=true`, `fetchpriority=high`;

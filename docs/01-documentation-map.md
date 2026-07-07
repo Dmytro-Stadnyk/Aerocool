@@ -9,7 +9,7 @@
 - [README.md](../README.md) — краткая карта проекта, стека, структуры и основных команд.
 - [AGENTS.md](../AGENTS.md) — правила безопасной работы для Codex/агентов.
 
-Основные документационные позиции внутри `docs/` пронумерованы глобально от `01` до `91`. Номер в начале имени показывает рекомендуемый порядок чтения. Три сопутствующих CSV-файла используют номера своих основных документов `53` и `59`, поэтому физически внутри `docs/` находится 94 файла.
+Основные документационные позиции внутри `docs/` пронумерованы глобально от `01` до `93`. Номер в начале имени показывает рекомендуемый порядок чтения. Сопутствующие CSV-файлы используют номера своих основных документов `53` и `59`.
 
 ## Как Пользоваться Новичку
 
@@ -93,7 +93,7 @@
 
 Аудиты читать после базовых документов. Они фиксируют историю решений и текущие риски.
 
-29. [audits/29-2026-04-29-hugo-0-161-compliance-audit.md](audits/29-2026-04-29-hugo-0-161-compliance-audit.md) — архивный аудит совместимости с Hugo 0.161.0; текущий Hugo target см. в аудите 68.
+29. [audits/29-2026-04-29-hugo-0-161-compliance-audit.md](audits/29-2026-04-29-hugo-0-161-compliance-audit.md) — архивный аудит совместимости с Hugo 0.161.0; текущий Hugo target см. в аудите 93.
 30. [audits/30-2026-04-29-google-rich-results-quality-audit.md](audits/30-2026-04-29-google-rich-results-quality-audit.md) — аудит Google rich results качества.
 31. [audits/31-2026-05-06-content-depth-literary-audit.md](audits/31-2026-05-06-content-depth-literary-audit.md) — аудит глубины и литературной обработки `content/`.
 32. [audits/32-2026-05-06-schemaapp-pdf-documentation-integration-audit.md](audits/32-2026-05-06-schemaapp-pdf-documentation-integration-audit.md) — интеграция выводов из SchemaApp PDF.
@@ -172,15 +172,15 @@
 
 ### Исторические Tooling-Аудиты
 
-66. [audits/66-2026-06-05-hugo-0-162-documentation-full-audit.md](audits/66-2026-06-05-hugo-0-162-documentation-full-audit.md) — исторический полный аудит документации по Hugo 0.162.0 на 2026-06-05. Для текущего target использовать аудит `68`.
+66. [audits/66-2026-06-05-hugo-0-162-documentation-full-audit.md](audits/66-2026-06-05-hugo-0-162-documentation-full-audit.md) — исторический полный аудит документации по Hugo 0.162.0 на 2026-06-05. Для текущего target использовать аудит `93`.
 
 ### Регламент Обложек И AI-Промптов
 
 67. [content/67-image-design-playbook-2026.md](content/67-image-design-playbook-2026.md) — общий регламент изображений проекта: визуальная ДНК, high-tech/tactile стиль, единое расположение логотипа на обложках, товарный слой с приоритетом фактов, повторно используемые AI-промпты, negative prompt, дефект-чеклист, технические параметры WebP и сравнение с Google/web.dev/Baymard/Adobe/Canva практиками 2026.
 
-### Текущие Tooling-Аудиты
+### Исторические Tooling-Аудиты
 
-68. [audits/68-2026-06-11-hugo-0-163-documentation-sync-audit.md](audits/68-2026-06-11-hugo-0-163-documentation-sync-audit.md) — текущий аудит синхронизации документации с Hugo 0.163.0, Node 24.16.0, Tailwind CSS 4.3, `mise.toml`, `netlify.toml`, README, AGENTS и tooling-гайдом.
+68. [audits/68-2026-06-11-hugo-0-163-documentation-sync-audit.md](audits/68-2026-06-11-hugo-0-163-documentation-sync-audit.md) — исторический аудит синхронизации документации с Hugo 0.163.0, Node 24.16.0, Tailwind CSS 4.3, `mise.toml`, `netlify.toml`, README, AGENTS и tooling-гайдом. Для текущего target использовать аудит `93`.
 
 ### Текущие Image/SEO-Аудиты
 
@@ -202,7 +202,7 @@
 
 ### Hugo.yaml И SERP-Технический Контракт
 
-76. [seo/76-hugo-yaml-serp-technical-contract-2026.md](seo/76-hugo-yaml-serp-technical-contract-2026.md) — текущий полный аудит `hugo.yaml` как технического SERP-фундамента проекта на `Hugo 0.163.0`, `Tailwind CSS 4.3` и `Netlify`; фиксирует оценку **9.4/10**, production gate, рекомендации по sitemap, robots, canonical, hreflang, Tailwind build stats и правила проверки после любых правок конфига.
+76. [seo/76-hugo-yaml-serp-technical-contract-2026.md](seo/76-hugo-yaml-serp-technical-contract-2026.md) — текущий полный аудит `hugo.yaml` как технического SERP-фундамента проекта на `Hugo 0.164.0`, `Tailwind CSS 4.3` и `Netlify`; фиксирует оценку **9.4/10**, production gate, рекомендации по sitemap, robots, canonical, hreflang, Tailwind build stats и правила проверки после любых правок конфига.
 
 ### Текущий Глубокий Аудит Articles/News
 
@@ -256,11 +256,15 @@
 
 ### Текущий Полный Аудит Документации
 
-91. [audits/91-2026-06-26-full-documentation-project-sync-audit-current.md](audits/91-2026-06-26-full-documentation-project-sync-audit-current.md) — текущий полный аудит документации на 2026-06-26: порядок чтения `01-91`, русский язык, стек Hugo `0.163.0` / Node `24.16.0` / Tailwind CSS `4.3.0`, ссылки, image/cover-стандарт, SEO/schema/CWV, проверка production-сборки и итоговая оценка **9.8/10**.
+91. [audits/91-2026-06-26-full-documentation-project-sync-audit-current.md](audits/91-2026-06-26-full-documentation-project-sync-audit-current.md) — последний полный аудит документации на 2026-06-26: порядок чтения `01-91`, русский язык, стек на дату аудита Hugo `0.163.0` / Node `24.16.0` / Tailwind CSS `4.3.0`, ссылки, image/cover-стандарт, SEO/schema/CWV, проверка production-сборки и итоговая оценка **9.8/10**. Текущий Hugo/tooling target после него см. в аудите `93`.
 
 ### Текущий UX/UI Аудит Tailwind Plus
 
 92. [audits/92-2026-06-28-tailwind-plus-ui-map-current-audit.md](audits/92-2026-06-28-tailwind-plus-ui-map-current-audit.md) — текущая проверка выполнения карты `51`: структура Tailwind Plus **8.1/10**, фактический e-commerce UX **7.6/10**, общая готовность **7.8/10**, закрытые UI-задачи, P0 по одинаковым и тестовым товарным изображениям и актуальный порядок работ по featured products, filters, comparison, search, series и PDP.
+
+### Текущий Hugo/Tooling Аудит
+
+93. [audits/93-2026-07-07-hugo-0-164-update-audit.md](audits/93-2026-07-07-hugo-0-164-update-audit.md) — текущий аудит перехода проекта на Hugo 0.164.0: pins в `mise.toml` и `netlify.toml`, минимальная версия в `layouts/baseof.html`, tooling-документация, Tailwind 4.3, Node 24.16.0, сборка и базовые проверки.
 
 ## Маршруты По Задачам
 
@@ -355,7 +359,7 @@
 
 1. [seo/76-hugo-yaml-serp-technical-contract-2026.md](seo/76-hugo-yaml-serp-technical-contract-2026.md)
 2. [deploy/15-local-tooling-mise.md](deploy/15-local-tooling-mise.md)
-3. [audits/68-2026-06-11-hugo-0-163-documentation-sync-audit.md](audits/68-2026-06-11-hugo-0-163-documentation-sync-audit.md)
+3. [audits/93-2026-07-07-hugo-0-164-update-audit.md](audits/93-2026-07-07-hugo-0-164-update-audit.md)
 4. [quality/14-production-quality-gate-2026.md](quality/14-production-quality-gate-2026.md)
 5. [seo/27-google-seo-audit-checklist-2026.md](seo/27-google-seo-audit-checklist-2026.md)
 

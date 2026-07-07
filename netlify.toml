@@ -7,7 +7,7 @@
   # 1) Обновляем git-подмодули 2) Выгружаем approved отзывы 3) Собираем сайт Hugo с очисткой кэша и минификацией
 
 [build.environment]
-  HUGO_VERSION = "0.163.0"
+  HUGO_VERSION = "0.164.0"
   # Версия Hugo
   HUGO_ENVIRONMENT = "development"
   # Временный безопасный режим Hugo: HTML-страницы остаются noindex,nofollow

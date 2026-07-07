@@ -6,7 +6,7 @@
 
 ## Краткий Вывод
 
-Текущая документация по `seo-image`, product gallery, LCP preload и front matter изображениям синхронизирована с Hugo `0.163.0` и текущим шаблонным слоем проекта.
+Текущая документация по `seo-image`, product gallery, LCP preload и front matter изображениям синхронизирована с Hugo `0.164.0` и текущим шаблонным слоем проекта.
 
 Итоговая оценка: **9.0/10**.
 
@@ -49,13 +49,13 @@
 4. Product primary image выводится через [products/gallery.html](../../layouts/_partials/products/gallery.html).
 5. Product LCP preload выводится через [lcp-image-preload.html](../../layouts/_partials/_seo/lcp-image-preload.html) и должен совпадать с gallery `sizes`.
 6. `jsonld` в shortcode не используется: JSON-LD image собирается централизованно из front matter `image`.
-7. Для Hugo `0.163.0` актуальная проверка processable images — `reflect.IsImageResourceProcessable`.
+7. Для Hugo `0.164.0` актуальная проверка processable images — `reflect.IsImageResourceProcessable`.
 
 ## Оценка По Категориям
 
 | Категория | Оценка | Почему |
 |---|---:|---|
-| Соответствие Hugo `0.163.0` | **9.5/10** | Документация описывает `reflect.IsImageResourceProcessable`, Hugo image processing и разделение page resources/global resources. |
+| Соответствие Hugo `0.164.0` | **9.5/10** | Документация описывает `reflect.IsImageResourceProcessable`, Hugo image processing и разделение page resources/global resources. |
 | SEO/schema-ясность | **9.2/10** | Зафиксировано, что `image` отвечает за SEO/OG/schema, а `seo-image` — только за видимое HTML-изображение. |
 | Core Web Vitals/LCP | **9.0/10** | Разделены article/news LCP, home hero и product gallery; описано требование совпадения visible `sizes` и preload `imagesizes`. |
 | Понятность для новичка | **9.3/10** | Добавлены таблицы “что за что отвечает” в README, shortcode guide и front matter reference. |

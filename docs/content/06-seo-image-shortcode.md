@@ -8,7 +8,7 @@ Shortcode `seo-image` находится в [layouts/_shortcodes/seo-image.html]
 
 `seo-image` отвечает только за видимое HTML-изображение в теле обычной контентной страницы: responsive `srcset`, WebP-версии, fallback-изображение, `width` / `height`, `sizes`, `loading`, `decoding`, `fetchpriority` и стабильный `aspect-ratio`. Он не рендерит `H1`, не меняет SEO `title`, не управляет `og:image` и не выводит JSON-LD.
 
-В Hugo `0.163.0` shortcode проверяет processable image resources через `reflect.IsImageResourceProcessable` перед вызовами image pipeline. Это актуальный Hugo-подход вместо ручного списка расширений. Для processable-изображений проект выводит `<picture>` с WebP `srcset` и fallback `<img>` в исходном формате. SVG не является processable resource, поэтому выводится как обычный `<img>` с обязательными размерами.
+В Hugo `0.164.0` shortcode проверяет processable image resources через `reflect.IsImageResourceProcessable` перед вызовами image pipeline. Это актуальный Hugo-подход вместо ручного списка расширений. Для processable-изображений проект выводит `<picture>` с WebP `srcset` и fallback `<img>` в исходном формате. SVG не является processable resource, поэтому выводится как обычный `<img>` с обязательными размерами.
 
 Hero-изображение главной страницы — отдельное исключение: оно живет в shortcode [home-hero.html](../../layouts/_shortcodes/home-hero.html), не проходит через `seo-image`, но использует Hugo global image resource из `assets/images/home-hero85.webp`. Shortcode выводит responsive `srcset`, `sizes`, `loading="eager"` и `fetchpriority="high"`, а matching preload для главной страницы выводится в `<head>` через [lcp-image-preload.html](../../layouts/_partials/_seo/lcp-image-preload.html).
 

@@ -267,7 +267,7 @@ LCP состоит из четырех частей:
 
 Изображения — главная зона риска для LCP и CLS.
 
-В текущей реализации `seo-image` в Hugo `0.163.0` сначала проверяет ресурс через `reflect.IsImageResourceProcessable`, а затем генерирует `<picture>` с WebP `srcset` и fallback `<img>` в исходном формате. Для типовых `article` и `news` страниц, где `image` во front matter совпадает с первым `seo-image`, а `cover.hiddenInSingle: true`, LCP preload выводится в `<head>` через `layouts/_partials/_seo/lcp-image-preload.html`.
+В текущей реализации `seo-image` в Hugo `0.164.0` сначала проверяет ресурс через `reflect.IsImageResourceProcessable`, а затем генерирует `<picture>` с WebP `srcset` и fallback `<img>` в исходном формате. Для типовых `article` и `news` страниц, где `image` во front matter совпадает с первым `seo-image`, а `cover.hiddenInSingle: true`, LCP preload выводится в `<head>` через `layouts/_partials/_seo/lcp-image-preload.html`.
 
 Главная страница остается отдельным shortcode-исключением: `layouts/_shortcodes/home-hero.html` берет `assets/images/home-hero85.webp` как Hugo global image resource и сам выводит responsive `srcset`. Для `/` и `/ru/` тот же набор размеров preloads в `<head>` через `layouts/_partials/_seo/lcp-image-preload.html`.
 
