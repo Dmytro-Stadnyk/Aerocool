@@ -153,8 +153,9 @@
 - `docs/audits/91-2026-06-26-full-documentation-project-sync-audit-current.md`
 - `docs/audits/92-2026-06-28-tailwind-plus-ui-map-current-audit.md`
 - `docs/audits/93-2026-07-07-hugo-0-164-update-audit.md`
+- `docs/audits/94-2026-07-07-full-documentation-project-sync-audit-current.md`
 
-Последний полный аудит всей проектной документации: `docs/audits/91-2026-06-26-full-documentation-project-sync-audit-current.md`. Текущий Hugo/tooling target после обновления до Hugo `0.164.0` зафиксирован в `docs/audits/93-2026-07-07-hugo-0-164-update-audit.md`. Документы `87` и `88` — профильные документы по расширению ключевых слов, контента, развитию семантического ядра и стратегии роста; аудит `89` — профильная проверка `image` + `cover`, размеров, форматов, crop-наборов статей/новостей и дублей главных товарных изображений. Аудиты `78`, `82`, `86` и `90` использовать как исторические снимки.
+Последний полный аудит всей проектной документации: `docs/audits/94-2026-07-07-full-documentation-project-sync-audit-current.md`. Текущий Hugo/tooling target после обновления до Hugo `0.164.0` зафиксирован в `docs/audits/93-2026-07-07-hugo-0-164-update-audit.md`; профильный UX/UI snapshot — в `docs/audits/92-2026-06-28-tailwind-plus-ui-map-current-audit.md`. Документы `87` и `88` — профильные документы по расширению ключевых слов, контента, развитию семантического ядра и стратегии роста; аудит `89` — профильная проверка `image` + `cover`, размеров, форматов, crop-наборов статей/новостей и дублей главных товарных изображений. Аудиты `78`, `82`, `86`, `90` и `91` использовать как исторические снимки.
 
 Текущий профильный UX/UI-аудит выполнения карты Tailwind Plus: `docs/audits/92-2026-06-28-tailwind-plus-ui-map-current-audit.md`. Он фиксирует общую готовность **7.8/10**, P0 по одинаковым и тестовым товарным изображениям и актуальный порядок работ. Аудит `65` использовать как историческую code revalidation, аудит `64` — как screenshot evidence.
 

@@ -31,7 +31,7 @@
 
 Вся документация проекта должна быть русскоязычной, понятной новичку и структурированной. Единый стандарт стиля описан в [docs/architecture/02-documentation-style-guide.md](docs/architecture/02-documentation-style-guide.md).
 
-Последний полный аудит документации, синхронизации с кодом и официальными практиками 2026 года находится в [docs/audits/91-2026-06-26-full-documentation-project-sync-audit-current.md](docs/audits/91-2026-06-26-full-documentation-project-sync-audit-current.md). Итоговая оценка после проверки: **9.8/10**. Текущий Hugo/tooling target после этого полного аудита обновлен отдельно в документе `93`. Более новый документ `92` является профильным UX/UI-аудитом и не заменяет полный документационный аудит `91`. Документы `87` и `88` — профильные документы по расширению ключевых слов, контента и стратегии роста; аудит `89` — профильная проверка `image` + `cover`, размеров, форматов, crop-наборов и дублей главных товарных изображений. Аудиты `78`, `82`, `86` и `90` остаются историческими снимками.
+Последний полный аудит документации, синхронизации с кодом и официальными практиками 2026 года находится в [docs/audits/94-2026-07-07-full-documentation-project-sync-audit-current.md](docs/audits/94-2026-07-07-full-documentation-project-sync-audit-current.md). Итоговая оценка после проверки: **9.8/10**. Документ `92` является профильным UX/UI-аудитом, документ `93` — профильным tooling-аудитом перехода на Hugo `0.164.0`, а полный текущий snapshot документации после них — `94`. Документы `87` и `88` — профильные документы по расширению ключевых слов, контента и стратегии роста; аудит `89` — профильная проверка `image` + `cover`, размеров, форматов, crop-наборов и дублей главных товарных изображений. Аудиты `78`, `82`, `86`, `90` и `91` остаются историческими снимками.
 
 ## 1. Главная идея проекта
 
@@ -466,7 +466,7 @@ npm run build:production
 | `./scripts/script_start.sh` | Для ежедневной разработки | Запускает `hugo server` со встроенным Hugo/Tailwind pipeline. |
 | `./scripts/script_build.sh` | После правок и перед ручной проверкой | Запускает `npm run build`. |
 | `./scripts/script_build_production.sh` | Перед финальной SEO/indexability-проверкой | Запускает `npm run build:production`. |
-| `./scripts/script_check.sh` | Перед коммитом | Собирает сайт и проверяет `_redirects`, `.DS_Store`, markdown `# H1`, inline-code в `content/`, `schema_type` и noindex для служебных страниц. |
+| `./scripts/script_check.sh` | Перед коммитом | Собирает сайт и проверяет `_redirects`, `.DS_Store` в `static/` и `public/`, markdown `# H1`, inline-code в `content/`, `schema_type` и noindex для служебных страниц. |
 | `./scripts/script_netlify_dev.sh` | После правок `static/_redirects`, `netlify.toml`, 404, headers или CSP | Собирает `public/` и запускает Netlify Dev на `http://localhost:8899`. |
 | `./scripts/script_check_routes.sh` | После запуска `script_netlify_dev.sh` | Проверяет ключевые `200` и scanner/sensitive `404` через `curl`. |
 | `./scripts/script_clean.sh` | Когда нужна безопасная очистка Hugo-кэша | Удаляет только `public`, `resources`, `.hugo_build.lock`, `hugo_stats.json`. |
