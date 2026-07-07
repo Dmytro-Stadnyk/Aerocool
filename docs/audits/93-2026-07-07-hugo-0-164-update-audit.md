@@ -25,7 +25,6 @@
 
 - `mise.toml`: `hugo = "0.164.0"`;
 - `netlify.toml`: `HUGO_VERSION = "0.164.0"`;
-- `layouts/baseof.html`: минимальная версия сборки `hugo.Version "0.164.0"`;
 - `scripts/script_setup.sh`: fallback-инструкция для ручной установки Hugo `0.164.0`;
 - `README.md`;
 - `AGENTS.md`;
@@ -35,6 +34,8 @@
 - `docs/quality/12-core-web-vitals-guide-2026.md`;
 - `docs/seo/76-hugo-yaml-serp-technical-contract-2026.md`;
 - `docs/01-documentation-map.md`.
+
+Примечание: `layouts/baseof.html` больше не используется как guard версии Hugo. Причина — строковое сравнение `hugo.Version` в шаблоне может вести себя хрупко для semver-версий. Минимальная версия контролируется через `mise.toml`, `netlify.toml`, tooling-документацию и локальные build checks.
 
 Аудит `68` теперь является историческим snapshot по Hugo `0.163.0`.
 

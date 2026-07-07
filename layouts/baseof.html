@@ -1,7 +1,3 @@
-{{- if lt hugo.Version "0.164.0" }}
-    {{- errorf "=> hugo v0.164.0 or greater is required to build this site " }}
-{{- end -}}
-
 <!DOCTYPE html>
 {{- $htmlLang := partial "page-language.html" . -}}
 <html lang="{{ $htmlLang }}" dir="{{ .Language.Direction | default "ltr" }}">

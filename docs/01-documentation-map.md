@@ -264,7 +264,7 @@
 
 ### Текущий Hugo/Tooling Аудит
 
-93. [audits/93-2026-07-07-hugo-0-164-update-audit.md](audits/93-2026-07-07-hugo-0-164-update-audit.md) — текущий аудит перехода проекта на Hugo 0.164.0: pins в `mise.toml` и `netlify.toml`, минимальная версия в `layouts/baseof.html`, tooling-документация, Tailwind 4.3, Node 24.16.0, сборка и базовые проверки.
+93. [audits/93-2026-07-07-hugo-0-164-update-audit.md](audits/93-2026-07-07-hugo-0-164-update-audit.md) — текущий аудит перехода проекта на Hugo 0.164.0: pins в `mise.toml` и `netlify.toml`, отказ от хрупкого template-guard в `layouts/baseof.html`, tooling-документация, Tailwind 4.3, Node 24.16.0, сборка и базовые проверки.
 
 ### Текущий Полный Аудит Документации После Hugo 0.164.0
 

@@ -99,7 +99,7 @@ README говорил, что `script_check.sh` проверяет `.DS_Store`, 
 
 | Компонент | Где Зафиксирован | Текущее Значение |
 |---|---|---|
-| `Hugo` | `mise.toml`, `netlify.toml`, `layouts/baseof.html`, README, AGENTS | **0.164.0** |
+| `Hugo` | `mise.toml`, `netlify.toml`, README, AGENTS, tooling-документация | **0.164.0** |
 | `Node` | `mise.toml`, `netlify.toml`, README, AGENTS | **24.16.0** |
 | `npm` | локальный runtime через `mise exec` | **11.13.0** |
 | `Tailwind CSS` | `package.json`, `package-lock.json` | **4.3.0** |
