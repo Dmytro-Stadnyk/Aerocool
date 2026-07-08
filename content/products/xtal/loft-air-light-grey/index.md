@@ -28,9 +28,9 @@ product_group_id: "xtal-loft-air-product-group"
 slug: "loft-air-light-grey"
 categories: ["xtal"]
 tags: ["aerocool", "ергономічне крісло", "офісне крісло", "комп'ютерне крісло", "xtal", "loft air light grey", "home office"]
-image: "01-front.png"
+image: "01-front.webp"
 cover:
-  image: "01-front.png"
+  image: "01-front.webp"
   alt: "Крісло Aerocool XTAL Loft Air Light Grey"
   relative: true
   hiddenInSingle: true
