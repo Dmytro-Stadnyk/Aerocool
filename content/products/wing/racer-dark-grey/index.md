@@ -30,9 +30,9 @@ product_group_id: "wing-racer-product-group"
 slug: "racer-dark-grey"
 categories: ["wing"]
 tags: ["aerocool", "ергономічне крісло", "ігрове крісло", "комп'ютерне крісло", "wing", "racer dark grey"]
-image: "01-front.png"
+image: "01-front.webp"
 cover:
-  image: "01-front.png"
+  image: "01-front.webp"
   alt: "Крісло Aerocool WING Racer Dark Grey"
   relative: true
   hiddenInSingle: true

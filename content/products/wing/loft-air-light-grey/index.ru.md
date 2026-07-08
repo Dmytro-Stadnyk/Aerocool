@@ -30,9 +30,9 @@ product_group_id: "wing-loft-air-product-group"
 slug: "loft-air-light-grey"
 categories: ["wing"]
 tags: ["aerocool", "эргономичное кресло", "офисное кресло", "компьютерное кресло", "wing", "loft air light grey", "home office"]
-image: "01-front.png"
+image: "01-front.webp"
 cover:
-  image: "01-front.png"
+  image: "01-front.webp"
   alt: "Кресло Aerocool WING Loft Air Light Grey"
   relative: true
   hiddenInSingle: true

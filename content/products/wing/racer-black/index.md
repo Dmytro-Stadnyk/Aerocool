@@ -30,9 +30,9 @@ product_group_id: "wing-racer-product-group"
 slug: "racer-black"
 categories: ["wing"]
 tags: ["aerocool", "ергономічне крісло", "ігрове крісло", "комп'ютерне крісло", "wing", "racer black"]
-image: "01-front.png"
+image: "01-front.webp"
 cover:
-  image: "01-front.png"
+  image: "01-front.webp"
   alt: "Крісло Aerocool WING Racer Black"
   relative: true
   hiddenInSingle: true

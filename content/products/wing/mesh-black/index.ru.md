@@ -29,9 +29,9 @@ mentions_entities:
 slug: "mesh-black"
 categories: ["wing"]
 tags: ["aerocool", "эргономичное кресло", "компьютерное кресло", "офисное кресло", "wing", "mesh black"]
-image: "01-front.png"
+image: "01-front.webp"
 cover:
-  image: "01-front.png"
+  image: "01-front.webp"
   alt: "Кресло Aerocool WING Mesh Black"
   relative: true
   hiddenInSingle: true
