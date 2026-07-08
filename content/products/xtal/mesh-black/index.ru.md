@@ -27,9 +27,9 @@ mentions_entities:
 slug: "mesh-black"
 categories: ["xtal"]
 tags: ["aerocool", "эргономичное кресло", "компьютерное кресло", "офисное кресло", "xtal", "mesh black"]
-image: "01-front.png"
+image: "01-front.webp"
 cover:
-  image: "01-front.png"
+  image: "01-front.webp"
   alt: "Кресло Aerocool XTAL Mesh Black"
   relative: true
   hiddenInSingle: true
