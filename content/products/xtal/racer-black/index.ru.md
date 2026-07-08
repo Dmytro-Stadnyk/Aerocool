@@ -28,9 +28,9 @@ product_group_id: "xtal-racer-product-group"
 slug: "racer-black"
 categories: ["xtal"]
 tags: ["aerocool", "эргономичное кресло", "игровое кресло", "компьютерное кресло", "xtal", "racer black"]
-image: "01-front.png"
+image: "01-front.webp"
 cover:
-  image: "01-front.png"
+  image: "01-front.webp"
   alt: "Кресло Aerocool XTAL Racer Black"
   relative: true
   hiddenInSingle: true
