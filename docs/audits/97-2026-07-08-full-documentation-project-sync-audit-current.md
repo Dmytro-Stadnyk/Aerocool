@@ -170,14 +170,23 @@
 |---|---|
 | Структурный скан документации до добавления `97` | `96` Markdown-документов, `3` CSV, диапазон `01-96`, пропусков и дублей нет. |
 | Скан локальных Markdown-ссылок до добавления `97` | Проверено **1 058** repo-ссылок; **0** битых repo-ссылок; **8** site-root ссылок пропущены как URL сайта; **11** placeholder-ссылок только в шаблонах `10` и `11`. |
+| Структурный скан документации после добавления `97` | `97` Markdown-документов, `3` CSV, диапазон `01-97`, пропусков и дублей нет; все документы есть в карте и `AGENTS.md`. |
+| Скан локальных Markdown-ссылок после добавления `97` | Проверено **1 063** repo-ссылки; **0** битых repo-ссылок; **8** site-root ссылок пропущены как URL сайта; **11** placeholder-ссылок только в шаблонах `10` и `11`. |
 | `mise current` | `hugo 0.164.0`, `node 24.16.0`. |
 | `mise exec -- hugo version` | `v0.164.0-ce2470e7012b5ab5fc4e10ebe4027e9f8d9e00dc`. |
 | `mise exec -- node -v` | `v24.16.0`. |
 | `npm ls tailwindcss @tailwindcss/cli @netlify/database --depth=0` | `tailwindcss 4.3.0`, `@tailwindcss/cli 4.3.0`, `@netlify/database 1.0.0`. |
 | `npm outdated --json` | pinned/wanted версии совпадают; доступны latest `tailwindcss 4.3.2`, `@tailwindcss/cli 4.3.2`, `@netlify/database 1.1.0`. |
 | `git ls-remote` по Hugo `v0.164.*` | Найден `refs/tags/v0.164.0`. |
+| `git diff --check` | Пройдено, пробельных ошибок нет. |
+| `mise exec -- ./scripts/script_check.sh` | Пройдено на Hugo `0.164.0`. Development build успешен; базовые проверки `_redirects`, `.DS_Store` в `static/` и `public/`, markdown `# H1`, inline-code в `content/`, `schema_type` и noindex служебных страниц прошли. |
+| `mise exec -- npm run build:production` | Пройдено на Hugo `0.164.0`. Production build успешен. |
+| Скан JSON-LD в готовом HTML | **96** JSON-LD блоков, **0** parse-ошибок. |
+| Скан ссылок в готовом HTML | **7 086** внутренних ссылок, **588** внешних ссылок, **1 494** fragment links, **0** пустых `href`, **0** `javascript:`-ссылок, **0** битых внутренних ссылок. |
+| Canonical и `hreflang` scan | **129** HTML-страниц с canonical, **232** `hreflang` links. |
+| `public/llms.txt` | Файл существует после сборки. |
 
-Финальные проверки после добавления `97` зафиксированы в конце этого документа после повторного прогона.
+Локальная сборка выводит `Netlify Database is not available; writing empty reviews snapshot.` Это ожидаемо для локальной среды без подключенной Netlify Database и не является дефектом документации.
 
 ## 10. Что Не Удалялось
 
@@ -236,4 +245,12 @@ Legacy-аудиты не удалялись. Причина: они являют
 
 ## 14. Финальная Проверка После Правок
 
-Этот раздел обновляется после финального прогона проверок.
+Финальная проверка после добавления `97` пройдена:
+
+1. `git diff --check` — без ошибок.
+2. `mise exec -- ./scripts/script_check.sh` — успешно.
+3. `mise exec -- npm run build:production` — успешно.
+4. HTML scan готового `public/` — `0` JSON-LD parse-ошибок и `0` битых внутренних ссылок.
+5. `public/llms.txt` присутствует после сборки.
+
+Документация синхронизирована с текущим проектом на дату 2026-07-08 после добавления WebMCP и `llms.txt`.
