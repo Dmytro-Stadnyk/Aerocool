@@ -1,8 +1,8 @@
 # Проверка Через PageSpeed Insights
 
-Обновлено: 2026-06-02.
+Обновлено: 2026-07-08.
 
-Этот документ фиксирует текущий стандарт проекта `Aerocool Ukraine`: автоматический браузерный performance-аудит внутри репозитория больше не используется. Для оценки скорости, Core Web Vitals, Accessibility, Best Practices, SEO и PWA использовать внешний сервис [PageSpeed Insights](https://pagespeed.web.dev/).
+Этот документ фиксирует текущий стандарт проекта `Aerocool Ukraine`: автоматический браузерный performance-аудит внутри репозитория больше не используется. Для оценки скорости, Core Web Vitals, Accessibility, Best Practices, SEO, PWA и Agentic Browsing использовать внешний сервис [PageSpeed Insights](https://pagespeed.web.dev/).
 
 ## 1. Зачем Это Нужно
 
@@ -13,6 +13,8 @@ PageSpeed Insights проще для проекта и владельца сай
 - не ломает deploy из-за ошибки внешнего браузерного runtime;
 - показывает и лабораторную проверку конкретного URL, и реальные field data, когда они накопятся;
 - подходит для ручной production-проверки после каждого важного deploy.
+
+Для новичка: PageSpeed Insights — это не один общий балл. В нем есть разные блоки. Блоки Agentic Browsing/WebMCP сейчас помогают понять, сможет ли AI-агент распознать формы и служебный `llms.txt`. Они не заменяют SEO, schema.org, Core Web Vitals и ручную проверку сайта человеком.
 
 ## 2. Что Удалено Из Проекта
 
@@ -53,6 +55,28 @@ Netlify теперь должен только собрать и опублик�
 5. Проверить, нет ли console errors, CSP errors, missing resources и явных regressions.
 6. Если страница в `development/noindex`, не считать SEO score финальным для indexability.
 7. После production-переключения отдельно проверить `index,follow`, sitemap, canonical, hreflang и schema.
+8. Если менялись формы, `static/llms.txt`, headers или Agentic Browsing-подсказки, дополнительно открыть блоки WebMCP и `llms.txt`.
+
+## 4.1. Что Смотреть В Agentic Browsing
+
+PageSpeed может показывать отдельные проверки для WebMCP и `llms.txt`. В проекте они нужны для трех вещей:
+
+- чтобы AI-агент нашел форму контакта, форму отзыва или фильтр каталога;
+- чтобы браузер получил понятную схему полей формы;
+- чтобы LLM/AI-агент нашел краткую карту сайта в `/llms.txt`.
+
+Проверки и практический смысл:
+
+| Проверка | Что означает для новичка | Где править |
+|---|---|---|
+| Покрытие форм WebMCP | Форма найдена, но ей может не хватать `toolname` / `tooldescription` | `layouts/_shortcodes/contact.html`, `layouts/_partials/reviews/form.html`, `layouts/_partials/products/filters.html` |
+| Зарегистрированные инструменты WebMCP | Браузер видит список форм-инструментов | те же шаблоны форм |
+| Схемы WebMCP действительны | У полей и групп полей есть понятные имена и описания | `toolparamdescription`, `title`, `aria-label`, `aria-description`, `fieldset` |
+| `llms.txt` соответствует рекомендациям | Корневой файл `/llms.txt` существует, написан как Markdown и имеет H1 | `static/llms.txt` |
+
+Важно: для checkbox и radio-групп одного описания на каждом `input` может быть недостаточно. В текущем проекте группы фильтров и рейтинг отзывов описаны через `fieldset`, потому что Chrome строит WebMCP-схему на уровне параметра-группы.
+
+Текущий профильный снимок и пример локальной проверки зафиксированы в [96-2026-07-08-webmcp-llms-agentic-readiness-audit.md](../audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md).
 
 ## 5. Целевые Ориентиры
 
@@ -65,6 +89,7 @@ Netlify теперь должен только собрать и опублик�
 | Best Practices | `100` |
 | SEO | `100` на production-indexable страницах |
 | PWA | `100`, если страница участвует в PWA-контуре |
+| Agentic Browsing | без WebMCP schema issues на страницах с формами |
 | LCP | ≤ `2.0 s`, лучше ≤ `1.5 s` |
 | INP | ≤ `150 ms`, лучше ≤ `100 ms` |
 | CLS | `0` или почти `0` |
@@ -99,6 +124,21 @@ Netlify теперь должен только собрать и опублик�
 - web fonts;
 - поздно вставляемые блоки.
 
+Если PageSpeed показывает WebMCP warning:
+
+- у формы проверить `toolname` и `tooldescription`;
+- у обычных полей проверить `name`, связанный `label`, `title` или `toolparamdescription`;
+- у checkbox/radio-групп проверить `fieldset`, `legend`, `aria-description` и `toolparamdescription` на группе;
+- не добавлять `toolautosubmit` к contact/review формам без отдельного решения: пользователь должен видеть и подтверждать отправку.
+
+Если PageSpeed показывает проблему `llms.txt`:
+
+- проверить, что файл доступен по `/llms.txt`;
+- проверить, что он написан в Markdown;
+- проверить наличие одного H1;
+- проверить, что есть обычные Markdown-ссылки на ключевые страницы;
+- не превращать файл в рекламную страницу или второй sitemap.
+
 ## 7. Локальные Проверки До PageSpeed
 
 Перед ручной проверкой опубликованного URL запускать:
@@ -118,9 +158,13 @@ npm run build:production
 
 PageSpeed Insights проверяет опубликованный URL, поэтому локальная Hugo-сборка не заменяет ручную проверку.
 
+Если нужно предварительно проверить Agentic Browsing локально, использовать временный Lighthouse/Chrome-прогон вне root-зависимостей проекта. Не добавлять Lighthouse как постоянную зависимость в `package.json` без отдельного решения.
+
 ## 8. Чего Не Делать
 
 - Не возвращать браузерный audit plugin в `netlify.toml` без отдельного решения.
 - Не добавлять тяжелые Chrome-аудит зависимости в root `package.json`.
 - Не считать `dev` Branch Deploy финальной SEO-indexability проверкой, пока Netlify собирает сайт в `development`.
 - Не гнаться за числом `100`, если правка ухудшает контент, UX или конверсию.
+- Не использовать WebMCP как способ скрыть или заменить обычные видимые подписи формы.
+- Не дублировать в `llms.txt` коммерческие product facts, если источником правды уже являются видимые страницы и JSON-LD.

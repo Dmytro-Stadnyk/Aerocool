@@ -1,6 +1,6 @@
 # Финальный Контроль Качества Перед Production-Релизом
 
-Обновлено: 2026-06-16.
+Обновлено: 2026-07-08.
 
 Этот документ фиксирует короткий финальный чек перед production-релизом `Aerocool Ukraine`. Он дополняет [13-pagespeed-insights-audit.md](13-pagespeed-insights-audit.md), но не заменяет SEO/schema-проверки.
 
@@ -48,6 +48,7 @@ mise exec -- hugo config --format json --lang ru
 - meta-тег robots, canonical и hreflang;
 - JSON-LD через `validator.schema.org`;
 - PageSpeed Insights для ключевых URL.
+- PageSpeed Agentic Browsing/WebMCP для `/contact/`, `/products/` и одной товарной страницы с формой отзывов, если менялись формы, `static/llms.txt`, headers или CSS вокруг `fieldset`.
 
 Если менялся `hugo.yaml`, дополнительно локально открыть после production-сборки:
 
@@ -70,6 +71,7 @@ Production-релиз можно считать технически готов�
 - служебные страницы остаются `noindex,nofollow`;
 - schema.org validator не показывает ошибок;
 - PageSpeed Insights не показывает критических регрессий;
+- WebMCP-схемы форм и `llms.txt` не имеют предупреждений на затронутых опубликованных URL;
 - routing и forced 404 работают на опубликованном URL.
 
 ## 5. Что Не Делать
@@ -77,3 +79,4 @@ Production-релиз можно считать технически готов�
 - Не переносить `dev` в `main`, если опубликованный Branch Deploy не проверен вручную.
 - Не включать production-индексацию, если sitemap, robots, canonical или hreflang не проверены.
 - Не возвращать в проект локальный browser audit runtime без отдельного решения.
+- Не считать локальный WebMCP/Lighthouse-прогон финальной проверкой: финальный сигнал дает опубликованный URL в PageSpeed Insights.

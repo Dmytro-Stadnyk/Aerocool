@@ -45,7 +45,7 @@ Knowledge graph — это сеть отношений между сущност
 - снижается риск неправильного описания бренда или товара;
 - появляется единый semantic layer для бренда, каталога, product facts и сервисных условий;
 - можно анализировать, какие сущности и темы уже покрыты, а где есть пробелы;
-- в будущем тот же слой может быть полезен для AI-chatbot, NLWeb, `llms.txt` или agentic interfaces.
+- тот же слой уже используется как ориентир для минимального `static/llms.txt` и может быть полезен для будущих AI-chatbot, NLWeb или agentic interfaces.
 
 Важно: knowledge graph строится из видимого контента и подтвержденных источников правды. JSON-LD не должен описывать факты, которых нет на странице или в подтвержденной структуре сайта.
 
@@ -84,7 +84,7 @@ Customer stories Schema App подтверждают практическую с
 | Создание (Creation) | Определить сущности, entity home, `@id`, связи и видимый контент | `data/entities.yaml`, front matter, страницы сущностей |
 | Публикация (Hosting) | Опубликовать graph в crawlable HTML через JSON-LD | централизованный `@graph` из Hugo partials |
 | Поддержка (Curation) | Регулярно проверять факты, статусы, `sameAs`, product facts по регламенту и schema drift | меньше дублей, битых `@id` и устаревших коммерческих данных |
-| Внедрение И Повторное Использование (Deployment / Reuse) | Использовать graph для SEO, AI Search, отчетности, будущего `llms.txt` или agentic surfaces | entity coverage reports, AI citation audits, будущие data endpoints при необходимости |
+| Внедрение И Повторное Использование (Deployment / Reuse) | Использовать graph для SEO, AI Search, отчетности, текущего `llms.txt` и будущих agentic surfaces | entity coverage reports, AI citation audits, будущие data endpoints при необходимости |
 
 Не внедрять triplestore, SPARQL или отдельный graph database сейчас. Для текущего масштаба проекта достаточно качественного registry, rendered JSON-LD и регулярной отчетности.
 
@@ -289,7 +289,7 @@ Knowledge graph может быть переиспользован за пред
 
 1. Рассмотреть glossary или entity hub.
 2. Рассмотреть author/reviewer entities только при реальной редакционной модели.
-3. Использовать knowledge graph как источник для будущего `llms.txt`.
+3. Поддерживать `static/llms.txt` как краткий reuse-слой knowledge graph и карты ключевых URL.
 4. Подготовить данные для AI-chatbot только после production-стабилизации и актуализации product facts.
 5. Рассмотреть queryable graph или export только если появится реальная задача для internal tools, AI grounding или аналитики.
 

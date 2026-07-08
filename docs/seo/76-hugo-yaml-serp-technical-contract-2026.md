@@ -1,8 +1,8 @@
 # `hugo.yaml` Как SERP-Технический Контракт 2026
 
-Обновлено: 2026-06-16.
+Обновлено: 2026-07-08.
 
-Этот документ объясняет, как текущий [hugo.yaml](../../hugo.yaml) влияет на SEO, индексацию, мультиязычность, Core Web Vitals, structured data и готовность проекта `Aerocool Ukraine` к борьбе за сильные позиции в Google Search.
+Этот документ объясняет, как текущий [hugo.yaml](../../hugo.yaml) влияет на SEO, индексацию, мультиязычность, Core Web Vitals, structured data, Agentic Browsing и готовность проекта `Aerocool Ukraine` к борьбе за сильные позиции в Google Search.
 
 Важно: никакой конфиг, schema.org-разметка, PageSpeed score или объем текста не гарантируют `топ-1`. Цель этого документа - убрать технические причины проигрыша, зафиксировать лучшие практики стека `Hugo 0.164.0`, `Tailwind CSS 4.3`, `Netlify`, `PaperMod`, `Netlify Database` и дать понятный порядок проверки перед production.
 
@@ -22,6 +22,9 @@
 - Hugo Tailwind CSS function: `https://gohugo.io/functions/css/tailwindcss/`
 - Netlify Hugo docs: `https://docs.netlify.com/frameworks/hugo/`
 - Netlify build environment variables: `https://docs.netlify.com/build/configure-builds/environment-variables/`
+- Chrome WebMCP: `https://developer.chrome.com/docs/ai/webmcp`
+- Chrome WebMCP Declarative API: `https://developer.chrome.com/docs/ai/webmcp/declarative-api`
+- `llms.txt` proposal: `https://llmstxt.org/`
 
 Практический вывод для новичка: документация проекта может быть жестче общих Google/Hugo правил, но не должна им противоречить.
 
@@ -40,6 +43,7 @@
 - `build.buildStats` и `module.mounts` поддерживают Tailwind CSS 4.3 через Hugo pipeline;
 - `robots.txt`, canonical, hreflang, sitemap index и языковые sitemap генерируются;
 - JSON-LD не включается ложным флагом в конфиге, а управляется локальными partials и `schema_types`;
+- Agentic Browsing слой не требует новых индексируемых URL: WebMCP живет в HTML-формах, а `llms.txt` отдается как статический корневой Markdown-файл;
 - Netlify development/noindex gate сохранен до отдельного production-решения.
 
 Почему не `10 / 10`:
@@ -128,6 +132,7 @@
 | Entity graph | `data/entities.yaml`, `schema_types`, `_seo` partials | Сущности видимы в тексте и связаны в JSON-LD без выдуманных фактов |
 | Товары | product front matter, product templates, review export | Реальные product facts, approved reviews, `Product`/`Offer` без fake data |
 | Изображения | page bundles, `seo-image`, gallery partials | Уникальные WebP, `alt`, размеры, LCP preload, schema image set |
+| Agentic Browsing | `static/llms.txt`, WebMCP-атрибуты форм | Краткая карта сайта для LLM/AI-агентов и валидные схемы contact/review/filter форм |
 | Производительность | Hugo Pipes, Tailwind 4.3, Netlify headers | Хорошие CWV на published URL, минимум JS, стабильные размеры изображений |
 | Мониторинг | PageSpeed Insights, Google Search Console, Schema Validator | Регулярная проверка реальных URL и реальных запросов |
 
@@ -166,6 +171,21 @@ public/ru/index.json
 - sitemap содержит только canonical URL;
 - search JSON парсится;
 - Tailwind CSS не теряет классы после правок шаблонов.
+- `public/llms.txt` существует, содержит H1 и Markdown-ссылки;
+- страницы с формами сохраняют `toolname`, `tooldescription` и валидные WebMCP-параметры.
+
+## 6.1. WebMCP И `llms.txt` Простыми Словами
+
+WebMCP и `llms.txt` не являются классическим SEO-фактором и не заменяют schema.org. Их задача другая: помочь браузеру и AI-агенту понять, какие действия можно выполнить на странице.
+
+В текущем проекте:
+
+- `static/llms.txt` копируется Hugo в `public/llms.txt` и становится доступен по `/llms.txt`;
+- контактная форма, форма отзыва и фильтры каталога имеют WebMCP-атрибуты в локальных шаблонах;
+- `fieldset` используется там, где один параметр формы состоит из группы checkbox или radio controls;
+- `toolautosubmit` не включен, потому что отправка контакта и отзыва должна оставаться видимой и контролируемой пользователем.
+
+При изменении этого слоя читать [96-2026-07-08-webmcp-llms-agentic-readiness-audit.md](../audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md), а результат проверять через PageSpeed Insights на опубликованном URL.
 
 ## 7. Итог
 

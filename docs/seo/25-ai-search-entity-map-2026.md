@@ -1,6 +1,6 @@
 # Карта Сущностей Для Поиска С AI 2026
 
-Обновлено: 2026-05-25.
+Обновлено: 2026-07-08.
 
 Этот документ переводит идеи из `Mastering AI Search`, `Schema Markup and AI Search`, `Designing Content for Humans and Machines`, `How to Prepare Your Content for Generative AI Search`, `Impact of Schema Markup` и `How Marketers Can Prepare Their Organization for the Agentic Web` от SchemaApp в практическую систему для проекта `Aerocool Ukraine`: какие сущности нужно закрепить на сайте, какие AI Search-метрики отслеживать, какие prompt-наборы проверять и как развивать JSON-LD graph без переспама.
 
@@ -12,7 +12,7 @@
 Customer stories/case studies Schema App по AI hallucinations, entity linking и product visibility зафиксированы в [46-2026-05-18-schemaapp-customer-stories-case-studies-audit.md](../audits/46-2026-05-18-schemaapp-customer-stories-case-studies-audit.md).
 Обновление `2026-05-25` учитывает статью Schema App [Stop Chasing Visibility. Build Understanding.](https://www.schemaapp.com/schema-markup/stop-chasing-visibility-build-understanding/) и официальный Google guide [Optimizing your website for generative AI features on Google Search](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide).
 
-Важно: AI Search-слой не заменяет Google Search Essentials, people-first content, Core Web Vitals и structured data quality. До production-запуска и индексации AI Search считать мониторинговым и entity-governance слоем, а не причиной внедрять chatbot, NLWeb, MCP, chunking-стратегию или `llms.txt` как P0.
+Важно: AI Search-слой не заменяет Google Search Essentials, people-first content, Core Web Vitals и structured data quality. До production-запуска и индексации AI Search считать мониторинговым и entity-governance слоем, а не причиной внедрять chatbot, NLWeb, MCP или chunking-стратегию как P0. Минимальный `llms.txt` внедрен как служебная карта сайта после PageSpeed Agentic Browsing-проверки, но он не является заменой sitemap, robots, schema.org или видимого контента.
 
 ### Уточнение После Google AI Guide И Schema App
 
@@ -20,7 +20,7 @@ Customer stories/case studies Schema App по AI hallucinations, entity linking 
 
 - специальной `AI schema` для попадания в generative AI search не существует;
 - structured data не является самостоятельным shortcut для AI-видимости;
-- `llms.txt`, chunking и похожие AI-тактики не должны опережать индексацию, качество контента и связный entity graph;
+- `llms.txt`, chunking и похожие AI-тактики не должны опережать индексацию, качество контента и связный entity graph; текущий `llms.txt` только указывает на ключевые публичные URL и источники правды;
 - AI Search-аудит должен проверять не только наличие упоминаний, но и точность понимания бренда, товаров, условий покупки и связей между сущностями;
 - главная цель Aerocool — machine understanding: поисковые и AI-системы должны уверенно понимать, кто продает кресла Aerocool в Украине, какие серии и модели существуют, какие характеристики подтверждены, какие условия сервиса актуальны.
 
@@ -304,7 +304,7 @@ AI follow-up вопросы не равны обычному Google `People Also
 | P2 | `DefinedTerm` / glossary layer | Articles, glossary or FAQ sections | Нужны реальные объяснения терминов |
 | P2 | Author / reviewer layer | Articles, NewsArticle | Только реальные люди или прозрачная организация |
 | P2 | `sameAs` | Brand, Organization, entities | Только точные официальные профили или авторитетные knowledge bases |
-| P2 | `llms.txt` | Root static file | После production-стабилизации и ясной карты ключевых URL |
+| Done | `llms.txt` | Root static file | Минимальная Markdown-карта сайта внедрена в `static/llms.txt`; поддерживать как краткий навигационный файл, не как второй sitemap |
 
 ## 9. Front Matter И Связи
 
@@ -375,7 +375,7 @@ AI-friendly контент не должен быть короче или бед
 
 - товарные данные должны быть структурированы и синхронизированы с видимым контентом;
 - коммерческие условия должны быть понятны не только человеку, но и машине: цена, наличие, доставка, возврат, гарантия, оплата;
-- RSS, schema.org, sitemap и будущий `llms.txt` должны указывать на стабильные URL и актуальные сущности;
+- RSS, schema.org, sitemap и текущий `static/llms.txt` должны указывать на стабильные URL и актуальные сущности;
 - если рынок начнет использовать Agentic Commerce Protocol или похожие commerce-стандарты, проекту понадобится надежный источник товарной правды;
 - если появится задача conversational-интерфейса на сайте, NLWeb-подход логично рассматривать поверх уже опубликованных semi-structured данных: schema.org, RSS, sitemap, FAQ и каталог.
 
@@ -460,12 +460,12 @@ AI-friendly контент не должен быть короче или бед
 ### P2
 
 1. Спроектировать glossary или entity hub.
-2. Рассмотреть `llms.txt` после production-стабилизации.
+2. Поддерживать текущий `static/llms.txt` кратким: H1, описание, ссылки на ключевые URL, sitemap и robots.
 3. Добавить author/reviewer layer только при наличии реальной редакционной модели.
 4. Добавить внешние `sameAs` только для точных официальных источников.
 5. Подключить AI referral monitoring к регулярному SEO-отчету.
 6. При наличии логов добавить AI crawler traffic в регулярный отчет.
-7. Рассмотреть `llms.txt`, NLWeb или agentic commerce-требования только после production-стабилизации и появления понятной бизнес-задачи.
+7. Рассмотреть NLWeb или agentic commerce-требования только после production-стабилизации и появления понятной бизнес-задачи; текущий WebMCP/`llms.txt`-слой держать как lightweight progressive enhancement.
 8. Подготовить черновой `Callable Actions Registry` как документацию, без JSON-LD/API-вывода.
 
 ## 15. Контрольный Вывод

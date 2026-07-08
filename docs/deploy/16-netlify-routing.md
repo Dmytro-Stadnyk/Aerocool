@@ -1,6 +1,6 @@
 # Маршрутизация Netlify И Принудительная 404
 
-Обновлено: 2026-06-02.
+Обновлено: 2026-07-08.
 
 Этот документ описывает, как в проекте устроены Netlify redirects, HTTP headers и кастомная `404`.
 
@@ -13,6 +13,7 @@
 В проекте есть два слоя routing-настроек:
 
 - `static/_redirects` — plain text `_redirects` для Netlify. Hugo копирует его в `public/_redirects` как статический файл. Здесь живет явный root rewrite `/ -> /index.html` и forced `404!` для scanner URL.
+- `static/llms.txt` — корневой Markdown-файл для LLM/AI-агентов. Hugo копирует его в `public/llms.txt`, а опубликованный сайт отдает его по `/llms.txt`.
 - `netlify.toml` — основной Netlify config со сборкой, headers и локальными build plugins. Общий fallback на `404` не нужен: Netlify автоматически использует `public/404.html`.
 
 Netlify обрабатывает `_redirects` раньше правил из `netlify.toml`. Внутри файла первое совпавшее правило выигрывает, поэтому более конкретные правила должны стоять выше более общих.
@@ -153,6 +154,8 @@ assets/js/site.js
 
 Не добавлять `Cross-Origin-Embedder-Policy` автоматически вместе с COOP. COEP может ломать кросс-ориджин ресурсы, если они не отдают нужные CORS/CORP headers. Для текущего PageSpeed warning достаточно COOP.
 
+WebMCP в Chrome требует origin isolation и permissions policy, но это не означает, что в проект нужно автоматически добавлять COEP или широкий `Permissions-Policy`. Текущий WebMCP-слой реализован как declarative form annotations в HTML и проверяется через PageSpeed/Lighthouse Agentic Browsing. Если будущая версия Chrome или PageSpeed потребует новые headers для WebMCP, менять `netlify.toml` только после отдельной проверки на Deploy Preview, потому что headers могут повлиять на изображения, service worker и внешние ресурсы.
+
 Для cache rules не использовать brace glob в `for`, например `/*.{css,js,woff2}`. Netlify CLI трактует такие значения как route pattern и может вернуть ошибку `invalid regular expression: incomplete {} quantifier`. Вместо этого держать явные правила вроде `/assets/*`, `/images/*`, `/*.svg`, `/*.webmanifest`.
 
 Общие security headers должны оставаться в `for = "/*"`, а asset-cache правила должны стоять выше них. Если меняется кеширование, проверить итоговые headers на Deploy Preview: локальный Netlify Dev может отдавать служебный `cache-control: public, max-age=0` для некоторых статических файлов.
@@ -172,6 +175,7 @@ find static public -name '.DS_Store' -print
 Что проверить:
 
 - `public/_redirects` содержит актуальные правила из `static/_redirects`;
+- `public/llms.txt` существует, содержит H1 и Markdown-ссылки;
 - нет mid-path splat вида `/*/something`;
 - scanner/sensitive правила используют `404!`;
 - файл заканчивается newline;
@@ -206,6 +210,7 @@ curl -sS -I http://localhost:8899/ads.txt
 - scanner/sensitive URL отдают `404`;
 - удаленные без замены материалы, например `/ru/articles/how-to-choose-office-desk-2025/`, остаются `404`;
 - несуществующие обычные URL, например `/ads.txt`, отдают автоматическую кастомную `404`.
+- `/llms.txt` отдает `200` и plain text/Markdown-содержимое.
 
 Netlify CLI может создать локальные артефакты `.netlify/` и `deno.lock`; они должны оставаться в `.gitignore` и не попадать в коммит.
 
@@ -220,3 +225,5 @@ https://pagespeed.web.dev/
 ```
 
 Минимальный набор URL и целевые ориентиры описаны в [quality/13-pagespeed-insights-audit.md](../quality/13-pagespeed-insights-audit.md). Если менялись `static/_redirects`, CSP, headers или 404, сначала выполнить routing-проверки из раздела 8, затем уже смотреть PageSpeed.
+
+Если менялся `static/llms.txt` или WebMCP-разметка форм, в PageSpeed дополнительно смотреть Agentic Browsing-блоки: покрытие форм WebMCP, зарегистрированные инструменты WebMCP, валидность схем и рекомендации по `llms.txt`.

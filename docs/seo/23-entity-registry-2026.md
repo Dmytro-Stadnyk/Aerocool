@@ -424,5 +424,5 @@ Action нельзя создавать как “идею”. Он должен 
 10. Выполнено `2026-05-31`: удалить дубликат `products-collection` и оставить `aerocool-catalog` как единственную каноническую сущность каталога.
 11. Выполнено `2026-05-31`: выводить `ProductGroup`, `isVariantOf` и `inProductGroupWithID` для четырех подтвержденных цветовых групп вариантов WING/XTAL.
 12. Выполнено `2026-05-31`: выводить `Product.color` из registry и `Product.additionalProperty` из видимых `characteristics`.
-13. Использовать этот registry как input для `llms.txt` после стабилизации production.
+13. Выполнено `2026-07-08`: использовать registry и карту ключевых URL как input для минимального `static/llms.txt`; дальше поддерживать файл как краткую карту сайта, а не как дубликат Entity Registry.
 14. Держать `Callable Actions Registry` как P3-документацию, пока не появятся реальные business endpoints и владельцы.

@@ -9,7 +9,7 @@
 - [README.md](../README.md) — краткая карта проекта, стека, структуры и основных команд.
 - [AGENTS.md](../AGENTS.md) — правила безопасной работы для Codex/агентов.
 
-Основные документационные позиции внутри `docs/` пронумерованы глобально от `01` до `95`. Номер в начале имени показывает рекомендуемый порядок чтения. Сопутствующие CSV-файлы используют номера своих основных документов `53` и `59`.
+Основные документационные позиции внутри `docs/` пронумерованы глобально от `01` до `96`. Номер в начале имени показывает рекомендуемый порядок чтения. Сопутствующие CSV-файлы используют номера своих основных документов `53` и `59`.
 
 ## Как Пользоваться Новичку
 
@@ -274,6 +274,10 @@
 
 95. [audits/95-2026-07-08-full-documentation-project-sync-audit-current.md](audits/95-2026-07-08-full-documentation-project-sync-audit-current.md) — текущий полный аудит всей проектной документации на 2026-07-08: порядок чтения `01-95`, русский язык, новичковая структура, ссылки, `image` + `cover`, schema.org, Entity Registry, Core Web Vitals, Netlify, pinned stack, официальные практики 2026 года и итоговая оценка **9.8/10**.
 
+### Текущий Agentic Browsing Аудит
+
+96. [audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md](audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md) — профильный audit WebMCP-аннотаций форм, `static/llms.txt` и PageSpeed Agentic Browsing. Фиксирует, какие формы зарегистрированы как инструменты, как устроены `toolname`, `tooldescription`, `toolparamdescription`, почему `fieldset` нужен для checkbox/radio-групп и как проверять результат новичку.
+
 ## Маршруты По Задачам
 
 Для проверки или обновления всей документации читать:
@@ -331,7 +335,17 @@
 3. [seo/24-entities-knowledge-graph-playbook-2026.md](seo/24-entities-knowledge-graph-playbook-2026.md)
 4. [seo/25-ai-search-entity-map-2026.md](seo/25-ai-search-entity-map-2026.md)
 5. [seo/59-entity-performance-report-2026.md](seo/59-entity-performance-report-2026.md)
-6. [audits/57-2026-05-31-schema-entity-full-audit-current.md](audits/57-2026-05-31-schema-entity-full-audit-current.md), если нужен исторический полный baseline на 2026-05-31
+6. [audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md](audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md), если задача касается WebMCP, Agentic Browsing, форм или `llms.txt`
+7. [audits/57-2026-05-31-schema-entity-full-audit-current.md](audits/57-2026-05-31-schema-entity-full-audit-current.md), если нужен исторический полный baseline на 2026-05-31
+
+Для WebMCP, `llms.txt` и PageSpeed Agentic Browsing читать:
+
+1. [audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md](audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md)
+2. [architecture/03-hugo-template-helpers.md](architecture/03-hugo-template-helpers.md), если меняются `contact.html`, `reviews/form.html` или `products/filters.html`
+3. [quality/13-pagespeed-insights-audit.md](quality/13-pagespeed-insights-audit.md), если нужна ручная проверка опубликованного URL через PageSpeed Insights
+4. [quality/14-production-quality-gate-2026.md](quality/14-production-quality-gate-2026.md), если это часть production-релиза
+5. [deploy/16-netlify-routing.md](deploy/16-netlify-routing.md), если меняются `static/llms.txt`, headers или опубликованные служебные файлы
+6. [seo/76-hugo-yaml-serp-technical-contract-2026.md](seo/76-hugo-yaml-serp-technical-contract-2026.md), если нужно понять связь с sitemap, robots, canonical, hreflang и общей SERP-технической базой
 
 Для SEO-ключей, семантики и планирования новых посадочных страниц читать:
 
@@ -398,6 +412,7 @@
 - поменял schema.org partials — проверь [seo/19-schema-types-reference.md](seo/19-schema-types-reference.md), [seo/20-schema-markup-quality-checklist-2026.md](seo/20-schema-markup-quality-checklist-2026.md), [seo/26-json-ld-graph-audit-roadmap-2026.md](seo/26-json-ld-graph-audit-roadmap-2026.md) и после сборки обнови [seo/59-entity-performance-report-2026.md](seo/59-entity-performance-report-2026.md);
 - поменял product facts, товарный front matter, цвет, характеристики, гарантию, доставку, возврат, оплату или `priceValidUntil` — проверь [seo/58-product-facts-maintenance-process-2026.md](seo/58-product-facts-maintenance-process-2026.md), [content/05-front-matter-reference.md](content/05-front-matter-reference.md), [seo/21-ecommerce-structured-data-playbook-2026.md](seo/21-ecommerce-structured-data-playbook-2026.md) и после сборки обнови [seo/59-entity-performance-report-2026.md](seo/59-entity-performance-report-2026.md);
 - поменял review-систему, Netlify Database migrations, `review_target_id`, moderation flow или build-time export отзывов — проверь [deploy/17-netlify-database-reviews.md](deploy/17-netlify-database-reviews.md), [content/05-front-matter-reference.md](content/05-front-matter-reference.md), [seo/21-ecommerce-structured-data-playbook-2026.md](seo/21-ecommerce-structured-data-playbook-2026.md) и [seo/20-schema-markup-quality-checklist-2026.md](seo/20-schema-markup-quality-checklist-2026.md);
+- поменял контактную форму, форму отзывов, фильтры каталога, WebMCP-атрибуты или `static/llms.txt` — проверь [audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md](audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md), [architecture/03-hugo-template-helpers.md](architecture/03-hugo-template-helpers.md), [quality/13-pagespeed-insights-audit.md](quality/13-pagespeed-insights-audit.md), [quality/14-production-quality-gate-2026.md](quality/14-production-quality-gate-2026.md) и [deploy/16-netlify-routing.md](deploy/16-netlify-routing.md);
 - поменял entity strategy, `about`, `mentions`, `sameAs` или `@id` — проверь [seo/24-entities-knowledge-graph-playbook-2026.md](seo/24-entities-knowledge-graph-playbook-2026.md), [seo/25-ai-search-entity-map-2026.md](seo/25-ai-search-entity-map-2026.md) и после сборки обнови [seo/59-entity-performance-report-2026.md](seo/59-entity-performance-report-2026.md);
 - поменял entity registry, `about_entities`, `mentions_entities`, `product_group_id` или rendered JSON-LD graph — после `npm run build` запусти `npm run entity:report` и проверь [seo/59-entity-performance-report-2026.md](seo/59-entity-performance-report-2026.md);
 - поменял hero, изображения первого экрана, CSS, JS или performance-sensitive layout — проверь [quality/12-core-web-vitals-guide-2026.md](quality/12-core-web-vitals-guide-2026.md), [quality/13-pagespeed-insights-audit.md](quality/13-pagespeed-insights-audit.md) и [quality/14-production-quality-gate-2026.md](quality/14-production-quality-gate-2026.md);

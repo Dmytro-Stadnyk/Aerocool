@@ -15,7 +15,7 @@
 
 Для текущих задач по Core Web Vitals читать `docs/quality/12-core-web-vitals-guide-2026.md` и актуальный полевой аудит `docs/audits/83-2026-06-21-netlify-rum-core-web-vitals-baseline.md`. Аудит `54` остается историческим lab baseline на 2026-05-26.
 
-Для текущих задач по JSON-LD, schema.org, Entity Registry, `about_entities`, `mentions_entities`, `ProductGroup`, `sameAs` и graph-аудиту читать `docs/seo/23-entity-registry-2026.md`, `docs/seo/26-json-ld-graph-audit-roadmap-2026.md` и текущий generated report [docs/seo/59-entity-performance-report-2026.md](docs/seo/59-entity-performance-report-2026.md). Для ручной проверки через `validator.schema.org` использовать [docs/seo/60-schema-validator-url-checklist-2026.md](docs/seo/60-schema-validator-url-checklist-2026.md). Полный schema/entity-аудит `57` оставлен как исторический snapshot на 2026-05-31.
+Для текущих задач по JSON-LD, schema.org, Entity Registry, `about_entities`, `mentions_entities`, `ProductGroup`, `sameAs` и graph-аудиту читать `docs/seo/23-entity-registry-2026.md`, `docs/seo/26-json-ld-graph-audit-roadmap-2026.md` и текущий generated report [docs/seo/59-entity-performance-report-2026.md](docs/seo/59-entity-performance-report-2026.md). Для ручной проверки через `validator.schema.org` использовать [docs/seo/60-schema-validator-url-checklist-2026.md](docs/seo/60-schema-validator-url-checklist-2026.md). Для WebMCP-аннотаций форм, PageSpeed Agentic Browsing и корневого `llms.txt` читать профильный audit [docs/audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md](docs/audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md). Полный schema/entity-аудит `57` оставлен как исторический snapshot на 2026-05-31.
 
 Для текущих задач по ключевым словам, семантике, каннибализации, планированию посадочных страниц и стратегии роста читать [docs/seo/18-seo-keyword-map-2026.md](docs/seo/18-seo-keyword-map-2026.md), [docs/seo/53-keyword-database-2026.md](docs/seo/53-keyword-database-2026.md), [docs/seo/72-semantic-core-keyword-strategy-2026.md](docs/seo/72-semantic-core-keyword-strategy-2026.md), [docs/seo/87-content-expansion-keyword-roadmap-2026.md](docs/seo/87-content-expansion-keyword-roadmap-2026.md) и [docs/seo/88-semantic-core-top1-growth-system-2026.md](docs/seo/88-semantic-core-top1-growth-system-2026.md). Для задач по `hugo.yaml`, индексации, sitemap, robots, canonical, hreflang, production gate и техническому SERP-фундаменту читать [docs/seo/76-hugo-yaml-serp-technical-contract-2026.md](docs/seo/76-hugo-yaml-serp-technical-contract-2026.md). Актуальная keyword-база содержит `389` строк, покрывает `100` markdown-страниц, включает support/legal URL `/image-license/` и `/ru/image-license/`, product-level `price` / `availability` / `specs` интенты для всех товаров, growth-кластеры расширения контента, а поля `gsc_*` заполняются только после импорта реальных данных Google Search Console.
 
@@ -27,11 +27,11 @@
 
 Для текущих задач по Hugo, Node, Tailwind и локальным инструментам читать [docs/deploy/15-local-tooling-mise.md](docs/deploy/15-local-tooling-mise.md), актуальный tooling-аудит [docs/audits/93-2026-07-07-hugo-0-164-update-audit.md](docs/audits/93-2026-07-07-hugo-0-164-update-audit.md) и SERP-контракт [docs/seo/76-hugo-yaml-serp-technical-contract-2026.md](docs/seo/76-hugo-yaml-serp-technical-contract-2026.md), если меняется `hugo.yaml`.
 
-Проще говоря: `content/` отвечает за текст и данные страниц, `layouts/` отвечает за HTML/SEO/schema-логику, `assets/` отвечает за CSS/JS, а PageSpeed Insights используется для ручной проверки качества опубликованных URL.
+Проще говоря: `content/` отвечает за текст и данные страниц, `layouts/` отвечает за HTML/SEO/schema/WebMCP-логику, `assets/` отвечает за CSS/JS, `static/` отдает служебные файлы вроде `_redirects` и `llms.txt`, а PageSpeed Insights используется для ручной проверки качества опубликованных URL.
 
 Вся документация проекта должна быть русскоязычной, понятной новичку и структурированной. Единый стандарт стиля описан в [docs/architecture/02-documentation-style-guide.md](docs/architecture/02-documentation-style-guide.md).
 
-Последний полный аудит документации, синхронизации с кодом и официальными практиками 2026 года находится в [docs/audits/95-2026-07-08-full-documentation-project-sync-audit-current.md](docs/audits/95-2026-07-08-full-documentation-project-sync-audit-current.md). Итоговая оценка после проверки: **9.8/10**. Документ `92` является профильным UX/UI-аудитом, документ `93` — профильным tooling-аудитом перехода на Hugo `0.164.0`, а полный текущий snapshot документации после них — `95`. Документы `87` и `88` — профильные документы по расширению ключевых слов, контента и стратегии роста; аудит `89` — профильная проверка `image` + `cover`, размеров, форматов, crop-наборов и дублей главных товарных изображений. Аудиты `78`, `82`, `86`, `90`, `91` и `94` остаются историческими снимками.
+Последний полный аудит документации, синхронизации с кодом и официальными практиками 2026 года находится в [docs/audits/95-2026-07-08-full-documentation-project-sync-audit-current.md](docs/audits/95-2026-07-08-full-documentation-project-sync-audit-current.md). Итоговая оценка после проверки: **9.8/10**. Документ `96` — профильный snapshot по WebMCP, `llms.txt` и PageSpeed Agentic Browsing; он не заменяет полный аудит `95`. Документ `92` является профильным UX/UI-аудитом, документ `93` — профильным tooling-аудитом перехода на Hugo `0.164.0`. Документы `87` и `88` — профильные документы по расширению ключевых слов, контента и стратегии роста; аудит `89` — профильная проверка `image` + `cover`, размеров, форматов, crop-наборов и дублей главных товарных изображений. Аудиты `78`, `82`, `86`, `90`, `91` и `94` остаются историческими снимками.
 
 ## 1. Главная идея проекта
 
@@ -51,6 +51,7 @@
 - `Netlify` для сборки и публикации
 - `Netlify Functions` для API-эндпоинтов отзывов
 - `Netlify Database` / `PostgreSQL` для SEO-first review-системы
+- WebMCP declarative form annotations для contact/review/filter форм как progressive enhancement для AI-агентов
 - PageSpeed Insights для ручной проверки опубликованных URL
 
 Локальные версии инструментов фиксируются в `mise.toml`. В Netlify версии фиксируются в `netlify.toml`.
@@ -140,6 +141,7 @@ assets/css/main.css             Tailwind CSS и локальный визуал�
 assets/js/site.js               общий внешний JS сайта без inline-скриптов
 static/                         статические файлы
 static/_redirects               root rewrite и forced 404 для scanner/sensitive URL на Netlify
+static/llms.txt                 Markdown-карта сайта для LLM/AI-агентов
 netlify/database/migrations/    SQL-миграции Netlify Database
 netlify/functions/              Netlify Functions, включая прием отзывов
 hugo.yaml                       конфигурация Hugo
@@ -348,6 +350,14 @@ static/offline.js
 
 Это сделано, чтобы `Content-Security-Policy` мог быть строже и чтобы внешние quality-проверки не ругались на inline scripts.
 
+Формы, которые PageSpeed видит в Agentic Browsing/WebMCP-аудите, размечены прямо в HTML-шаблонах:
+
+- [layouts/_shortcodes/contact.html](layouts/_shortcodes/contact.html) — инструмент `contact_aerocool_ukraine`;
+- [layouts/_partials/reviews/form.html](layouts/_partials/reviews/form.html) — инструмент `submit_product_review`;
+- [layouts/_partials/products/filters.html](layouts/_partials/products/filters.html) — инструмент `filter_aerocool_products`.
+
+Для новичка: `toolname` — это короткое техническое имя действия, `tooldescription` — объяснение действия для AI-агента, `toolparamdescription` — пояснение отдельного поля или группы полей. Это не меняет вид формы для пользователя и не заменяет schema.org JSON-LD. Это помогает браузеру понять, какую форму можно заполнить и какие параметры у нее есть.
+
 Дополнительно в `netlify.toml` включены security headers для PageSpeed Insights:
 
 - `Cross-Origin-Opener-Policy: same-origin`;
@@ -417,6 +427,7 @@ JSON-LD генерируется централизованно через `layo
 4. Дождаться Netlify Branch Deploy или production deploy.
 5. Проверить ключевые URL в PageSpeed Insights, сначала mobile, затем desktop.
 6. Если менялись schema.org, дополнительно проверить URL через `validator.schema.org`.
+7. Если менялись формы, `static/llms.txt`, headers или Agentic Browsing-подсказки, дополнительно смотреть блоки PageSpeed про WebMCP и `llms.txt`: покрытие форм, зарегистрированные инструменты, валидность WebMCP-схем и соответствие `llms.txt` рекомендациям.
 
 Подробно смотри [docs/quality/13-pagespeed-insights-audit.md](docs/quality/13-pagespeed-insights-audit.md).
 
@@ -426,6 +437,7 @@ JSON-LD генерируется централизованно через `layo
 
 - PageSpeed Insights для главной, каталога, серии, товара, статьи, новости, FAQ, contact, search и 404;
 - `validator.schema.org` для страниц с JSON-LD;
+- PageSpeed Agentic Browsing/WebMCP для contact, catalog filters и review form, если менялись формы или `llms.txt`;
 - sitemap index и языковые sitemap;
 - robots meta, canonical и hreflang;
 - Netlify routing, headers и forced 404, если менялись `static/_redirects`, `netlify.toml` или 404-шаблон.
@@ -562,7 +574,7 @@ git checkout dev
 
 1. `README.md` — главный вход в проект.
 2. `AGENTS.md` — правила безопасной работы для Codex/агентов.
-3. [docs/01-documentation-map.md](docs/01-documentation-map.md) — полная карта документации и порядок чтения `01-92`.
+3. [docs/01-documentation-map.md](docs/01-documentation-map.md) — полная карта документации и порядок чтения `01-96`.
 4. [docs/architecture/02-documentation-style-guide.md](docs/architecture/02-documentation-style-guide.md) — стандарт русскоязычной, понятной и структурированной документации.
 5. [docs/architecture/03-hugo-template-helpers.md](docs/architecture/03-hugo-template-helpers.md) — локальные Hugo helpers и partials.
 6. [docs/content/05-front-matter-reference.md](docs/content/05-front-matter-reference.md) — поля front matter для страниц.

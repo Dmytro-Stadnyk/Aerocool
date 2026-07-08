@@ -18,6 +18,7 @@
 - Для стилизации используется `Tailwind CSS 4.3` через npm-пакеты `tailwindcss` и `@tailwindcss/cli` версии `4.3.0`.
 - Для будущей review-системы подключены `Netlify Functions` и `Netlify Database` / `PostgreSQL`.
 - Для проверки опубликованных URL используется ручной процесс PageSpeed Insights. Локальный браузерный аудит-плагин в Netlify не используется.
+- Для PageSpeed Agentic Browsing формы контакта, отзывов и фильтров каталога имеют WebMCP declarative annotations. Это progressive enhancement для AI-агентов, а не замена schema.org.
 - Начиная с Hugo 0.161.0, `css.TailwindCSS` использует Tailwind CSS CLI из npm-зависимостей проекта; в текущем Hugo 0.164.0 Tailwind должен оставаться npm-зависимостью проекта, standalone Tailwind CLI не использовать.
 - Локальные SEO-шаблоны и шаблоны schema.org-разметки находятся в `layouts/_partials/_seo` и `layouts/_partials/_schema`.
 
@@ -36,7 +37,7 @@
 - `layouts/_partials/home-final-cta.html` — финальный CTA главной страницы после товарно-информационных блоков.
 - `layouts/products/list.html` — специализированный листинг каталога и страниц серий: page heading, быстрые ссылки между сериями, фильтры, сортировка, счетчик и сетка товаров.
 - `layouts/_partials/products/card.html` — товарная карточка с product facts и `data-product-*` атрибутами для фильтров и сортировки. Видимый CTA `Подробнее` / `Детальніше` сохраняется коротким, но его доступное имя обязательно дополняется полным `$page.Title` через `sr-only`; не возвращать неинформативный анкор без названия модели.
-- `layouts/_partials/products/filters.html` — static-first фильтры каталога и страниц серий без изменения URL и без индексируемых filter pages.
+- `layouts/_partials/products/filters.html` — static-first фильтры каталога и страниц серий без изменения URL и без индексируемых filter pages; форма имеет `toolname`, `tooldescription`, `toolparamdescription` и групповые `fieldset`-описания для WebMCP-схемы.
 - `layouts/_partials/products/sort.html` — сортировка товаров по названию, рейтингу и цене.
 - `layouts/404.html`, `layouts/alias.html` и `layouts/search.html` — служебные шаблоны страниц, которые не должны попадать в SEO-индекс.
 - `layouts/rss.xml` — локальный RSS-шаблон.
@@ -50,6 +51,7 @@
 - `assets/css/main.css` — главный источник Tailwind и кастомного CSS; здесь же живут локальные design tokens, белый page canvas, базовый текстовый слой и component-layer проекта.
 - `static/` — статические файлы, которые копируются как есть.
 - `static/_redirects` — Netlify `_redirects` для явного root rewrite `/ -> /index.html 200` и forced `404!` по bot/scanner и sensitive URL: WordPress, `.env`, `.git`, framework manifests, filemanager, PHP/debug probes вроде `/phpinfo.php`, `/test.php` и `/:prefix/phpinfo.php`. SEO-переадресации сюда не добавлять; общий fallback `/* -> /404.html 404` не использовать, потому что Netlify автоматически берет `public/404.html`.
+- `static/llms.txt` — корневой Markdown-файл для LLM/AI-агентов. Должен иметь H1, краткое описание сайта и Markdown-ссылки на ключевые публичные страницы, sitemap и robots. Не дублировать в нем товарные цены, наличие и гарантии: источником правды остаются видимые страницы, JSON-LD, canonical URL и sitemap.
 - `hugo.yaml` — основная конфигурация сайта: языки, постоянные ссылки, меню и настройки сборки.
 - `netlify.toml` — сборка и заголовки ответа; временно используется `HUGO_ENVIRONMENT = "development"`, production включать только после финальной проверки.
 - `netlify/database/migrations` — SQL-миграции Netlify Database. Появляется после первой миграции; для review-системы использовать Direct SQL, а не Drizzle ORM.
@@ -155,8 +157,9 @@
 - `docs/audits/93-2026-07-07-hugo-0-164-update-audit.md`
 - `docs/audits/94-2026-07-07-full-documentation-project-sync-audit-current.md`
 - `docs/audits/95-2026-07-08-full-documentation-project-sync-audit-current.md`
+- `docs/audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md`
 
-Последний полный аудит всей проектной документации: `docs/audits/95-2026-07-08-full-documentation-project-sync-audit-current.md`. Текущий Hugo/tooling target после обновления до Hugo `0.164.0` зафиксирован в `docs/audits/93-2026-07-07-hugo-0-164-update-audit.md`; профильный UX/UI snapshot — в `docs/audits/92-2026-06-28-tailwind-plus-ui-map-current-audit.md`. Документы `87` и `88` — профильные документы по расширению ключевых слов, контента, развитию семантического ядра и стратегии роста; аудит `89` — профильная проверка `image` + `cover`, размеров, форматов, crop-наборов статей/новостей и дублей главных товарных изображений. Аудиты `78`, `82`, `86`, `90`, `91` и `94` использовать как исторические снимки.
+Последний полный аудит всей проектной документации: `docs/audits/95-2026-07-08-full-documentation-project-sync-audit-current.md`. Текущий профильный audit WebMCP, `llms.txt` и PageSpeed Agentic Browsing — `docs/audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md`. Текущий Hugo/tooling target после обновления до Hugo `0.164.0` зафиксирован в `docs/audits/93-2026-07-07-hugo-0-164-update-audit.md`; профильный UX/UI snapshot — в `docs/audits/92-2026-06-28-tailwind-plus-ui-map-current-audit.md`. Документы `87` и `88` — профильные документы по расширению ключевых слов, контента, развитию семантического ядра и стратегии роста; аудит `89` — профильная проверка `image` + `cover`, размеров, форматов, crop-наборов статей/новостей и дублей главных товарных изображений. Аудиты `78`, `82`, `86`, `90`, `91` и `94` использовать как исторические снимки.
 
 Текущий профильный UX/UI-аудит выполнения карты Tailwind Plus: `docs/audits/92-2026-06-28-tailwind-plus-ui-map-current-audit.md`. Он фиксирует общую готовность **7.8/10**, P0 по одинаковым и тестовым товарным изображениям и актуальный порядок работ. Аудит `65` использовать как историческую code revalidation, аудит `64` — как screenshot evidence.
 
@@ -256,6 +259,8 @@
 - При изменении меню, языков, permalink-логики или SEO-дефолтов осторожно редактировать `hugo.yaml`, потому что это влияет на весь сайт; перед правкой читать `docs/seo/76-hugo-yaml-serp-technical-contract-2026.md`.
 - При изменении `static/_redirects` использовать синтаксис Netlify: корневой rewrite держать выше scanner-правил, `*` применять только как splat в конце path segment, placeholder `/:prefix/...` использовать для одного сегмента, scanner/sensitive правила оставлять со статусом `404!`. Человекопохожие parser URL из логов без подтвержденной замены, например `/aboutus`, `/contactus`, `/company` или `/profile`, не редиректить; они должны оставаться обычной `404`.
 - При изменении review-системы, `Netlify Database` migrations, `review_target_id`, moderation flow или build-time export отзывов проверять `docs/deploy/17-netlify-database-reviews.md`, `docs/content/05-front-matter-reference.md`, `docs/seo/21-ecommerce-structured-data-playbook-2026.md` и `docs/seo/20-schema-markup-quality-checklist-2026.md`.
+- При изменении контактной формы, формы отзывов или фильтров каталога сохранять WebMCP-контракт: у формы должны быть `toolname` и `tooldescription`, а у значимых полей или групп — понятные `title`, `aria-label`, `aria-description` или `toolparamdescription`. После правок проверять `docs/audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md`.
+- При изменении `static/llms.txt` держать файл в Markdown, с H1 и обычными Markdown-ссылками. Не превращать его в рекламный текст или второй sitemap; это краткая карта для LLM/AI-агентов.
 - Не возвращать локальный браузерный audit plugin, Chrome-аудит зависимости или post-deploy browser runtime в `netlify.toml` без отдельного решения. Текущий стандарт проверки опубликованных URL — PageSpeed Insights.
 
 ## Проверки
@@ -268,6 +273,7 @@
 - Проверять видимую meta-строку после правок `layouts/single.html`, `layouts/list.html`, `layouts/faq/single.html`, `layouts/search.html` или `layouts/_partials/page-meta.html`: contact/FAQ/about/products без meta, article с датой и временем чтения, news только с датой, без списка переводов под `H1`.
 - Проверять, что `search` остается `noindex,nofollow`. Пока проект намеренно собирается с `HUGO_ENVIRONMENT = "development"`, все HTML-страницы остаются `noindex,nofollow`; перед production-переходом отдельно проверить возврат `index,follow` для индексируемых URL.
 - Проверять, что `404` и служебные alias-страницы остаются `noindex,nofollow`.
+- Если менялись формы или `static/llms.txt`, в PageSpeed Insights дополнительно проверить Agentic Browsing/WebMCP-блоки: покрытие форм, зарегистрированные инструменты, валидность WebMCP-схем и `llms.txt`.
 - При правках `static/_redirects` проверять, что `public/_redirects` обновился после сборки, `/` отдает `200`, а кастомная 404 продолжает отдаваться для scanner/sensitive URL. Для финальной проверки routing/headers использовать Netlify CLI или Deploy Preview.
 - Проверять, что корневой `sitemap.xml` остается индексом карт сайта, а `/uk/sitemap.xml` и `/ru/sitemap.xml` содержат только индексируемые URL.
 - После правок внутренних/внешних ссылок, `title`, `description`, URL, breadcrumbs, related-блоков, меню, карточек или контентных маршрутов запускать `npm run build:production`, затем вручную проверять ключевые URL, sitemap, canonical, `hreflang`, локальные якоря и целевые страницы.

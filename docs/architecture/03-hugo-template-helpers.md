@@ -1,6 +1,6 @@
 # Руководство по шаблонным helper-файлам Hugo
 
-Обновлено: 2026-06-21.
+Обновлено: 2026-07-08.
 
 ## Зачем Нужен Этот Документ
 
@@ -143,7 +143,7 @@
 - [layouts/_shortcodes/home-choice-benefits.html](../../layouts/_shortcodes/home-choice-benefits.html) — блок преимуществ выбора: механика, регулировки, материалы и сценарии.
 - [layouts/_shortcodes/seo-image.html](../../layouts/_shortcodes/seo-image.html) — контентные изображения с контролем LCP/lazy loading.
 - [layouts/_shortcodes/faq-list.html](../../layouts/_shortcodes/faq-list.html) — видимый список FAQ из front matter.
-- [layouts/_shortcodes/contact.html](../../layouts/_shortcodes/contact.html) — контактная `side-by-side` секция для `/contact/` и `/ru/contact/`.
+- [layouts/_shortcodes/contact.html](../../layouts/_shortcodes/contact.html) — контактная `side-by-side` секция для `/contact/` и `/ru/contact/`; содержит Netlify form и WebMCP-аннотации `contact_aerocool_ukraine`.
 - [layouts/_shortcodes/contact-success-alert.html](../../layouts/_shortcodes/contact-success-alert.html) — success alert после отправки контактной формы на `/contact/success/` и `/ru/contact/success/`.
 - [layouts/_shortcodes/about-intro.html](../../layouts/_shortcodes/about-intro.html) — верхний two-column description блок на `/about/` и `/ru/about/`.
 - [layouts/_shortcodes/about-series-preview.html](../../layouts/_shortcodes/about-series-preview.html) — три входа в серии `SKY`, `WING`, `XTAL` на about-странице.
@@ -173,14 +173,14 @@
 
 - [layouts/_partials/products/card.html](../../layouts/_partials/products/card.html) — товарная карточка для `/products/`, страниц серий, home-блоков и related-блоков. Выводит изображение, название, цену, наличие, rating summary при approved отзывах, color dots и product facts. Для фильтров и сортировки добавляет `data-product-*`: title, price, rating, order, series, material, adjustment, mechanism и availability. Поддерживает флаг `showSeriesInTitle`: в root-каталоге карточка показывает серию в названии товара, например `WING Mesh Black` и `XTAL Mesh Black`, а на страницах конкретных серий сохраняет короткий `linkTitle`, например `Mesh Black`. Видимый CTA остается компактным `Подробнее` / `Детальніше`, а его полное доступное имя формируется через `sr-only` и `$page.Title`, например `Подробнее о модели Aerocool WING Racer Black`.
 - [layouts/_partials/products/color-dots.html](../../layouts/_partials/products/color-dots.html) — компактные цветовые точки в карточках товаров. Для товаров с реальными вариантами главный источник — `product_group_id` и `data/entities.yaml`; если группы нет, helper берет `color` из главной product entity через `about_entities`. Это визуальный сигнал цвета в листинге, а не замена отдельным variant URL и не причина добавлять искусственный `product_group_id` одиночным товарам.
-- [layouts/_partials/products/filters.html](../../layouts/_partials/products/filters.html) — static-first фильтры каталога. На `/products/` показывает группы серии, материала, регулировок, механизма и наличия; на страницах конкретной серии скрывает группу серии. Фильтры не меняют URL и не создают индексируемые filter pages.
+- [layouts/_partials/products/filters.html](../../layouts/_partials/products/filters.html) — static-first фильтры каталога. На `/products/` показывает группы серии, материала, регулировок, механизма и наличия; на страницах конкретной серии скрывает группу серии. Фильтры не меняют URL и не создают индексируемые filter pages. Форма размечена как WebMCP-инструмент `filter_aerocool_products`; группы checkbox описаны через `fieldset`, чтобы Chrome строил валидную схему параметров.
 - [layouts/_partials/products/sort.html](../../layouts/_partials/products/sort.html) — сортировка каталога: по названию, рейтингу, цене от дешевых и цене от дорогих. Работает вместе с фильтрами через `assets/js/site.js`.
 - [layouts/_partials/products/gallery.html](../../layouts/_partials/products/gallery.html) — товарная галерея на детальной странице товара. Первый кадр берет из `image` во front matter и является видимым product LCP-кандидатом; остальные изображения из page bundle товара выводит как компактные миниатюры. Большие изображения получают responsive WebP `srcset`; первый кадр грузится eager/fetchpriority high, дополнительные кадры и миниатюры — lazy. Primary product image не вставляется через `seo-image` в markdown.
 - [layouts/_partials/products/variant-swatches.html](../../layouts/_partials/products/variant-swatches.html) — видимый выбор цвета/варианта товара. Список вариантов строит из `product_group_id` и `data/entities.yaml` только для реальных ProductGroup с несколькими вариантами, находит страницы текущего языка и выводит swatches как ссылки на соседние variant URL. Одиночные товары без соседних вариантов не получают `product_group_id`.
 
 ## Быстрая Карта Review Helpers
 
-- [layouts/_partials/reviews/form.html](../../layouts/_partials/reviews/form.html) — форма отправки отзыва в `POST /api/reviews`; выводится только для товара с включенными отзывами.
+- [layouts/_partials/reviews/form.html](../../layouts/_partials/reviews/form.html) — форма отправки отзыва в `POST /api/reviews`; выводится только для товара с включенными отзывами. Форма размечена как WebMCP-инструмент `submit_product_review`; шкала рейтинга описана через `fieldset`, потому что это один параметр `rating`, состоящий из radio-кнопок.
 - [layouts/_partials/reviews/list.html](../../layouts/_partials/reviews/list.html) — список approved отзывов текущего товара и языка из build-time snapshot.
 - [layouts/_partials/reviews/stars.html](../../layouts/_partials/reviews/stars.html) — единый визуальный вывод шкалы рейтинга без собственной логики источника данных.
 - [layouts/_partials/reviews/summary-data.html](../../layouts/_partials/reviews/summary-data.html) — получает агрегированные данные рейтинга по `review_target_id` из `data/generated/reviews.json`.
@@ -258,8 +258,18 @@ Review helpers не читают ручные `rating.value` или `rating.coun
 - shortcode сам переключает украинский и русский текст по языку страницы;
 - левая колонка содержит заголовок, краткое объяснение, блок “когда обращаться”, адрес, телефон, `support@aerocool.ua`, `sales@aerocool.ua`, быстрые ссылки на каталог, FAQ и серии, а также график `09:00 — 18:00` с понедельника по воскресенье;
 - правая колонка содержит Netlify form с honeypot, обязательными полями и локализованным success URL;
+- форма имеет WebMCP-атрибуты `toolname="contact_aerocool_ukraine"` и локализованный `tooldescription`, чтобы PageSpeed Agentic Browsing видел ее как понятный инструмент;
+- hidden-поля и honeypot получают технические `title`, а видимые поля сохраняют обычные `label`;
 - markdown-файлы `content/contact/index.md` и `content/contact/index.ru.md` обычно должны содержать только вызов `{{< contact >}}`, чтобы не дублировать контактные данные ниже формы;
 - отдельный markdown-раздел соцсетей на `/contact/` не используется; глобальные социальные ссылки остаются в footer и в schema global organization/brand.
+
+Важно по WebMCP в формах:
+
+- `toolname` — короткое техническое имя действия, например `submit_product_review`;
+- `tooldescription` — человекочитаемое объяснение действия для AI-агента;
+- `toolparamdescription` — описание отдельного параметра или группы параметров;
+- для checkbox/radio-групп использовать `fieldset` и `legend`, а не набор несвязанных `input`;
+- не добавлять `toolautosubmit` к контактной форме и форме отзывов без отдельного UX/security-решения.
 
 Важно по `contact-success-alert.html`:
 
