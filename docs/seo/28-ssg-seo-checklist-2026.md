@@ -405,7 +405,7 @@
 | Entity-rich контент | Да |
 | Авторитетные страницы | Да |
 | Цитируемые блоки | Да |
-| `llms.txt` | Минимально внедрен в `static/llms.txt`; поддерживать как краткую Markdown-карту сайта, не как P0 ranking lever и не как замену sitemap/schema.org |
+| `llms.txt` | Внедрен в `static/llms.txt`; поддерживать как краткую Markdown-карту сайта с ключевыми URL и всеми товарными страницами в `uk`/`ru`, не как P0 ranking lever и не как замену sitemap/schema.org |
 | Хорошая структура headings | Да |
 | Короткие summary-блоки | Да |
 | Glossary | Да |

@@ -276,7 +276,7 @@
 
 ### Текущий Agentic Browsing Аудит
 
-96. [audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md](audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md) — профильный аудит WebMCP-аннотаций форм, `static/llms.txt` и PageSpeed Agentic Browsing. Фиксирует, какие формы зарегистрированы как инструменты, как устроены `toolname`, `tooldescription`, `toolparamdescription`, почему `fieldset` нужен для checkbox/radio-групп и как проверять результат новичку.
+96. [audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md](audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md) — профильный аудит WebMCP-аннотаций форм, `static/llms.txt` и PageSpeed Agentic Browsing. Фиксирует, какие формы зарегистрированы как инструменты, как устроены `toolname`, `tooldescription`, `toolparamdescription`, почему `fieldset` нужен для checkbox/radio-групп, как `llms.txt` покрывает все товарные страницы в `uk` и `ru`, и как проверять результат новичку.
 
 ### Текущий Полный Аудит Документации После WebMCP
 

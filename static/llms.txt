@@ -2,6 +2,8 @@
 
 > Official Aerocool Ukraine website for gaming, office, computer and home office chairs, with Ukrainian and Russian product, article, FAQ and contact pages.
 
+Last updated: 2026-07-08.
+
 This file gives AI agents a concise map of the public site. Use visible page content, JSON-LD, canonical URLs, hreflang links and sitemap files as the source of truth for product facts, availability, pricing, delivery, warranty and service terms.
 
 ## Primary Pages
@@ -18,6 +20,21 @@ This file gives AI agents a concise map of the public site. Use visible page con
 - [WING series](https://aerocool.ua/products/wing/): WING chair series page.
 - [XTAL series](https://aerocool.ua/products/xtal/): XTAL chair series page.
 
+## Ukrainian Product Pages
+
+- [Aerocool SKY 360](https://aerocool.ua/products/sky/360/): Ukrainian product page for the SKY 360 chair.
+- [Aerocool SKY Light](https://aerocool.ua/products/sky/light/): Ukrainian product page for the SKY Light chair.
+- [Aerocool WING Loft Air Dark Grey](https://aerocool.ua/products/wing/loft-air-dark-grey/): Ukrainian product page for the WING Loft Air Dark Grey chair.
+- [Aerocool WING Loft Air Light Grey](https://aerocool.ua/products/wing/loft-air-light-grey/): Ukrainian product page for the WING Loft Air Light Grey chair.
+- [Aerocool WING Mesh Black](https://aerocool.ua/products/wing/mesh-black/): Ukrainian product page for the WING Mesh Black chair.
+- [Aerocool WING Racer Black](https://aerocool.ua/products/wing/racer-black/): Ukrainian product page for the WING Racer Black chair.
+- [Aerocool WING Racer Dark Grey](https://aerocool.ua/products/wing/racer-dark-grey/): Ukrainian product page for the WING Racer Dark Grey chair.
+- [Aerocool XTAL Loft Air Dark Grey](https://aerocool.ua/products/xtal/loft-air-dark-grey/): Ukrainian product page for the XTAL Loft Air Dark Grey chair.
+- [Aerocool XTAL Loft Air Light Grey](https://aerocool.ua/products/xtal/loft-air-light-grey/): Ukrainian product page for the XTAL Loft Air Light Grey chair.
+- [Aerocool XTAL Mesh Black](https://aerocool.ua/products/xtal/mesh-black/): Ukrainian product page for the XTAL Mesh Black chair.
+- [Aerocool XTAL Racer Black](https://aerocool.ua/products/xtal/racer-black/): Ukrainian product page for the XTAL Racer Black chair.
+- [Aerocool XTAL Racer Dark Grey](https://aerocool.ua/products/xtal/racer-dark-grey/): Ukrainian product page for the XTAL Racer Dark Grey chair.
+
 ## Editorial Guides
 
 - [Articles](https://aerocool.ua/articles/): Practical chair selection and setup guides.
@@ -29,6 +46,27 @@ This file gives AI agents a concise map of the public site. Use visible page con
 - [Russian products](https://aerocool.ua/ru/products/): Russian catalog hub.
 - [Russian FAQ](https://aerocool.ua/ru/faq/): Russian purchase and service answers.
 - [Russian contact](https://aerocool.ua/ru/contact/): Russian contact page.
+
+## Russian Product Series
+
+- [Russian SKY series](https://aerocool.ua/ru/products/sky/): Russian SKY series page.
+- [Russian WING series](https://aerocool.ua/ru/products/wing/): Russian WING series page.
+- [Russian XTAL series](https://aerocool.ua/ru/products/xtal/): Russian XTAL series page.
+
+## Russian Product Pages
+
+- [Aerocool SKY 360 RU](https://aerocool.ua/ru/products/sky/360/): Russian product page for the SKY 360 chair.
+- [Aerocool SKY Light RU](https://aerocool.ua/ru/products/sky/light/): Russian product page for the SKY Light chair.
+- [Aerocool WING Loft Air Dark Grey RU](https://aerocool.ua/ru/products/wing/loft-air-dark-grey/): Russian product page for the WING Loft Air Dark Grey chair.
+- [Aerocool WING Loft Air Light Grey RU](https://aerocool.ua/ru/products/wing/loft-air-light-grey/): Russian product page for the WING Loft Air Light Grey chair.
+- [Aerocool WING Mesh Black RU](https://aerocool.ua/ru/products/wing/mesh-black/): Russian product page for the WING Mesh Black chair.
+- [Aerocool WING Racer Black RU](https://aerocool.ua/ru/products/wing/racer-black/): Russian product page for the WING Racer Black chair.
+- [Aerocool WING Racer Dark Grey RU](https://aerocool.ua/ru/products/wing/racer-dark-grey/): Russian product page for the WING Racer Dark Grey chair.
+- [Aerocool XTAL Loft Air Dark Grey RU](https://aerocool.ua/ru/products/xtal/loft-air-dark-grey/): Russian product page for the XTAL Loft Air Dark Grey chair.
+- [Aerocool XTAL Loft Air Light Grey RU](https://aerocool.ua/ru/products/xtal/loft-air-light-grey/): Russian product page for the XTAL Loft Air Light Grey chair.
+- [Aerocool XTAL Mesh Black RU](https://aerocool.ua/ru/products/xtal/mesh-black/): Russian product page for the XTAL Mesh Black chair.
+- [Aerocool XTAL Racer Black RU](https://aerocool.ua/ru/products/xtal/racer-black/): Russian product page for the XTAL Racer Black chair.
+- [Aerocool XTAL Racer Dark Grey RU](https://aerocool.ua/ru/products/xtal/racer-dark-grey/): Russian product page for the XTAL Racer Dark Grey chair.
 
 ## Machine-Readable Files
 

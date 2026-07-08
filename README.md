@@ -141,7 +141,7 @@ assets/css/main.css             Tailwind CSS и локальный визуал�
 assets/js/site.js               общий внешний JS сайта без inline-скриптов
 static/                         статические файлы
 static/_redirects               root rewrite и forced 404 для scanner/sensitive URL на Netlify
-static/llms.txt                 Markdown-карта сайта для LLM/AI-агентов
+static/llms.txt                 Markdown-карта сайта для LLM/AI-агентов, включая все товарные URL в uk/ru
 netlify/database/migrations/    SQL-миграции Netlify Database
 netlify/functions/              Netlify Functions, включая прием отзывов
 hugo.yaml                       конфигурация Hugo
