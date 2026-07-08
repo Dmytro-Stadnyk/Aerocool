@@ -35,9 +35,9 @@
 - `12-14` — качество, Core Web Vitals, PageSpeed Insights и контроль перед production-релизом;
 - `15-17` — локальные инструменты, Netlify routing и Netlify Database reviews;
 - `18-28` — SEO, schema.org, entity registry и structured data;
-- `29-50` — исторические и текущие audit-снимки до UI-карты;
+- `29-50` — исторические и текущие аудит-снимки до UI-карты;
 - `51` — прикладная карта UI/UX-внедрения;
-- `52+` — новые audit-снимки, SEO-базы и последующие проектные документы.
+- `52+` — новые аудит-снимки, SEO-базы и последующие проектные документы.
 
 Для новых файлов выбирать следующий свободный номер и сразу обновлять эту карту, `README.md`, `AGENTS.md` и все локальные ссылки.
 
@@ -98,7 +98,7 @@
 31. [audits/31-2026-05-06-content-depth-literary-audit.md](audits/31-2026-05-06-content-depth-literary-audit.md) — аудит глубины и литературной обработки `content/`.
 32. [audits/32-2026-05-06-schemaapp-pdf-documentation-integration-audit.md](audits/32-2026-05-06-schemaapp-pdf-documentation-integration-audit.md) — интеграция выводов из SchemaApp PDF.
 33. [audits/33-2026-05-06-project-readiness-assessment.md](audits/33-2026-05-06-project-readiness-assessment.md) — оценка готовности проекта после обновления документации и аудита.
-34. [audits/34-2026-05-07-documentation-refresh-and-project-action-plan.md](audits/34-2026-05-07-documentation-refresh-and-project-action-plan.md) — исторический P0/P1/P2/P3 action-plan snapshot на 2026-05-07.
+34. [audits/34-2026-05-07-documentation-refresh-and-project-action-plan.md](audits/34-2026-05-07-documentation-refresh-and-project-action-plan.md) — исторический P0/P1/P2/P3 снимок плана действий на 2026-05-07.
 35. [audits/35-2026-05-07-schemaapp-articles-2016-2026-corpus-analysis.md](audits/35-2026-05-07-schemaapp-articles-2016-2026-corpus-analysis.md) — corpus-анализ статей SchemaApp за 2016-2026.
 36. [audits/36-2026-05-13-content-image-cover-alt-audit.md](audits/36-2026-05-13-content-image-cover-alt-audit.md) — аудит `image`, `cover`, `cover.alt` и content image consistency.
 37. [audits/37-2026-05-13-documentation-2026-best-practices-sync-audit.md](audits/37-2026-05-13-documentation-2026-best-practices-sync-audit.md) — историческая синхронизация документации с практиками 2026 на 2026-05-13.
@@ -130,7 +130,7 @@
 
 ### Актуальные CWV Аудиты
 
-54. [audits/54-2026-05-26-core-web-vitals-current-audit.md](audits/54-2026-05-26-core-web-vitals-current-audit.md) — исторический lab baseline Core Web Vitals проекта на 2026-05-26.
+54. [audits/54-2026-05-26-core-web-vitals-current-audit.md](audits/54-2026-05-26-core-web-vitals-current-audit.md) — исторический лабораторный базовый снимок Core Web Vitals проекта на 2026-05-26.
 
 ### Schema/Entity Аудит 2026-05-26
 
@@ -162,13 +162,13 @@
 
 ### Текущие UX/UI Аудиты
 
-62. [audits/62-2026-06-03-ux-ui-tailwind-current-audit.md](audits/62-2026-06-03-ux-ui-tailwind-current-audit.md) — исторический UX/UI-аудит после первых обновлений визуального слоя Tailwind 4.3, FAQ, контактов, success alert, recommended links для статей/новостей, about-компонентов, product cards и product detail layout. Для текущего состояния использовать audit `92`.
+62. [audits/62-2026-06-03-ux-ui-tailwind-current-audit.md](audits/62-2026-06-03-ux-ui-tailwind-current-audit.md) — исторический UX/UI-аудит после первых обновлений визуального слоя Tailwind 4.3, FAQ, контактов, success alert, recommended links для статей/новостей, about-компонентов, product cards и product detail layout. Для текущего состояния использовать аудит `92`.
 
-63. [audits/63-2026-06-04-ux-ui-tailwind-current-audit.md](audits/63-2026-06-04-ux-ui-tailwind-current-audit.md) — исторический быстрый UX/UI snapshot после каталоговых обновлений: 1440px site width, desktop/mobile catalog navigation, product filters, sort, product cards, PDP purchase-блоки и backlog по comparison table, applied filter chips и search UI. Для текущего полного аудита использовать audit `92`.
+63. [audits/63-2026-06-04-ux-ui-tailwind-current-audit.md](audits/63-2026-06-04-ux-ui-tailwind-current-audit.md) — исторический быстрый UX/UI-снимок после каталоговых обновлений: ширина сайта 1440px, desktop/mobile catalog navigation, product filters, sort, product cards, PDP purchase-блоки и backlog по comparison table, applied filter chips и search UI. Для текущего полного аудита использовать аудит `92`.
 
-64. [audits/64-2026-06-04-full-ux-ui-tailwind-audit.md](audits/64-2026-06-04-full-ux-ui-tailwind-audit.md) — исторический полный UX/UI-аудит Tailwind 4.3: screenshots, rendered HTML, CDP-проверка filters/sort, PDP gallery, search UI, root catalog titles, series previews, contact placeholders, Tailwind token debt и практический порядок исправлений. Использовать как screenshot evidence; для текущего состояния читать audit `92`.
+64. [audits/64-2026-06-04-full-ux-ui-tailwind-audit.md](audits/64-2026-06-04-full-ux-ui-tailwind-audit.md) — исторический полный UX/UI-аудит Tailwind 4.3: скриншоты, rendered HTML, CDP-проверка filters/sort, PDP gallery, search UI, root catalog titles, series previews, contact placeholders, Tailwind token debt и практический порядок исправлений. Использовать как скриншот-доказательства; для текущего состояния читать аудит `92`.
 
-65. [audits/65-2026-06-05-full-ux-ui-revalidation-audit.md](audits/65-2026-06-05-full-ux-ui-revalidation-audit.md) — исторический повторный UX/UI-аудит Tailwind 4.3 на 2026-06-05: фиксирует оценку **7.9/10** после исправления root catalog titles, успешную Hugo-сборку и открытые на ту дату P1/P2 задачи. Для текущего состояния и порядка работ использовать audit `92`.
+65. [audits/65-2026-06-05-full-ux-ui-revalidation-audit.md](audits/65-2026-06-05-full-ux-ui-revalidation-audit.md) — исторический повторный UX/UI-аудит Tailwind 4.3 на 2026-06-05: фиксирует оценку **7.9/10** после исправления root catalog titles, успешную Hugo-сборку и открытые на ту дату P1/P2 задачи. Для текущего состояния и порядка работ использовать аудит `92`.
 
 ### Исторические Tooling-Аудиты
 
@@ -196,9 +196,9 @@
 
 ### Inline-Изображения Статей И Новостей
 
-73. [audits/73-2026-06-14-articles-news-inline-image-plan.md](audits/73-2026-06-14-articles-news-inline-image-plan.md) — исторический snapshot плана inline-изображений на 2026-06-14. Для текущего состояния использовать аудит `77`, а для поштучной исторической матрицы — аудит `74`.
+73. [audits/73-2026-06-14-articles-news-inline-image-plan.md](audits/73-2026-06-14-articles-news-inline-image-plan.md) — исторический снимок плана inline-изображений на 2026-06-14. Для текущего состояния использовать аудит `77`, а для поштучной исторической матрицы — аудит `74`.
 74. [audits/74-2026-06-15-articles-news-inline-image-serp-audit.md](audits/74-2026-06-15-articles-news-inline-image-serp-audit.md) — подробная матрица всех текстов `content/articles` и `content/news` по inline-изображениям: фактическое состояние, рекомендации по каждому материалу, SERP-стандарт размеров/форматов/веса, shortcode-правила и закрытый backlog внедрения.
-75. [audits/75-2026-06-16-articles-news-text-image-revalidation.md](audits/75-2026-06-16-articles-news-text-image-revalidation.md) — исторический snapshot текстов и изображений после закрытия inline backlog. Для текущего состояния использовать аудит `77`.
+75. [audits/75-2026-06-16-articles-news-text-image-revalidation.md](audits/75-2026-06-16-articles-news-text-image-revalidation.md) — исторический снимок текстов и изображений после закрытия inline backlog. Для текущего состояния использовать аудит `77`.
 
 ### Hugo.yaml И SERP-Технический Контракт
 
@@ -276,7 +276,7 @@
 
 ### Текущий Agentic Browsing Аудит
 
-96. [audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md](audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md) — профильный audit WebMCP-аннотаций форм, `static/llms.txt` и PageSpeed Agentic Browsing. Фиксирует, какие формы зарегистрированы как инструменты, как устроены `toolname`, `tooldescription`, `toolparamdescription`, почему `fieldset` нужен для checkbox/radio-групп и как проверять результат новичку.
+96. [audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md](audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md) — профильный аудит WebMCP-аннотаций форм, `static/llms.txt` и PageSpeed Agentic Browsing. Фиксирует, какие формы зарегистрированы как инструменты, как устроены `toolname`, `tooldescription`, `toolparamdescription`, почему `fieldset` нужен для checkbox/radio-групп и как проверять результат новичку.
 
 ### Текущий Полный Аудит Документации После WebMCP
 
@@ -300,7 +300,7 @@
 6. [audits/84-2026-06-24-full-link-content-seo-audit.md](audits/84-2026-06-24-full-link-content-seo-audit.md), если нужен текущий объединенный аудит ссылок, контента, сниппетов и P0-P3 проблем.
 7. [content/67-image-design-playbook-2026.md](content/67-image-design-playbook-2026.md), если задача касается обложек, AI-промптов, fallback-картинок, product gallery, inline-иллюстраций, технических схем или визуального стиля.
 8. [audits/89-2026-06-24-cover-block-image-seo-audit.md](audits/89-2026-06-24-cover-block-image-seo-audit.md), если нужно проверить наличие `image` / `cover`, размеры, форматы, crop-наборы и текущий P1 по главным товарным изображениям.
-9. [audits/80-2026-06-19-full-site-content-image-audit.md](audits/80-2026-06-19-full-site-content-image-audit.md), если нужно состояние изображений и page-level backlog всего сайта.
+9. [audits/80-2026-06-19-full-site-content-image-audit.md](audits/80-2026-06-19-full-site-content-image-audit.md), если нужно состояние изображений и постраничный backlog всего сайта.
 10. [audits/77-2026-06-18-articles-news-content-image-audit.md](audits/77-2026-06-18-articles-news-content-image-audit.md), если нужна специализированная детализация `content/articles` / `content/news`.
 11. [audits/74-2026-06-15-articles-news-inline-image-serp-audit.md](audits/74-2026-06-15-articles-news-inline-image-serp-audit.md), если нужна историческая матрица inline-изображений.
 12. [audits/70-2026-06-12-content-articles-news-image-home-hero-audit.md](audits/70-2026-06-12-content-articles-news-image-home-hero-audit.md), если нужна специализированная проверка обложек, crops и home hero.
@@ -315,7 +315,7 @@
 6. [content/07-content-seo-checklist-2026.md](content/07-content-seo-checklist-2026.md)
 7. [quality/12-core-web-vitals-guide-2026.md](quality/12-core-web-vitals-guide-2026.md)
 8. [audits/89-2026-06-24-cover-block-image-seo-audit.md](audits/89-2026-06-24-cover-block-image-seo-audit.md), если задача касается `image`, служебного `cover`-блока, размеров, форматов, schema crops или дублей главных товарных изображений.
-9. [audits/80-2026-06-19-full-site-content-image-audit.md](audits/80-2026-06-19-full-site-content-image-audit.md), если нужна текущая ручная проверка всех изображений и page-level backlog.
+9. [audits/80-2026-06-19-full-site-content-image-audit.md](audits/80-2026-06-19-full-site-content-image-audit.md), если нужна текущая ручная проверка всех изображений и постраничный backlog.
 10. [audits/77-2026-06-18-articles-news-content-image-audit.md](audits/77-2026-06-18-articles-news-content-image-audit.md), если задача касается `content/articles` / `content/news`.
 11. [audits/74-2026-06-15-articles-news-inline-image-serp-audit.md](audits/74-2026-06-15-articles-news-inline-image-serp-audit.md), если нужна историческая матрица inline-иллюстраций.
 12. [audits/70-2026-06-12-content-articles-news-image-home-hero-audit.md](audits/70-2026-06-12-content-articles-news-image-home-hero-audit.md), если задача касается только covers, schema crops или `assets/images/home-hero85.webp`.
@@ -378,7 +378,7 @@
 2. [quality/13-pagespeed-insights-audit.md](quality/13-pagespeed-insights-audit.md)
 3. [quality/14-production-quality-gate-2026.md](quality/14-production-quality-gate-2026.md)
 4. [audits/83-2026-06-21-netlify-rum-core-web-vitals-baseline.md](audits/83-2026-06-21-netlify-rum-core-web-vitals-baseline.md)
-5. [audits/54-2026-05-26-core-web-vitals-current-audit.md](audits/54-2026-05-26-core-web-vitals-current-audit.md), если нужен исторический lab baseline
+5. [audits/54-2026-05-26-core-web-vitals-current-audit.md](audits/54-2026-05-26-core-web-vitals-current-audit.md), если нужен исторический лабораторный базовый снимок
 6. [audits/61-2026-06-02-pagespeed-insights-quality-simplification.md](audits/61-2026-06-02-pagespeed-insights-quality-simplification.md), если задача касается текущего процесса качества только через PageSpeed Insights
 
 Для `hugo.yaml`, production gate и технического SERP-фундамента читать:
@@ -393,7 +393,7 @@
 
 1. [architecture/51-tailwind-plus-ui-section-map-2026.md](architecture/51-tailwind-plus-ui-section-map-2026.md)
 2. [audits/92-2026-06-28-tailwind-plus-ui-map-current-audit.md](audits/92-2026-06-28-tailwind-plus-ui-map-current-audit.md)
-3. [audits/65-2026-06-05-full-ux-ui-revalidation-audit.md](audits/65-2026-06-05-full-ux-ui-revalidation-audit.md), если нужен исторический code-level snapshot до последующих изменений
+3. [audits/65-2026-06-05-full-ux-ui-revalidation-audit.md](audits/65-2026-06-05-full-ux-ui-revalidation-audit.md), если нужен исторический снимок проверки кода до последующих изменений
 4. [audits/64-2026-06-04-full-ux-ui-tailwind-audit.md](audits/64-2026-06-04-full-ux-ui-tailwind-audit.md), если нужны скриншоты и подробные визуальные доказательства
 5. [architecture/03-hugo-template-helpers.md](architecture/03-hugo-template-helpers.md)
 6. [content/07-content-seo-checklist-2026.md](content/07-content-seo-checklist-2026.md)

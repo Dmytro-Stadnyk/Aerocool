@@ -13,15 +13,15 @@
 5. `docs/architecture/03-hugo-template-helpers.md` — какие шаблоны за что отвечают.
 6. `docs/quality/13-pagespeed-insights-audit.md` — как проверять опубликованные URL через PageSpeed Insights.
 
-Для текущих задач по Core Web Vitals читать `docs/quality/12-core-web-vitals-guide-2026.md` и актуальный полевой аудит `docs/audits/83-2026-06-21-netlify-rum-core-web-vitals-baseline.md`. Аудит `54` остается историческим lab baseline на 2026-05-26.
+Для текущих задач по Core Web Vitals читать `docs/quality/12-core-web-vitals-guide-2026.md` и актуальный полевой аудит `docs/audits/83-2026-06-21-netlify-rum-core-web-vitals-baseline.md`. Аудит `54` остается историческим лабораторным базовым снимком на 2026-05-26.
 
-Для текущих задач по JSON-LD, schema.org, Entity Registry, `about_entities`, `mentions_entities`, `ProductGroup`, `sameAs` и graph-аудиту читать `docs/seo/23-entity-registry-2026.md`, `docs/seo/26-json-ld-graph-audit-roadmap-2026.md` и текущий generated report [docs/seo/59-entity-performance-report-2026.md](docs/seo/59-entity-performance-report-2026.md). Для ручной проверки через `validator.schema.org` использовать [docs/seo/60-schema-validator-url-checklist-2026.md](docs/seo/60-schema-validator-url-checklist-2026.md). Для WebMCP-аннотаций форм, PageSpeed Agentic Browsing и корневого `llms.txt` читать профильный audit [docs/audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md](docs/audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md). Полный schema/entity-аудит `57` оставлен как исторический snapshot на 2026-05-31.
+Для текущих задач по JSON-LD, schema.org, Entity Registry, `about_entities`, `mentions_entities`, `ProductGroup`, `sameAs` и graph-аудиту читать `docs/seo/23-entity-registry-2026.md`, `docs/seo/26-json-ld-graph-audit-roadmap-2026.md` и текущий сгенерированный отчет [docs/seo/59-entity-performance-report-2026.md](docs/seo/59-entity-performance-report-2026.md). Для ручной проверки через `validator.schema.org` использовать [docs/seo/60-schema-validator-url-checklist-2026.md](docs/seo/60-schema-validator-url-checklist-2026.md). Для WebMCP-аннотаций форм, PageSpeed Agentic Browsing и корневого `llms.txt` читать профильный аудит [docs/audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md](docs/audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md). Полный schema/entity-аудит `57` оставлен как исторический снимок на 2026-05-31.
 
 Для текущих задач по ключевым словам, семантике, каннибализации, планированию посадочных страниц и стратегии роста читать [docs/seo/18-seo-keyword-map-2026.md](docs/seo/18-seo-keyword-map-2026.md), [docs/seo/53-keyword-database-2026.md](docs/seo/53-keyword-database-2026.md), [docs/seo/72-semantic-core-keyword-strategy-2026.md](docs/seo/72-semantic-core-keyword-strategy-2026.md), [docs/seo/87-content-expansion-keyword-roadmap-2026.md](docs/seo/87-content-expansion-keyword-roadmap-2026.md) и [docs/seo/88-semantic-core-top1-growth-system-2026.md](docs/seo/88-semantic-core-top1-growth-system-2026.md). Для задач по `hugo.yaml`, индексации, sitemap, robots, canonical, hreflang, production gate и техническому SERP-фундаменту читать [docs/seo/76-hugo-yaml-serp-technical-contract-2026.md](docs/seo/76-hugo-yaml-serp-technical-contract-2026.md). Актуальная keyword-база содержит `389` строк, покрывает `100` markdown-страниц, включает support/legal URL `/image-license/` и `/ru/image-license/`, product-level `price` / `availability` / `specs` интенты для всех товаров, growth-кластеры расширения контента, а поля `gsc_*` заполняются только после импорта реальных данных Google Search Console.
 
 Для задач по внутренней перелинковке, анкорам, breadcrumbs, related-блокам, пагинации и внешним ссылкам использовать [docs/seo/81-internal-linking-strategy-2026.md](docs/seo/81-internal-linking-strategy-2026.md), [docs/seo/85-content-linking-editorial-standard-2026.md](docs/seo/85-content-linking-editorial-standard-2026.md) и текущий аудит [docs/audits/84-2026-06-24-full-link-content-seo-audit.md](docs/audits/84-2026-06-24-full-link-content-seo-audit.md). Проверка ссылок остается ручной после production-сборки; текущая структурная оценка ссылочного графа — **9.5/10**. Практический SEO-эффект основного домена остается заблокирован, пока Netlify собирает опубликованный сайт с `--environment development` и возвращает `noindex,nofollow`.
 
-Для текущих задач по UX/UI, Tailwind Plus секциям, визуальному слою Tailwind CSS 4.3, компонентам, каталогу, фильтрам и визуальной структуре страниц читать [docs/architecture/51-tailwind-plus-ui-section-map-2026.md](docs/architecture/51-tailwind-plus-ui-section-map-2026.md) и текущий аудит выполнения карты [docs/audits/92-2026-06-28-tailwind-plus-ui-map-current-audit.md](docs/audits/92-2026-06-28-tailwind-plus-ui-map-current-audit.md). Аудит [65](docs/audits/65-2026-06-05-full-ux-ui-revalidation-audit.md) использовать как исторический code-level snapshot, а для screenshot-доказательств — полный визуальный аудит [64](docs/audits/64-2026-06-04-full-ux-ui-tailwind-audit.md).
+Для текущих задач по UX/UI, Tailwind Plus секциям, визуальному слою Tailwind CSS 4.3, компонентам, каталогу, фильтрам и визуальной структуре страниц читать [docs/architecture/51-tailwind-plus-ui-section-map-2026.md](docs/architecture/51-tailwind-plus-ui-section-map-2026.md) и текущий аудит выполнения карты [docs/audits/92-2026-06-28-tailwind-plus-ui-map-current-audit.md](docs/audits/92-2026-06-28-tailwind-plus-ui-map-current-audit.md). Аудит [65](docs/audits/65-2026-06-05-full-ux-ui-revalidation-audit.md) использовать как историческую проверку кода, а для скриншот-доказательств — полный визуальный аудит [64](docs/audits/64-2026-06-04-full-ux-ui-tailwind-audit.md).
 
 Для работы с текстами и изображениями любой страницы сначала читать [docs/content/79-page-content-design-dna-2026.md](docs/content/79-page-content-design-dna-2026.md): это единый контракт тональности, правил против AI-штампов, доказательности, визуальной ДНК, размеров и контрольных ограничений товарных изображений. Для вопроса “где какой контент должен быть, какие ссылки нужны и как делать литературную обработку” читать [docs/seo/85-content-linking-editorial-standard-2026.md](docs/seo/85-content-linking-editorial-standard-2026.md), а для текущего состояния контента и ссылок — [docs/audits/84-2026-06-24-full-link-content-seo-audit.md](docs/audits/84-2026-06-24-full-link-content-seo-audit.md). Подробные промпты для изображений и технический регламент находятся в [docs/content/67-image-design-playbook-2026.md](docs/content/67-image-design-playbook-2026.md), текущая проверка `image` + служебного `cover`-блока — в [docs/audits/89-2026-06-24-cover-block-image-seo-audit.md](docs/audits/89-2026-06-24-cover-block-image-seo-audit.md), а постраничное состояние слоя изображений — в [docs/audits/80-2026-06-19-full-site-content-image-audit.md](docs/audits/80-2026-06-19-full-site-content-image-audit.md). Аудиты `69`, `70`, `71`, `74` и `77` остаются профильными или историческими детализациями.
 
@@ -31,7 +31,7 @@
 
 Вся документация проекта должна быть русскоязычной, понятной новичку и структурированной. Единый стандарт стиля описан в [docs/architecture/02-documentation-style-guide.md](docs/architecture/02-documentation-style-guide.md).
 
-Последний полный аудит документации, синхронизации с кодом и официальными практиками 2026 года находится в [docs/audits/97-2026-07-08-full-documentation-project-sync-audit-current.md](docs/audits/97-2026-07-08-full-documentation-project-sync-audit-current.md). Итоговая оценка после проверки: **9.8/10**. Документ `96` — профильный snapshot по WebMCP, `llms.txt` и PageSpeed Agentic Browsing; он не заменяет полный аудит `97`. Документ `92` является профильным UX/UI-аудитом, документ `93` — профильным tooling-аудитом перехода на Hugo `0.164.0`. Документы `87` и `88` — профильные документы по расширению ключевых слов, контента и стратегии роста; аудит `89` — профильная проверка `image` + `cover`, размеров, форматов, crop-наборов и дублей главных товарных изображений. Аудиты `78`, `82`, `86`, `90`, `91`, `94` и `95` остаются историческими снимками.
+Последний полный аудит документации, синхронизации с кодом и официальными практиками 2026 года находится в [docs/audits/97-2026-07-08-full-documentation-project-sync-audit-current.md](docs/audits/97-2026-07-08-full-documentation-project-sync-audit-current.md). Итоговая оценка после проверки: **9.8/10**. Документ `96` — профильный снимок по WebMCP, `llms.txt` и PageSpeed Agentic Browsing; он не заменяет полный аудит `97`. Документ `92` является профильным UX/UI-аудитом, документ `93` — профильным tooling-аудитом перехода на Hugo `0.164.0`. Документы `87` и `88` — профильные документы по расширению ключевых слов, контента и стратегии роста; аудит `89` — профильная проверка `image` + `cover`, размеров, форматов, crop-наборов и дублей главных товарных изображений. Аудиты `78`, `82`, `86`, `90`, `91`, `94` и `95` остаются историческими снимками.
 
 ## 1. Главная идея проекта
 
@@ -112,7 +112,7 @@ npm run build:production
 - публиковать сайт;
 - создавать Branch Deploy для `dev`.
 
-Для системы отзывов подключен `Netlify Database`. Целевая архитектура описана в [docs/deploy/17-netlify-database-reviews.md](docs/deploy/17-netlify-database-reviews.md): отзывы хранятся в PostgreSQL, проходят модерацию, выгружаются в `data/generated/reviews.json` на этапе build и только после этого попадают в видимый HTML и `Product` JSON-LD. На текущем этапе создана первая миграция `reviews`, добавлен `POST /api/reviews`, полный цикл проверен на ветке `dev`, а все текущие товарные страницы получили `review_target_id` и `reviews_enabled: true`. Рейтинг в HTML, карточках товаров и `Product.aggregateRating` строится только из approved отзывов, выгруженных в Hugo snapshot перед сборкой.
+Для системы отзывов подключен `Netlify Database`. Целевая архитектура описана в [docs/deploy/17-netlify-database-reviews.md](docs/deploy/17-netlify-database-reviews.md): отзывы хранятся в PostgreSQL, проходят модерацию, выгружаются в `data/generated/reviews.json` на этапе build и только после этого попадают в видимый HTML и `Product` JSON-LD. На текущем этапе создана первая миграция `reviews`, добавлен `POST /api/reviews`, полный цикл проверен на ветке `dev`, а все текущие товарные страницы получили `review_target_id` и `reviews_enabled: true`. Рейтинг в HTML, карточках товаров и `Product.aggregateRating` строится только из одобренных отзывов, выгруженных в Hugo-снимок перед сборкой.
 
 Текущий правильный рабочий процесс такой:
 
@@ -133,7 +133,7 @@ content/articles/               evergreen-статьи
 content/news/                   новости и запусковые материалы
 data/                           структурированные данные Hugo
 data/entities.yaml              реестр сущностей для schema.org-связей
-data/generated/                 build-time exports, например ignored approved reviews snapshot
+data/generated/                 экспорты на этапе сборки, например не хранящийся в git снимок одобренных отзывов
 layouts/                        локальные Hugo-шаблоны и overrides
 layouts/_partials/              локальные partials
 layouts/_shortcodes/            локальные shortcodes
@@ -157,7 +157,7 @@ package.json                    npm-команды корневого Hugo-пр�
 - `node_modules/` — установленные npm-пакеты;
 Если нужно изменить страницу, почти всегда начинай с `content/`, `layouts/`, `assets/` или `data/`, а не с `public/`.
 
-Папка `netlify/database/migrations/` уже используется для review-системы: первая миграция создает таблицу `reviews`. Файл `data/generated/reviews.json` создается build-time скриптом `scripts/export_reviews.mjs` и не хранится в git, потому что это сгенерированный snapshot approved отзывов.
+Папка `netlify/database/migrations/` уже используется для review-системы: первая миграция создает таблицу `reviews`. Файл `data/generated/reviews.json` создается build-time скриптом `scripts/export_reviews.mjs` и не хранится в git, потому что это сгенерированный снимок одобренных отзывов.
 
 ## 6. Контент и языки
 
@@ -589,8 +589,8 @@ git checkout dev
 - `12-14` — Core Web Vitals, PageSpeed Insights и контроль качества перед production-релизом.
 - `15-17` — локальные инструменты, Netlify routing и review-инфраструктура.
 - `18-28` — SEO, schema.org, Entity Registry и structured data.
-- `29-50` — audit-снимки и исторические оценки до UI-карты.
+- `29-50` — аудит-снимки и исторические оценки до UI-карты.
 - `51` — прикладная карта UI/UX-внедрения Tailwind Plus.
-- `52+` — новые audit-снимки, SEO-базы и последующие проектные документы.
+- `52+` — новые аудит-снимки, SEO-базы и последующие проектные документы.
 
 Весь полный список файлов и их порядок чтения поддерживается в [docs/01-documentation-map.md](docs/01-documentation-map.md). Если добавляется новый документ, сначала выбирается следующий свободный номер, затем обновляются `docs/01-documentation-map.md`, `README.md`, `AGENTS.md` и локальные ссылки.

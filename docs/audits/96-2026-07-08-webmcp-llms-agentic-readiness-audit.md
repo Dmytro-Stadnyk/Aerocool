@@ -1,4 +1,4 @@
-# WebMCP И `llms.txt`: Agentic Readiness Audit
+# WebMCP И `llms.txt`: Аудит Готовности К Agentic Browsing
 
 Обновлено: 2026-07-08.
 
