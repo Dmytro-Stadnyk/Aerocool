@@ -134,6 +134,8 @@ content/news/                   новости и запусковые мате�
 data/                           структурированные данные Hugo
 data/entities.yaml              реестр сущностей для schema.org-связей
 data/generated/                 экспорты на этапе сборки, например не хранящийся в git снимок одобренных отзывов
+docs/                           проектная документация и ненумерованные служебные архивы
+docs/XTAL/                      исходные изображения производителя для линейки XTAL; не часть порядка чтения
 layouts/                        локальные Hugo-шаблоны и overrides
 layouts/_partials/              локальные partials
 layouts/_shortcodes/            локальные shortcodes

@@ -29,6 +29,7 @@
 - `content/about`, `content/contact`, `content/faq`, `content/image-license` — локализованные статичные страницы.
 - `content/articles`, `content/news` — материалы в формате папок страниц Hugo (`page bundle`) со структурами `index.md` и `index.ru.md`.
 - `content/products` — каталог товаров. Для серий используются `_index.md` / `_index.ru.md`, а варианты товаров лежат во вложенных папках как самостоятельные папки страниц.
+- `docs/XTAL` — отслеживаемый Git архив исходных изображений производителя для линейки XTAL: `Product Photo` и `Scenario Photo`. Это не нумерованная документация и не часть маршрута чтения `01-97`; использовать как исходники для подготовки оптимизированных WebP/JPEG в `content/`, а не как публичные файлы Hugo.
 - `data/entities.yaml` — структурированный реестр entity IDs для safe resolver schema.org-связей.
 - `layouts/` — локальные Hugo-переопределения. По умолчанию правки вносятся сюда, а не в тему.
 - `layouts/single.html` и `layouts/list.html` — общие базовые шаблоны для большинства типов страниц.
