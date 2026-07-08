@@ -9,7 +9,7 @@
 - [README.md](../README.md) — краткая карта проекта, стека, структуры и основных команд.
 - [AGENTS.md](../AGENTS.md) — правила безопасной работы для Codex/агентов.
 
-Основные документационные позиции внутри `docs/` пронумерованы глобально от `01` до `96`. Номер в начале имени показывает рекомендуемый порядок чтения. Сопутствующие CSV-файлы используют номера своих основных документов `53` и `59`.
+Основные документационные позиции внутри `docs/` пронумерованы глобально от `01` до `97`. Номер в начале имени показывает рекомендуемый порядок чтения. Сопутствующие CSV-файлы используют номера своих основных документов `53` и `59`.
 
 ## Как Пользоваться Новичку
 
@@ -256,7 +256,7 @@
 
 ### Исторический Полный Аудит Документации 2026-06-26
 
-91. [audits/91-2026-06-26-full-documentation-project-sync-audit-current.md](audits/91-2026-06-26-full-documentation-project-sync-audit-current.md) — исторический полный аудит документации на 2026-06-26: порядок чтения `01-91`, русский язык, стек на дату аудита Hugo `0.163.0` / Node `24.16.0` / Tailwind CSS `4.3.0`, ссылки, image/cover-стандарт, SEO/schema/CWV, проверка production-сборки и итоговая оценка **9.8/10**. Для текущего полного аудита использовать документ `95`, а tooling-аудит Hugo `0.164.0` брать из документа `93`.
+91. [audits/91-2026-06-26-full-documentation-project-sync-audit-current.md](audits/91-2026-06-26-full-documentation-project-sync-audit-current.md) — исторический полный аудит документации на 2026-06-26: порядок чтения `01-91`, русский язык, стек на дату аудита Hugo `0.163.0` / Node `24.16.0` / Tailwind CSS `4.3.0`, ссылки, image/cover-стандарт, SEO/schema/CWV, проверка production-сборки и итоговая оценка **9.8/10**. Для текущего полного аудита использовать документ `97`, а tooling-аудит Hugo `0.164.0` брать из документа `93`.
 
 ### Текущий UX/UI Аудит Tailwind Plus
 
@@ -270,20 +270,24 @@
 
 94. [audits/94-2026-07-07-full-documentation-project-sync-audit-current.md](audits/94-2026-07-07-full-documentation-project-sync-audit-current.md) — исторический полный аудит всей проектной документации на 2026-07-07 после перехода на Hugo `0.164.0`: порядок чтения `01-94`, русский язык, новичковая структура, ссылки, `image` + `cover`, schema.org, Entity Registry, Core Web Vitals, Netlify, pinned stack, официальные практики 2026 года и итоговая оценка **9.8/10**. Для текущего полного аудита использовать документ `95`.
 
-### Текущий Полный Аудит Документации 2026-07-08
+### Исторический Полный Аудит Документации 2026-07-08
 
-95. [audits/95-2026-07-08-full-documentation-project-sync-audit-current.md](audits/95-2026-07-08-full-documentation-project-sync-audit-current.md) — текущий полный аудит всей проектной документации на 2026-07-08: порядок чтения `01-95`, русский язык, новичковая структура, ссылки, `image` + `cover`, schema.org, Entity Registry, Core Web Vitals, Netlify, pinned stack, официальные практики 2026 года и итоговая оценка **9.8/10**.
+95. [audits/95-2026-07-08-full-documentation-project-sync-audit-current.md](audits/95-2026-07-08-full-documentation-project-sync-audit-current.md) — исторический полный аудит всей проектной документации на 2026-07-08 до добавления профильного WebMCP-документа `96`: порядок чтения `01-95`, русский язык, новичковая структура, ссылки, `image` + `cover`, schema.org, Entity Registry, Core Web Vitals, Netlify, pinned stack, официальные практики 2026 года и итоговая оценка **9.8/10**. Для текущего полного аудита использовать документ `97`.
 
 ### Текущий Agentic Browsing Аудит
 
 96. [audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md](audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md) — профильный audit WebMCP-аннотаций форм, `static/llms.txt` и PageSpeed Agentic Browsing. Фиксирует, какие формы зарегистрированы как инструменты, как устроены `toolname`, `tooldescription`, `toolparamdescription`, почему `fieldset` нужен для checkbox/radio-групп и как проверять результат новичку.
+
+### Текущий Полный Аудит Документации После WebMCP
+
+97. [audits/97-2026-07-08-full-documentation-project-sync-audit-current.md](audits/97-2026-07-08-full-documentation-project-sync-audit-current.md) — текущий полный аудит всей проектной документации на 2026-07-08 после добавления WebMCP, `static/llms.txt` и профильного документа `96`: порядок чтения `01-97`, русский язык, новичковая структура, ссылки, `image` + `cover`, schema.org, Entity Registry, Core Web Vitals, WebMCP, Netlify, pinned stack, официальные практики 2026 года и итоговая оценка **9.8/10**.
 
 ## Маршруты По Задачам
 
 Для проверки или обновления всей документации читать:
 
 1. [architecture/02-documentation-style-guide.md](architecture/02-documentation-style-guide.md)
-2. [audits/95-2026-07-08-full-documentation-project-sync-audit-current.md](audits/95-2026-07-08-full-documentation-project-sync-audit-current.md)
+2. [audits/97-2026-07-08-full-documentation-project-sync-audit-current.md](audits/97-2026-07-08-full-documentation-project-sync-audit-current.md)
 3. текущий профильный гайд или аудит из разделов ниже
 
 Для контентной правки читать:
