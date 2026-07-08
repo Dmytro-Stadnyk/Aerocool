@@ -59,6 +59,8 @@ payment_methods:
 characteristics:
   - label: "Модель"
     value: "XTAL Racer Black"
+  - label: "Колір"
+    value: "Black"
   - label: "Загальна регульованість"
     value: "7D"
   - label: "Підголівник"

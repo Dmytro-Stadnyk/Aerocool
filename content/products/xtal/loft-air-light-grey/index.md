@@ -59,6 +59,8 @@ payment_methods:
 characteristics:
   - label: "Модель"
     value: "XTAL Loft Air Light Grey"
+  - label: "Колір"
+    value: "Light Grey"
   - label: "Загальна регульованість"
     value: "7D"
   - label: "Підголівник"

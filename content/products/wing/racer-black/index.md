@@ -4,7 +4,7 @@ linkTitle: "Racer Black"
 description: "Купити Aerocool WING Racer Black в Україні: крісло WING з 11D, Synchronous Tilt, подвійною спинкою та поверхнею Leatherette."
 summary: "Aerocool WING Racer Black — ігрове та комп'ютерне крісло серії WING з 11D регулюванням, подвійною спинкою й поверхнею Leatherette."
 date: 2026-03-19
-lastmod: 2026-06-24
+lastmod: 2026-07-08
 schema_types: ["website", "product", "organization", "breadcrumbs"]
 about_entities:
   - "wing-racer-black"
@@ -36,7 +36,7 @@ cover:
   alt: "Крісло Aerocool WING Racer Black"
   relative: true
   hiddenInSingle: true
-price: 11500
+price: 13400
 sku: "WING-RB-001"
 review_target_id: "wing-racer-black"
 reviews_enabled: true
@@ -61,6 +61,8 @@ payment_methods:
 characteristics:
   - label: "Модель"
     value: "WING Racer Black"
+  - label: "Колір"
+    value: "Black"
   - label: "Загальна регульованість"
     value: "11D"
   - label: "Підголівник"

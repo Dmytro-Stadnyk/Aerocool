@@ -59,6 +59,8 @@ payment_methods:
 characteristics:
   - label: "Модель"
     value: "XTAL Racer Dark Grey"
+  - label: "Цвет"
+    value: "Dark Grey"
   - label: "Общая регулировка"
     value: "7D"
   - label: "Подголовник"

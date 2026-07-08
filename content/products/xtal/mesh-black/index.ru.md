@@ -58,6 +58,8 @@ payment_methods:
 characteristics:
   - label: "Модель"
     value: "XTAL Mesh Black"
+  - label: "Цвет"
+    value: "Black"
   - label: "Общая регулировка"
     value: "7D"
   - label: "Подголовник"

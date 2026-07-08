@@ -59,6 +59,8 @@ payment_methods:
 characteristics:
   - label: "Модель"
     value: "XTAL Loft Air Light Grey"
+  - label: "Цвет"
+    value: "Light Grey"
   - label: "Общая регулировка"
     value: "7D"
   - label: "Подголовник"
