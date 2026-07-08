@@ -118,6 +118,8 @@
 
     <form
       name="contact"
+      toolname="contact_aerocool_ukraine"
+      tooldescription="{{ cond $isRu "Отправляет обращение в Aerocool Украина по подбору кресла, наличию, доставке, гарантии или сервису." "Надсилає звернення в Aerocool Україна щодо підбору крісла, наявності, доставки, гарантії або сервісу." }}"
       method="POST"
       action="{{ $action }}"
       data-netlify="true"
@@ -127,11 +129,11 @@
       <p class="hidden">
         <label>
           {{ cond $isRu "Не заполняйте это поле:" "Не заповнюйте це поле:" }}
-          <input type="text" name="bot-field">
+          <input type="text" name="bot-field" title="{{ cond $isRu "Служебное антиспам-поле" "Службове антиспам-поле" }}">
         </label>
       </p>
-      <input type="hidden" name="language" value="{{ $language }}">
-      <input type="hidden" name="subject" data-remove-prefix value="{{ $subject }}">
+      <input type="hidden" name="language" value="{{ $language }}" title="{{ cond $isRu "Язык обращения" "Мова звернення" }}">
+      <input type="hidden" name="subject" data-remove-prefix value="{{ $subject }}" title="{{ cond $isRu "Тема обращения" "Тема звернення" }}">
 
       <div class="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
         <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
@@ -174,7 +176,7 @@
               {{ cond $isRu "Сообщение" "Повідомлення" }}
             </label>
             <div class="mt-2.5">
-              <textarea id="message" name="message" rows="4" required class="ui-field"></textarea>
+              <textarea id="message" name="message" rows="4" required title="{{ cond $isRu "Опишите вопрос по подбору, покупке или сервису Aerocool" "Опишіть питання щодо підбору, купівлі або сервісу Aerocool" }}" class="ui-field"></textarea>
             </div>
           </div>
         </div>

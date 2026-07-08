@@ -1,0 +1,42 @@
+# Aerocool Ukraine
+
+> Official Aerocool Ukraine website for gaming, office, computer and home office chairs, with Ukrainian and Russian product, article, FAQ and contact pages.
+
+This file gives AI agents a concise map of the public site. Use visible page content, JSON-LD, canonical URLs, hreflang links and sitemap files as the source of truth for product facts, availability, pricing, delivery, warranty and service terms.
+
+## Primary Pages
+
+- [Homepage](https://aerocool.ua/): Ukrainian main page for Aerocool Ukraine.
+- [Products](https://aerocool.ua/products/): Ukrainian catalog hub for Aerocool chair series and product variants.
+- [FAQ](https://aerocool.ua/faq/): Purchase, delivery, warranty, return and service answers.
+- [Contact](https://aerocool.ua/contact/): Official contact page for product selection, purchase and service questions.
+- [About Aerocool Ukraine](https://aerocool.ua/about/): Brand, local catalog and support context.
+
+## Product Series
+
+- [SKY series](https://aerocool.ua/products/sky/): SKY Light and SKY 360 chair series page.
+- [WING series](https://aerocool.ua/products/wing/): WING chair series page.
+- [XTAL series](https://aerocool.ua/products/xtal/): XTAL chair series page.
+
+## Editorial Guides
+
+- [Articles](https://aerocool.ua/articles/): Practical chair selection and setup guides.
+- [News](https://aerocool.ua/news/): Aerocool Ukraine product and catalog updates.
+
+## Russian Versions
+
+- [Russian homepage](https://aerocool.ua/ru/): Russian main page.
+- [Russian products](https://aerocool.ua/ru/products/): Russian catalog hub.
+- [Russian FAQ](https://aerocool.ua/ru/faq/): Russian purchase and service answers.
+- [Russian contact](https://aerocool.ua/ru/contact/): Russian contact page.
+
+## Machine-Readable Files
+
+- [Sitemap index](https://aerocool.ua/sitemap.xml): Canonical multilingual sitemap index.
+- [Ukrainian sitemap](https://aerocool.ua/uk/sitemap.xml): Ukrainian canonical URLs.
+- [Russian sitemap](https://aerocool.ua/ru/sitemap.xml): Russian canonical URLs.
+- [Robots.txt](https://aerocool.ua/robots.txt): Crawl directives.
+
+## Optional
+
+- [Image license](https://aerocool.ua/image-license/): Image licensing and attribution context.

@@ -3308,6 +3308,9 @@ textarea.ui-field {
 .products-filter__options {
     display: grid;
     gap: 0.625rem;
+    min-inline-size: 0;
+    margin: 0;
+    border: 0;
     padding: 0 1rem 1rem;
 }
 

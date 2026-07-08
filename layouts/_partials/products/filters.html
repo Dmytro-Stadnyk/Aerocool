@@ -6,6 +6,11 @@
 {{- $adjustmentLabel := cond $isRu "Регулировки" "Регулювання" -}}
 {{- $mechanismLabel := cond $isRu "Механизм" "Механізм" -}}
 {{- $availabilityLabel := cond $isRu "Наличие" "Наявність" -}}
+{{- $seriesDescription := cond $isRu "Фильтр каталога Aerocool по товарной серии." "Фільтр каталогу Aerocool за товарною серією." -}}
+{{- $materialDescription := cond $isRu "Фильтр каталога Aerocool по материалу обивки или сетки." "Фільтр каталогу Aerocool за матеріалом оббивки або сітки." -}}
+{{- $adjustmentDescription := cond $isRu "Фильтр каталога Aerocool по уровню регулировок кресла." "Фільтр каталогу Aerocool за рівнем регулювань крісла." -}}
+{{- $mechanismDescription := cond $isRu "Фильтр каталога Aerocool по типу синхромеханизма." "Фільтр каталогу Aerocool за типом синхромеханізму." -}}
+{{- $availabilityDescription := cond $isRu "Фильтр каталога Aerocool по наличию товара." "Фільтр каталогу Aerocool за наявністю товару." -}}
 {{- $foundLabel := cond $isRu "Найдено товаров" "Знайдено товарів" -}}
 {{- $emptyTitle := cond $isRu "По этим фильтрам товаров не найдено" "За цими фільтрами товарів не знайдено" -}}
 {{- $emptyText := cond $isRu "Снимите часть условий или сбросьте фильтры, чтобы снова увидеть все кресла." "Зніміть частину умов або скиньте фільтри, щоб знову побачити всі крісла." -}}
@@ -22,31 +27,31 @@
     <span data-product-filter-count>{{ .Scratch.Get "productFilterTotal" }}</span>
   </p>
 
-  <form class="products-filter__form" data-product-filter-form>
+  <form class="products-filter__form" data-product-filter-form toolname="filter_aerocool_products" tooldescription="{{ cond $isRu "Фильтрует каталог кресел Aerocool по серии, материалу, регулировкам, механизму и наличию без отправки данных на сервер." "Фільтрує каталог крісел Aerocool за серією, матеріалом, регулюваннями, механізмом і наявністю без надсилання даних на сервер." }}">
     {{- $groups := slice -}}
     {{- if not $hideSeries -}}
-      {{- $groups = $groups | append (dict "name" "series" "label" $seriesLabel "options" (slice
+      {{- $groups = $groups | append (dict "name" "series" "label" $seriesLabel "description" $seriesDescription "options" (slice
         (dict "value" "sky" "label" "SKY")
         (dict "value" "wing" "label" "WING")
         (dict "value" "xtal" "label" "XTAL")
       )) -}}
     {{- end -}}
     {{- $groups = $groups | append
-      (dict "name" "material" "label" $materialLabel "options" (slice
+      (dict "name" "material" "label" $materialLabel "description" $materialDescription "options" (slice
         (dict "value" "mesh" "label" "Mesh")
         (dict "value" "loft-air" "label" "Loft Air")
         (dict "value" "racer" "label" "Racer")
       ))
-      (dict "name" "adjustment" "label" $adjustmentLabel "options" (slice
+      (dict "name" "adjustment" "label" $adjustmentLabel "description" $adjustmentDescription "options" (slice
         (dict "value" "7d" "label" "7D")
         (dict "value" "8d" "label" "8D")
         (dict "value" "11d" "label" "11D")
       ))
-      (dict "name" "mechanism" "label" $mechanismLabel "options" (slice
+      (dict "name" "mechanism" "label" $mechanismLabel "description" $mechanismDescription "options" (slice
         (dict "value" "sync4" "label" "SYNC4")
         (dict "value" "sync5" "label" "SYNC5")
       ))
-      (dict "name" "availability" "label" $availabilityLabel "options" (slice
+      (dict "name" "availability" "label" $availabilityLabel "description" $availabilityDescription "options" (slice
         (dict "value" "in-stock" "label" (cond $isRu "В наличии" "В наявності"))
       ))
     -}}
@@ -57,8 +62,11 @@
         <span>{{ .label }}</span>
         <span class="products-filter__summary-icon" aria-hidden="true"></span>
       </summary>
-      <div class="products-filter__options">
+      <fieldset class="products-filter__options" title="{{ .label }}" aria-description="{{ .description }}" toolparamdescription="{{ .description }}">
+        <legend class="sr-only">{{ .label }}</legend>
         {{- $groupName := .name -}}
+        {{- $groupLabel := .label -}}
+        {{- $filterDescription := .description -}}
         {{- range $index, $option := .options }}
         {{- $inputID := printf "filter-%s-%d" $groupName $index -}}
         <label class="products-filter__option" for="{{ $inputID }}">
@@ -68,11 +76,14 @@
             type="checkbox"
             name="{{ $groupName }}"
             value="{{ $option.value }}"
+            title="{{ printf "%s: %s" $groupLabel $option.label }}"
+            toolparamdescription="{{ $filterDescription }}"
+            aria-label="{{ printf "%s: %s" $groupLabel $option.label }}"
             data-product-filter-input>
           <span>{{ $option.label }}</span>
         </label>
         {{- end }}
-      </div>
+      </fieldset>
     </details>
     {{- end }}
   </form>
