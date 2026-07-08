@@ -4,7 +4,7 @@ linkTitle: "SKY Light"
 description: "Купити Aerocool SKY Light в Україні — ергономічне офісне та комп'ютерне крісло з Synchronous Tilt, вентильованою сіткою, 2D поперековою підтримкою та 8D регулюванням."
 summary: "Aerocool SKY Light — офісне та комп'ютерне крісло серії SKY з 8D регулюванням, Synchronous Tilt і вентильованою поверхнею для роботи та home office."
 date: 2026-03-19
-lastmod: 2026-06-24
+lastmod: 2026-07-08
 schema_types: ["website", "product", "organization", "breadcrumbs"]
 related_news:
   - "news/2026-04-19-aerocool-sky-light-launch"
@@ -35,7 +35,7 @@ cover:
   alt: "Крісло Aerocool SKY Light"
   relative: true
   hiddenInSingle: true
-price: 8500
+price: 6000
 sku: "SKY-LIGHT-001"
 review_target_id: "sky-light"
 reviews_enabled: true
@@ -61,7 +61,7 @@ characteristics:
   - label: "Модель"
     value: "SKY Light"
   - label: "Колір"
-    value: "чорний"
+    value: "Mesh Black"
   - label: "Загальна регульованість"
     value: "8D"
   - label: "Підголівник"

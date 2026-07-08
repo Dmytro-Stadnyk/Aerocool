@@ -4,7 +4,7 @@ linkTitle: "SKY 360"
 description: "Купити Aerocool SKY 360 в Україні — ергономічне комп'ютерне та офісне крісло з Synchronous Tilt, вентильованою сіткою, 2D поперековою підтримкою та 11D регулюванням."
 summary: "Aerocool SKY 360 — комп'ютерне та офісне крісло серії SKY з 11D регулюванням, Synchronous Tilt і глибшим налаштуванням для роботи та home office."
 date: 2026-03-19
-lastmod: 2026-06-24
+lastmod: 2026-07-08
 schema_types: ["website", "product", "organization", "breadcrumbs"]
 related_news:
   - "news/2026-04-18-aerocool-sky-360-launch"
@@ -36,7 +36,7 @@ cover:
   alt: "Крісло Aerocool SKY 360"
   relative: true
   hiddenInSingle: true
-price: 12400
+price: 7100
 sku: "SKY-360-001"
 review_target_id: "sky-360"
 reviews_enabled: true
@@ -62,7 +62,7 @@ characteristics:
   - label: "Модель"
     value: "SKY 360"
   - label: "Колір"
-    value: "чорний"
+    value: "Mesh Black"
   - label: "Загальна регульованість"
     value: "11D"
   - label: "Підголівник"
