@@ -28,9 +28,9 @@ product_group_id: "xtal-loft-air-product-group"
 slug: "loft-air-dark-grey"
 categories: ["xtal"]
 tags: ["aerocool", "эргономичное кресло", "офисное кресло", "компьютерное кресло", "xtal", "loft air dark grey", "home office"]
-image: "01-front.png"
+image: "01-front.webp"
 cover:
-  image: "01-front.png"
+  image: "01-front.webp"
   alt: "Кресло Aerocool XTAL Loft Air Dark Grey"
   relative: true
   hiddenInSingle: true

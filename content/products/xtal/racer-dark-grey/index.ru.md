@@ -28,9 +28,9 @@ product_group_id: "xtal-racer-product-group"
 slug: "racer-dark-grey"
 categories: ["xtal"]
 tags: ["aerocool", "эргономичное кресло", "игровое кресло", "компьютерное кресло", "xtal", "racer dark grey"]
-image: "01-front.png"
+image: "01-front.webp"
 cover:
-  image: "01-front.png"
+  image: "01-front.webp"
   alt: "Кресло Aerocool XTAL Racer Dark Grey"
   relative: true
   hiddenInSingle: true
