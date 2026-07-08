@@ -4,7 +4,9 @@
 
 Last updated: 2026-07-08.
 
-This file gives AI agents a concise map of the public site. Use visible page content, JSON-LD, canonical URLs, hreflang links and sitemap files as the source of truth for product facts, availability, pricing, delivery, warranty and service terms.
+This file gives AI agents a concise map of the public site.
+Use visible page content, JSON-LD, canonical URLs, hreflang links and sitemap files as the source of truth.
+For product facts, availability, pricing, delivery, warranty and service terms, use the linked product pages and FAQ.
 
 ## Primary Pages
 
