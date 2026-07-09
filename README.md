@@ -1,6 +1,6 @@
 # Aerocool Ukraine
 
-Обновлено: 2026-07-08.
+Обновлено: 2026-07-09.
 
 `Aerocool Ukraine` — двуязычный маркетинговый и каталоговый сайт на `Hugo` для кресел Aerocool в Украине. Основной язык — украинский (`uk`), второй язык — русский (`ru`). Сайт собирается статически, деплоится через `Netlify` и использует локальные Hugo overrides поверх темы `PaperMod`.
 
@@ -31,7 +31,7 @@
 
 Вся документация проекта должна быть русскоязычной, понятной новичку и структурированной. Единый стандарт стиля описан в [docs/architecture/02-documentation-style-guide.md](docs/architecture/02-documentation-style-guide.md).
 
-Последний полный аудит документации, синхронизации с кодом и официальными практиками 2026 года находится в [docs/audits/97-2026-07-08-full-documentation-project-sync-audit-current.md](docs/audits/97-2026-07-08-full-documentation-project-sync-audit-current.md). Итоговая оценка после проверки: **9.8/10**. Документ `96` — профильный снимок по WebMCP, `llms.txt` и PageSpeed Agentic Browsing; он не заменяет полный аудит `97`. Документ `92` является профильным UX/UI-аудитом, документ `93` — профильным tooling-аудитом перехода на Hugo `0.164.0`. Документы `87` и `88` — профильные документы по расширению ключевых слов, контента и стратегии роста; аудит `89` — профильная проверка `image` + `cover`, размеров, форматов, crop-наборов и дублей главных товарных изображений. Аудиты `78`, `82`, `86`, `90`, `91`, `94` и `95` остаются историческими снимками.
+Последний полный аудит документации, синхронизации с кодом и официальными практиками 2026 года находится в [docs/audits/98-2026-07-09-full-documentation-project-sync-audit-current.md](docs/audits/98-2026-07-09-full-documentation-project-sync-audit-current.md). Итоговая оценка после проверки: **9.8/10**. Документ `96` — профильный снимок по WebMCP, `llms.txt` и PageSpeed Agentic Browsing; он не заменяет полный аудит `98`. Документ `92` является профильным UX/UI-аудитом, документ `93` — профильным tooling-аудитом перехода на Hugo `0.164.0`. Документы `87` и `88` — профильные документы по расширению ключевых слов, контента и стратегии роста; аудит `89` — профильная проверка `image` + `cover`, размеров, форматов, crop-наборов и дублей главных товарных изображений. Аудиты `78`, `82`, `86`, `90`, `91`, `94`, `95` и `97` остаются историческими снимками.
 
 ## 1. Главная идея проекта
 
@@ -576,7 +576,7 @@ git checkout dev
 
 1. `README.md` — главный вход в проект.
 2. `AGENTS.md` — правила безопасной работы для Codex/агентов.
-3. [docs/01-documentation-map.md](docs/01-documentation-map.md) — полная карта документации и порядок чтения `01-97`.
+3. [docs/01-documentation-map.md](docs/01-documentation-map.md) — полная карта документации и порядок чтения `01-98`.
 4. [docs/architecture/02-documentation-style-guide.md](docs/architecture/02-documentation-style-guide.md) — стандарт русскоязычной, понятной и структурированной документации.
 5. [docs/architecture/03-hugo-template-helpers.md](docs/architecture/03-hugo-template-helpers.md) — локальные Hugo helpers и partials.
 6. [docs/content/05-front-matter-reference.md](docs/content/05-front-matter-reference.md) — поля front matter для страниц.

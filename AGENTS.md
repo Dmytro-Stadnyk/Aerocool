@@ -29,7 +29,7 @@
 - `content/about`, `content/contact`, `content/faq`, `content/image-license` — локализованные статичные страницы.
 - `content/articles`, `content/news` — материалы в формате папок страниц Hugo (`page bundle`) со структурами `index.md` и `index.ru.md`.
 - `content/products` — каталог товаров. Для серий используются `_index.md` / `_index.ru.md`, а варианты товаров лежат во вложенных папках как самостоятельные папки страниц.
-- `docs/XTAL` — отслеживаемый Git архив исходных изображений производителя для линейки XTAL: `Product Photo` и `Scenario Photo`. Это не нумерованная документация и не часть маршрута чтения `01-97`; использовать как исходники для подготовки оптимизированных WebP/JPEG в `content/`, а не как публичные файлы Hugo.
+- `docs/XTAL` — отслеживаемый Git архив исходных изображений производителя для линейки XTAL: `Product Photo` и `Scenario Photo`. Это не нумерованная документация и не часть маршрута чтения `01-98`; использовать как исходники для подготовки оптимизированных WebP/JPEG в `content/`, а не как публичные файлы Hugo.
 - `data/entities.yaml` — структурированный реестр entity IDs для safe resolver schema.org-связей.
 - `layouts/` — локальные Hugo-переопределения. По умолчанию правки вносятся сюда, а не в тему.
 - `layouts/single.html` и `layouts/list.html` — общие базовые шаблоны для большинства типов страниц.
@@ -160,8 +160,9 @@
 - `docs/audits/95-2026-07-08-full-documentation-project-sync-audit-current.md`
 - `docs/audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md`
 - `docs/audits/97-2026-07-08-full-documentation-project-sync-audit-current.md`
+- `docs/audits/98-2026-07-09-full-documentation-project-sync-audit-current.md`
 
-Последний полный аудит всей проектной документации: `docs/audits/97-2026-07-08-full-documentation-project-sync-audit-current.md`. Текущий профильный аудит WebMCP, `llms.txt` и PageSpeed Agentic Browsing — `docs/audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md`. Текущий Hugo/tooling target после обновления до Hugo `0.164.0` зафиксирован в `docs/audits/93-2026-07-07-hugo-0-164-update-audit.md`; профильный UX/UI-снимок — в `docs/audits/92-2026-06-28-tailwind-plus-ui-map-current-audit.md`. Документы `87` и `88` — профильные документы по расширению ключевых слов, контента, развитию семантического ядра и стратегии роста; аудит `89` — профильная проверка `image` + `cover`, размеров, форматов, crop-наборов статей/новостей и дублей главных товарных изображений. Аудиты `78`, `82`, `86`, `90`, `91`, `94` и `95` использовать как исторические снимки.
+Последний полный аудит всей проектной документации: `docs/audits/98-2026-07-09-full-documentation-project-sync-audit-current.md`. Текущий профильный аудит WebMCP, `llms.txt` и PageSpeed Agentic Browsing — `docs/audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md`. Текущий Hugo/tooling target после обновления до Hugo `0.164.0` зафиксирован в `docs/audits/93-2026-07-07-hugo-0-164-update-audit.md`; профильный UX/UI-снимок — в `docs/audits/92-2026-06-28-tailwind-plus-ui-map-current-audit.md`. Документы `87` и `88` — профильные документы по расширению ключевых слов, контента, развитию семантического ядра и стратегии роста; аудит `89` — профильная проверка `image` + `cover`, размеров, форматов, crop-наборов статей/новостей и дублей главных товарных изображений. Аудиты `78`, `82`, `86`, `90`, `91`, `94`, `95` и `97` использовать как исторические снимки.
 
 Текущий профильный UX/UI-аудит выполнения карты Tailwind Plus: `docs/audits/92-2026-06-28-tailwind-plus-ui-map-current-audit.md`. Он фиксирует общую готовность **7.8/10**, P0 по одинаковым и тестовым товарным изображениям и актуальный порядок работ. Аудит `65` использовать как историческую проверку кода, аудит `64` — как скриншот-доказательства.
 
