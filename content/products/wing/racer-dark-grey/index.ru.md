@@ -4,7 +4,7 @@ linkTitle: "Racer Dark Grey"
 description: "Купить Aerocool WING Racer Dark Grey в Украине — кресло WING с 11D регулировкой, Synchronous Tilt, двойной спинкой и Leatherette."
 summary: "Aerocool WING Racer Dark Grey — игровое и компьютерное кресло серии WING с 11D регулировкой, двойной спинкой и поверхностью Leatherette."
 date: 2026-03-19
-lastmod: 2026-07-08
+lastmod: 2026-07-09
 schema_types: ["website", "product", "organization", "breadcrumbs"]
 about_entities:
   - "wing-racer-dark-grey"
@@ -62,7 +62,7 @@ characteristics:
   - label: "Модель"
     value: "WING Racer Dark Grey"
   - label: "Цвет"
-    value: "Dark Grey"
+    value: "Racer Dark Grey"
   - label: "Общая регулировка"
     value: "11D"
   - label: "Подголовник"

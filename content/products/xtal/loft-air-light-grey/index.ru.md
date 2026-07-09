@@ -4,7 +4,7 @@ linkTitle: "Loft Air Light Grey"
 description: "Купить Aerocool XTAL Loft Air Light Grey в Украине — кресло XTAL с 7D регулировкой, Synchronous Tilt, сменными элементами и вентилируемой тканью."
 summary: "Aerocool XTAL Loft Air Light Grey — офисное и компьютерное кресло серии XTAL с 7D регулировкой, сменными элементами и вентилируемой текстильной поверхностью для работы и home office."
 date: 2026-03-19
-lastmod: 2026-07-08
+lastmod: 2026-07-09
 schema_types: ["website", "product", "organization", "breadcrumbs"]
 about_entities:
   - "xtal-loft-air-light-grey"
@@ -60,7 +60,7 @@ characteristics:
   - label: "Модель"
     value: "XTAL Loft Air Light Grey"
   - label: "Цвет"
-    value: "Light Grey"
+    value: "Loft Air Light Grey"
   - label: "Общая регулировка"
     value: "7D"
   - label: "Подголовник"
