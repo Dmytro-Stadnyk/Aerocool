@@ -1,6 +1,6 @@
-# Руководство По Shortcode `seo-image`
+# Руководство по Shortcode `seo-image`
 
-Обновлено: 2026-06-24.
+Обновлено: 2026-07-10.
 
 Короткое руководство по shortcode `seo-image` в текущем проекте `Aerocool`.
 
@@ -14,15 +14,15 @@ Hero-изображение главной страницы — отдельно
 
 Главное изображение товарной страницы — тоже отдельный сценарий. Оно не должно вставляться через `seo-image` в markdown. На товарных страницах первый видимый кадр выводит [products/gallery.html](../../layouts/_partials/products/gallery.html) из front matter `image`, а responsive preload для этого кадра выводится в `<head>` через [lcp-image-preload.html](../../layouts/_partials/_seo/lcp-image-preload.html) с тем же `sizes`, что и gallery.
 
-Общий визуальный стандарт изображений, включая обложки, fallback, section covers, home hero, product gallery, inline-иллюстрации, технические схемы и AI-промпты, описан отдельно в [67-image-design-playbook-2026.md](67-image-design-playbook-2026.md). Текущая проверка `image` + служебного `cover`-блока, размеров, форматов, crop-наборов и product primary дублей находится в [89-2026-06-24-cover-block-image-seo-audit.md](../audits/89-2026-06-24-cover-block-image-seo-audit.md). Текущее состояние статей и новостей находится в [77-2026-06-18-articles-news-content-image-audit.md](../audits/77-2026-06-18-articles-news-content-image-audit.md), а историческая поштучная матрица внедрения - в [74-2026-06-15-articles-news-inline-image-serp-audit.md](../audits/74-2026-06-15-articles-news-inline-image-serp-audit.md). Эти документы отвечают за внешний вид, смысл и SERP-стандарт; текущий `seo-image` отвечает за HTML, responsive delivery и performance.
+Общий визуальный стандарт изображений, включая обложки, резервные изображения, обложки разделов, главный экран, товарную галерею, встроенные иллюстрации, технические схемы и AI-промпты, описан в [34-image-design-playbook-2026.md](34-image-design-playbook-2026.md). Фактическое состояние на 2026-07-10 подтверждено [полным аудитом 99](../audits/99-2026-07-10-full-documentation-project-sync-audit-current.md). Аудиты [89](../audits/89-2026-06-24-cover-block-image-seo-audit.md), [82](../audits/82-2026-06-18-articles-news-content-image-audit.md) и [80](../audits/80-2026-06-15-articles-news-inline-image-serp-audit.md) сохраняются как исторические снимки внедрения. Этот документ отвечает за HTML, адаптивную доставку и производительность `seo-image`.
 
 Простыми словами для новичка: `seo-image` нужен, когда ты вставляешь изображение прямо в текст статьи, новости или обычной страницы. Для главной и товарной страницы уже есть отдельные шаблоны первого экрана.
 
-## Что За Что Отвечает
+## Что за что отвечает
 
 Эта таблица нужна, чтобы не смешивать SEO-метаданные, preview-картинки и видимые изображения внутри страницы.
 
-| Элемент | За Что Отвечает | Где Используется | Что Новичку Важно Помнить |
+| Элемент | За что отвечает | Где используется | Что новичку важно помнить |
 |---|---|---|---|
 | `image` | Главный image URL страницы для SEO/OG/Twitter/schema. На product page это еще и первый кадр visible gallery. | front matter страницы, helpers `page-image.html`, JSON-LD, social previews, product gallery | Заполнять почти всегда. Для товара файл должен реально лежать в page bundle и быть processable image resource. |
 | `cover.image` | Preview-изображение для карточек, списков и cover-логики. | front matter `cover`, листинги, карточки, fallback preview | Обычно совпадает с `image`, но отвечает за визуальное preview, а не за schema напрямую. |
@@ -30,7 +30,7 @@ Hero-изображение главной страницы — отдельно
 | `cover.relative` | Объясняет Hugo/PaperMod, что путь к cover лежит рядом со страницей. | front matter `cover` | Для page bundle обычно `true`; для root `/cover.webp` или `/images/...` использовать `false`. |
 | `cover.hiddenInSingle` | Скрывает стандартный cover темы на одиночной странице, когда видимое изображение выводит другой слой. | front matter `cover` | Для article/news с первым `seo-image` и для product gallery обычно `true`, чтобы не получить дубль. |
 | `seo-image` | Видимое изображение в markdown-теле: `<picture>`, WebP, fallback `<img>`, `srcset`, `sizes`, размеры и loading strategy. | markdown статей, новостей и обычных страниц | Не управляет SEO title, `og:image` или JSON-LD. Для primary product image не использовать. |
-| `products/gallery.html` | Product primary image и дополнительные фото товара. | `layouts/products/single.html` | Первый кадр берет из `image`; дополнительные кадры берет из остальных image-файлов page bundle. |
+| `products/gallery.html` | Главное изображение товара и дополнительные фото. | `layouts/products/single.html` | Первый кадр берет из `image`; дополнительные кадры — из остальных изображений page bundle. |
 | `lcp-image-preload.html` | Ранний preload главной картинки первого экрана в `<head>`. | SEO partial, вызывается шаблонным слоем | Для article/news синхронизируется с первым `seo-image`; для product синхронизируется с gallery. |
 | `seo_image_sizes` | Override для `imagesizes` в head preload article/news. | front matter статьи или новости | Нужен только если первый `seo-image` использует нестандартный `sizes`; для product не нужен. |
 | `alt` в `seo-image` | Описание конкретного видимого inline-изображения. | параметр shortcode | Должен быть на языке страницы и описывать картинку, а не SEO-фразу. |
@@ -41,7 +41,7 @@ Hero-изображение главной страницы — отдельно
 | `sizes` | Подсказывает браузеру, какой реальный размер изображения будет на разных ширинах экрана. | параметр shortcode, gallery, preload | Должен совпадать у видимой картинки и preload; `100vw` не ставить для обычной контентной колонки. |
 | `crop` | Разрешает намеренную обрезку через Hugo `Fill`, если ratio отличается. | параметр shortcode | По умолчанию сборка падает при неявной обрезке. Добавлять `crop=true` только осознанно. |
 
-Самое короткое правило: `image` отвечает за SEO и главный источник картинки, `cover.image` отвечает за preview, `seo-image` отвечает за видимую картинку в тексте, а product primary image отвечает product gallery.
+Самое короткое правило: `image` задает главный SEO-источник изображения, `cover.image` — превью, `seo-image` — видимую картинку в тексте, а главное изображение товара выводит товарная галерея.
 
 Официальная база правил:
 
@@ -51,7 +51,7 @@ Hero-изображение главной страницы — отдельно
 - Hugo image processing: https://gohugo.io/content-management/image-processing/
 - Hugo page resources: https://gohugo.io/content-management/page-resources/
 
-## 1. Главное Изображение Статьи Или Новости
+## 1. Главное изображение статьи или новости
 
 Сначала во front matter:
 
@@ -87,20 +87,20 @@ cover:
 - [lcp-image-preload.html](../../layouts/_partials/_seo/lcp-image-preload.html) выводит один ранний responsive preload в `<head>`;
 - shortcode не дублирует body-level preload, если `image`, `src` и `cover.hiddenInSingle: true` совпадают.
 
-## 2. Товарная Страница
+## 2. Товарная страница
 
 Для товара первичное изображение задается только через front matter:
 
 ```yaml
-image: "01-front.png"
+image: "01-front.webp"
 cover:
-  image: "01-front.png"
+  image: "01-front.webp"
   alt: "Кресло Aerocool SKY 360"
   relative: true
   hiddenInSingle: true
 ```
 
-В markdown-теле товара не добавлять стартовый `seo-image` для `01-front.png`. Товарный шаблон сам:
+В Markdown-теле товара не добавлять стартовый `seo-image` для `01-front.webp`. Товарный шаблон сам:
 
 - берет первый кадр из `image`;
 - выводит его через [products/gallery.html](../../layouts/_partials/products/gallery.html);
@@ -110,11 +110,11 @@ cover:
 
 Если `image` или `cover.image` товарной страницы указывает на отсутствующий файл либо на image resource, который Hugo не может обработать через `reflect.IsImageResourceProcessable`, сборка должна остановиться. Это намеренная защита от битой LCP-картинки и рассинхронизации SEO/OG/schema с видимой gallery.
 
-Важно: пример выше отражает текущее состояние части каталога, где product primary еще использует `01-front.png`. Для новых и заменяемых товарных assets целевой стандарт проекта — уникальный `01-front.webp` **2000x2000** для конкретного SKU/цвета/материала. Аудит [89-2026-06-24-cover-block-image-seo-audit.md](../audits/89-2026-06-24-cover-block-image-seo-audit.md) фиксирует открытый P1: `12` текущих product primary PNG имеют одинаковый байтовый хэш и должны заменяться точными уникальными изображениями, а не просто массовой конвертацией формата.
+Проверено 2026-07-10: все `12` главных товарных файлов называются `01-front.webp`, имеют размер **2000x2000** и разные SHA-256. В `content/products/` нет PNG/JPEG и файлов с именами `test`, `candidate` или `placeholder`. Для нового товара сохраняйте тот же стандарт и проверяйте соответствие конкретным SKU, цвету и материалу.
 
 Если в товарной странице позже понадобится вторичная inline-иллюстрация внутри описания, ее можно вставить через `seo-image`, но только с `loading="lazy"`, `preload=false` и без `fetchpriority=high`.
 
-## 3. Второстепенное Контентное Изображение
+## 3. Второстепенное контентное изображение
 
 Для статей и новостей стандартный secondary inline image:
 
@@ -157,7 +157,7 @@ cover:
 - `crop`: необязательный `true`, только если нужно намеренно обрезать изображение через Hugo `Fill`.
 - `class`: Tailwind-классы.
 
-## Защитные Правила
+## Защитные правила
 
 1. `src`, `alt`, `width` и `height` обязательны.
 2. `preload=true` требует `loading="eager"` и `fetchpriority=high`.
@@ -181,4 +181,4 @@ cover:
 9. Image license metadata не управляется shortcode: если меняются условия использования изображений, сначала обновить страницы `/image-license/` и `/ru/image-license/`, затем проверить rendered `ImageObject`.
 10. Для `content/articles` и `content/news` не публиковать `candidate` / `test` / `final-v*` файлы и не ссылаться на них из markdown. Такие файлы допустимы только для визуального утверждения.
 11. Для secondary inline image не использовать `preload=true` и `fetchpriority=high`: это резерв только для одного LCP-кандидата страницы.
-12. Текущий cover-contract проверен в аудите `89`: `100/100` markdown-страниц имеют полный `image` + `cover`, но product primary дубли остаются отдельным P1-backlog товарного слоя.
+12. Текущее состояние проверяется аудитом `99`. Числа из аудита `89` относятся к 2026-06-24; описанный там список задач по одинаковым товарным PNG уже закрыт.

@@ -1,20 +1,18 @@
-# Маршрутизация Netlify И Принудительная 404
+# Маршрутизация Netlify и принудительная 404
 
-Обновлено: 2026-07-08.
+Обновлено: 2026-07-10.
 
 Этот документ описывает, как в проекте устроены Netlify redirects, HTTP headers и кастомная `404`.
 
-Базовая синхронизация с Netlify redirects, headers и caching docs зафиксирована в [37-2026-05-13-documentation-2026-best-practices-sync-audit.md](../audits/37-2026-05-13-documentation-2026-best-practices-sync-audit.md).
+Правила сверены 2026-07-10 с официальной документацией [Netlify redirects](https://docs.netlify.com/manage/routing/redirects/overview/), [custom headers](https://docs.netlify.com/manage/routing/headers/) и [caching](https://docs.netlify.com/build/caching/caching-overview/). Аудиты `50` и `69` сохраняют историю прежней синхронизации и отказа от локального браузерного плагина.
 
-Решение убрать локальный browser-аудит из Netlify и перейти на PageSpeed Insights зафиксировано в [61-2026-06-02-pagespeed-insights-quality-simplification.md](../audits/61-2026-06-02-pagespeed-insights-quality-simplification.md).
-
-## 1. Где Живут Правила
+## 1. Где живут правила
 
 В проекте есть два слоя routing-настроек:
 
 - `static/_redirects` — plain text `_redirects` для Netlify. Hugo копирует его в `public/_redirects` как статический файл. Здесь живет явный root rewrite `/ -> /index.html` и forced `404!` для scanner URL.
 - `static/llms.txt` — корневой Markdown-файл для LLM/AI-агентов. Hugo копирует его в `public/llms.txt`, а опубликованный сайт отдает его по `/llms.txt`.
-- `netlify.toml` — основной Netlify config со сборкой, headers и локальными build plugins. Общий fallback на `404` не нужен: Netlify автоматически использует `public/404.html`.
+- `netlify.toml` — основной Netlify config со сборкой и статическими headers. Общий fallback на `404` не нужен: Netlify автоматически использует `public/404.html`.
 
 Netlify обрабатывает `_redirects` раньше правил из `netlify.toml`. Внутри файла первое совпавшее правило выигрывает, поэтому более конкретные правила должны стоять выше более общих.
 
@@ -89,7 +87,7 @@ Netlify обрабатывает `_redirects` раньше правил из `ne
 
 Текущие `/:prefix/...` правила покрывают один уровень вложенности, например `/ru/wp-login.php`. Более глубокие scanner URL обычно доходят до автоматической Netlify `404`.
 
-## 5. Контентные 301 И Автоматическая 404
+## 5. Контентные 301 и автоматическая 404
 
 Если Netlify Analytics показывает старый или ошибочный пользовательский URL, который явно относится к существующему контентному intent, его можно вести `301` на новую страницу только при наличии реальной замены.
 
@@ -122,7 +120,7 @@ HTML кастомной страницы ошибки задается в `layou
 - ссылка на главную должна вести на текущий язык: `/` для `uk`, `/ru/` для `ru`;
 - после изменения 404-шаблона проверять главную, `/404.html` и `/ru/404.html`.
 
-## 7. HTTP-Заголовки
+## 7. HTTP-заголовки
 
 HTTP headers задаются в `netlify.toml`, в блоке:
 
@@ -158,11 +156,23 @@ WebMCP в Chrome требует origin isolation и permissions policy, но э�
 
 Для cache rules не использовать brace glob в `for`, например `/*.{css,js,woff2}`. Netlify CLI трактует такие значения как route pattern и может вернуть ошибку `invalid regular expression: incomplete {} quantifier`. Вместо этого держать явные правила вроде `/assets/*`, `/images/*`, `/*.svg`, `/*.webmanifest`.
 
-Общие security headers должны оставаться в `for = "/*"`, а asset-cache правила должны стоять выше них. Если меняется кеширование, проверить итоговые headers на Deploy Preview: локальный Netlify Dev может отдавать служебный `cache-control: public, max-age=0` для некоторых статических файлов.
+Общие security headers должны оставаться в `for = "/*"`, а правила кэширования ресурсов должны стоять выше них. Если меняется кэширование, проверьте итоговые headers на Deploy Preview: локальный Netlify Dev может вести себя иначе, чем опубликованный CDN.
 
-Netlify автоматически инвалидирует статические assets при atomic deploy. Поэтому длинный `Cache-Control` с `immutable` допустим только для файлов, которые меняются через новый deploy и имеют стабильную стратегию инвалидации; для HTML-страниц не добавлять такой же долгий browser cache без отдельной проверки.
+Текущий контракт:
 
-## 8. Проверка После Правок
+| URL | Browser `Cache-Control` | Причина |
+|---|---|---|
+| `/assets/*` | `public, max-age=31536000, immutable` | Hugo создает URL с отпечатком содержимого; новый файл получает новый URL. |
+| `/images/*`, `/*.ico`, `/*.png`, `/*.svg`, `/*.webmanifest` | `public, max-age=0, must-revalidate` | URL стабильны и могут получить новое содержимое при следующем deploy. |
+| HTML и остальные статические файлы | базовое правило Netlify | Браузер перепроверяет свежесть; CDN Netlify автоматически инвалидирует измененные файлы при deploy. |
+
+Атомарный deploy очищает или инвалидирует кэш Netlify CDN для изменившихся статических файлов, но не может очистить уже заполненный кэш браузера посетителя. Поэтому `immutable` разрешен только для content-hashed URL. Сам факт, что файл меняется через новый deploy, недостаточен.
+
+Переходный статус 2026-07-10: локальный `netlify.toml` уже исправлен, но опубликованный `https://aerocool.ua/images/logo.svg` до следующего deploy продолжает отдавать прежний `Cache-Control: public,max-age=31536000,immutable`. После deploy обязательно подтвердите, что `/images/logo.svg` и favicon/SVG/webmanifest отдают `max-age=0,must-revalidate`, а fingerprinted `/assets/*` сохраняют длительный `immutable`.
+
+Custom headers из `netlify.toml` применяются только к файлам из backing store Netlify. Они не добавляются автоматически к ответам Netlify Functions, Edge Functions или proxy. Функция должна самостоятельно вернуть `Cache-Control`, CORS и другие необходимые заголовки. Текущая `netlify/functions/reviews.mjs` возвращает `Cache-Control: no-store` для всех своих ответов.
+
+## 8. Проверка после правок
 
 Минимальная проверка:
 
@@ -214,7 +224,7 @@ curl -sS -I http://localhost:8899/ads.txt
 
 Netlify CLI может создать локальные артефакты `.netlify/` и `deno.lock`; они должны оставаться в `.gitignore` и не попадать в коммит.
 
-## 9. PageSpeed Insights После Deploy
+## 9. PageSpeed Insights после Deploy
 
 В `netlify.toml` нет post-deploy browser audit plugin. Это намеренно: Netlify должен собирать и публиковать сайт, а не блокировать deploy из-за внешнего browser runtime.
 

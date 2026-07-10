@@ -1,12 +1,12 @@
-# Netlify Database Для SEO-First Отзывов
+# Netlify Database для SEO-first отзывов
 
-Обновлено: 2026-06-15.
+Обновлено: 2026-07-10.
 
 Этот документ объясняет, как в проекте `Aerocool Ukraine` использовать `Netlify Database` для собственной системы отзывов к товарам и статьям.
 
 Главная цель: не просто сохранять отзывы, а сделать SEO-безопасный review pipeline, где `Product` JSON-LD получает рейтинг только из реальных, публичных, approved отзывов, которые видны пользователю на странице.
 
-## Как Пользоваться Новичку
+## Как пользоваться новичку
 
 Если ты раньше не работал с `Netlify Database`, читай документ в таком порядке:
 
@@ -22,12 +22,12 @@
 
 Не начинай с формы на сайте. Для SEO сначала нужно зафиксировать данные, модерацию и build-time экспорт approved отзывов.
 
-## 1. Текущий Статус
+## 1. Текущий статус
 
-На `2026-05-26` для проекта выполнено:
+Проверено 2026-07-10:
 
 - `Netlify CLI` установлен через `brew`;
-- версия CLI: `netlify-cli/26.0.0` локально проверялась через `netlify dev`;
+- версия CLI: `netlify-cli/26.2.0` локально проверена через `netlify --version`;
 - локальная копия репозитория связана с Netlify-проектом `hugo-aerocool`;
 - production URL проекта: `https://aerocool.ua`;
 - `Netlify Database` включена для проекта;
@@ -36,14 +36,28 @@
 - sample data не создавались;
 - создана первая миграция `20260526171923_create-reviews-table`;
 - миграция локально применена через `netlify database migrations apply`;
-- добавлена функция `netlify/functions/reviews.mjs` для `POST /api/reviews`;
+- добавлена функция `netlify/functions/reviews.mjs` для `POST /api/reviews`; другие методы получают `405 Method Not Allowed`;
 - все текущие товарные страницы в украинской и русской версии получили стабильный `review_target_id` и `reviews_enabled: true`;
 - форма отзывов выводится только для товаров с явными `review_target_id` и `reviews_enabled: true`;
 - локально и на Netlify branch `dev` проверено, что `POST /api/reviews` создает запись в `reviews` со статусом `pending`;
 - добавлен build-time export `scripts/export_reviews.mjs`, который пишет approved отзывы в `data/generated/reviews.json`;
-- товарный шаблон и карточки товаров умеют показывать approved отзывы и средний рейтинг из generated snapshot;
-- `Product.aggregateRating` строится из того же generated snapshot и не выводится, если у товара нет approved отзывов;
+- товарный шаблон и карточки товаров умеют показывать approved-отзывы и средний рейтинг из сгенерированного снимка;
+- `Product.aggregateRating` строится из того же снимка и не выводится, если у товара нет approved-отзывов;
 - на `https://dev--hugo-aerocool.netlify.app/products/sky/light/#reviews` проверен полный цикл: отправка отзыва, ручная модерация `pending -> approved`, новый deploy `dev`, появление видимого отзыва на странице.
+
+Netlify Database доступна только на credit-based plans и расходует credits на compute и bandwidth. Официальная страница указывала бесплатное хранение данных только до 2026-07-01; эта дата уже прошла. Перед production-нагрузкой обязательно проверять актуальные тарифы, расход credits и лимиты именно в Netlify Dashboard. Документация проекта не считает базу безусловно бесплатной.
+
+### Обязательная переменная `REVIEW_EMAIL_HASH_SALT`
+
+Функция хэширует email автора с секретной солью из `REVIEW_EMAIL_HASH_SALT`. Production и branch deploy нельзя считать корректно настроенными без этой переменной.
+
+1. Откройте Netlify Dashboard -> Project configuration -> Environment variables.
+2. Создайте случайное секретное значение достаточной длины, например вывод `openssl rand -hex 32`.
+3. Сохраните его как `REVIEW_EMAIL_HASH_SALT`.
+4. Убедитесь, что scope включает `Functions` или все scopes.
+5. Создайте новый deploy: Functions получают значения, действовавшие в момент deploy.
+
+Не записывайте secret в `netlify.toml`, `.env` под Git или Markdown. Netlify прямо указывает, что переменные из `netlify.toml` недоступны Functions во время выполнения; используйте UI, CLI или API. Текущий код имеет пустой fallback, поэтому отсутствие секрета не останавливает функцию автоматически, но является запрещенным операционным состоянием и должно выявляться перед deploy.
 
 Управление базой в Netlify находится здесь:
 
@@ -51,11 +65,11 @@
 https://app.netlify.com/projects/hugo-aerocool/database
 ```
 
-## 2. Актуальный Алгоритм Работ
+## 2. Актуальный алгоритм работ
 
 Это текущий порядок внедрения review-системы после подключения `Netlify Database`.
 
-### Уже Сделано
+### Уже сделано
 
 1. Установлен `Netlify CLI`.
 2. Выполнен `netlify login`.
@@ -72,7 +86,7 @@ https://app.netlify.com/projects/hugo-aerocool/database
 13. Добавлен `POST /api/reviews`, который сохраняет только `pending` отзывы.
 14. Локально проверена отправка тестового отзыва: запись появилась в `reviews` со статусом `pending`.
 
-### Текущий Рабочий Шаг
+### Текущий рабочий шаг
 
 После изменения статуса отзыва на `approved` нужно запустить новый deploy/rebuild:
 
@@ -84,9 +98,9 @@ approved review в Netlify Database
 -> Hugo renders visible review
 ```
 
-На ветке `dev` этот сценарий уже подтвержден на `SKY Light`. `Product.aggregateRating` подключен к тому же generated snapshot и появляется только при наличии visible approved отзывов. После масштабирования на каталог legacy `rating.value` и `rating.count` удалены из товарного front matter; следующий операционный шаг — поддерживать модерацию, rebuild после approval и проверку branch/production rich-results reports.
+На ветке `dev` этот сценарий уже подтвержден на `SKY Light`. `Product.aggregateRating` подключен к тому же снимку и появляется только при наличии видимых approved-отзывов. После масштабирования на каталог устаревшие `rating.value` и `rating.count` удалены из товарного front matter; следующий операционный шаг — поддерживать модерацию, пересборку после одобрения и проверку отчетов rich results на branch/production.
 
-### Полный Алгоритм V1
+### Полный алгоритм V1
 
 1. Создать миграцию `reviews`. Готово: `20260526171923_create-reviews-table`.
 2. Вставить SQL таблицы отзывов. Готово.
@@ -115,7 +129,7 @@ approved review в Netlify Database
 10. Сделать build-time export approved отзывов в `data/generated/reviews.json`. Готово через `scripts/export_reviews.mjs`.
 11. Подключить Hugo partial для вывода реальных approved отзывов сначала на тестовом товаре. Готово через `layouts/_partials/reviews/list.html`.
 12. Проверить после rebuild, что approved отзыв виден на `SKY Light`. Готово на branch `dev`.
-13. Переключить `Product.aggregateRating` на generated reviews snapshot. Готово.
+13. Переключить `Product.aggregateRating` на сгенерированный снимок отзывов. Готово.
 14. Проверить два состояния:
 
     ```text
@@ -126,7 +140,7 @@ approved review в Netlify Database
 15. После успешной проверки масштабировать `review_target_id` на остальные товары. Готово для текущего каталога.
 16. Статьи подключать вторым этапом, без `AggregateRating` в `Article` JSON-LD.
 
-### Что Не Делать В Первом Проходе
+### Что не делать в первом проходе
 
 Не делать:
 
@@ -136,7 +150,7 @@ approved review в Netlify Database
 - не добавлять `Review` JSON-LD раньше visible approved отзывов;
 - не возвращать front matter `rating.value` / `rating.count` как источник `Product.aggregateRating`.
 
-## 3. Что Такое Netlify Database
+## 3. Что такое Netlify Database
 
 `Netlify Database` — это управляемая `PostgreSQL`-база, встроенная в Netlify workflow.
 
@@ -162,7 +176,7 @@ approved review в Netlify Database
 -> visible review + Product JSON-LD
 ```
 
-## 3.1. Ветвление Базы Данных
+## 3.1. Ветвление базы данных
 
 `Netlify Database` использует ветки базы.
 
@@ -206,7 +220,7 @@ local netlify dev -> локальная база
 7. Запустить новый deploy `dev`.
 8. Проверить, что отзыв появился в HTML на `SKY Light`.
 
-## 4. Базовые Команды
+## 4. Базовые команды
 
 Все команды выполнять из корня проекта:
 
@@ -288,7 +302,7 @@ netlify database status
 
 Важное правило: если миграция уже применена, ее нельзя редактировать задним числом. Новое изменение схемы нужно делать новой миграцией.
 
-## 6. Целевая Таблица `reviews`
+## 6. Целевая таблица `reviews`
 
 Минимальная таблица для v1:
 
@@ -331,7 +345,7 @@ ON reviews (author_email_hash);
 
 В фактической миграции также добавлен триггер `reviews_set_updated_at`, который обновляет `updated_at` при изменении строки. Это нужно для будущей модерации: когда отзыв переводят из `pending` в `approved`, дата обновления меняется автоматически.
 
-## 7. `review_target_id` Для Товаров
+## 7. `review_target_id` для товаров
 
 Для товаров нельзя привязывать отзывы только к URL. У товара есть украинская и русская версии, а URL может измениться.
 
@@ -362,7 +376,7 @@ content/products/xtal/mesh-black/index.ru.md
 
 Для production SEO-режима лучше показывать на каждой языковой странице отзывы на языке этой страницы. До внедрения переводов на branch `dev` временно используется общий вывод approved отзывов для `uk` и `ru`, чтобы проверить интерфейс и расчет рейтинга на обеих версиях товара.
 
-## 8. SEO-Ориентированный Процесс Для Отзывов
+## 8. SEO-ориентированный процесс для отзывов
 
 Для максимального SEO нельзя полагаться только на клиентский `fetch`.
 
@@ -400,7 +414,7 @@ node scripts/export_reviews.mjs
 
 Текущий временный режим для `dev`: export сохраняет отзывы и по языкам (`uk`, `ru`), и в общей группе `all`. Шаблон видимых отзывов пока берет группу `all`, чтобы украинская и русская страницы товара показывали одинаковый набор approved отзывов до внедрения нормальных переводов. Это переходное решение для тестирования UI, рейтинга и будущей SEO-логики. Для production SEO-режима нужно вернуться к языковым текстам или добавить поля переводов, чтобы текст отзыва соответствовал языку страницы.
 
-Если `NETLIFY_DB_URL` недоступен, например при обычной локальной сборке без `netlify dev`, скрипт пишет пустой snapshot:
+Если `NETLIFY_DB_URL` недоступен, например при обычной локальной сборке без `netlify dev`, скрипт пишет пустой снимок:
 
 ```json
 {
@@ -426,7 +440,7 @@ node scripts/export_reviews.mjs
 }
 ```
 
-## 9. Netlify Functions Для API Отзывов
+## 9. Netlify Functions для API отзывов
 
 Для review-системы нужны функции:
 
@@ -498,9 +512,9 @@ export const config: Config = {
 };
 ```
 
-Если функция пишется на TypeScript и проект начинает проверять типы функций локально, добавить `@netlify/functions` как dev dependency. Для обычной Hugo-сборки этот пакет сейчас не нужен, пока функции физически не добавлены.
+Текущая функция уже существует и написана как JavaScript-модуль `.mjs`; она не импортирует типы `Context` или `Config`, поэтому отдельный пакет `@netlify/functions` ей не нужен. Добавьте его как dev dependency только при переходе на TypeScript или при использовании helpers из этого пакета.
 
-## 10. Правила SEO Для Отзывов
+## 10. Правила SEO для отзывов
 
 `AggregateRating` в `Product` JSON-LD можно выводить только если:
 
@@ -515,7 +529,7 @@ export const config: Config = {
 
 Для статей в v1 отзывы можно показывать как публичный UGC-блок, но не добавлять `AggregateRating` в `Article` JSON-LD. Основной SEO-сценарий review rich results для проекта — товарные страницы.
 
-## 11. Что Проверять После Изменений
+## 11. Что проверять после изменений
 
 После добавления миграции:
 
@@ -542,7 +556,7 @@ netlify dev
 - Hugo выводит `AggregateRating`, если approved отзывы есть и видны на странице;
 - `npm run build` проходит без ошибок.
 
-## 12. Чего Не Делать
+## 12. Чего не делать
 
 Не делать:
 
@@ -555,15 +569,18 @@ netlify dev
 - не выводить email автора публично;
 - не разрешать HTML в тексте отзыва без жесткой очистки;
 - не хранить секреты в `netlify.toml`.
+- не запускать production-функцию без `REVIEW_EMAIL_HASH_SALT`;
 
-## 13. Официальная База
+## 13. Официальная база
 
 - Netlify Database: `https://docs.netlify.com/build/data-and-storage/netlify-database/`
 - Netlify Database CLI: `https://docs.netlify.com/build/data-and-storage/netlify-database/cli/`
 - Netlify Database API: `https://docs.netlify.com/build/data-and-storage/netlify-database/api/`
+- Netlify environment variables for Functions: `https://docs.netlify.com/build/functions/environment-variables/`
+- Netlify caching: `https://docs.netlify.com/build/caching/caching-overview/`
 - Google Review Snippet structured data: `https://developers.google.com/search/docs/appearance/structured-data/review-snippet`
 
-## 14. Связанные Документы
+## 14. Связанные документы
 
 - [docs/content/05-front-matter-reference.md](../content/05-front-matter-reference.md)
 - [docs/seo/21-ecommerce-structured-data-playbook-2026.md](../seo/21-ecommerce-structured-data-playbook-2026.md)

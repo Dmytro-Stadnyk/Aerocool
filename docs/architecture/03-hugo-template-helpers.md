@@ -1,12 +1,12 @@
 # Руководство по шаблонным helper-файлам Hugo
 
-Обновлено: 2026-07-08.
+Обновлено: 2026-07-10.
 
-## Зачем Нужен Этот Документ
+## Зачем нужен этот документ
 
 Этот документ объясняет логику локальных `helpers` и `partials` проекта `Aerocool` так, чтобы в ней мог быстро разобраться новичок.
 
-Текущая синхронизация документации с Hugo 0.164.0, Tailwind CSS 4.3, SEO/schema и CWV-практиками 2026 зафиксирована в [93-2026-07-07-hugo-0-164-update-audit.md](../audits/93-2026-07-07-hugo-0-164-update-audit.md). Историческая синхронизация лучших практик 2026 остается в [37-2026-05-13-documentation-2026-best-practices-sync-audit.md](../audits/37-2026-05-13-documentation-2026-best-practices-sync-audit.md).
+Текущая синхронизация документации с Hugo 0.164.0, Tailwind CSS 4.3, SEO/schema и CWV-практиками 2026 зафиксирована в [93-2026-07-07-hugo-0-164-update-audit.md](../audits/93-2026-07-07-hugo-0-164-update-audit.md). Историческая синхронизация лучших практик 2026 остается в [50-2026-05-13-documentation-2026-best-practices-sync-audit.md](../audits/50-2026-05-13-documentation-2026-best-practices-sync-audit.md).
 
 Главная цель:
 
@@ -16,7 +16,7 @@
 - понимать, **в какой файл идти, если нужно изменить конкретное поведение сайта**;
 - не ломать архитектуру проекта случайными правками в неправильном месте.
 
-## Что Такое Helper В Этом Проекте
+## Что такое Helper в этом проекте
 
 В контексте `Aerocool` helper — это небольшой `partial` в папке `layouts/_partials`, который делает одну понятную работу:
 
@@ -30,7 +30,7 @@
 - `single.html` и `list.html` — это большие шаблоны страницы;
 - `helpers` / `partials` — это маленькие переиспользуемые куски логики, которые эти шаблоны вызывают.
 
-## Почему Это Вообще Хорошо
+## Почему это вообще хорошо
 
 Без helpers код быстро превращается в копипасту:
 
@@ -46,7 +46,7 @@
 - более безопасные изменения;
 - более предсказуемый SEO-слой.
 
-## Как Выглядит Вызов Helper
+## Как выглядит вызов Helper
 
 Обычно helper вызывается так:
 
@@ -72,7 +72,7 @@
 {{ partial "header.html" . }}
 ```
 
-## Главная Идея Архитектуры
+## Главная идея архитектуры
 
 В проекте `Aerocool` helpers условно делятся на 4 группы:
 
@@ -81,7 +81,7 @@
 3. `_seo/*` helpers — рендерят meta-теги.
 4. `_schema/*` helpers — рендерят schema.org JSON-LD.
 
-## Цепочка Рендера Простыми Словами
+## Цепочка рендера простыми словами
 
 Вот как это работает сверху вниз:
 
@@ -116,7 +116,7 @@
 
 Верхнеуровневые шаблоны `layouts/search.html`, `layouts/rss.xml`, `layouts/sitemap.xml`, `layouts/sitemapindex.xml`, `layouts/404.html`, `layouts/alias.html`, `layouts/list.html` и `layouts/single.html` тоже считаются локальными overrides проекта. Папки `layouts/_default` в текущей структуре нет.
 
-## Быстрая Карта Верхнеуровневых Layout-Файлов
+## Быстрая карта верхнеуровневых Layout-файлов
 
 Эта карта нужна новичку, чтобы не искать точку входа по всему проекту.
 
@@ -135,7 +135,7 @@
 - [layouts/sitemapindex.xml](../../layouts/sitemapindex.xml) — корневой sitemap index.
 - [layouts/faq/single.html](../../layouts/faq/single.html) — детальная страница FAQ с видимым выводом вопросов.
 
-## Быстрая Карта Shortcode-Файлов
+## Быстрая карта Shortcode-файлов
 
 - [layouts/_shortcodes/home-hero.html](../../layouts/_shortcodes/home-hero.html) — hero главной страницы и ее H1.
 - [layouts/_shortcodes/home-product-lines.html](../../layouts/_shortcodes/home-product-lines.html) — три входа в серии `SKY`, `WING`, `XTAL` на главной.
@@ -157,19 +157,19 @@
 - [layouts/_shortcodes/recommended-links-news.html](../../layouts/_shortcodes/recommended-links-news.html) — управляемый блок рекомендованных новостей на `/news/` и `/ru/news/`.
 - [layouts/_shortcodes/recommended-links-faq.html](../../layouts/_shortcodes/recommended-links-faq.html) — блок следующих шагов после FAQ на `/faq/` и `/ru/faq/`.
 
-## Быстрая Карта Article Helpers
+## Быстрая карта Article Helpers
 
 - [layouts/_partials/articles/card-image.html](../../layouts/_partials/articles/card-image.html) — responsive-изображение для карточек на листинге статей; берет `cover.image` или `image` из page bundle, строит WebP `srcset`, задает стабильные размеры и использует `lazy` loading.
 
-## Быстрая Карта Home Helpers
+## Быстрая карта Home Helpers
 
 - [layouts/_partials/home-final-cta.html](../../layouts/_partials/home-final-cta.html) — финальный CTA главной страницы. Подключается в `layouts/list.html` после блока материалов, ведет в каталог и контакты, не имитирует checkout-flow.
 
-## Быстрая Карта Общих Helpers
+## Быстрая карта общих Helpers
 
 - [layouts/_partials/pagination.html](../../layouts/_partials/pagination.html) — единый интерфейс перехода между страницами листинга. Используется там, где Hugo создает paginator, и не должен дублироваться отдельной разметкой в каждом list-шаблоне.
 
-## Быстрая Карта Product Helpers
+## Быстрая карта Product Helpers
 
 - [layouts/_partials/products/card.html](../../layouts/_partials/products/card.html) — товарная карточка для `/products/`, страниц серий, home-блоков и related-блоков. Выводит изображение, название, цену, наличие, rating summary при approved отзывах, color dots и product facts. Для фильтров и сортировки добавляет `data-product-*`: title, price, rating, order, series, material, adjustment, mechanism и availability. Поддерживает флаг `showSeriesInTitle`: в root-каталоге карточка показывает серию в названии товара, например `WING Mesh Black` и `XTAL Mesh Black`, а на страницах конкретных серий сохраняет короткий `linkTitle`, например `Mesh Black`. Видимый CTA остается компактным `Подробнее` / `Детальніше`, а его полное доступное имя формируется через `sr-only` и `$page.Title`, например `Подробнее о модели Aerocool WING Racer Black`.
 - [layouts/_partials/products/color-dots.html](../../layouts/_partials/products/color-dots.html) — компактные цветовые точки в карточках товаров. Для товаров с реальными вариантами главный источник — `product_group_id` и `data/entities.yaml`; если группы нет, helper берет `color` из главной product entity через `about_entities`. Это визуальный сигнал цвета в листинге, а не замена отдельным variant URL и не причина добавлять искусственный `product_group_id` одиночным товарам.
@@ -178,10 +178,10 @@
 - [layouts/_partials/products/gallery.html](../../layouts/_partials/products/gallery.html) — товарная галерея на детальной странице товара. Первый кадр берет из `image` во front matter и является видимым product LCP-кандидатом; остальные изображения из page bundle товара выводит как компактные миниатюры. Большие изображения получают responsive WebP `srcset`; первый кадр грузится eager/fetchpriority high, дополнительные кадры и миниатюры — lazy. Primary product image не вставляется через `seo-image` в markdown.
 - [layouts/_partials/products/variant-swatches.html](../../layouts/_partials/products/variant-swatches.html) — видимый выбор цвета/варианта товара. Список вариантов строит из `product_group_id` и `data/entities.yaml` только для реальных ProductGroup с несколькими вариантами, находит страницы текущего языка и выводит swatches как ссылки на соседние variant URL. Одиночные товары без соседних вариантов не получают `product_group_id`.
 
-## Быстрая Карта Review Helpers
+## Быстрая карта Review Helpers
 
 - [layouts/_partials/reviews/form.html](../../layouts/_partials/reviews/form.html) — форма отправки отзыва в `POST /api/reviews`; выводится только для товара с включенными отзывами. Форма размечена как WebMCP-инструмент `submit_product_review`; шкала рейтинга описана через `fieldset`, потому что это один параметр `rating`, состоящий из radio-кнопок.
-- [layouts/_partials/reviews/list.html](../../layouts/_partials/reviews/list.html) — список approved отзывов текущего товара и языка из build-time snapshot.
+- [layouts/_partials/reviews/list.html](../../layouts/_partials/reviews/list.html) — список approved-отзывов текущего товара и языка из снимка, созданного во время сборки.
 - [layouts/_partials/reviews/stars.html](../../layouts/_partials/reviews/stars.html) — единый визуальный вывод шкалы рейтинга без собственной логики источника данных.
 - [layouts/_partials/reviews/summary-data.html](../../layouts/_partials/reviews/summary-data.html) — получает агрегированные данные рейтинга по `review_target_id` из `data/generated/reviews.json`.
 - [layouts/_partials/reviews/summary-inline.html](../../layouts/_partials/reviews/summary-inline.html) — компактный рейтинг для строк и небольших интерфейсных блоков.
@@ -221,7 +221,7 @@ Review helpers не читают ручные `rating.value` или `rating.coun
 - `products/filters.html` и `products/sort.html` подключаются из `layouts/products/list.html`;
 - фильтры должны оставаться static-first: без URL-параметров, без индексируемых filter pages, без canonical/noindex-сюрпризов;
 - активные фильтры, счетчик, reset, сортировка и empty state управляются внешним JS в `assets/js/site.js`;
-- следующим UX/UI-слоем остаются applied filter chips и comparison table.
+- следующим UX/UI-слоем остаются метки примененных фильтров и таблица сравнения.
 
 Важно по `about-*`:
 
@@ -278,7 +278,7 @@ Review helpers не читают ручные `rating.value` или `rating.coun
 - показывает подтверждение отправки формы, ожидаемое время ответа и быстрые ссылки назад к контактам и в каталог;
 - не должен заменять native validation формы: ошибки заполнения остаются на стороне браузера и Netlify form flow.
 
-## Группа 1. Helper-Файлы Данных Страницы
+## Группа 1. Helper-файлы данных страницы
 
 Это самые важные helper-файлы для понимания логики страницы.
 
@@ -523,7 +523,7 @@ Review helpers не читают ручные `rating.value` или `rating.coun
 - если “похожие материалы” подбираются не по той серии;
 - если нужно улучшить связь между контентом и каталогом.
 
-## Группа 2. Структурные Helper-Файлы
+## Группа 2. структурные Helper-файлы
 
 Эти helpers рендерят большие части страницы.
 
@@ -720,7 +720,7 @@ Review helpers не читают ручные `rating.value` или `rating.coun
 
 - почти наверняка сейчас он тебе не нужен.
 
-## Группа 3. SEO Helper-Файлы
+## Группа 3. SEO Helper-файлы
 
 Эти helpers не строят видимый UI, но отвечают за мета-слой.
 
@@ -816,7 +816,7 @@ Review helpers не читают ручные `rating.value` или `rating.coun
 - если нужно изменить состав графа;
 - если какой-то schema-partial должен перестать включаться.
 
-## Группа 4. Schema.org Helper-Файлы
+## Группа 4. Schema.org Helper-файлы
 
 Это отдельные сущности внутри JSON-LD.
 
@@ -1079,7 +1079,7 @@ Review helpers не читают ручные `rating.value` или `rating.coun
 - использует `breadcrumb-label.html` для тех же коротких названий, что и видимый HTML;
 - не рендерится на главной странице, чтобы не создавать одноэлементную хлебную крошку.
 
-## Как Быстро Понять, Куда Идти
+## Как быстро понять, куда идти
 
 Если проблема такая:
 
@@ -1103,7 +1103,7 @@ Review helpers не читают ручные `rating.value` или `rating.coun
 - footer -> [footer.html](../../layouts/_partials/footer.html)
 - “похожие материалы” -> [post-footer-navigation.html](../../layouts/_partials/post-footer-navigation.html)
 
-## Что Лучше Не Делать Новичку
+## Что лучше не делать новичку
 
 - не править тему `themes/PaperMod`, если это можно решить локальным override в `layouts/`
 - не вставлять SEO-логику в `single.html`, если для нее уже есть helper
@@ -1111,7 +1111,7 @@ Review helpers не читают ручные `rating.value` или `rating.coun
 - не добавлять вручную `# H1` в markdown-контент
 - не создавать новый helper, если уже есть подходящий существующий
 
-## Хороший Подход К Правкам
+## Хороший подход к правкам
 
 Если нужно что-то изменить:
 
@@ -1125,7 +1125,7 @@ Review helpers не читают ручные `rating.value` или `rating.coun
    - одну детальную страницу;
    - `uk` и `ru`.
 
-## Короткая Формула Для Запоминания
+## Короткая формула для запоминания
 
 - `page-*` -> данные страницы
 - `head/header/footer` -> структура HTML

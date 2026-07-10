@@ -1,6 +1,6 @@
-# Практическое Руководство По Структурированным Данным Для E-Commerce 2026
+# Практическое руководство по структурированным данным для E-Commerce 2026
 
-Обновлено: 2026-06-12.
+Обновлено: 2026-07-10.
 
 Этот документ переводит `Guide to E-Commerce Structured Data` от SchemaApp в локальные правила для товарного каталога `Aerocool Ukraine`.
 
@@ -8,12 +8,9 @@
 
 Документ синхронизирован с текущими Google Search Central правилами для `Product`, merchant listings и product variants. Внешние SchemaApp материалы используются как стратегический слой, но eligibility для Google rich results всегда проверять по официальной документации Google.
 
-Текущий порядок внедрения для ratings, product facts, `ProductGroup` и production gate описан в [34-2026-05-07-documentation-refresh-and-project-action-plan.md](../audits/34-2026-05-07-documentation-refresh-and-project-action-plan.md).
-Реальные e-commerce customer stories Schema App по InSinkErator, Avid, CAPREIT, KEEN и Home Hardware разобраны в [46-2026-05-18-schemaapp-customer-stories-case-studies-audit.md](../audits/46-2026-05-18-schemaapp-customer-stories-case-studies-audit.md).
-Актуальный полный schema/entity audit зафиксирован в [57-2026-05-31-schema-entity-full-audit-current.md](../audits/57-2026-05-31-schema-entity-full-audit-current.md).
-Операционный регламент поддержки product facts зафиксирован в [58-product-facts-maintenance-process-2026.md](58-product-facts-maintenance-process-2026.md).
+Текущий порядок внедрения ratings, product facts, `ProductGroup` и production gate задают [регламент product facts](31-product-facts-maintenance-process-2026.md), [чек-лист schema](20-schema-markup-quality-checklist-2026.md), [entity performance report](32-entity-performance-report-2026.md) и [production gate](../quality/14-production-quality-gate-2026.md). Аудиты `59` и `68` сохраняют исторический контекст на май 2026 года; текущее состояние проверяет [аудит 99](../audits/99-2026-07-10-full-documentation-project-sync-audit-current.md).
 
-## 1. Связь С Текущими Документами
+## 1. Связь с текущими документами
 
 Этот playbook дополняет:
 
@@ -22,16 +19,16 @@
 - `docs/content/07-content-seo-checklist-2026.md` — требования к видимому контенту;
 - `docs/content/05-front-matter-reference.md` — источники product metadata;
 - `docs/content/06-seo-image-shortcode.md` — правила видимых изображений.
-- `docs/audits/37-2026-05-13-documentation-2026-best-practices-sync-audit.md` — базовая синхронизация документации с лучшими практиками 2026.
+- `docs/audits/50-2026-05-13-documentation-2026-best-practices-sync-audit.md` — базовая синхронизация документации с лучшими практиками 2026.
 
 Практическая граница:
 
 - JSON-LD roadmap отвечает, что уже есть и что внедрять в шаблонах;
 - этот документ отвечает, какие e-commerce rich result возможности использовать, а какие откладывать или запрещать.
 
-Главный вывод из customer stories для Aerocool: Product rich results зависят от согласованного product data layer. Нельзя считать `Product` schema качественной, если цена, наличие, SKU/MPN/GTIN, гарантия, доставка, возврат, варианты или ratings расходятся между front matter, видимым блоком, FAQ, review snapshot и JSON-LD.
+Главный вывод из кейсов для Aerocool: Product rich results зависят от согласованного слоя товарных данных. Нельзя считать `Product` schema качественной, если цена, наличие, SKU/MPN/GTIN, гарантия, доставка, возврат, варианты или рейтинги расходятся между front matter, видимым блоком, FAQ, снимком отзывов и JSON-LD.
 
-## 2. Текущий Статус Aerocool
+## 2. Текущий статус Aerocool
 
 В проекте уже есть:
 
@@ -47,20 +44,20 @@
 - `hasMerchantReturnPolicy`;
 - `acceptedPaymentMethod`;
 - `WarrantyPromise`, если заполнено в front matter;
-- `AggregateRating` выводится только из generated reviews snapshot, созданного из approved отзывов;
+- `AggregateRating` выводится только из сгенерированного снимка approved-отзывов;
 - `BreadcrumbList`;
 - `FAQPage` для канонического `/faq/`;
 - единый `ImageObject` для primary image страницы.
 
 Главный риск: данные e-commerce schema должны совпадать с видимым контентом и единым источником правды. Для merchant facts таким источником является product front matter; владелец бизнес-значений — команда Aerocool Украина. Видимый commercial block и `/faq/` подтверждают те же значения. Это касается цены, `priceValidUntil`, наличия, доставки, возврата и гарантии. Текущее значение `priceValidUntil: 2027-12-31` подтверждено командой Aerocool Украина `2026-05-07`.
 
-Для рейтингов и отзывов целевой источник правды другой: `Netlify Database` с approved отзывами и build-time export в `data/generated/reviews.json`. Это решение зафиксировано в [17-netlify-database-reviews.md](../deploy/17-netlify-database-reviews.md). `Product` JSON-LD уже переключен на этот snapshot, а legacy `rating.value` и `rating.count` удалены из товарного front matter.
+Для рейтингов и отзывов целевой источник правды другой: `Netlify Database` с approved-отзывами и экспорт во время сборки в `data/generated/reviews.json`. Это решение зафиксировано в [17-netlify-database-reviews.md](../deploy/17-netlify-database-reviews.md). `Product` JSON-LD уже переключен на этот снимок, а устаревшие `rating.value` и `rating.count` удалены из товарного front matter.
 
-## 3. Обязательные И Важные Свойства Товара
+## 3. Обязательные и важные свойства товара
 
 Для товарных страниц Aerocool минимальный e-commerce набор:
 
-| Поле | Где Живет | Статус |
+| Поле | Где живет | Статус |
 | --- | --- | --- |
 | Product name | `title` / visible H1 | Обязательно |
 | Product description | `description`, summary, visible body | Обязательно |
@@ -80,7 +77,7 @@
 
 ## 4. Возможности Rich Results
 
-| Возможность | Применимость Для Aerocool | Условие |
+| Возможность | Применимость для Aerocool | Условие |
 | --- | --- | --- |
 | Product rich result | Да | Product page с ценой, наличием, изображением и SKU |
 | Product snippet / merchant listing | Да, после production-проверки | Видимые и актуальные merchant facts |
@@ -93,7 +90,7 @@
 
 Не строить стратегию вокруг одного rich result. Google может не показать enhancement даже при валидной structured data.
 
-## 5. Правила Для Отзывов И Рейтингов
+## 5. Правила для отзывов и рейтингов
 
 PDF подчеркивает коммерческую пользу reviews и aggregate rating, но для Aerocool это зона повышенного риска.
 
@@ -124,7 +121,7 @@ Netlify Database
 
 Для статей можно внедрять публичные moderated comments/reviews как пользовательский контент, но не добавлять `AggregateRating` в `Article` JSON-LD в v1. Основная SEO-цель review rich results для Aerocool — конкретные product pages.
 
-## 6. FAQ, HowTo И Поддерживающий Контент
+## 6. FAQ, HowTo и поддерживающий контент
 
 FAQ полезен для e-commerce не как ставка на Google FAQ rich result, а как слой снятия возражений, подтверждения merchant-фактов и помощи пользователю перед покупкой.
 
@@ -150,7 +147,7 @@ FAQ полезен для e-commerce не как ставка на Google FAQ ri
 
 Условие: шаги, изображения и результат должны быть видимыми в контенте. Без этого `HowTo` не использовать.
 
-## 7. Изображения Товаров
+## 7. Изображения товаров
 
 Для e-commerce structured data изображения — не декоративный слой, а часть товарного понимания.
 
@@ -165,7 +162,7 @@ FAQ полезен для e-commerce не как ставка на Google FAQ ri
 - добавить изображения деталей: спинка, материал, механизм, подлокотники, база, ролики;
 - не добавлять изображения в JSON-LD, если они не присутствуют в видимом HTML или не являются crawlable.
 
-## 8. Стратегия Для Вариантов Товара
+## 8. Стратегия для вариантов товара
 
 PDF выделяет три типовых подхода к вариантам товара.
 
@@ -185,7 +182,7 @@ PDF выделяет три типовых подхода к вариантам 
 
 Видимая навигация уже есть на уровне UI: `variant-swatches.html` строит цветовые ссылки из `product_group_id` и `data/entities.yaml`. На `2026-05-31` четыре реальные WING/XTAL цветовые группы переведены в `confirmed` и выводят `ProductGroup`, `isVariantOf` и `inProductGroupWithID` в JSON-LD. Одиночные товары не получают `product_group_id` и связываются с линейкой через `about_entities`, registry-поле `series` и страницу серии.
 
-## 9. E-E-A-T Для E-Commerce
+## 9. E-E-A-T для E-Commerce
 
 Schema помогает E-E-A-T только тогда, когда усиливает реальный контент.
 
@@ -204,18 +201,18 @@ Schema помогает E-E-A-T только тогда, когда усилив
 
 Нельзя компенсировать слабый видимый контент расширенной schema-разметкой.
 
-## 10. Очередь Внедрения
+## 10. Очередь внедрения
 
 ### P0
 
 1. Поддерживать актуальный алгоритм review-системы из [17-netlify-database-reviews.md](../deploy/17-netlify-database-reviews.md): миграция `reviews`, `POST /api/reviews`, moderation flow, build-time export и Hugo review block. Базовый pipeline готов.
 2. Внедрить `review_target_id` и `reviews_enabled` сначала только на одном тестовом товаре в `uk` и `ru`, затем масштабировать на текущий каталог. Готово для текущих товаров.
-3. Переключить `Product.aggregateRating` на generated reviews snapshot из `data/generated/reviews.json`. Готово; legacy `rating` удален из товарного front matter.
+3. Переключить `Product.aggregateRating` на сгенерированный снимок отзывов из `data/generated/reviews.json`. Готово; устаревший `rating` удален из товарного front matter.
 4. Проверить правило: без approved отзывов нет `AggregateRating`; с approved отзывом есть visible review block и `AggregateRating`.
 5. Проверить branch-сайт `dev` с тестовыми approved отзывами для остальных товаров перед переносом в `main`.
 6. Поддерживать product front matter как единый источник правды для merchant facts.
 7. Держать видимый commercial block, `/faq/` и `Product` JSON-LD синхронными с front matter по доставке, возврату, оплате и гарантии.
-8. При каждом изменении product facts брать подтверждение у команды Aerocool Украина и проходить регламент [58-product-facts-maintenance-process-2026.md](58-product-facts-maintenance-process-2026.md).
+8. При каждом изменении product facts брать подтверждение у команды Aerocool Украина и проходить регламент [31-product-facts-maintenance-process-2026.md](31-product-facts-maintenance-process-2026.md).
 
 ### P1
 
@@ -231,7 +228,7 @@ Schema помогает E-E-A-T только тогда, когда усилив
 3. Рассмотреть отдельные страницы доставки, оплаты, возврата и гарантии, если FAQ станет слишком перегруженным.
 4. Вынести merchant policy на уровень Organization или отдельной policy-сущности после стабилизации видимых policy pages.
 
-## 11. Что Не Делать
+## 11. Что не делать
 
 Не делать:
 
@@ -243,7 +240,7 @@ Schema помогает E-E-A-T только тогда, когда усилив
 - не скрывать различия вариантов товара агрегированной offer-структурой;
 - не рассчитывать на Google FAQ rich result: по официальной документации Google он больше не показывается с `2026-05-07`.
 
-## 12. Контрольный Вывод
+## 12. Контрольный вывод
 
 Для Aerocool главный вывод из `Guide to E-Commerce Structured Data`: текущий Product schema-фундамент уже есть, но e-commerce structured data должна развиваться вокруг покупательского пути.
 

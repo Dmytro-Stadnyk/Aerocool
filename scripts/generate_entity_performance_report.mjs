@@ -3,11 +3,11 @@ import { existsSync } from "node:fs";
 import { dirname, extname, join, relative, resolve } from "node:path";
 
 const registryPath = resolve("data/entities.yaml");
-const overridesPath = resolve("docs/seo/59-entity-performance-overrides.csv");
+const overridesPath = resolve("docs/seo/32-entity-performance-overrides.csv");
 const contentDir = resolve("content");
 const publicDir = resolve("public");
-const reportPath = resolve("docs/seo/59-entity-performance-report-2026.md");
-const csvPath = resolve("docs/seo/59-entity-performance-report-2026.csv");
+const reportPath = resolve("docs/seo/32-entity-performance-report-2026.md");
+const csvPath = resolve("docs/seo/32-entity-performance-report-2026.csv");
 
 async function main() {
   const registry = parseRegistry(await readFile(registryPath, "utf8"));
@@ -357,11 +357,11 @@ function buildMarkdownReport(rows, contentPages, renderedGraph) {
   const topMentions = topRows(rows, (row) => row.mentionPages.length);
   const topRendered = topRows(rows, (row) => row.renderedIDRefs);
 
-  return `# Отчет По Эффективности Сущностей (Entity Performance Report) 2026
+  return `# Отчет по эффективности сущностей (Entity Performance Report) 2026
 
 Обновлено: ${date}.
 
-Этот отчет связывает Entity Registry, front matter и rendered JSON-LD. Его задача — показать, какие сущности реально используются как главные темы страниц, какие упоминаются как связанные сущности и сколько раз их стабильные \`@id\` встречаются в готовом JSON-LD графе.
+Этот отчет связывает реестр сущностей, front matter и собранный JSON-LD. Он показывает, какие сущности являются главными темами страниц, какие упоминаются как связанные и сколько раз их стабильные \`@id\` встречаются в готовом JSON-LD-графе.
 
 Команда генерации:
 
@@ -370,26 +370,26 @@ npm run build
 npm run entity:report
 \`\`\`
 
-CSV-версия отчета: [59-entity-performance-report-2026.csv](59-entity-performance-report-2026.csv). Ручные GSC/AI/business-метрики добавлять не в generated CSV, а в [59-entity-performance-overrides.csv](59-entity-performance-overrides.csv), чтобы следующий запуск не потерял данные.
+CSV-версия отчета: [32-entity-performance-report-2026.csv](32-entity-performance-report-2026.csv). Ручные метрики GSC, AI и бизнеса добавлять не в сгенерированный CSV, а в [32-entity-performance-overrides.csv](32-entity-performance-overrides.csv), чтобы следующий запуск не потерял данные.
 
-## 1. Статус Данных
+## 1. Статус данных
 
 | Источник | Статус |
 | --- | --- |
-| Entity Registry | заполнено из [data/entities.yaml](../../data/entities.yaml) |
+| Реестр сущностей | заполнено из [data/entities.yaml](../../data/entities.yaml) |
 | Front matter \`about_entities\` | заполнено из \`content/**/*.md\` |
 | Front matter \`mentions_entities\` | заполнено из \`content/**/*.md\` |
 | Front matter \`product_group_id\` | заполнено из \`content/**/*.md\` |
-| Ссылки в rendered JSON-LD | заполнено из \`public/**/*.html\` после \`npm run build\` |
-| GSC impressions/clicks/CTR | из \`docs/seo/59-entity-performance-overrides.csv\`, сейчас \`pending-production\` |
-| AI citations | из \`docs/seo/59-entity-performance-overrides.csv\`, сейчас \`pending-production\` |
-| Бизнес-сигнал | из \`docs/seo/59-entity-performance-overrides.csv\`, сейчас \`pending-production\` |
+| Ссылки в собранном JSON-LD | заполнено из \`public/**/*.html\` после \`npm run build\` |
+| GSC impressions/clicks/CTR | из \`docs/seo/32-entity-performance-overrides.csv\`, сейчас \`pending-production\` |
+| AI citations | из \`docs/seo/32-entity-performance-overrides.csv\`, сейчас \`pending-production\` |
+| Бизнес-сигнал | из \`docs/seo/32-entity-performance-overrides.csv\`, сейчас \`pending-production\` |
 
-## 2. Сводка Данных
+## 2. Сводка данных
 
 | Метрика | Значение |
 | --- | ---: |
-| Сущности в Registry | \`${rows.length}\` |
+| Сущности в реестре | \`${rows.length}\` |
 | Confirmed-сущности | \`${confirmed}\` |
 | Planned-сущности | \`${planned}\` |
 | Do-not-markup-сущности | \`${doNotMarkup}\` |
@@ -398,25 +398,25 @@ CSV-версия отчета: [59-entity-performance-report-2026.csv](59-entity
 | Ошибки парсинга JSON-LD | \`${renderedGraph.parseErrors.length}\` |
 | Сущности с использованием в about | \`${rowsWithAbout}\` |
 | Сущности с использованием в mentions | \`${rowsWithMentions}\` |
-| Сущности с rendered \`@id\` refs | \`${rowsWithRenderedRefs}\` |
+| Сущности со ссылками на \`@id\` в собранном графе | \`${rowsWithRenderedRefs}\` |
 
 ${renderedGraph.parseErrors.length > 0 ? buildParseErrorBlock(renderedGraph.parseErrors) : "Ошибки парсинга JSON-LD не найдены."}
 
-## 3. Топ Сущностей По About-Страницам
+## 3. Сущности с наибольшим числом about-страниц
 
 ${buildSmallTable(topAbout, "about")}
 
-## 4. Топ Сущностей По Mentions-Страницам
+## 4. Сущности с наибольшим числом mentions-страниц
 
 ${buildSmallTable(topMentions, "mentions")}
 
-## 5. Топ Сущностей По Rendered \`@id\` Refs
+## 5. Сущности с наибольшим числом ссылок на \`@id\`
 
 ${buildSmallTable(topRendered, "rendered")}
 
-## 6. Полная Таблица Сущностей
+## 6. Полная таблица сущностей
 
-| Сущность | Статус | Класс | URL Сущности | About | Mentions | Группы | Rendered refs | Node defs | GSC | AI | Бизнес | Заметки |
+| Сущность | Статус | Класс | URL сущности | About | Mentions | Группы | Ссылки в графе | Определения узлов | GSC | AI | Бизнес | Заметки |
 | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- |
 ${rows.map((row) => [
     md(row.entityID),
@@ -434,17 +434,17 @@ ${rows.map((row) => [
     md(row.notes),
   ].join(" | ")).map((line) => `| ${line} |`).join("\n")}
 
-## 7. Как Использовать Отчет
+## 7. Как использовать отчет
 
 1. После каждого крупного schema/entity/content изменения запускать \`npm run build\`, затем \`npm run entity:report\`.
-2. Проверять, что важные confirmed сущности не потеряли \`about\`, \`mentions\` или rendered refs.
-3. После production-перехода добавить GSC impressions, clicks и CTR в \`docs/seo/59-entity-performance-overrides.csv\`.
-4. После AI Search baseline добавить AI citations и ошибки представления бренда/товаров в \`docs/seo/59-entity-performance-overrides.csv\`.
-5. После появления бизнес-событий добавить бизнес-сигнал: консультации, заявки, покупки или другие подтвержденные действия в \`docs/seo/59-entity-performance-overrides.csv\`.
+2. Проверять, что важные confirmed-сущности не потеряли \`about\`, \`mentions\` или ссылки в собранном графе.
+3. После production-перехода добавить показы, клики и CTR из GSC в \`docs/seo/32-entity-performance-overrides.csv\`.
+4. После исходного замера AI-поиска добавить AI-цитирования и ошибки представления бренда/товаров в \`docs/seo/32-entity-performance-overrides.csv\`.
+5. После появления бизнес-событий добавить бизнес-сигнал: консультации, заявки, покупки или другие подтвержденные действия в \`docs/seo/32-entity-performance-overrides.csv\`.
 
-## 8. Текущий Вывод
+## 8. Текущий вывод
 
-Локальный entity reporting теперь создан: registry, использование front matter и rendered JSON-LD refs измеряются автоматически. Внешние performance-поля остаются \`pending-production\`, потому что до production/indexability gate реальные GSC, AI citations и business signals нельзя считать честными метриками.
+Локальная отчетность по сущностям работает: реестр, использование front matter и ссылки в собранном JSON-LD измеряются автоматически. Внешние поля эффективности остаются \`pending-production\`, потому что до production и открытия индексации данные GSC, AI-цитирования и бизнес-сигналы нельзя считать полноценными метриками.
 `;
 }
 
@@ -457,7 +457,7 @@ function buildSmallTable(rows, metricName) {
     return "Нет данных.";
   }
 
-  return `| Сущность | Количество | URL Сущности |
+  return `| Сущность | Количество | URL сущности |
 | --- | ---: | --- |
 ${rows.map((row) => {
     const count = metricName === "about"

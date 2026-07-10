@@ -1,12 +1,12 @@
-# Финальный Контроль Качества Перед Production-Релизом
+# Финальный контроль качества перед Production-релизом
 
-Обновлено: 2026-07-08.
+Обновлено: 2026-07-10.
 
 Этот документ фиксирует короткий финальный чек перед production-релизом `Aerocool Ukraine`. Он дополняет [13-pagespeed-insights-audit.md](13-pagespeed-insights-audit.md), но не заменяет SEO/schema-проверки.
 
-Если релиз затрагивает `hugo.yaml`, языки, URL, `params.env`, sitemap, robots, canonical, hreflang или production indexing, сначала читать [76-hugo-yaml-serp-technical-contract-2026.md](../seo/76-hugo-yaml-serp-technical-contract-2026.md).
+Если релиз затрагивает `hugo.yaml`, языки, URL, `params.env`, sitemap, robots, canonical, hreflang или production indexing, сначала читать [36-hugo-yaml-serp-technical-contract-2026.md](../seo/36-hugo-yaml-serp-technical-contract-2026.md).
 
-## 1. Когда Использовать
+## 1. Когда использовать
 
 Использовать перед:
 
@@ -15,7 +15,7 @@
 - крупным изменением `layouts/`, `assets/`, `static/_redirects`, `netlify.toml`, `hugo.yaml`;
 - релизом новых товарных страниц, статей, новостей или серий.
 
-## 2. Локальный Минимум
+## 2. Локальный минимум
 
 Перед ручной проверкой опубликованного URL выполнить:
 
@@ -61,7 +61,7 @@ mise exec -- hugo config --format json --lang ru
 - `public/index.json`;
 - `public/ru/index.json`.
 
-## 4. Критерий Готовности
+## 4. Критерий готовности
 
 Production-релиз можно считать технически готовым, если:
 
@@ -74,7 +74,7 @@ Production-релиз можно считать технически готов�
 - WebMCP-схемы форм и `llms.txt` не имеют предупреждений на затронутых опубликованных URL;
 - routing и forced 404 работают на опубликованном URL.
 
-## 5. Что Не Делать
+## 5. Что не делать
 
 - Не переносить `dev` в `main`, если опубликованный Branch Deploy не проверен вручную.
 - Не включать production-индексацию, если sitemap, robots, canonical или hreflang не проверены.

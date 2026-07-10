@@ -1,20 +1,18 @@
-# Карта Сущностей Для Поиска С AI 2026
+# Карта сущностей для поиска с AI 2026
 
-Обновлено: 2026-07-08.
+Обновлено: 2026-07-10.
 
 Этот документ переводит идеи из `Mastering AI Search`, `Schema Markup and AI Search`, `Designing Content for Humans and Machines`, `How to Prepare Your Content for Generative AI Search`, `Impact of Schema Markup` и `How Marketers Can Prepare Their Organization for the Agentic Web` от SchemaApp в практическую систему для проекта `Aerocool Ukraine`: какие сущности нужно закрепить на сайте, какие AI Search-метрики отслеживать, какие prompt-наборы проверять и как развивать JSON-LD graph без переспама.
 
 Главная мысль: для AI Search недостаточно просто иметь много SEO-текста. Сайт должен давать машинам полную, связанную и проверяемую картину бренда, товаров, серий, материалов, механизмов, сценариев использования и коммерческих условий.
 
-Текущий порядок внедрения зафиксирован в [34-2026-05-07-documentation-refresh-and-project-action-plan.md](../audits/34-2026-05-07-documentation-refresh-and-project-action-plan.md).
-Базовая синхронизация всей документации с лучшими практиками 2026 зафиксирована в [37-2026-05-13-documentation-2026-best-practices-sync-audit.md](../audits/37-2026-05-13-documentation-2026-best-practices-sync-audit.md).
-Новый PDF-аудит Schema App по connected graph, Content Knowledge Graphs, impact и Agentic Web зафиксирован в [44-2026-05-17-schemaapp-pdf-agentic-graph-impact-analysis.md](../audits/44-2026-05-17-schemaapp-pdf-agentic-graph-impact-analysis.md).
-Customer stories/case studies Schema App по AI hallucinations, entity linking и product visibility зафиксированы в [46-2026-05-18-schemaapp-customer-stories-case-studies-audit.md](../audits/46-2026-05-18-schemaapp-customer-stories-case-studies-audit.md).
-Обновление `2026-05-25` учитывает статью Schema App [Stop Chasing Visibility. Build Understanding.](https://www.schemaapp.com/schema-markup/stop-chasing-visibility-build-understanding/) и официальный Google guide [Optimizing your website for generative AI features on Google Search](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide).
+Текущий порядок задают [реестр сущностей](23-entity-registry-2026.md), [knowledge graph playbook](24-entities-knowledge-graph-playbook-2026.md), [JSON-LD roadmap](26-json-ld-graph-audit-roadmap-2026.md), [entity performance report](32-entity-performance-report-2026.md) и [технический SERP-контракт](36-hugo-yaml-serp-technical-contract-2026.md). Аудиты `47`, `50`, `57` и `59` остаются датированными источниками истории решений.
 
-Важно: AI Search-слой не заменяет Google Search Essentials, people-first content, Core Web Vitals и structured data quality. До production-запуска и индексации AI Search считать мониторинговым и entity-governance слоем, а не причиной внедрять chatbot, NLWeb, MCP или chunking-стратегию как P0. Минимальный `llms.txt` внедрен как служебная карта сайта после PageSpeed Agentic Browsing-проверки, но он не является заменой sitemap, robots, schema.org или видимого контента.
+Стратегия учитывает статью Schema App [Stop Chasing Visibility. Build Understanding.](https://www.schemaapp.com/schema-markup/stop-chasing-visibility-build-understanding/) и официальный Google guide [Optimizing your website for generative AI features on Google Search](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide).
 
-### Уточнение После Google AI Guide И Schema App
+Важно: AI Search-слой не заменяет Google Search Essentials, people-first content, Core Web Vitals и structured data quality. До production-запуска и индексации AI Search считать мониторинговым и entity-governance слоем, а не причиной внедрять chatbot, NLWeb, MCP или chunking-стратегию как P0. Минимальный `llms.txt` внедрен как служебная карта сайта для совместимых систем, но он не является заменой sitemap, robots, schema.org или видимого контента. Google Search 2026-06-15 отдельно уточнил: `llms.txt` ему не требуется и не влияет на видимость или ранжирование ни положительно, ни отрицательно.
+
+### Уточнение после Google AI Guide и Schema App
 
 Для проекта нельзя формулировать AI Search как “добавить schema и получить AI visibility”. Корректная рамка такая:
 
@@ -26,7 +24,7 @@ Customer stories/case studies Schema App по AI hallucinations, entity linking 
 
 Практический вывод: если нужно выбрать между новым “AI-файлом” и улучшением видимого контента, product facts, entity home, внутренних ссылок и JSON-LD-связей, сначала улучшать основу понимания.
 
-## 1. Зачем Это Нужно
+## 1. Зачем это нужно
 
 AI-поиск меняет SEO-логику:
 
@@ -43,11 +41,11 @@ Customer stories Wells Fargo, Henry Ford Health и MasterControl усилива�
 
 - что `Aerocool Ukraine` — локальный сайт/представительство в Украине, связанное с global Aerocool;
 - что каталог состоит из серий `SKY`, `WING`, `XTAL` и конкретных вариантов;
-- что product facts берутся из подтвержденного front matter и поддерживаются по регламенту [58-product-facts-maintenance-process-2026.md](58-product-facts-maintenance-process-2026.md);
+- что product facts берутся из подтвержденного front matter и поддерживаются по регламенту [31-product-facts-maintenance-process-2026.md](31-product-facts-maintenance-process-2026.md);
 - что доставка, возврат, гарантия и оплата подтверждаются `/faq/`;
 - что рекомендации должны опираться на реальные характеристики, а не на общие фразы про игровые кресла.
 
-## 2. Связь С Текущей Документацией
+## 2. Связь с текущей документацией
 
 Этот документ дополняет, а не заменяет:
 
@@ -55,7 +53,7 @@ Customer stories Wells Fargo, Henry Ford Health и MasterControl усилива�
 - `docs/content/07-content-seo-checklist-2026.md` — качество видимого контента;
 - `docs/seo/19-schema-types-reference.md` — текущие `schema_types`;
 - `docs/seo/26-json-ld-graph-audit-roadmap-2026.md` — технический roadmap JSON-LD graph;
-- `docs/seo/58-product-facts-maintenance-process-2026.md` — операционный процесс поддержки товарных фактов;
+- `docs/seo/31-product-facts-maintenance-process-2026.md` — операционный процесс поддержки товарных фактов;
 - `docs/quality/13-pagespeed-insights-audit.md` — техническая проверка published URL через PageSpeed Insights.
 
 Практическая граница:
@@ -65,11 +63,11 @@ Customer stories Wells Fargo, Henry Ford Health и MasterControl усилива�
 - JSON-LD roadmap отвечает: `как размечать видимый контент`;
 - этот документ отвечает: `как сделать бренд и товары понятными для AI-ответов`.
 
-## 3. Метрики Поиска С AI
+## 3. Метрики поиска с AI
 
 Отслеживать нужно не только Google Search Console.
 
-| Метрика | Что Значит | Как Проверять | Ограничение |
+| Метрика | Что значит | Как проверять | Ограничение |
 | --- | --- | --- | --- |
 | AI visibility | Появляется ли Aerocool или URL сайта в AI-ответах | Ручные prompt-проверки, Semrush/Profound/аналогичные инструменты при наличии | Инструменты неполные и зависят от выбранных запросов |
 | Brand citations | Как AI описывает бренд и рядом с кем его ставит | Ручная проверка ChatGPT, Gemini, Copilot, Perplexity, Google AI Overviews | Ответы нестабильны и зависят от языка/локации |
@@ -85,19 +83,19 @@ Customer stories Wells Fargo, Henry Ford Health и MasterControl усилива�
 | Entity-level performance | Какие сущности дают видимость, переходы и действия | Сопоставить entity registry, URL, GSC, GA4 и AI-аудит | Требует стабильных entity homes и production baseline |
 | Qualified organic traffic | Растет ли полезный трафик, а не просто показы | GA4 events, contact actions, product/catalog visits | Нужны корректные события |
 
-### Базовая Оценка Эффективности На Уровне Сущностей
+### Базовая оценка эффективности на уровне сущностей
 
 После production-запуска нужен отдельный baseline не только по URL, но и по сущностям.
 
 Минимальная таблица:
 
-| Сущность | Entity Home | URL-Кластер | GSC Queries | Clicks/CTR | AI Citations | Бизнес-Действия | Следующее Действие |
+| Сущность | Entity Home | URL-кластер | GSC Queries | Clicks/CTR | AI Citations | Бизнес-действия | Следующее действие |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `mesh-material` | `/articles/racer-vs-loft-air-vs-mesh/` | material article + product pages | mesh / сетка / сітка | значение после production | да/нет | переходы в каталог | усилить или оставить |
 
 Это нужно для Content Knowledge Graph: проект должен видеть, какие сущности уже работают как сильные смысловые узлы, а какие только присутствуют в registry, но не дают видимости или полезных действий.
 
-## 4. Ежемесячный Аудит Поиска С AI
+## 4. Ежемесячный аудит поиска с AI
 
 Периодичность: `1` раз в месяц после production-запуска и индексации.
 
@@ -151,7 +149,7 @@ Follow-up вопросы после основного prompt:
 - `кресло с mesh спинкой`
 - `игровое кресло для длительных сессий`
 
-### Серии И Модели
+### Серии и модели
 
 - `Aerocool SKY крісло`
 - `Aerocool WING крісло`
@@ -164,7 +162,7 @@ Follow-up вопросы после основного prompt:
 - `Aerocool WING кресло`
 - `Aerocool XTAL кресло`
 
-### Материалы И Механизмы
+### Материалы и механизмы
 
 - `що таке Synchronous Tilt у кріслі`
 - `SYNC4 механізм крісла`
@@ -177,7 +175,7 @@ Follow-up вопросы после основного prompt:
 - `mesh или экокожа для кресла`
 - `что такое dual backrest`
 
-### Выбор И Сравнение
+### Выбор и сравнение
 
 - `яке крісло Aerocool обрати для home office`
 - `чим відрізняються Aerocool SKY і WING`
@@ -188,11 +186,11 @@ Follow-up вопросы после основного prompt:
 - `Aerocool SKY или XTAL`
 - `кресло для осанки и долгой работы`
 
-### Матрица Persona × Funnel Для Prompts
+### Матрица Persona × Funnel для Prompts
 
 `Schema Markup and AI Search` полезен тем, что предлагает мыслить не только ключами, а пересечением `persona × intent stage`. Для Aerocool это важнее, чем простой список запросов, потому что AI Search отвечает на длинные разговорные prompts.
 
-| Персона | Обучение | Сравнение | Анализ Стоимости | Рекомендация | Покупка | Поддержка |
+| Персона | Обучение | Сравнение | Анализ стоимости | Рекомендация | Покупка | Поддержка |
 | --- | --- | --- | --- | --- | --- | --- |
 | Home office worker | `як облаштувати робоче місце для довгої роботи` | `mesh чи екошкіра для home office крісла` | `скільки коштує нормальне офісне крісло в Україні` | `яке крісло Aerocool обрати для роботи вдома` | `де купити Aerocool SKY з доставкою по Україні` | `як налаштувати крісло для довгої роботи` |
 | Gamer | `що важливо в ігровому кріслі для довгих сесій` | `Aerocool SKY чи WING для геймінгу` | `чи варте дорожче ігрове крісло своїх грошей` | `краще ігрове крісло Aerocool для вентиляції` | `купити ігрове крісло Aerocool в Україні` | `як доглядати за матеріалом крісла Aerocool` |
@@ -201,13 +199,13 @@ Follow-up вопросы после основного prompt:
 
 Русские версии этой матрицы нужно вести параллельно при реальном аудите, а не переводить автоматически в момент проверки. В AI Search формулировка prompt влияет на ответ сильнее, чем в классическом exact-match SEO.
 
-AI follow-up вопросы не равны обычному Google `People Also Ask`. В AI snapshot и conversational search цепочка вопросов зависит от context window пользователя, поэтому при аудите нужно сохранять не только первый prompt, но и последующие вопросы, которые предлагает или принимает AI-система.
+Уточняющие AI-вопросы не равны обычному Google `People Also Ask`. В AI-ответе и разговорном поиске цепочка зависит от контекстного окна пользователя, поэтому при аудите нужно сохранять не только первый запрос, но и последующие вопросы, которые предлагает или принимает AI-система.
 
-## 6. Работа С Сущностями: Найти, Связать, Управлять
+## 6. Работа с сущностями: найти, связать, управлять
 
 Вебинар формулирует простой операционный цикл для данных, которые будут потреблять AI-агенты.
 
-| Шаг | Что Делать В Aerocool | Результат |
+| Шаг | Что делать в Aerocool | Результат |
 | --- | --- | --- |
 | Identify | Найти все ключевые сущности: бренд, локальную организацию, серии, модели, материалы, механизмы, сценарии, политики | Понятная entity map и канонические страницы |
 | Connect internally | Связать сущности внутри сайта через ссылки, `@id`, `about`, `mentions`, `brand`, `seller`, `mainEntity`, `isVariantOf` | Машина понимает отношения между страницами |
@@ -217,7 +215,7 @@ AI follow-up вопросы не равны обычному Google `People Also
 
 Практический вывод: entity map — не разовый документ. Это слой данных, который нужно поддерживать вместе с контентом и JSON-LD.
 
-### Принципы Семантического Поиска
+### Принципы семантического поиска
 
 `How to Prepare Your Content for Generative AI Search` добавляет важную рамку: поиск движется от lexical matching к semantic search. Значит, Aerocool нужно оптимизировать не только exact-match фразы, а близость смыслов, атрибутов и отношений между сущностями.
 
@@ -229,13 +227,13 @@ AI follow-up вопросы не равны обычному Google `People Also
 - держать Aerocool в consideration set для follow-up вопросов, а не только для первого запроса;
 - проверять фактическую согласованность, потому что связка LLM + knowledge graph усиливает значение противоречий.
 
-### Страница Сущности И Шкала Зрелости
+### Страница сущности и шкала зрелости
 
 Для каждой важной сущности нужен `entity home`: страница, которая лучше всего определяет эту сущность на сайте. Внешний источник может уточнять или дезамбигуировать сущность, но не должен быть главным определением вместо собственного URL.
 
 Локальная шкала зрелости:
 
-| Уровень | Состояние | Пример Для Aerocool |
+| Уровень | Состояние | Пример для Aerocool |
 | --- | --- | --- |
 | 1 | Keywords | `ігрове крісло`, `офісне крісло`, `home office` |
 | 2 | Topics | выбор кресла, материалы, эргономика, доставка |
@@ -245,7 +243,7 @@ AI follow-up вопросы не равны обычному Google `People Also
 
 Цель проекта — двигаться к уровню `5`, но только через видимый контент и реальные связи.
 
-### Семантические Тройки
+### Семантические тройки
 
 Для проектирования связей удобно думать в формате `subject -> predicate -> object`.
 
@@ -262,11 +260,11 @@ AI follow-up вопросы не равны обычному Google `People Also
 
 Такая запись помогает выбирать точные Schema.org properties, а не использовать общий `mentions` там, где подходит `brand`, `seller`, `about`, `mainEntity` или `isVariantOf`.
 
-## 7. Карта Сущностей
+## 7. Карта сущностей
 
 Эта карта нужна для управляемых `about`, `mentions`, `ProductGroup`, `Product.color`, `additionalProperty` и внутренних ссылок. Канонический список entity IDs и entity homes находится в [23-entity-registry-2026.md](23-entity-registry-2026.md), а структурированный источник для schema resolver — в [data/entities.yaml](../../data/entities.yaml).
 
-| Entity | Тип Schema.org | Каноническая Страница | Где Усиливать | Следующее Действие |
+| Entity | Тип Schema.org | Каноническая страница | Где усиливать | Следующее действие |
 | --- | --- | --- | --- | --- |
 | Aerocool | `Brand` | `/` или `/about/` | Home, About, Product, Collection | Использовать стабильный `@id`; глобальные соцпрофили держать как `sameAs` бренда/global organization |
 | Aerocool Ukraine | `Organization` / `OnlineStore`, если подтвердится модель магазина | `/about/`, `/contact/`, `/faq/` | Organization graph, FAQ, Contact | Local facts подтверждены `2026-05-07`; не расширять до `OnlineStore`; связь с глобальным Aerocool через `parentOrganization` и `brand`, без local `sameAs` |
@@ -286,15 +284,15 @@ AI follow-up вопросы не равны обычному Google `People Also
 | Racer | `DefinedTerm` / material | product pages | Materials, specs | Привязать к конкретным товарам |
 | Loft Air | `DefinedTerm` / material | product pages | Materials, specs | Привязать к конкретным товарам |
 | Dual backrest | `DefinedTerm` / feature | статьи/товары | Product specs, articles | Нужен короткий ответ и видимый контекст |
-| Доставка | `OfferShippingDetails` / policy | product front matter + `/faq/` | Product, FAQ | Front matter — source of truth; UI и FAQ подтверждают |
-| Возврат | `MerchantReturnPolicy` | product front matter + `/faq/` | Product, FAQ | Front matter — source of truth; UI и FAQ подтверждают |
+| Доставка | `OfferShippingDetails` / policy | product front matter + `/faq/` | Product, FAQ | Front matter — источник правды; UI и FAQ подтверждают |
+| Возврат | `MerchantReturnPolicy` | product front matter + `/faq/` | Product, FAQ | Front matter — источник правды; UI и FAQ подтверждают |
 | Гарантия | `WarrantyPromise` / `PropertyValue` | product front matter + products + `/faq/` | Product pages | Показывать видимо перед расширением schema |
 
-## 8. План Развития Schema Для Поиска С AI
+## 8. План развития Schema для поиска с AI
 
 Не добавлять новые свойства только ради количества. Сначала видимый контент и источник правды, затем JSON-LD.
 
-| Уровень | Что Добавить | Где | Условие |
+| Уровень | Что добавить | Где | Условие |
 | --- | --- | --- | --- |
 | P0 | Уточнить источник рейтингов или убрать `aggregateRating` | Product schema | Рейтинг должен быть реальным и видимым |
 | P1 | `about` | Article, NewsArticle, CollectionPage | В front matter должна быть главная сущность страницы |
@@ -306,7 +304,7 @@ AI follow-up вопросы не равны обычному Google `People Also
 | P2 | `sameAs` | Brand, Organization, entities | Только точные официальные профили или авторитетные knowledge bases |
 | Done | `llms.txt` | Root static file | Минимальная Markdown-карта сайта внедрена в `static/llms.txt`; поддерживать как краткий навигационный файл, не как второй sitemap |
 
-## 9. Front Matter И Связи
+## 9. Front Matter и связи
 
 Текущие шаблоны читают `schema_types`. Это правило не менять.
 
@@ -333,7 +331,7 @@ AI follow-up вопросы не равны обычному Google `People Also
 - `product_properties`;
 - `same_as`.
 
-## 10. Контентные Паттерны Для AI-Ответов
+## 10. Контентные паттерны для AI-ответов
 
 AI-friendly контент не должен быть короче или беднее. Он должен иметь легко извлекаемые ответы внутри полноценной страницы.
 
@@ -367,7 +365,7 @@ AI-friendly контент не должен быть короче или бед
 
 Эти блоки должны быть локализованы отдельно для `uk` и `ru`, а не машинно скопированы без редакторской проверки.
 
-## 11. Готовность К Agentic Web
+## 11. Готовность к Agentic Web
 
 `Designing Content for Humans and Machines` отдельно подчеркивает: контент становится строительным материалом для агентских интерфейсов. Для Aerocool это пока не задача немедленной разработки, но уже влияет на контент и данные.
 
@@ -383,7 +381,7 @@ AI-friendly контент не должен быть короче или бед
 
 Будущий `Callable Actions Registry` может описывать только реальные действия:
 
-| Action | Когда Допустимо | Что Должно Быть Определено |
+| Action | Когда допустимо | Что должно быть определено |
 | --- | --- | --- |
 | Compare chairs | После стабильной product/entity map | входные серии/модели, правила сравнения, URL результата |
 | Check availability | После операционного процесса наличия | источник правды, частота обновления, ответ при отсутствии товара |
@@ -394,7 +392,7 @@ AI-friendly контент не должен быть короче или бед
 
 На текущем этапе не внедрять agentic commerce, MCP или NLWeb “на всякий случай”. Сначала нужна production-индексация, чистый schema graph, стабильные товарные данные, понятная entity map и владелец каждого business action.
 
-## 12. Мониторинг AI Referral В GA4
+## 12. Мониторинг AI Referral в GA4
 
 После production-запуска нужно создать отдельный сегмент или отчет для AI referrals.
 
@@ -423,7 +421,7 @@ AI-friendly контент не должен быть короче или бед
 
 Дополнительно, если Netlify logs или другой серверный лог доступны, отдельно проверять AI crawler traffic. Это не показатель конверсии, но полезный сигнал, что AI-системы и агенты начинают обращаться к данным сайта.
 
-## 13. Что Не Делать
+## 13. Что не делать
 
 Не делать:
 
@@ -435,7 +433,7 @@ AI-friendly контент не должен быть короче или бед
 - не подменять AI Search-аудит общим performance-аудитом.
 - не внедрять agentic commerce или NLWeb без реальной бизнес-задачи и стабильного источника товарных данных.
 
-## 14. Очередь Работ
+## 14. Очередь работ
 
 ### P0
 
@@ -455,7 +453,7 @@ AI-friendly контент не должен быть короче или бед
 5. Проверить, какие текущие статьи лучше всего подходят как entity pages.
 6. Расширить prompt-аудит до матрицы `persona × intent stage`.
 7. Описать компонентные паттерны для product, series, article, news и FAQ страниц.
-8. Заполнять внешние GSC/AI/business-метрики в [отчете по эффективности сущностей (Entity Performance Report)](59-entity-performance-report-2026.md) после production-индексации.
+8. Заполнять внешние GSC/AI/business-метрики в [отчете по эффективности сущностей (Entity Performance Report)](32-entity-performance-report-2026.md) после production-индексации.
 
 ### P2
 
@@ -468,7 +466,7 @@ AI-friendly контент не должен быть короче или бед
 7. Рассмотреть NLWeb или agentic commerce-требования только после production-стабилизации и появления понятной бизнес-задачи; текущий WebMCP/`llms.txt`-слой держать как lightweight progressive enhancement.
 8. Подготовить черновой `Callable Actions Registry` как документацию, без JSON-LD/API-вывода.
 
-## 15. Контрольный Вывод
+## 15. Контрольный вывод
 
 Для Aerocool самый полезный вывод из SchemaApp eBook такой: проект уже не нужно спасать базовой schema-разметкой. Его нужно развивать как связанную систему сущностей.
 

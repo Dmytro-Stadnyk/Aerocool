@@ -1,6 +1,6 @@
-# Руководство По `schema_types`
+# Руководство по `schema_types`
 
-Обновлено: 2026-05-31.
+Обновлено: 2026-07-10.
 
 В проекте `Aerocool` используется только поле `schema_types`.
 
@@ -34,12 +34,12 @@ schema_types: ["website", "product", "organization", "breadcrumbs"]
 - `additionalType` пока не является рабочим front matter полем проекта. Если оно понадобится, сначала документировать источник, внешний термин и причину, почему базового Schema.org типа недостаточно.
 - Image license metadata (`license`, `acquireLicensePage`, `creator`, `creditText`, `copyrightNotice`) внедрена централизованно для `ImageObject`: основное изображение страницы и логотип получают эти поля через schema partials, а видимая страница условий находится по `/image-license/` и `/ru/image-license/`.
 - Чистый Schema Validator не равен гарантии rich results: для Google данные в JSON-LD должны совпадать с видимым контентом страницы.
-- Для `product` source of truth по коммерческим фактам — front matter товарной страницы; schema partial читает эти поля, а видимый товарный блок и `/faq/` должны подтверждать их. Операционный процесс поддержки этих фактов описан в [58-product-facts-maintenance-process-2026.md](58-product-facts-maintenance-process-2026.md).
-- Текущий roadmap усиления графа и rich-results качества хранится в [26-json-ld-graph-audit-roadmap-2026.md](26-json-ld-graph-audit-roadmap-2026.md).
+- Для `product` источник правды по коммерческим фактам — front matter товарной страницы; schema partial читает эти поля, а видимый товарный блок и `/faq/` должны их подтверждать. Операционный процесс описан в [31-product-facts-maintenance-process-2026.md](31-product-facts-maintenance-process-2026.md).
+- Текущий план усиления графа и качества rich results хранится в [26-json-ld-graph-audit-roadmap-2026.md](26-json-ld-graph-audit-roadmap-2026.md).
 - QA-правила schema.org-графа, schema drift и ownership описаны в [20-schema-markup-quality-checklist-2026.md](20-schema-markup-quality-checklist-2026.md).
 - Entity strategy, `@id`, `sameAs`, `about` и `mentions` проектируются через [23-entity-registry-2026.md](23-entity-registry-2026.md), [22-entity-registry-beginner-guide-2026.md](22-entity-registry-beginner-guide-2026.md), [24-entities-knowledge-graph-playbook-2026.md](24-entities-knowledge-graph-playbook-2026.md) и [25-ai-search-entity-map-2026.md](25-ai-search-entity-map-2026.md).
 - Product/Offer/rating/variant/image policy для каталога описана в [21-ecommerce-structured-data-playbook-2026.md](21-ecommerce-structured-data-playbook-2026.md).
-- Базовая синхронизация документации с лучшими практиками 2026 описана в [37-2026-05-13-documentation-2026-best-practices-sync-audit.md](../audits/37-2026-05-13-documentation-2026-best-practices-sync-audit.md).
+- Базовая синхронизация документации с лучшими практиками 2026 описана в [50-2026-05-13-documentation-2026-best-practices-sync-audit.md](../audits/50-2026-05-13-documentation-2026-best-practices-sync-audit.md).
 
 Главная `content/_index.md`
 `schema_types: ["website", "organization", "brand"]`

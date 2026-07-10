@@ -1,6 +1,8 @@
-# Аудит Перехода На Hugo 0.164.0
+# Аудит перехода на Hugo 0.164.0
 
 Дата аудита: 2026-07-07.
+
+> Архивная оговорка 2026-07-10: документ фиксирует состояние на дату в имени файла. Номера документов внутри исторического текста могут отражать прежнюю нумерацию до перестройки маршрута; актуальные имена и статусы смотрите в [карте документации](../01-documentation-map.md).
 
 Этот документ фиксирует текущий Hugo/tooling target проекта после обновления с Hugo `0.163.0` на Hugo `0.164.0`.
 
@@ -19,7 +21,7 @@
 
 Важно: Netlify build остается в безопасном режиме `HUGO_ENVIRONMENT = "development"`. Production environment не включался как основной deploy-режим.
 
-## 2. Источники Правды
+## 2. Источники правды
 
 Текущая версия Hugo закреплена в:
 
@@ -32,7 +34,7 @@
 - `docs/architecture/03-hugo-template-helpers.md`;
 - `docs/content/06-seo-image-shortcode.md`;
 - `docs/quality/12-core-web-vitals-guide-2026.md`;
-- `docs/seo/76-hugo-yaml-serp-technical-contract-2026.md`;
+- `docs/seo/36-hugo-yaml-serp-technical-contract-2026.md`;
 - `docs/01-documentation-map.md`.
 
 Примечание: `layouts/baseof.html` больше не используется как guard версии Hugo. Причина — строковое сравнение `hugo.Version` в шаблоне может вести себя хрупко для semver-версий. Минимальная версия контролируется через `mise.toml`, `netlify.toml`, tooling-документацию и локальные build checks.
@@ -88,7 +90,7 @@ Deprecated local language API вроде `.Language.Lang`, `.Site.Language.Lang`
 
 Tailwind остается npm-зависимостью проекта. Standalone Tailwind CLI не использовать.
 
-## 5. Открытые Состояния
+## 5. Открытые состояния
 
 1. `HUGO_ENVIRONMENT = "development"` остается намеренно.
 2. Netlify production mode включать только отдельным production-readiness изменением.

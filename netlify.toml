@@ -20,8 +20,9 @@
 
 # Блок Headers для безопасности, SEO и кеширования
 
-# Длительное кэширование статических ресурсов.
-# Специфичные правила стоят выше общего, чтобы Cache-Control для asset-файлов не перекрывался.
+# Fingerprinted Hugo assets можно безопасно хранить в браузере длительно.
+# Стабильные URL изображений и иконок должны перепроверяться после deploy:
+# атомарный deploy инвалидирует CDN Netlify, но не очищает браузерный кэш.
 
 [[headers]]
   for = "/assets/*"
@@ -31,27 +32,27 @@
 [[headers]]
   for = "/images/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
   for = "/*.ico"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
   for = "/*.png"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
   for = "/*.svg"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
   for = "/*.webmanifest"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
   for = "/*"

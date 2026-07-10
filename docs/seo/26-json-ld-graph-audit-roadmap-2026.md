@@ -1,23 +1,20 @@
-# Аудит И План Развития JSON-LD Графа 2026
+# Аудит и план развития JSON-LD графа 2026
 
-Обновлено: 2026-06-03.
+Обновлено: 2026-07-10.
 
-Этот документ фиксирует текущее состояние JSON-LD Graph проекта `Aerocool Ukraine`, объясняет текущую оценку `Google rich-results quality: 8.8/10` и хранит roadmap усиления structured data без риска переспама, schema drift или несоответствия видимому контенту.
+Этот документ фиксирует постоянный план развития JSON-LD Graph проекта `Aerocool Ukraine` и правила усиления structured data без переспама, schema drift или несоответствия видимому контенту. Старые числовые оценки сохраняются ниже как датированные ориентиры, а не как гарантия текущего качества Google rich results.
 
 Важно: JSON-LD не является кнопкой `топ-1`. Он помогает Google понять сущности, связи, товарные данные, организацию, хлебные крошки, FAQ и изображения, а также повышает eligibility для тех rich results, которые Google еще поддерживает. Но позиция в Google зависит от интента, качества страницы, доверия, внутренней архитектуры, ссылок, UX, индексации и конкуренции.
 
 Актуализация `2026-05-17`: по официальной документации Google, с `2026-05-07` FAQ rich results больше не показываются в Google Search. Для Aerocool `FAQPage` остается полезным как структурированное описание видимого FAQ и сервисных условий, но не как SERP-enhancement цель.
 
-Текущий практический план внедрения roadmap-задач описан в [34-2026-05-07-documentation-refresh-and-project-action-plan.md](../audits/34-2026-05-07-documentation-refresh-and-project-action-plan.md).
-Базовый sync-аудит документации и 2026 best-practices alignment описан в [37-2026-05-13-documentation-2026-best-practices-sync-audit.md](../audits/37-2026-05-13-documentation-2026-best-practices-sync-audit.md).
-Актуальный полный schema/entity-срез зафиксирован в [57-2026-05-31-schema-entity-full-audit-current.md](../audits/57-2026-05-31-schema-entity-full-audit-current.md).
-Операционный регламент поддержки product facts зафиксирован в [58-product-facts-maintenance-process-2026.md](58-product-facts-maintenance-process-2026.md).
+Текущий практический порядок задают этот roadmap, [чек-лист качества schema](20-schema-markup-quality-checklist-2026.md), [регламент product facts](31-product-facts-maintenance-process-2026.md), [entity performance report](32-entity-performance-report-2026.md) и [список URL для валидаторов](33-schema-validator-url-checklist-2026.md). Аудиты `47`, `50` и `68` являются историческими снимками.
 
 Простыми словами для новичка: JSON-LD — это машинное описание страницы для поисковика. Оно должно подтверждать то, что человек реально видит на странице. Если в JSON-LD указать цену, рейтинг или наличие, но не показать их пользователю, это становится риском для Google rich results.
 
-## 1. Текущая Оценка
+## 1. Текущая оценка
 
-### Schema.org / JSON-LD Граф: `9.7/10`
+### Schema.org / JSON-LD граф: `9.7/10`
 
 Текущий граф технически чистый:
 
@@ -44,13 +41,13 @@
 - возврат;
 - гарантия.
 
-Сейчас `Product.aggregateRating` появляется только при наличии approved отзывов в build-time snapshot. Если у товара нет approved отзывов или локальная сборка запущена без подключения `Netlify Database`, `aggregateRating` не выводится.
+Сейчас `Product.aggregateRating` появляется только при наличии approved-отзывов в снимке, созданном во время сборки. Если у товара нет approved-отзывов или локальная сборка запущена без подключения `Netlify Database`, `aggregateRating` не выводится.
 
 Статус `2026-05-07`: product front matter зафиксирован как единый источник правды для price, `priceValidUntil`, availability, SKU, MPN, GTIN, warranty, shipping, returns и payment methods; владелец бизнес-значений — команда Aerocool Украина. Значение `priceValidUntil: 2027-12-31` подтверждено как актуальный срок действия товарных цен. Видимый коммерческий блок на product pages и merchant-факты в `/faq/` теперь должны служить синхронным подтверждением этих значений.
 
 Статус `2026-05-28`: pipeline рейтингов внедрен: `Netlify Database -> approved reviews -> build-time export -> data/generated/reviews.json -> visible reviews -> Product JSON-LD`. Legacy rating во front matter удален.
 
-## 2. Почему Это Важно Для Google
+## 2. Почему это важно для Google
 
 Google отличает технически валидную structured data от качественной structured data.
 
@@ -67,13 +64,13 @@ Google отличает технически валидную structured data о
 
 Статус `2026-05-07`: merchant-условия `Product` JSON-LD читаются из product front matter и подтверждаются видимым FAQ: доставка по Украине `Новой Почтой`, доставка `0 грн`, передача в отправку `0-1 день`, транзит `1-3 дня`, возврат `14 дней`, бесплатный возврат, оплата наличными/картой.
 
-Статус `2026-05-26`: источник рейтингов должен быть не front matter, а approved reviews snapshot из `Netlify Database`. Документ внедрения: [17-netlify-database-reviews.md](../deploy/17-netlify-database-reviews.md).
+Статус `2026-05-26`: источником рейтингов должен быть не front matter, а снимок approved-отзывов из `Netlify Database`. Документ внедрения: [17-netlify-database-reviews.md](../deploy/17-netlify-database-reviews.md).
 
-## 3. Что Нужно Доделать Для `10/10` По Google Rich Results
+## 3. Что нужно доделать для `10/10` по Google Rich Results
 
-### P0. Видимый Коммерческий Блок На Товарных Страницах
+### P0. видимый коммерческий блок на товарных страницах
 
-Статус `2026-05-07`: базовый visible product facts block добавлен в контент, а product front matter зафиксирован как source of truth для тех же фактов, которые есть в JSON-LD:
+Статус `2026-05-07`: базовый видимый блок товарных фактов добавлен в контент, а front matter товара зафиксирован как источник правды для тех же фактов, которые есть в JSON-LD:
 
 - цена;
 - валюта `UAH`;
@@ -85,9 +82,9 @@ Google отличает технически валидную structured data о
 - способы оплаты;
 - рейтинг и количество отзывов, только если они реальные и подтверждены.
 
-Если рейтинг и отзывы пока не являются реальным пользовательским сигналом, не выводить `aggregateRating` и не усиливать review-layer. Текущий шаблон уже следует этому правилу: `AggregateRating` выводится только из approved reviews snapshot.
+Если рейтинг и отзывы пока не являются реальным пользовательским сигналом, не выводить `aggregateRating` и не усиливать слой отзывов. Текущий шаблон уже следует этому правилу: `AggregateRating` выводится только из снимка approved-отзывов.
 
-### P0. Синхронизация Видимого Интерфейса И Schema-Разметки
+### P0. синхронизация видимого интерфейса и Schema-разметки
 
 Любое быстро меняющееся поле должно обновляться одновременно в UI и JSON-LD:
 
@@ -100,13 +97,13 @@ Google отличает технически валидную structured data о
 - рейтинг;
 - количество отзывов.
 
-Если меняются цена, наличие, доставка, возврат, гарантия, способы оплаты, `priceValidUntil`, цвет или характеристики, проходить регламент [58-product-facts-maintenance-process-2026.md](58-product-facts-maintenance-process-2026.md): бизнес-подтверждение, product front matter или registry, видимый HTML, `/faq/` при policy-wide изменении, JSON-LD QA и post-deploy проверка. [layouts/_partials/_schema/product.html](../../layouts/_partials/_schema/product.html) менять нужно только при изменении mapping или добавлении новых полей.
+Если меняются цена, наличие, доставка, возврат, гарантия, способы оплаты, `priceValidUntil`, цвет или характеристики, проходить регламент [31-product-facts-maintenance-process-2026.md](31-product-facts-maintenance-process-2026.md): бизнес-подтверждение, product front matter или registry, видимый HTML, `/faq/` при policy-wide изменении, JSON-LD QA и post-deploy проверка. [layouts/_partials/_schema/product.html](../../layouts/_partials/_schema/product.html) менять нужно только при изменении mapping или добавлении новых полей.
 
-### Выполнено. ProductGroup Для Вариантов
+### Выполнено. ProductGroup для вариантов
 
 У Aerocool есть отдельные товарные URL, но не каждый товар является вариантом ProductGroup. На `2026-05-31` `ProductGroup` внедрен только там, где несколько URL представляют реальные варианты одной модели: цветовые пары WING Racer, WING Loft Air, XTAL Racer и XTAL Loft Air.
 
-Rendered graph сейчас содержит:
+Собранный граф сейчас содержит:
 
 - `ProductGroup`;
 - `productGroupID`;
@@ -119,7 +116,7 @@ Rendered graph сейчас содержит:
 
 Важное условие остается для будущих групп: на странице должен быть видимый variant selector или хотя бы понятные ссылки на другие варианты. На `2026-05-28` этот UI-слой добавлен: `variant-swatches.html` выводит цветовые swatches как ссылки на соседние variant URL на основе `product_group_id` и `data/entities.yaml`. На `2026-05-31` singleton ProductGroup удалены из registry/front matter, а четыре реальные группы переведены в `confirmed` и активированы в JSON-LD.
 
-### Выполнено. Свойства Товара
+### Выполнено. свойства товара
 
 Видимые характеристики уже есть в product content/front matter. На `2026-05-31` Product schema усилена двумя безопасными слоями:
 
@@ -138,7 +135,7 @@ Rendered graph сейчас содержит:
 
 `Product.additionalProperty` сейчас строится из видимой вкладки `characteristics`. Не переносить туда маркетинговые фразы, которые не являются стабильными характеристиками модели.
 
-### P1. Merchant Policy На Уровне Organization
+### P1. Merchant Policy на уровне Organization
 
 Сейчас возврат и доставка описаны на уровне `Offer`. Это валидно, но если политика единая для большинства товаров, лучше позже вынести стандартную политику на уровень организации или отдельной policy-сущности:
 
@@ -148,7 +145,7 @@ Rendered graph сейчас содержит:
 
 Не добавлять это заранее, если на сайте еще нет видимых страниц или блоков с этими условиями.
 
-### P2. Слой Авторов И Проверяющих Для Статей
+### P2. слой авторов и проверяющих для статей
 
 Сейчас `Article` и `NewsArticle` используют организацию как `author` и `publisher`. Это безопасно.
 
@@ -162,7 +159,7 @@ Rendered graph сейчас содержит:
 
 Не добавлять фиктивных авторов или reviewer-сущности только ради E-E-A-T.
 
-### P2. Поля `about` И `mentions` Для Контентных Материалов
+### P2. поля `about` и `mentions` для контентных материалов
 
 Для статей и новостей можно добавить более явные связи:
 
@@ -172,7 +169,7 @@ Rendered graph сейчас содержит:
 
 Это имеет смысл после появления устойчивого front matter для связанных товаров/серий, чтобы не парсить связи из текста случайно.
 
-### P2. Галерея `ImageObject`
+### P2. галерея `ImageObject`
 
 Сейчас есть единый `primaryImageOfPage`. Для товарных страниц позже можно расширить изображения:
 
@@ -183,7 +180,7 @@ Rendered graph сейчас содержит:
 
 Для Google это полезнее, если изображения реально присутствуют в HTML-странице, а не только в JSON-LD.
 
-### Закрыто. Метаданные Лицензии Изображений (Image License Metadata)
+### Закрыто. метаданные лицензии изображений (Image License Metadata)
 
 Выполнено `2026-05-31`: для `ImageObject` внедрены `license`, `acquireLicensePage`, `creator`, `creditText` и `copyrightNotice`. Поля добавляются централизованно через [image-license-metadata.html](../../layouts/_partials/_schema/image-license-metadata.html), а видимые условия находятся на `/image-license/` и `/ru/image-license/`.
 
@@ -196,7 +193,7 @@ Rendered graph сейчас содержит:
 
 Не превращать страницу лицензии в обещание открытого использования. Текущая модель - restricted permission request: изображения можно использовать только по условиям правообладателя или после письменного разрешения.
 
-## 4. Что Не Нужно Добавлять Сейчас
+## 4. Что не нужно добавлять сейчас
 
 Не добавлять:
 
@@ -210,17 +207,17 @@ Rendered graph сейчас содержит:
 
 Правило простое: сначала видимый контент и бизнес-источник правды, потом schema.
 
-## 5. Приоритеты На Следующий Цикл
+## 5. Приоритеты на следующий цикл
 
 1. Закрыть production gate: переключить окружение только после финальной проверки `index,follow`, sitemap, canonical, hreflang и published URL.
 2. Подтвердить MPN/GTIN для `SKY 360` и `SKY Light`.
-3. Поддерживать регулярный [отчет по эффективности сущностей (Entity Performance Report)](59-entity-performance-report-2026.md) через `npm run entity:report`; GSC/AI/business-поля заполнить после production.
+3. Поддерживать регулярный [отчет по эффективности сущностей (Entity Performance Report)](32-entity-performance-report-2026.md) через `npm run entity:report`; GSC/AI/business-поля заполнить после production.
 4. Исполнять регламент product facts при каждом изменении коммерческих и товарных данных.
-5. После production-перехода контролировать approved reviews snapshot, GSC product reports и rich-results eligibility на published URL.
+5. После production-перехода контролировать снимок approved-отзывов, товарные отчеты GSC и доступность rich results на опубликованных URL.
 6. Поддерживать image license metadata через видимую страницу условий и централизованный schema helper.
-7. Вести entity/schema изменения через [20-schema-markup-quality-checklist-2026.md](20-schema-markup-quality-checklist-2026.md), [24-entities-knowledge-graph-playbook-2026.md](24-entities-knowledge-graph-playbook-2026.md), [21-ecommerce-structured-data-playbook-2026.md](21-ecommerce-structured-data-playbook-2026.md), [58-product-facts-maintenance-process-2026.md](58-product-facts-maintenance-process-2026.md) и [57-2026-05-31-schema-entity-full-audit-current.md](../audits/57-2026-05-31-schema-entity-full-audit-current.md).
+7. Вести entity/schema изменения через [20-schema-markup-quality-checklist-2026.md](20-schema-markup-quality-checklist-2026.md), [24-entities-knowledge-graph-playbook-2026.md](24-entities-knowledge-graph-playbook-2026.md), [21-ecommerce-structured-data-playbook-2026.md](21-ecommerce-structured-data-playbook-2026.md), [31-product-facts-maintenance-process-2026.md](31-product-facts-maintenance-process-2026.md) и [68-2026-05-31-schema-entity-full-audit-current.md](../audits/68-2026-05-31-schema-entity-full-audit-current.md).
 
-## 6. Контроль Перед Деплоем
+## 6. Контроль перед деплоем
 
 Минимальная проверка:
 
@@ -248,7 +245,7 @@ npm run build
 - Google Rich Results Test: `https://search.google.com/test/rich-results`
 - Search Console rich results reports после индексации.
 
-## 7. Официальные Источники
+## 7. Официальные источники
 
 - Google General Structured Data Guidelines: https://developers.google.com/search/docs/appearance/structured-data/sd-policies
 - Google Product Snippet Structured Data: https://developers.google.com/search/docs/appearance/structured-data/product-snippet

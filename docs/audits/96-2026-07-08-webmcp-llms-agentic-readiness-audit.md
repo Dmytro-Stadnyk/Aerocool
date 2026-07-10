@@ -1,12 +1,24 @@
-# WebMCP И `llms.txt`: Аудит Готовности К Agentic Browsing
+# WebMCP и `llms.txt`: аудит готовности к Agentic Browsing
 
-Обновлено: 2026-07-08.
+Обновлено: 2026-07-10.
+
+> Архивная оговорка 2026-07-10: документ фиксирует состояние на дату в имени файла. Номера документов внутри исторического текста могут отражать прежнюю нумерацию до перестройки маршрута; актуальные имена и статусы смотрите в [карте документации](../01-documentation-map.md).
 
 Этот документ объясняет, что было добавлено для PageSpeed Agentic Browsing, зачем это нужно и как проверять результат. Он написан для новичка: если ты впервые видишь `toolname`, `tooldescription`, `toolparamdescription` или `llms.txt`, начни отсюда.
 
-## 1. Краткий Вывод
+> Статус: исторический профильный снимок от 2026-07-08, дополненный уточнением 2026-07-10. Оценка ниже относится к состоянию и методике на дату исходной проверки, а не является текущей полной оценкой проекта.
 
-Оценка текущего состояния: **9.8 / 10**.
+## Уточнение 2026-07-10
+
+- Google Search 2026-06-15 уточнил, что `llms.txt` ему не требуется и не влияет на видимость или ранжирование положительно либо отрицательно. Файл допустимо поддерживать для других систем, но нельзя учитывать как SEO-преимущество.
+- Chrome 2026-07-01 расширил рекомендации безопасности WebMCP: indirect prompt injection нельзя считать полностью решенной; imperative tools должны применять `untrustedContentHint` для внешнего/пользовательского содержимого и `readOnlyHint` только для действий без изменения состояния.
+- Ориентиры Chrome для imperative tools: до `500` символов на описание инструмента, `150` на описание параметра, `30` на имя и `1.5K` на отдельный результат.
+- Текущие declarative forms проекта не используют `toolautosubmit` для контакта и отзывов. Это сохраняет видимое подтверждение пользователя.
+- Источники: [Google Search documentation updates](https://developers.google.com/search/updates), [Chrome WebMCP tool security](https://developer.chrome.com/docs/ai/webmcp/secure-tools), [Chrome Declarative API](https://developer.chrome.com/docs/ai/webmcp/declarative-api).
+
+## 1. Краткий вывод
+
+Оценка на дату 2026-07-08: **9.8 / 10**.
 
 Почему высоко:
 
@@ -22,7 +34,7 @@
 - финальный сигнал нужно повторить на опубликованном Netlify URL через PageSpeed Insights после deploy;
 - production-сайт все еще зависит от общего production gate проекта.
 
-## 2. Объяснение Для Новичка
+## 2. Объяснение для новичка
 
 Есть три разных машинных слоя, и их нельзя путать:
 
@@ -38,7 +50,7 @@
 - WebMCP говорит: “это форма контакта, сюда нужно ввести имя, email, телефон и сообщение”.
 - `llms.txt` говорит: “если ты AI-агент, начни с этих страниц: каталог, все товары, FAQ, контакты, sitemap”.
 
-## 3. Что Было Изменено
+## 3. Что было изменено
 
 ### 3.1. Contact Form
 
@@ -81,7 +93,7 @@
 
 Важно: фильтры остаются static-first. Они не меняют URL, не создают индексируемые filter pages и не отправляют данные на сервер.
 
-### 3.4. CSS Reset Для `fieldset`
+### 3.4. CSS Reset для `fieldset`
 
 Файл: [assets/css/main.css](../../assets/css/main.css)
 
@@ -100,7 +112,7 @@
 Добавлено:
 
 - H1 `Aerocool Ukraine`;
-- дата обновления `Last updated: 2026-07-08`;
+- дата обновления файла;
 - краткое описание сайта;
 - ссылки на главную, каталог, FAQ, контакты, about, статьи, новости, sitemap, robots и image license;
 - ссылки на все `12` украинских товарных страниц;
@@ -109,7 +121,7 @@
 
 Файл не должен дублировать весь sitemap и не должен становиться рекламной страницей. Его задача - коротко направить AI-агента к источникам правды. Поэтому в нем есть все товарные URL, но нет цен, наличия, гарантий и длинных описаний: эти данные должны читаться с самих товарных страниц, из JSON-LD, canonical URL и sitemap.
 
-## 4. Почему Использован `fieldset`
+## 4. Почему использован `fieldset`
 
 Chrome строит WebMCP input schema не только по отдельным `input`, но и по параметрам формы.
 
@@ -139,7 +151,7 @@ Chrome строит WebMCP input schema не только по отдельны�
 
 Это один параметр `rating`, а не пять отдельных полей.
 
-## 5. Что Не Делать
+## 5. Что не делать
 
 - Не добавлять `toolautosubmit` к контактной форме и форме отзывов без отдельного UX/security-решения.
 - Не убирать обычные видимые `label`: WebMCP не заменяет accessibility.
@@ -148,7 +160,7 @@ Chrome строит WebMCP input schema не только по отдельны�
 - Не добавлять Lighthouse или Chrome-аудит как постоянную root-зависимость проекта без отдельного решения.
 - Не менять `Cross-Origin-Embedder-Policy` только ради WebMCP без проверки на Deploy Preview.
 
-## 6. Как Проверять
+## 6. Как проверять
 
 Минимальная локальная проверка:
 
@@ -204,7 +216,7 @@ public/products/sky/360/index.html
 - `12 / 12` русских товарных URL есть в `static/llms.txt`;
 - `public/llms.txt` после `npm run build` должен совпадать с `static/llms.txt`.
 
-## 8. Связанные Документы
+## 8. Связанные документы
 
 - [README.md](../../README.md) - общий вход в проект.
 - [AGENTS.md](../../AGENTS.md) - рабочие правила для агентов.
@@ -212,7 +224,7 @@ public/products/sky/360/index.html
 - [docs/quality/13-pagespeed-insights-audit.md](../quality/13-pagespeed-insights-audit.md) - как проверять PageSpeed.
 - [docs/quality/14-production-quality-gate-2026.md](../quality/14-production-quality-gate-2026.md) - production gate.
 - [docs/deploy/16-netlify-routing.md](../deploy/16-netlify-routing.md) - `static/`, headers, routing.
-- [docs/seo/76-hugo-yaml-serp-technical-contract-2026.md](../seo/76-hugo-yaml-serp-technical-contract-2026.md) - общий SERP-технический контракт.
+- [docs/seo/36-hugo-yaml-serp-technical-contract-2026.md](../seo/36-hugo-yaml-serp-technical-contract-2026.md) - общий SERP-технический контракт.
 
 ## 9. Источники
 

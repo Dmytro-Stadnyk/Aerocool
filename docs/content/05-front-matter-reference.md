@@ -1,6 +1,6 @@
-# Руководство По Полям Метаданных Страницы
+# Руководство по полям метаданных страницы
 
-Обновлено: 2026-06-24.
+Обновлено: 2026-07-10.
 
 В проекте `Aerocool` использовать только поле `schema_types`. Поле `schema_type` не используется.
 
@@ -14,9 +14,9 @@
 4. Не добавляй поля “на всякий случай”, если шаблоны проекта их не используют.
 5. После правки запусти `npm run build`.
 
-Практический план entity/product fields (`about_entities`, `mentions_entities`, `product_group_id`, `variant_attributes`, `rating_source`) описан в [34-2026-05-07-documentation-refresh-and-project-action-plan.md](../audits/34-2026-05-07-documentation-refresh-and-project-action-plan.md). Базовая синхронизация документации с лучшими практиками 2026 зафиксирована в [37-2026-05-13-documentation-2026-best-practices-sync-audit.md](../audits/37-2026-05-13-documentation-2026-best-practices-sync-audit.md). Entity IDs и entity homes зафиксированы в [23-entity-registry-2026.md](../seo/23-entity-registry-2026.md), а структурированный источник для шаблонов — [data/entities.yaml](../../data/entities.yaml). Для первого знакомства с этим слоем читайте [22-entity-registry-beginner-guide-2026.md](../seo/22-entity-registry-beginner-guide-2026.md). Hugo templates уже безопасно читают `about_entities`, `mentions_entities`, `product_group_id`, `related_series` и `related_products`, но добавлять их в `content/` нужно только точечно: значение должно быть подтверждено видимым содержанием страницы. Для JSON-LD resolver выводит только `confirmed` сущности; `product_group_id` допустим только для реальных групп вариантов одной модели и начнет давать `isVariantOf` только после подтверждения ProductGroup.
+Правила полей сущностей описаны в [реестре сущностей](../seo/23-entity-registry-2026.md), а машинный источник для шаблонов — [data/entities.yaml](../../data/entities.yaml). Для первого знакомства прочитайте [руководство для новичка](../seo/22-entity-registry-beginner-guide-2026.md). Hugo-шаблоны безопасно читают `about_entities`, `mentions_entities`, `product_group_id`, `related_series` и `related_products`, но добавлять их в `content/` можно только при подтверждении видимым содержанием страницы. JSON-LD resolver выводит только `confirmed` сущности; `product_group_id` допустим только для реальных групп вариантов одной модели.
 
-## Поля Сущностей Во Front Matter
+## Поля сущностей во Front Matter
 
 `about_entities` — главные сущности страницы. Для статьи это тема, для серии — сама серия и ключевой сценарий, для товара — конкретная модель, серия и основной тип кресла.
 
@@ -38,7 +38,7 @@ mentions_entities:
 product_group_id: "wing-racer-product-group"
 ```
 
-## Поля Управляемой Перелинковки
+## Поля управляемой перелинковки
 
 `related_series` — ручной список серий для блока “Что посмотреть дальше”. Использовать только значения `sky`, `wing`, `xtal`. Поле нужно тогда, когда страница явно связана с серией, но автоматический вывод по заголовку, описанию и entity-полям может быть слишком широким или слишком слабым.
 
@@ -63,7 +63,7 @@ related_articles:
 
 Эти поля не заменяют видимые ссылки в тексте. Их задача — уточнить автоматический related-блок, а не сделать скрытую или нерелевантную перелинковку. Если страница ведет на товар через `related_products` или на гайд через `related_articles`, в тексте страницы должна быть понятная причина такой связи: серия, материал, механизм, сценарий использования или сравнение.
 
-## Главное Правило По Заголовкам
+## Главное правило по заголовкам
 
 - `title` обязателен и отвечает за SEO-заголовок документа.
 - `linkTitle` задает короткое навигационное имя для хлебных крошек и внутренних списков, если полный `title` слишком длинный.
@@ -73,7 +73,7 @@ related_articles:
 - Исключение на текущий момент — главная страница: ее hero и видимый `H1` задаются единым shortcode `layouts/_shortcodes/home-hero.html`, который сам выбирает украинский или русский текст по языку страницы.
 - В теле markdown не добавлять `# H1`; контент начинается с лида или с `##`.
 
-## Видимая Meta-Строка И Даты
+## Видимая Meta-строка и даты
 
 В проекте есть два разных слоя метаданных:
 
@@ -104,11 +104,11 @@ related_articles:
 - переключение языка живет в шапке сайта через [header.html](../../layouts/_partials/header.html);
 - `hideMeta: true` использовать только как точечный ручной override, а не как способ массово чинить типы страниц.
 
-## Стандарт `image` И `cover`
+## Стандарт `image` и `cover`
 
 В текущем проекте каждый файл `content/**/*.md` должен иметь не только `image`, но и служебный `cover`-блок.
 
-Актуальная проверка на 2026-06-24 зафиксирована в [89-2026-06-24-cover-block-image-seo-audit.md](../audits/89-2026-06-24-cover-block-image-seo-audit.md): `100/100` markdown-файлов имеют полный `image` + `cover`-блок, все файлы существуют, `cover.alt` заполнены, а `25/25` article/news bundles имеют полный crop-набор для schema/search surfaces. Этот результат нужно сохранять при любых новых страницах и правках front matter.
+Историческая проверка [аудита 89](../audits/89-2026-06-24-cover-block-image-seo-audit.md) зафиксировала `100/100` Markdown-файлов с полным `image` + `cover`-блоком и `25/25` article/news bundles с crop-набором. Текущее состояние повторно проверяет [аудит 99](../audits/99-2026-07-10-full-documentation-project-sync-audit-current.md). Этот контракт нужно сохранять при новых страницах и правках front matter.
 
 `image` — источник для SEO/OG/Twitter/schema через локальный helper `layouts/_partials/page-image.html`.
 
@@ -137,7 +137,7 @@ related_articles:
 |---|---|
 | Статьи и новости | `01-front.webp`, **1536x1024**, WebP; для schema/search surfaces рядом держать `16:9`, `4:3`, `1:1` crops. |
 | Хабы, статичные страницы, section covers, series covers | `cover.webp`, **1536x1024**, WebP. |
-| Товары | целевой replacement standard `01-front.webp`, минимум **1600x1600**, лучше **2000x2000**; текущие `01-front.png` допустимы только как временный/официальный asset, но не должны быть одинаковыми для разных SKU. |
+| Товары | `01-front.webp`, **2000x2000**, WebP; файл обязан показывать конкретные модель, цвет и материал. На 2026-07-10 все `12` главных товарных изображений соответствуют размеру и уникальны по SHA-256. |
 
 Для page bundle и section bundle использовать относительный путь:
 
@@ -167,7 +167,7 @@ cover:
   hiddenInSingle: true
 ```
 
-## Терминология И Написание
+## Терминология и написание
 
 - В видимом тексте, `title`, `description`, `summary`, `alt`, пунктах FAQ и внутренних ссылках использовать единое написание технических терминов.
 - Для механизма наклона текущий стандарт проекта — `Synchronous Tilt`.
@@ -178,7 +178,7 @@ cover:
 - Широкие коммерческие SEO-фразы вроде `игровое кресло`, `офисное кресло`, `компьютерное кресло`, `кресло для работы`, `home office` писать обычным текстом или, если нужен визуальный акцент, обычным жирным выделением.
 - Не переносить это правило на шаблонный код Hugo/JS в `layouts/` и документационные примеры вне `content/`: там обратные кавычки могут быть частью кода или пояснения.
 
-## 1. Главная Страница `content/_index.md` и `content/_index.ru.md`
+## 1. Главная страница `content/_index.md` и `content/_index.ru.md`
 
 ```yaml
 ---
@@ -201,7 +201,7 @@ schema_types: ["website", "organization", "brand"]
 `title`, `description`, `summary` и `image` для главной по-прежнему задаются через front matter. Но видимый `H1` и hero-изображение на текущем этапе живут в едином shortcode `layouts/_shortcodes/home-hero.html`, а не в универсальном helper-слое.
 `breadcrumbs` на главной не указывается: home не нуждается в одноэлементном `BreadcrumbList`.
 
-## 2. Страница О Бренде `content/about/index.md` и `index.ru.md`
+## 2. Страница о бренде `content/about/index.md` и `index.ru.md`
 
 ```yaml
 ---
@@ -259,7 +259,7 @@ schema_types: ["website", "organization", "contact-page", "breadcrumbs"]
 
 Не дублировать в markdown адрес, телефоны, email, сценарии обращения, график работы, быстрые ссылки или отдельный список соцсетей. Эти данные уже находятся в shortcode и должны оставаться согласованными с JSON-LD `Organization` в [local-organization.html](../../layouts/_partials/_schema/local-organization.html). Если меняется график работы, телефон, email или адрес, нужно обновить и видимый shortcode, и schema partial.
 
-### 3.1. Служебная Страница Успешной Отправки
+### 3.1. Служебная страница успешной отправки
 
 Файлы `content/contact-success/index.md` и `content/contact-success/index.ru.md` используют три дополнительных служебных поля:
 
@@ -326,7 +326,7 @@ schema_types: ["website", "collection", "organization", "breadcrumbs"]
 
 У самих хабов `/products/`, `/articles/` и `/news/` meta-строка под `H1` не выводится. В карточках листинга meta-строку получает только дочерний материал, если он является статьей или новостью: статья показывает дату и время чтения, новость показывает только дату.
 
-## 6. Страница Серии `content/products/<series>/_index.md` и `_index.ru.md`
+## 6. Страница серии `content/products/<series>/_index.md` и `_index.ru.md`
 
 ```yaml
 ---
@@ -479,7 +479,7 @@ Product gallery должна получить реальный processable image
 
 `characteristics` — видимый список технических характеристик товара во вкладке “Характеристики”. Использовать пары `label` + `value`, локализованные под язык страницы. Это поле нужно для технических фактов модели: общая регулировка, подголовник, поверхность, спинка, поясничная поддержка, подлокотники, механизм, сиденье, тип наклона, база, ролики и вес. Эти пары также выводятся в `Product.additionalProperty` как `PropertyValue`, поэтому сюда нельзя добавлять маркетинговые фразы, скрытые факты или данные, которые не должны становиться частью schema.org. Не смешивать сюда цену, доставку, возврат и оплату: коммерческие условия остаются в отдельных merchant fields и во вкладке условий.
 
-Владелец бизнес-значений — команда Aerocool Украина. Она подтверждает цену, наличие, гарантию, доставку, возврат, оплату, SKU, MPN, GTIN и срок актуальности цены. Контент-редактор или Codex вносит подтвержденные значения в front matter и синхронизирует видимый товарный текст. По состоянию на `2026-05-07` значение `priceValidUntil: 2027-12-31` подтверждено для текущих товарных цен. Полный операционный процесс ролей, подтверждений, `/faq/`, JSON-LD QA и post-deploy проверки описан в [58-product-facts-maintenance-process-2026.md](../seo/58-product-facts-maintenance-process-2026.md).
+Владелец бизнес-значений — команда Aerocool Украина. Она подтверждает цену, наличие, гарантию, доставку, возврат, оплату, SKU, MPN, GTIN и срок актуальности цены. Контент-редактор или Codex вносит подтвержденные значения в front matter и синхронизирует видимый товарный текст. По состоянию на `2026-05-07` значение `priceValidUntil: 2027-12-31` подтверждено для текущих товарных цен. Полный операционный процесс ролей, подтверждений, `/faq/`, JSON-LD QA и post-deploy проверки описан в [31-product-facts-maintenance-process-2026.md](../seo/31-product-facts-maintenance-process-2026.md).
 
 [layouts/_partials/_schema/product.html](../../layouts/_partials/_schema/product.html) читает merchant facts из front matter и строит `Offer`, `OfferShippingDetails`, `MerchantReturnPolicy`, `acceptedPaymentMethod` и `WarrantyPromise`. Этот же partial берет `color` из [data/entities.yaml](../../data/entities.yaml) для главной product entity страницы и строит `additionalProperty` из видимого `characteristics`. Видимый коммерческий блок товарной страницы и `/faq/` должны подтверждать merchant facts, но не являются первичным источником. Если меняется цена, наличие, SKU, GTIN, гарантия, доставка, возврат или оплата, сначала обновлять product front matter, затем в том же изменении синхронизировать видимый product copy и `/faq/`, если это изменение policy-wide. Если меняется цвет товара, обновлять registry и видимую характеристику цвета одновременно. Сам partial менять нужно только при изменении schema mapping или добавлении новых полей.
 

@@ -1,12 +1,12 @@
 # Финальный SEO-чеклист для SSG-сайта в 2026 году
 
-Обновлено: 2026-06-21.
+Обновлено: 2026-07-10.
 
 Этот файл — финальный список элементов для построения технически сильного SSG-сайта: Hugo, техническое SEO, schema.org, Core Web Vitals, контентная стратегия, entity SEO, E-E-A-T, мониторинг и развитие сайта. Он не обещает конкретную позицию в Google; он фиксирует, что должно быть сделано, чтобы сайт не проигрывал по технической базе и качеству сигналов.
 
-Синхронизировано с текущей проектной документацией и лучшими практиками 2026: [37-2026-05-13-documentation-2026-best-practices-sync-audit.md](../audits/37-2026-05-13-documentation-2026-best-practices-sync-audit.md).
+Синхронизировано 2026-07-10 с текущей проектной документацией, [техническим SERP-контрактом](36-hugo-yaml-serp-technical-contract-2026.md) и [полным аудитом 99](../audits/99-2026-07-10-full-documentation-project-sync-audit-current.md). Аудит `50` хранит историческую проверку от 2026-05-13.
 
-Примечание для новичка: это общий стратегический чеклист, а не список файлов, которые нужно сразу менять. Для текущего проекта Aerocool фактические правила лежат в [README.md](../../README.md), [AGENTS.md](../../AGENTS.md), [content/07-content-seo-checklist-2026.md](../content/07-content-seo-checklist-2026.md), [content/05-front-matter-reference.md](../content/05-front-matter-reference.md), [seo/20-schema-markup-quality-checklist-2026.md](20-schema-markup-quality-checklist-2026.md), [seo/24-entities-knowledge-graph-playbook-2026.md](24-entities-knowledge-graph-playbook-2026.md), [seo/76-hugo-yaml-serp-technical-contract-2026.md](76-hugo-yaml-serp-technical-contract-2026.md), [seo/81-internal-linking-strategy-2026.md](81-internal-linking-strategy-2026.md), [quality/13-pagespeed-insights-audit.md](../quality/13-pagespeed-insights-audit.md) и [34-2026-05-07-documentation-refresh-and-project-action-plan.md](../audits/34-2026-05-07-documentation-refresh-and-project-action-plan.md).
+Примечание для новичка: это общий стратегический чек-лист, а не список файлов, которые нужно сразу менять. Фактические правила проекта находятся в [README.md](../../README.md), [AGENTS.md](../../AGENTS.md), [контентном чек-листе](../content/07-content-seo-checklist-2026.md), [справочнике front matter](../content/05-front-matter-reference.md), [schema-чек-листе](20-schema-markup-quality-checklist-2026.md), [knowledge graph playbook](24-entities-knowledge-graph-playbook-2026.md), [SERP-контракте](36-hugo-yaml-serp-technical-contract-2026.md), [стратегии перелинковки](38-internal-linking-strategy-2026.md) и [руководстве PageSpeed](../quality/13-pagespeed-insights-audit.md).
 
 ---
 
@@ -50,7 +50,7 @@
 
 ---
 
-## 3. Структурированные Данные И Schema.org
+## 3. Структурированные данные и Schema.org
 
 | Schema | Для чего |
 |---|---|
@@ -127,7 +127,7 @@
 
 ---
 
-## 6. SEO Сущностей
+## 6. SEO сущностей
 
 | Entity | Что нужно сделать |
 |---|---|
@@ -148,7 +148,7 @@
 
 ---
 
-## 7. Внутренняя Перелинковка
+## 7. Внутренняя перелинковка
 
 | Элемент | Обязательно |
 |---|---|
@@ -174,7 +174,7 @@
 
 ---
 
-## 8. Производительность И Core Web Vitals
+## 8. Производительность и Core Web Vitals
 
 Подробный локальный playbook для проекта: [12-core-web-vitals-guide-2026.md](../quality/12-core-web-vitals-guide-2026.md).
 
@@ -242,7 +242,7 @@
 
 ---
 
-## 11. E-Commerce И SEO Товаров
+## 11. E-Commerce и SEO товаров
 
 | Элемент | Обязательно |
 |---|---|
@@ -269,7 +269,7 @@
 
 ---
 
-## 12. Доверие И E-E-A-T
+## 12. Доверие и E-E-A-T
 
 | Элемент | Обязательно |
 |---|---|
@@ -294,7 +294,7 @@
 
 ---
 
-## 13. Авторитетность И Authority SEO
+## 13. Авторитетность и Authority SEO
 
 | Элемент | Обязательно |
 |---|---|
@@ -313,7 +313,7 @@
 
 ---
 
-## 14. UX И Conversion SEO
+## 14. UX и Conversion SEO
 
 | Элемент | Обязательно |
 |---|---|
@@ -334,7 +334,7 @@
 
 ---
 
-## 15. Мониторинг И Аналитика
+## 15. Мониторинг и аналитика
 
 | Инструмент | Обязательно |
 |---|---|
@@ -358,7 +358,7 @@
 
 ---
 
-## 16. Безопасность И Надежность
+## 16. Безопасность и надежность
 
 | Элемент | Обязательно |
 |---|---|
@@ -377,7 +377,7 @@
 
 ---
 
-## 17. PWA И Modern Web
+## 17. PWA и Modern Web
 
 | Элемент | Нужно |
 |---|---|
@@ -394,7 +394,7 @@
 
 ---
 
-## 18. Видимость В AI И LLM
+## 18. Видимость в AI и LLM
 
 | Элемент | Желательно |
 |---|---|
@@ -415,7 +415,7 @@
 
 ---
 
-## 19. Финальная Формула
+## 19. Финальная формула
 
 ```text
 Top SEO SSG Website =

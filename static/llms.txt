@@ -2,7 +2,7 @@
 
 > Official Aerocool Ukraine website for gaming, office, computer and home office chairs, with Ukrainian and Russian product, article, FAQ and contact pages.
 
-Last updated: 2026-07-08.
+Last updated: 2026-07-10.
 
 This file gives AI agents a concise map of the public site.
 Use visible page content, JSON-LD, canonical URLs, hreflang links and sitemap files as the source of truth.

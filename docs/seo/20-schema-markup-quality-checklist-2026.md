@@ -1,6 +1,6 @@
-# Чек-Лист Качества Schema-Разметки 2026
+# Чек-лист качества Schema-разметки 2026
 
-Обновлено: 2026-06-02.
+Обновлено: 2026-07-10.
 
 Этот документ переводит `Schema Markup Checklist` и универсальные выводы из `Definitive Guide to Healthcare Structured Data in SEO` от SchemaApp в локальный QA-чеклист для `Aerocool Ukraine`. Его задача — проверять не только валидность JSON-LD, но и качество schema.org-графа: правильные типы, полезные свойства, связи между сущностями, устойчивые `@id`, отсутствие schema drift и соответствие schema-стратегии реальной цели страницы.
 
@@ -8,16 +8,12 @@
 
 Документ синхронизирован с текущими Google structured data guidelines: JSON-LD должен описывать видимый контент страницы, не вводить пользователя в заблуждение, не скрывать размеченные факты и проходить не только validator, но и quality-проверку соответствия интенту страницы.
 
-Текущий порядок внедрения P0/P1/P2 описан в [34-2026-05-07-documentation-refresh-and-project-action-plan.md](../audits/34-2026-05-07-documentation-refresh-and-project-action-plan.md).
-Базовый sync-аудит документации: [37-2026-05-13-documentation-2026-best-practices-sync-audit.md](../audits/37-2026-05-13-documentation-2026-best-practices-sync-audit.md).
-Дополнительный аудит support-статей Schema App по `sameAs`, primary entity, `additionalType`, breadcrumbs и image license metadata: [42-2026-05-17-schemaapp-support-knowledge-base-audit.md](../audits/42-2026-05-17-schemaapp-support-knowledge-base-audit.md).
-Анализ 4 PDF Schema App про connected schema, Content Knowledge Graphs, impact и Agentic Web: [44-2026-05-17-schemaapp-pdf-agentic-graph-impact-analysis.md](../audits/44-2026-05-17-schemaapp-pdf-agentic-graph-impact-analysis.md).
-Анализ 21 Schema App customer stories/case studies по real-world внедрениям: [46-2026-05-18-schemaapp-customer-stories-case-studies-audit.md](../audits/46-2026-05-18-schemaapp-customer-stories-case-studies-audit.md).
-Операционный регламент поддержки product facts: [58-product-facts-maintenance-process-2026.md](58-product-facts-maintenance-process-2026.md).
-Image license metadata внедрена через видимую страницу `/image-license/` и centralized schema helper; текущий статус зафиксирован в [57-2026-05-31-schema-entity-full-audit-current.md](../audits/57-2026-05-31-schema-entity-full-audit-current.md).
+Текущий порядок внедрения задают [JSON-LD roadmap](26-json-ld-graph-audit-roadmap-2026.md), [регламент product facts](31-product-facts-maintenance-process-2026.md), [entity performance report](32-entity-performance-report-2026.md) и [список URL для валидаторов](33-schema-validator-url-checklist-2026.md). Аудиты `47`, `50`, `55`, `57` и `59` сохраняют историю источников и прежних решений.
+Операционный регламент поддержки product facts: [31-product-facts-maintenance-process-2026.md](31-product-facts-maintenance-process-2026.md).
+Image license metadata внедрена через видимую страницу `/image-license/` и централизованный schema helper. Аудит `68` фиксирует состояние на 2026-05-31, а текущую техническую проверку выполняет [аудит 99](../audits/99-2026-07-10-full-documentation-project-sync-audit-current.md).
 Обновление `2026-05-25` учитывает статью Schema App [Stop Chasing Visibility. Build Understanding.](https://www.schemaapp.com/schema-markup/stop-chasing-visibility-build-understanding/) и официальный Google guide [Optimizing your website for generative AI features on Google Search](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide).
 
-## 0. Рамка Для AI Search
+## 0. Рамка для AI Search
 
 Structured data не является отдельным AI-хаком. В Google generative AI search нет специального schema.org-типа, который нужно добавить “для AI”. Поэтому качество разметки в проекте оценивается не по количеству свойств, а по тому, насколько точно graph помогает машинам понять реальные сущности и связи.
 
@@ -27,11 +23,11 @@ Structured data не является отдельным AI-хаком. В Googl
 - не размечать невидимые или неподтвержденные факты;
 - не создавать отдельную `AI schema`;
 - не считать `llms.txt` или chunking заменой видимого контента, индексации, entity registry и JSON-LD graph;
-- считать лучшей schema-разметкой ту, которая синхронизирована с source of truth и снижает риск неправильного представления бренда, товара или условий покупки.
+- считать лучшей schema-разметкой ту, которая синхронизирована с источником правды и снижает риск неправильного представления бренда, товара или условий покупки.
 
-## 1. Семь Проверок Schema-Разметки
+## 1. Семь проверок Schema-разметки
 
-| # | Проверка | Приоритет | Смысл Для Aerocool |
+| # | Проверка | Приоритет | Смысл для Aerocool |
 | ---: | --- | --- | --- |
 | 1 | Правильный `Schema.org` type | High | Тип должен соответствовать главному интенту страницы |
 | 2 | Релевантные properties по видимому контенту | High | Разметка должна описывать реальные факты на странице |
@@ -41,13 +37,13 @@ Structured data не является отдельным AI-хаком. В Googl
 | 6 | Внешнее entity linking | Medium | `sameAs` и внешние knowledge bases использовать только при точном совпадении |
 | 7 | Защита от schema drift | High | JSON-LD должен оставаться синхронным с видимым контентом |
 
-## 2. Правильный Type По Интенту Страницы
+## 2. Правильный Type по интенту страницы
 
 В проекте это решается через `schema_types`.
 
 Текущие соответствия:
 
-| Тип Страницы | Локальный `schema_types` | Статус |
+| Тип страницы | Локальный `schema_types` | Статус |
 | --- | --- | --- |
 | Главная | `["website", "organization", "brand"]` | Ок |
 | О бренде | `["website", "organization", "brand", "about-page", "breadcrumbs"]` | Ок |
@@ -66,7 +62,7 @@ Structured data не является отдельным AI-хаком. В Googl
 
 Перед добавлением или изменением schema-разметки определить главную сущность страницы.
 
-| Тип Страницы | Primary Entity | Как Связывать |
+| Тип страницы | Primary Entity | Как связывать |
 | --- | --- | --- |
 | Главная | `Organization`, `Brand`, `WebSite` | site-level graph и publisher |
 | О бренде | `AboutPage` -> `Organization` | `mainEntity` |
@@ -81,7 +77,7 @@ Structured data не является отдельным AI-хаком. В Googl
 
 Если нельзя коротко назвать primary entity, проблема в контенте или intent страницы. В таком случае сначала уточнить страницу, а не добавлять больше JSON-LD.
 
-### Типы Для Конкретных Вертикалей
+### Типы для конкретных вертикалей
 
 Healthcare-гайд полезен как напоминание: schema.org type выбирается по реальному вертикальному контенту, а не по желанию получить больше свойств.
 
@@ -107,7 +103,7 @@ Healthcare-гайд полезен как напоминание: schema.org typ
 
 Правило: vertical schema нельзя переносить из чужого примера. Сначала page intent и видимый контент, потом type.
 
-## 3. Свойства Только По Видимому Контенту
+## 3. Свойства только по видимому контенту
 
 Качественная schema-разметка использует не только required-поля для rich results, но и свойства, которые реально помогают описать сущность.
 
@@ -135,11 +131,11 @@ Healthcare-гайд полезен как напоминание: schema.org typ
 
 На `2026-05-31` `Product.color` выводится из registry, а `Product.additionalProperty` строится из видимой вкладки `characteristics`. Если характеристика не видна пользователю, она не должна попадать в `additionalProperty`.
 
-Для цены, наличия, гарантии, доставки, возврата, оплаты, `priceValidUntil`, цвета и характеристик использовать регламент [58-product-facts-maintenance-process-2026.md](58-product-facts-maintenance-process-2026.md): сначала бизнес-подтверждение, затем front matter или registry, затем видимый HTML, JSON-LD и `/faq/`, если факт относится к общей политике.
+Для цены, наличия, гарантии, доставки, возврата, оплаты, `priceValidUntil`, цвета и характеристик использовать регламент [31-product-facts-maintenance-process-2026.md](31-product-facts-maintenance-process-2026.md): сначала бизнес-подтверждение, затем front matter или registry, затем видимый HTML, JSON-LD и `/faq/`, если факт относится к общей политике.
 
 Открытый риск: `aggregateRating`. Его нужно держать только при реальном и видимом источнике рейтинга/отзывов. Целевой источник для проекта — approved отзывы из `Netlify Database`, выгруженные на build в `data/generated/reviews.json`.
 
-## 4. Вложенность И Иерархия
+## 4. Вложенность и иерархия
 
 SchemaApp checklist подчеркивает: если сущности относятся к главной сущности страницы, их нужно вложить или связать так, чтобы была понятна иерархия.
 
@@ -154,7 +150,7 @@ SchemaApp checklist подчеркивает: если сущности отно
 
 Правило: breadcrumb — навигация, а не смысловая часть товара или статьи. Его нормально держать отдельным узлом графа.
 
-## 5. URI И `@id`
+## 5. URI и `@id`
 
 Каждая важная сущность должна иметь стабильный `@id`.
 
@@ -180,7 +176,7 @@ SchemaApp checklist подчеркивает: если сущности отно
 - не использовать случайные fragment-имена без понятной системы;
 - для entity-полей использовать только `entity_id` из registry/data layer; front matter добавлять точечно после проверки видимого контента.
 
-## 6. Связи Между Сущностями
+## 6. Связи между сущностями
 
 PDF особенно полезен здесь: важна не просто ссылка на сущность, а точное свойство связи.
 
@@ -196,7 +192,7 @@ PDF особенно полезен здесь: важна не просто с�
 
 Менее точное свойство вроде `mentions` не должно заменять более точное `publisher`, `author`, `brand`, `seller` или `mainEntity`.
 
-## 7. Внешняя Связь Сущностей
+## 7. Внешняя связь сущностей
 
 Внешние связи помогают устранить неоднозначность, но для Aerocool их нужно применять осторожно.
 
@@ -221,7 +217,7 @@ PDF особенно полезен здесь: важна не просто с�
 
 Для терминов вроде `Mesh`, `Synchronous Tilt`, `SYNC4`, `SYNC5` лучше сначала создать сильное собственное объяснение на сайте, а внешнее связывание добавлять только при надежном совпадении.
 
-### `additionalType` И `sameAs`
+### `additionalType` и `sameAs`
 
 `sameAs` и `additionalType` решают разные задачи.
 
@@ -239,7 +235,7 @@ PDF особенно полезен здесь: важна не просто с�
 
 Официальные `sameAs` ссылки проверять раз в квартал: URL должен быть живым, стабильным и по-прежнему представлять global Aerocool, а не локальное представительство или стороннюю карточку.
 
-## 8. Расхождение Schema-Разметки С Видимым Контентом
+## 8. Расхождение Schema-разметки с видимым контентом
 
 Schema drift — расхождение между JSON-LD и видимым контентом.
 
@@ -259,7 +255,7 @@ Schema drift — расхождение между JSON-LD и видимым к�
 - материал и цвет;
 - характеристики товара.
 
-Правило поддержки: product front matter является источником правды для merchant facts. Если меняется видимый коммерческий факт, сначала обновить front matter, затем одновременно проверить `Product` JSON-LD, `/faq/` и контент страницы. Для рейтинга и отзывов источник другой: approved reviews snapshot из `data/generated/reviews.json`, собранный из `Netlify Database`.
+Правило поддержки: front matter товара является источником правды для merchant facts. Если меняется видимый коммерческий факт, сначала обновить front matter, затем одновременно проверить `Product` JSON-LD, `/faq/` и контент страницы. Для рейтинга и отзывов источник другой: снимок approved-отзывов из `data/generated/reviews.json`, собранный из `Netlify Database`.
 
 Особенно внимательно:
 
@@ -270,7 +266,7 @@ Schema drift — расхождение между JSON-LD и видимым к�
 - при переносе URL;
 - при изменении локализации `uk` / `ru`.
 
-## 9. Метаданные Лицензии Изображений (Image License Metadata)
+## 9. Метаданные лицензии изображений (Image License Metadata)
 
 Текущий проект создает `ImageObject` для primary image страницы и логотипа. С `2026-05-31` каждый такой `ImageObject` получает:
 
@@ -286,7 +282,7 @@ Schema drift — расхождение между JSON-LD и видимым к�
 
 Для товарных изображений по-прежнему обязательны crawlable visible images, корректный `alt`, `contentUrl`, `width`, `height` и соответствие изображения реальному товару.
 
-## 10. QA-Процесс На Уровне Страницы
+## 10. QA-процесс на уровне страницы
 
 Использовать этот чеклист для ключевых страниц после schema/content изменений.
 
@@ -320,11 +316,11 @@ Schema drift — расхождение между JSON-LD и видимым к�
 11. Проверить Google Rich Results Test для страниц, где rich result важен.
 12. После production-перехода проверить Search Console reports.
 
-### Проверка Стратегии И Пользы
+### Проверка стратегии и пользы
 
 Structured data должна быть связана с целью страницы, а не добавляться ради самого факта разметки.
 
-| Цель | Подходящая Schema/страница | Что Измерять |
+| Цель | Подходящая Schema/страница | Что измерять |
 | --- | --- | --- |
 | Продать товар | `Product`, `Offer`, merchant facts | impressions, clicks, CTR, product page visits, qualified traffic, contact/catalog actions, conversions |
 | Помочь выбрать | `Article`, `CollectionPage`, `FAQPage` где уместно | relevant queries, engagement, переходы в серии и товары, AI citations по выбору кресла |
@@ -336,7 +332,7 @@ Structured data должна быть связана с целью страни�
 
 Schema strategy — это ongoing process. После production-запуска отслеживать не только validator pass, но и Search Console, rich result reports, AI Search-аудит, schema drift и реальные бизнес-действия.
 
-### Schema Как Performance Layer
+### Schema как Performance Layer
 
 `Impact of Schema Markup` усиливает важную рамку: schema в 2026 году нельзя оценивать только по принципу “валидно / невалидно” или “есть rich result / нет rich result”. Для Aerocool schema должна работать как слой измеримой производительности.
 
@@ -351,9 +347,9 @@ Schema strategy — это ongoing process. После production-запуска
 
 До production и индексации эти метрики не являются основанием для новых schema-типов. Сначала нужен чистый граф, затем baseline, затем улучшения.
 
-Customer stories Schema App подтверждают ту же логику на реальных внедрениях: сильный эффект дают не добавленные свойства сами по себе, а связка `visible content -> reliable source of truth -> structured data -> measurement`. Для Aerocool это означает, что Product rich results, entity linking и AI Search readiness нельзя оценивать без источника product facts, source для ratings и post-production reporting.
+Кейсы Schema App подтверждают ту же логику на реальных внедрениях: сильный эффект дают не свойства сами по себе, а связка `видимый контент -> надежный источник правды -> structured data -> измерение`. Для Aerocool это означает, что Product rich results, связи сущностей и готовность к AI-поиску нельзя оценивать без источника товарных фактов, источника рейтингов и отчетности после публикации.
 
-### Операционная Поддержка И Владение Данными
+### Операционная поддержка и владение данными
 
 `The Schema App` полезен не как причина переходить на внешний SaaS, а как напоминание: structured data требует операционной модели.
 
@@ -370,13 +366,13 @@ Customer stories Schema App подтверждают ту же логику на
 - schema-изменения должны иметь владельца, а не быть случайными правками;
 - новые page types сначала описываются в документации, потом в шаблонах;
 - массовые поля front matter не добавляются без шаблонной поддержки;
-- schema backlog должен идти вместе с content backlog;
+- список задач schema должен обновляться вместе со списком контентных задач;
 - при миграции URL, redesign или изменении товарных данных проверять JSON-LD отдельно;
 - измерять влияние через существующие business metrics, а не придумывать vanity-метрики.
 
 Внешний schema SaaS имеет смысл рассматривать только если проект резко вырастет до сотен/тысяч шаблонно разных страниц, появится частая смена коммерческих данных без участия разработки или понадобится отдельный non-dev workflow для SEO-команды. Сейчас это не требуется.
 
-## 11. Что Добавлять В План Развития
+## 11. Что добавлять в план развития
 
 Из PDF для проекта реально полезны следующие задачи:
 
@@ -387,11 +383,11 @@ Customer stories Schema App подтверждают ту же логику на
 - документировать источник рейтингов или убрать `aggregateRating`;
 - создать schema drift QA как регулярную проверку;
 - привязывать schema-изменения к цели страницы и измеримой метрике;
-- поддерживать schema ownership и backlog как часть контентно-технического процесса;
+- закрепить владельцев schema и вести список задач как часть контентно-технического процесса;
 - при новых страницах выбирать type через intent страницы, а не по шаблону “похоже на прошлую”.
-- поддерживать [отчет по эффективности сущностей (Entity Performance Report)](59-entity-performance-report-2026.md): entity -> URL -> impressions -> clicks -> CTR -> AI citations -> business actions; внешние performance-поля заполнять после production.
+- поддерживать [отчет по эффективности сущностей (Entity Performance Report)](32-entity-performance-report-2026.md): entity -> URL -> impressions -> clicks -> CTR -> AI citations -> business actions; внешние performance-поля заполнять после production.
 
-## 12. Что Не Менять Сейчас
+## 12. Что не менять сейчас
 
 Не нужно:
 
@@ -406,7 +402,7 @@ Customer stories Schema App подтверждают ту же логику на
 - переходить на внешний schema SaaS без реальной проблемы масштаба, ownership или скорости обновлений;
 - добавлять agentic actions, если нет реального business endpoint, owner, validation rules и видимого процесса.
 
-## 13. Контрольный Вывод
+## 13. Контрольный вывод
 
 Главная практическая польза `Schema Markup Checklist` для Aerocool — это QA-дисциплина.
 

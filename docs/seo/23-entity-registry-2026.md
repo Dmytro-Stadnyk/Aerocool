@@ -1,8 +1,8 @@
-# Реестр Сущностей Aerocool 2026
+# Реестр сущностей Aerocool 2026
 
-Обновлено: 2026-06-24.
+Обновлено: 2026-07-10.
 
-Базовая синхронизация документации с лучшими практиками 2026 зафиксирована в [37-2026-05-13-documentation-2026-best-practices-sync-audit.md](../audits/37-2026-05-13-documentation-2026-best-practices-sync-audit.md). PDF-аудит Schema App по connected graph, Content Knowledge Graphs, impact и Agentic Web зафиксирован в [44-2026-05-17-schemaapp-pdf-agentic-graph-impact-analysis.md](../audits/44-2026-05-17-schemaapp-pdf-agentic-graph-impact-analysis.md). Актуальный полный audit registry и rendered graph зафиксирован в [57-2026-05-31-schema-entity-full-audit-current.md](../audits/57-2026-05-31-schema-entity-full-audit-current.md). Реестр остается governance-документом: `confirmed` сущности можно использовать в JSON-LD, а новые staged/planned сущности не должны становиться сильными связями без видимого подтверждения на странице.
+Реестр остается документом управления сущностями: `confirmed` сущности можно использовать в JSON-LD, а новые `staged` или `planned` сущности не должны становиться сильными связями без видимого подтверждения на странице. Аудиты `50`, `57` и `68` сохраняют историю формирования реестра; текущее состояние сверяется с `data/entities.yaml`, [entity performance report](32-entity-performance-report-2026.md) и [аудитом 99](../audits/99-2026-07-10-full-documentation-project-sync-audit-current.md).
 
 Этот документ — канонический реестр сущностей проекта `Aerocool Ukraine`. Он нужен для управляемого Entity SEO, AI Search, `about_entities`, `mentions_entities`, `ProductGroup`, `Product.color`, `additionalProperty`, `llms.txt`, будущего `Callable Actions Registry` и структурированного [data/entities.yaml](../../data/entities.yaml).
 
@@ -10,9 +10,9 @@
 
 Реестр не заменяет `schema_types`. Поле `schema_types` по-прежнему выбирает типы JSON-LD, а registry фиксирует стабильные сущности, `@id`, entity home, связи, владельца фактов и условия внедрения.
 
-## Актуальный Снимок Аудита
+## Проверенный снимок реестра
 
-На 2026-05-31 в registry зафиксировано `63` сущности: `61 confirmed`, `0 planned` и `2 do-not-markup`. Машинных ошибок registry не найдено: неизвестных ссылок из front matter нет, `about_entities` и `mentions_entities` используют только `confirmed` сущности, `product_group_id` остался только у реальных цветовых вариантов WING/XTAL и указывает на `confirmed` ProductGroup, поэтому `ProductGroup`, `isVariantOf` и `inProductGroupWithID` выводятся в JSON-LD.
+Повторно проверено 2026-07-10: в `data/entities.yaml` зафиксировано `63` сущности — `61 confirmed`, `0 planned` и `2 do-not-markup`. Неизвестных ссылок из front matter нет; `about_entities` и `mentions_entities` используют только `confirmed` сущности; `product_group_id` остается только у реальных цветовых вариантов WING/XTAL и указывает на `confirmed` ProductGroup.
 
 Оценка Entity Registry: `9.7 / 10`.
 
@@ -24,12 +24,12 @@
 
 - не создавать ProductGroup для одиночных товаров без соседних вариантов;
 - добавлять новые `planned` feature/use case/material entities только после видимого объяснения и entity home;
-- поддерживать регулярный [отчет по эффективности сущностей (Entity Performance Report)](59-entity-performance-report-2026.md) через `npm run entity:report`;
-- исполнять операционный процесс поддержки product front matter из [58-product-facts-maintenance-process-2026.md](58-product-facts-maintenance-process-2026.md);
+- поддерживать регулярный [отчет по эффективности сущностей (Entity Performance Report)](32-entity-performance-report-2026.md) через `npm run entity:report`;
+- исполнять операционный процесс поддержки product front matter из [31-product-facts-maintenance-process-2026.md](31-product-facts-maintenance-process-2026.md);
 - поддерживать страницу `/image-license/` и `/ru/image-license/`, если меняются права на изображения, владелец или порядок запроса разрешения;
 - поддерживать review governance через approved reviews pipeline и не возвращать ручные rating-поля во front matter.
 
-## 1. Как Использовать Этот Документ
+## 1. Как использовать этот документ
 
 - При создании новой страницы сначала определить главную сущность страницы в registry.
 - При добавлении `about_entities` или `mentions_entities` использовать только `entity_id` из registry.
@@ -37,7 +37,7 @@
 - Если сущность имеет статус `planned`, ее можно использовать для планирования контента, но не стоит выводить как сильный JSON-LD relationship без видимого объяснения.
 - Если сущность имеет статус `do-not-markup`, ее не размечать и не использовать как `sameAs`.
 
-## 2. Основные Правила
+## 2. Основные правила
 
 - `entity_id` должен быть стабильным, коротким, lower-case и `kebab-case`.
 - `entity_home` — собственный URL сайта, который лучше всего объясняет сущность человеку.
@@ -47,7 +47,7 @@
 - Внешние профили Aerocool остаются у `https://aerocool.io/#brand` и `https://aerocool.io/#organization`.
 - Официальный реестр `sameAs` проверять раз в квартал: URL должен быть живым, стабильным и по-прежнему представлять ту же global Aerocool entity.
 - `additionalType` не является заменой `sameAs`. Его можно рассматривать только для уточнения типа через внешний словарь, если внешний термин является более узким типом текущей сущности.
-- Product facts canonical source — product front matter; владелец business values — команда Aerocool Украина; процесс подтверждения, внесения и QA описан в [58-product-facts-maintenance-process-2026.md](58-product-facts-maintenance-process-2026.md).
+- Product facts canonical source — product front matter; владелец business values — команда Aerocool Украина; процесс подтверждения, внесения и QA описан в [31-product-facts-maintenance-process-2026.md](31-product-facts-maintenance-process-2026.md).
 - Не добавлять entity fields в `content/`, пока Hugo templates не умеют безопасно читать эти поля.
 - Не создавать новые schema nodes, если человек не видит соответствующий факт на странице.
 - Hugo генерирует отдельные registry-based JSON-LD nodes для `confirmed` сущностей классов `Material`, `Mechanism`, `Feature`, `UseCase`, `ContentTopic` и `Policy`, если они используются в `about_entities` или `mentions_entities`. Product, Organization, Brand, WebPage и Collection nodes не дублируются, потому что для них уже есть отдельные schema partials.
@@ -55,16 +55,16 @@
 - Registry refs в `about`, `mentions`, `hasVariant` и похожих связях должны передавать не только `@id`, но и `@type` из `schema_candidate`. Это защищает от ситуации, когда валидатор видит ссылку на `CollectionPage`, `Product`, `DefinedTerm` или `Policy` как объект без типа.
 - Agentic actions не добавлять в JSON-LD, пока нет реального business endpoint, owner, input validation, success/failure states и видимого процесса для пользователя.
 
-## 3. Статусы Сущностей
+## 3. Статусы сущностей
 
-| Статус | Значение | Можно Использовать В Планировании | Можно Использовать В JSON-LD Сейчас |
+| Статус | Значение | Можно использовать в планировании | Можно использовать в JSON-LD сейчас |
 | --- | --- | --- | --- |
 | `confirmed` | Сущность имеет entity home, факты подтверждены, связана с видимым контентом | Да | Да, если шаблон поддерживает |
 | `planned` | Сущность важна, но нужен блок глоссария, видимые характеристики, навигация вариантов или mapping | Да | Пока нет |
 | `needs-review` | Сущность есть в контенте, но факты, `@id` или entity home нужно уточнить | Да | Нет |
 | `do-not-markup` | Сущность не стоит размечать отдельно на текущем этапе | Нет | Нет |
 
-## 4. Справочник Полей
+## 4. Справочник полей
 
 | Поле | Значение |
 | --- | --- |
@@ -81,9 +81,9 @@
 | `parent` | Родительская сущность в графе |
 | `related` | Полезные связанные сущности для будущих `mentions` |
 
-## 5. Правила Для ID
+## 5. Правила для ID
 
-| Класс Сущности | Шаблон `entity_id` | Текущий / Будущий Шаблон `@id` |
+| Класс сущности | Шаблон `entity_id` | Текущий / будущий шаблон `@id` |
 | --- | --- | --- |
 | Brand | `aerocool-brand` | `https://aerocool.io/#brand` |
 | Локальная организация | `aerocool-ukraine` | `https://aerocool.ua/#organization` |
@@ -97,7 +97,7 @@
 | Сценарий использования | `<intent-name>` | Будущий glossary/entity node или content hub |
 | Политика | `<policy>-policy` | `/faq/`, `/image-license/` или будущая отдельная policy page |
 
-## 6. Базовые Сущности Бренда, Сайта И Организации
+## 6. Базовые сущности бренда, сайта и организации
 
 | entity_id | name_en | name_uk | name_ru | entity_class | schema_candidate | current_jsonld_id | entity_home | owner | status | Примечания |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -107,11 +107,11 @@
 | `aerocool-website` | Aerocool Ukraine website | Сайт Aerocool Україна | Сайт Aerocool Украина | WebSite | `WebSite` | `https://aerocool.ua/#website` | `/` | Aerocool Ukraine | `confirmed` | Site-level сущность для поиска, publisher-связей и графа страниц. |
 | `aerocool-logo` | Aerocool logo | Логотип Aerocool | Логотип Aerocool | ImageObject | `ImageObject` | `https://aerocool.ua/#logo` | `/` | Aerocool Ukraine | `confirmed` | Общий визуальный identity node. |
 
-## 7. Официальный Реестр `sameAs`
+## 7. Официальный реестр `sameAs`
 
 Сейчас только эти глобальные профили подтверждены как ссылки точного совпадения для глобальных сущностей Aerocool.
 
-| Целевая Сущность | sameAs URL | Статус | Примечания |
+| Целевая сущность | sameAs URL | Статус | Примечания |
 | --- | --- | --- | --- |
 | `aerocool-brand`, `aerocool-global-organization` | `https://www.facebook.com/AeroCoolGlobal/` | `confirmed` | Официальный глобальный профиль. |
 | `aerocool-brand`, `aerocool-global-organization` | `https://www.instagram.com/aerocool_global` | `confirmed` | Официальный глобальный профиль. |
@@ -120,7 +120,7 @@
 | `aerocool-brand`, `aerocool-global-organization` | `https://www.youtube.com/@AeroCoolGlobal` | `confirmed` | Официальный глобальный профиль. |
 | `aerocool-ukraine` | отсутствует | `confirmed` | Локальная сущность использует `parentOrganization` и `brand`, а не локальный `sameAs`. |
 
-## 8. Сущности Страниц И Контентных Хабов
+## 8. Сущности страниц и контентных хабов
 
 | entity_id | name_en | name_uk | name_ru | entity_class | schema_candidate | current_jsonld_id | entity_home | status | Рекомендуемые `about_entities` |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -132,28 +132,28 @@
 | `articles-collection` | Aerocool articles | Статті Aerocool | Статьи Aerocool | Collection | `CollectionPage` | `https://aerocool.ua/articles/#collection` | `/articles/` | `confirmed` | `chair-selection`, `ergonomic-chair`, `aerocool-catalog` |
 | `news-collection` | Aerocool news | Новини Aerocool | Новости Aerocool | Collection | `CollectionPage` | `https://aerocool.ua/news/#collection` | `/news/` | `confirmed` | `aerocool-brand`, `aerocool-catalog` |
 
-## 9. Сущности Товарных Серий
+## 9. Сущности товарных серий
 
-| entity_id | name_en | name_uk | name_ru | entity_class | current_schema | future_schema | current_jsonld_id | entity_home | status | Главные Связи |
+| entity_id | name_en | name_uk | name_ru | entity_class | current_schema | future_schema | current_jsonld_id | entity_home | status | Главные связи |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `sky-series` | Aerocool SKY | Aerocool SKY | Aerocool SKY | ProductSeries | `CollectionPage` | Коллекция списка товаров/серии | `https://aerocool.ua/products/sky/#collection` | `/products/sky/` | `confirmed` | parent `aerocool-catalog`; товары `sky-light`, `sky-360`; mentions `mesh-material`, `sync4-mechanism`, `sync5-mechanism` |
 | `wing-series` | Aerocool WING | Aerocool WING | Aerocool WING | ProductSeries | `CollectionPage` | Коллекция списка товаров/серии | `https://aerocool.ua/products/wing/#collection` | `/products/wing/` | `confirmed` | parent `aerocool-catalog`; товары WING; ProductGroup только для цветовых вариантов моделей; mentions `racer-material`, `loft-air-material`, `mesh-material`, `11d-adjustment`, `dual-backrest` |
 | `xtal-series` | Aerocool XTAL | Aerocool XTAL | Aerocool XTAL | ProductSeries | `CollectionPage` | Коллекция списка товаров/серии | `https://aerocool.ua/products/xtal/#collection` | `/products/xtal/` | `confirmed` | parent `aerocool-catalog`; товары XTAL; ProductGroup только для цветовых вариантов моделей; mentions `racer-material`, `loft-air-material`, `mesh-material`, `7d-adjustment`, `replaceable-elements` |
 
-## 10. Сущности `ProductGroup`, Активные Для Вариантов
+## 10. Сущности `ProductGroup`, активные для вариантов
 
 `ProductGroup` выводится только для реальных вариантов одной модели, где есть видимая навигация между вариантами. Одиночные товары не получают ProductGroup. На 2026-05-31 активны только четыре цветовые группы WING/XTAL.
 
 Validator-safe правило для `ProductGroup`: выводить `@type`, `@id`, `name`, `productGroupID`, `url`, `brand`, `hasVariant` и `variesBy`; не добавлять `inLanguage` и `isPartOf`, потому что Schema.org Validator не принимает эти свойства для `ProductGroup`.
 
-| entity_id | name_en | future_jsonld_id | entity_home | varies_by | variants | status | Условие Поддержки |
+| entity_id | name_en | future_jsonld_id | entity_home | varies_by | variants | status | Условие поддержки |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `wing-racer-product-group` | Aerocool WING Racer | `https://aerocool.ua/products/wing/#wing-racer-product-group` | `/products/wing/` | цвет | `wing-racer-black`, `wing-racer-dark-grey` | `confirmed` | Поддерживать swatches-ссылки и факты конкретного варианта. |
 | `wing-loft-air-product-group` | Aerocool WING Loft Air | `https://aerocool.ua/products/wing/#wing-loft-air-product-group` | `/products/wing/` | цвет | `wing-loft-air-light-grey`, `wing-loft-air-dark-grey` | `confirmed` | Поддерживать swatches-ссылки и факты конкретного варианта. |
 | `xtal-racer-product-group` | Aerocool XTAL Racer | `https://aerocool.ua/products/xtal/#xtal-racer-product-group` | `/products/xtal/` | цвет | `xtal-racer-black`, `xtal-racer-dark-grey` | `confirmed` | Поддерживать swatches-ссылки и факты конкретного варианта. |
 | `xtal-loft-air-product-group` | Aerocool XTAL Loft Air | `https://aerocool.ua/products/xtal/#xtal-loft-air-product-group` | `/products/xtal/` | цвет | `xtal-loft-air-light-grey`, `xtal-loft-air-dark-grey` | `confirmed` | Поддерживать swatches-ссылки и факты конкретного варианта. |
 
-## 11. Сущности Товаров И Товарных Вариантов
+## 11. Сущности товаров и товарных вариантов
 
 | entity_id | entity_class | name_en | SKU | MPN | GTIN-13 | series | material | color | adjustability | mechanism | current_jsonld_id | entity_home | product_group |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -170,9 +170,9 @@ Validator-safe правило для `ProductGroup`: выводить `@type`, `
 | `xtal-racer-black` | ProductVariant | Aerocool XTAL Racer Black | `XTAL-RB-001` | `TEGC-2099101.11` | `4711530966778` | `xtal-series` | `racer-material` | black | `7d-adjustment` | `sync5-mechanism` | `https://aerocool.ua/products/xtal/racer-black/#product` | `/products/xtal/racer-black/` | `xtal-racer-product-group` |
 | `xtal-racer-dark-grey` | ProductVariant | Aerocool XTAL Racer Dark Grey | `XTAL-RDG-001` | `TEGC-209910Z.Z` | `4711530966785` | `xtal-series` | `racer-material` | dark-grey | `7d-adjustment` | `sync5-mechanism` | `https://aerocool.ua/products/xtal/racer-dark-grey/#product` | `/products/xtal/racer-dark-grey/` | `xtal-racer-product-group` |
 
-## 12. Сущности Материалов И Поверхностей
+## 12. Сущности материалов и поверхностей
 
-| entity_id | name_en | name_uk | name_ru | entity_class | schema_candidate | entity_home | status | Текущие Сильные Страницы | Примечания |
+| entity_id | name_en | name_uk | name_ru | entity_class | schema_candidate | entity_home | status | Текущие сильные страницы | Примечания |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `racer-material` | Racer | Racer | Racer | Material | `DefinedTerm` или `Thing` | `/articles/racer-vs-loft-air-vs-mesh/` | `confirmed` | статья о сравнении материалов; товарные страницы Racer | Плотная поверхность, похожая на leatherette, и более простой уход. |
 | `loft-air-material` | Loft Air | Loft Air | Loft Air | Material | `DefinedTerm` или `Thing` | `/articles/racer-vs-loft-air-vs-mesh/` | `confirmed` | статья о сравнении материалов; товарные страницы Loft Air | Ощущение вентилируемого многослойного текстиля. |
@@ -180,9 +180,9 @@ Validator-safe правило для `ProductGroup`: выводить `@type`, `
 | `leatherette-material` | Leatherette | екошкіра / Leatherette | экокожа / Leatherette | Material | `DefinedTerm` или `Thing` | `/articles/racer-vs-loft-air-vs-mesh/` | `confirmed` | страницы Racer | Активировано `2026-05-31`; использовать там, где видимо обсуждается leatherette-поверхность Racer. |
 | `fabric-material` | Fabric | тканина | ткань | Material | `DefinedTerm` или `Thing` | `/articles/racer-vs-loft-air-vs-mesh/` | `confirmed` | страницы Loft Air | Активировано `2026-05-31`; использовать там, где видимо обсуждается тканевая поверхность Loft Air. |
 
-## 13. Сущности Механизмов И Функций
+## 13. Сущности механизмов и функций
 
-| entity_id | name_en | name_uk | name_ru | entity_class | schema_candidate | entity_home | status | Сильные Страницы | Примечания |
+| entity_id | name_en | name_uk | name_ru | entity_class | schema_candidate | entity_home | status | Сильные страницы | Примечания |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `synchronous-tilt` | Synchronous Tilt | Synchronous Tilt | Synchronous Tilt | Mechanism | `DefinedTerm` или `Thing` | `/articles/what-is-synchronous-tilt/` | `confirmed` | гайд по sync tilt; товарные страницы | Главная сущность синхронного наклона. |
 | `sync4-mechanism` | SYNC4 | SYNC4 | SYNC4 | Mechanism | `DefinedTerm` или `Thing` | `/articles/sync4-sync5-mechanism-guide/` | `confirmed` | гайд SYNC4/SYNC5; SKY Light | Использовать там, где в видимом товарном контенте указан SYNC4. |
@@ -196,7 +196,7 @@ Validator-safe правило для `ProductGroup`: выводить `@type`, `
 | `armrests-4d-x-360` | 4D X 360 armrests | підлокітники 4D X 360 | подлокотники 4D X 360 | Feature | `DefinedTerm` или `Thing` | `/products/wing/` | `confirmed` | страницы WING | Активировано `2026-05-31`; раскрывается через видимые товарные `characteristics` / `additionalProperty`, если они есть. |
 | `armrests-3d-x-360` | 3D X 360 armrests | підлокітники 3D X 360 | подлокотники 3D X 360 | Feature | `DefinedTerm` или `Thing` | `/products/sky/` | `confirmed` | страницы SKY 360 | Активировано `2026-05-31`; раскрывается через видимые товарные `characteristics` / `additionalProperty`, если они есть. |
 
-## 14. Сущности Сценариев Использования И Поисковых Интентов
+## 14. Сущности сценариев использования и поисковых интентов
 
 | entity_id | name_en | name_uk | name_ru | entity_class | schema_candidate | entity_home | status | Примечания |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -209,7 +209,7 @@ Validator-safe правило для `ProductGroup`: выводить `@type`, `
 | `hot-room` | hot room | жарке приміщення | жаркое помещение | UseCase | `Thing` или `DefinedTerm` | `/articles/racer-vs-loft-air-vs-mesh/` | `confirmed` | Активировано `2026-05-31`; связано с выбором Mesh и Loft Air без медицинских claims. |
 | `chair-selection` | chair selection | вибір крісла | выбор кресла | ContentTopic | `Thing` или `DefinedTerm` | `/articles/how-to-choose-aerocool-chair/` | `confirmed` | Главная редакционная support-тема. |
 
-## 15. Сущности Сервисных Политик
+## 15. Сущности сервисных политик
 
 Текущий entity home для сервисных политик — `/faq/`. Не создавать отдельную policy schema, пока видимые страницы политик или anchors не стали стабильными.
 
@@ -222,7 +222,7 @@ Validator-safe правило для `ProductGroup`: выводить `@type`, `
 | `price-validity-policy` | Price validity | Актуальність ціни | Актуальность цены | Offer validity reference | product front matter | product front matter | Aerocool Ukraine | `confirmed` | `priceValidUntil: 2027-12-31` подтверждено `2026-05-07`. |
 | `image-license-policy` | Image usage rights | Права на використання зображень | Права на использование изображений | `Thing` / image policy reference | `/image-license/` | image license page | Aerocool Ukraine + Global Aerocool | `confirmed` | Источник для `ImageObject.license` и `ImageObject.acquireLicensePage`. |
 
-## 16. Карта Сущностей Для Редакционного Контента
+## 16. Карта сущностей для редакционного контента
 
 Этот раздел связывает существующие статьи с основными и вторичными сущностями. Он служит источником планирования для постраничных `about_entities` и `mentions_entities`.
 
@@ -240,7 +240,7 @@ Validator-safe правило для `ProductGroup`: выводить `@type`, `
 | `/articles/chair-for-posture-and-long-work/` | `chair-selection`, `long-sitting`, `ergonomic-chair`, `office-chair` | `dual-backrest`, `replaceable-elements`, `sky-series`, `wing-series`, `xtal-series`, mechanisms, materials | `confirmed` |
 | `/articles/gaming-chair-long-sessions/` | `gaming-chair`, `long-sitting`, `chair-selection` | `dual-backrest`, `replaceable-elements`, `wing-series`, `xtal-series`, `sky-series`, materials | `confirmed` |
 
-## 17. Карта Сущностей Для Новостей
+## 17. Карта сущностей для новостей
 
 | Страница | Основные `about_entities` | Кандидаты `mentions_entities` | Статус |
 | --- | --- | --- | --- |
@@ -252,7 +252,7 @@ Validator-safe правило для `ProductGroup`: выводить `@type`, `
 | `/news/loft-air-and-mesh-focus/` | `loft-air-material`, `mesh-material` | `wing-loft-air-product-group`, `xtal-loft-air-product-group`, `wing-mesh-black`, `xtal-mesh-black`, `hot-room` | `confirmed` |
 | `/news/sync4-sync5-mechanism-update/` | `sync4-mechanism`, `sync5-mechanism` | `synchronous-tilt`, `sky-series`, `wing-series`, `xtal-series` | `confirmed` |
 
-## 18. Тройки Связей Между Сущностями
+## 18. Тройки связей между сущностями
 
 Использовать эти тройки как семантический каркас для будущих JSON-LD-связей.
 
@@ -277,7 +277,7 @@ Validator-safe правило для `ProductGroup`: выводить `@type`, `
 | `return-policy` | `appliesTo` | Product offers | product front matter и `/faq/` |
 | `warranty-policy` | `appliesTo` | Product offers | product front matter и `/faq/` |
 
-## 19. Связь С Front Matter Страницы
+## 19. Связь с Front Matter страницы
 
 Шаблоны поддерживают `about_entities`, `mentions_entities` и `product_group_id`. На `2026-05-07` эти поля заполнены на приоритетных страницах: главной, about, contact, FAQ, product/article/news hubs, страницах серий, актуальных статьях, актуальных новостях и товарных страницах. На `2026-05-31` одиночные ProductGroup-записи удалены, `product_group_id` остался только у реальных групп моделей с несколькими вариантами, а четыре ProductGroup-сущности WING/XTAL стали активны в JSON-LD.
 
@@ -365,7 +365,7 @@ wing-racer-black:
 
 Action нельзя создавать как “идею”. Он должен соответствовать реальному бизнес-процессу.
 
-| Action ID | Человеческое Действие | Возможная Сущность/Endpoint | Минимальные Входные Данные | Владелец | Статус | Блокер |
+| Action ID | Человеческое действие | Возможная сущность/Endpoint | Минимальные входные данные | Владелец | Статус | Блокер |
 | --- | --- | --- | --- | --- | --- | --- |
 | `compare-chairs` | Сравнить кресла | страница сравнения товаров/серий | ID серии/модели, язык, сценарий | Aerocool Ukraine + content owner | `planned` | Нужны стабильные правила сравнения и видимые страницы сравнения |
 | `check-availability` | Проверить наличие | product front matter или будущий inventory endpoint | product ID, регион при необходимости | Aerocool Ukraine | `planned` | Процесс обновления наличия описан; action останется planned до появления реального endpoint |
@@ -377,7 +377,7 @@ Action нельзя создавать как “идею”. Он должен 
 Правила для будущих actions:
 
 - action должен опираться на `confirmed` entities и актуальные product facts;
-- action должен иметь понятный source of truth;
+- действие должно иметь понятный источник правды;
 - action должен иметь владельца в команде;
 - action должен иметь обязательные поля, правила валидации и состояния ошибки;
 - action нельзя публиковать, если пользователь не может выполнить его на сайте или через официальный процесс;
@@ -385,7 +385,7 @@ Action нельзя создавать как “идею”. Он должен 
 
 До production-стабилизации этот раздел использовать только как roadmap.
 
-## 22. Правила Проверки Качества
+## 22. Правила проверки качества
 
 - Каждое значение `about_entities` должно существовать в этом registry.
 - Каждое значение `mentions_entities` должно существовать в этом registry.
@@ -398,19 +398,19 @@ Action нельзя создавать как “идею”. Он должен 
 - Не добавлять `sameAs` на marketplace-страницы, случайные отзывы или неофициальные страницы.
 - Если у сущности меняется entity home, обновить внутренние ссылки, registry, будущий front matter и schema tests в одном изменении.
 
-## 23. Что Пока Не Размечать
+## 23. Что пока не размечать
 
 | Кандидат | Статус | Причина |
 | --- | --- | --- |
 | `OnlineStore` | `do-not-markup` | Требует подтвержденного merchant/checkout-сценария. |
-| `Review` | `do-not-markup` | Отзывы обрабатываются по товарам через approved review snapshots, а не как отдельная registry-сущность. |
+| `Review` | `do-not-markup` | Отзывы обрабатываются по товарам через снимки approved-отзывов, а не как отдельная сущность реестра. |
 | Люди-авторы/reviewer people | `do-not-markup` | Пока нет реальной editorial person model. |
 | Marketplace-страницы как `sameAs` | `do-not-markup` | Не являются точным совпадением сущности. |
 | Случайные product reviews как `sameAs` | `do-not-markup` | Не являются точным совпадением сущности. |
 | MCP/NLWeb/chatbot entities | `do-not-markup` | Только P3 после production и стабильного knowledge graph. |
 | `BuyAction` / `ScheduleAction` | `do-not-markup` | Требует реального checkout, официального purchase endpoint или scheduling workflow. |
 
-## 24. План Внедрения
+## 24. План внедрения
 
 1. Держать этот markdown-файл как канонический registry во время первого прохода внедрения.
 2. Добавить видимую навигацию вариантов для product groups с несколькими вариантами.

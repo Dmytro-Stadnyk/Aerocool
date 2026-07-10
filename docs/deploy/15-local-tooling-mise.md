@@ -1,6 +1,6 @@
-# Локальные Инструменты Через `mise`
+# Локальные инструменты через `mise`
 
-Обновлено: 2026-07-07.
+Обновлено: 2026-07-10.
 
 `mise` — это менеджер версий инструментов. В этом проекте он нужен, чтобы локально запускать те же версии `Hugo` и `Node`, которые используются в `Netlify`.
 
@@ -165,7 +165,7 @@ mise exec -- ./scripts/script_check.sh
 npm run entity:report
 ```
 
-Generated CSV отчета не редактировать вручную: внешние GSC/AI/business-метрики добавлять в [59-entity-performance-overrides.csv](../seo/59-entity-performance-overrides.csv).
+Generated CSV отчета не редактировать вручную: внешние GSC/AI/business-метрики добавлять в [32-entity-performance-overrides.csv](../seo/32-entity-performance-overrides.csv).
 
 Локальная production-сборка:
 
