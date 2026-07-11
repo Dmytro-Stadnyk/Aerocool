@@ -26,8 +26,8 @@
 
 {{- range $resources -}}
   {{- if and (reflect.IsImageResourceProcessable .) (not (index $seen .Name)) -}}
-    {{- $label := cond $isRu "Дополнительное фото" "Додаткове фото" -}}
-    {{- $images = $images | append (dict "resource" . "alt" (printf "%s — %s" $productTitle $label) "label" $label) -}}
+    {{- $meta := partial "products/gallery-image-meta.html" (dict "page" $page "image" . "subject" $primaryAlt) -}}
+    {{- $images = $images | append (dict "resource" . "alt" $meta.alt "label" $meta.label) -}}
     {{- $seen = merge $seen (dict .Name true) -}}
   {{- end -}}
 {{- end -}}

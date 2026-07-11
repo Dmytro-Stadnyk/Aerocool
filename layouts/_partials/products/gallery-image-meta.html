@@ -1,0 +1,34 @@
+{{- $page := .page -}}
+{{- $image := .image -}}
+{{- $subject := .subject -}}
+{{- $isRu := eq $page.Language.Name "ru" -}}
+{{- $key := replaceRE `\.[^.]+$` "" (path.Base (lower $image.Name)) -}}
+{{- $label := "" -}}
+
+{{- if eq $key "02-front-3q" -}}
+  {{- $label = cond $isRu "Вид спереди под углом" "Вигляд спереду під кутом" -}}
+{{- else if eq $key "03-side" -}}
+  {{- $label = cond $isRu "Боковой профиль" "Боковий профіль" -}}
+{{- else if eq $key "04-back-3q" -}}
+  {{- $label = cond $isRu "Вид сзади под углом" "Вигляд ззаду під кутом" -}}
+{{- else if or (eq $key "04-back") (eq $key "05-back") -}}
+  {{- $label = cond $isRu "Вид сзади" "Вигляд ззаду" -}}
+{{- else if eq $key "06-front-with-lumbar-pillow" -}}
+  {{- $label = cond $isRu "Вид спереди с поясничной подушкой" "Вигляд спереду з поперековою подушкою" -}}
+{{- else if eq $key "07-front-3q-with-lumbar-pillow" -}}
+  {{- $label = cond $isRu "Вид спереди под углом с поясничной подушкой" "Вигляд спереду під кутом з поперековою подушкою" -}}
+{{- else if eq $key "06-material" -}}
+  {{- $label = cond $isRu "Фактура материала" "Фактура матеріалу" -}}
+{{- else if eq $key "07-controls" -}}
+  {{- $label = cond $isRu "Органы управления" "Органи керування" -}}
+{{- else if eq $key "08-mechanism" -}}
+  {{- $label = cond $isRu "Механизм кресла" "Механізм крісла" -}}
+{{- else if eq $key "09-in-scale" -}}
+  {{- $label = cond $isRu "Кресло в масштабе" "Крісло в масштабі" -}}
+{{- else if eq $key "10-dimensions" -}}
+  {{- $label = cond $isRu "Размеры кресла" "Розміри крісла" -}}
+{{- else -}}
+  {{- errorf "products/gallery: unsupported secondary image name '%s'; use the documented semantic filename pattern (%s)" $image.Name $page.Path -}}
+{{- end -}}
+
+{{- return (dict "alt" (printf "%s — %s" $subject $label) "label" $label) -}}

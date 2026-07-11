@@ -147,6 +147,18 @@
   {{- with .color -}}
     {{- $product = merge $product (dict "color" (replace (printf "%s" .) "-" " ")) -}}
   {{- end -}}
+  {{- with .material -}}
+    {{- $materialEntity := index $entities . -}}
+    {{- with $materialEntity -}}
+      {{- if eq (.status | default "planned") "confirmed" -}}
+        {{- $nameMap := .name | default dict -}}
+        {{- $materialName := index $nameMap $.Language.Name | default (index $nameMap "uk") | default (index $nameMap "en") -}}
+        {{- with $materialName -}}
+          {{- $product = merge $product (dict "material" .) -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
 {{- end -}}
 {{- if gt (len $additionalProperties) 0 -}}
   {{- $product = merge $product (dict "additionalProperty" $additionalProperties) -}}
