@@ -12,7 +12,7 @@
 
 ## Проверенный снимок реестра
 
-Повторно проверено 2026-07-10: в `data/entities.yaml` зафиксировано `63` сущности — `61 confirmed`, `0 planned` и `2 do-not-markup`. Неизвестных ссылок из front matter нет; `about_entities` и `mentions_entities` используют только `confirmed` сущности; `product_group_id` остается только у реальных цветовых вариантов WING/XTAL и указывает на `confirmed` ProductGroup.
+Повторно проверено 2026-07-13: в `data/entities.yaml` зафиксировано `64` сущности — `62 confirmed`, `0 planned` и `2 do-not-markup`. Неизвестных ссылок из front matter нет; `about_entities` и `mentions_entities` используют только `confirmed` сущности; `product_group_id` остается только у реальных цветовых вариантов WING/XTAL и указывает на `confirmed` ProductGroup. Отдельная подтвержденная сущность `aerocool-editorial-team` связывает видимое авторство статей и новостей с публичной редакционной политикой.
 
 Оценка Entity Registry: `9.7 / 10`.
 
@@ -104,6 +104,7 @@
 | `aerocool-brand` | Aerocool | Aerocool | Aerocool | Brand | `Brand` | `https://aerocool.io/#brand` | `/about/` | Global Aerocool + Aerocool Ukraine | `confirmed` | Глобальный бренд. Официальные глобальные социальные профили находятся здесь как `sameAs`. |
 | `aerocool-global-organization` | Aerocool Advanced Technologies Corp. | Aerocool Advanced Technologies Corp. | Aerocool Advanced Technologies Corp. | Organization | `Organization` | `https://aerocool.io/#organization` | `https://aerocool.io/` | Global Aerocool | `confirmed` | Глобальная родительская организация. |
 | `aerocool-ukraine` | Aerocool Ukraine | Aerocool Україна | Aerocool Украина | Organization | `Organization` | `https://aerocool.ua/#organization` | `/about/` + `/contact/` | Aerocool Ukraine | `confirmed` | Официальный статус сайта и связь с глобальной Aerocool подтверждены владельцем проекта `2026-07-13`; локальные business facts подтверждены `2026-05-07`; локальный `sameAs` для глобальных social profiles не используется. |
+| `aerocool-editorial-team` | Aerocool Ukraine Editorial Team | Редакція Aerocool Ukraine | Редакция Aerocool Ukraine | Organization | `Organization` | `https://aerocool.ua/about/#editorial-policy` | `/about/#editorial-policy` | Aerocool Ukraine | `confirmed` | Автор-организация для статей и новостей. Видимая подпись и `Article/NewsArticle.author` ведут на публичную редакционную политику; основная локальная организация остается `publisher`. |
 | `aerocool-website` | Aerocool Ukraine website | Сайт Aerocool Україна | Сайт Aerocool Украина | WebSite | `WebSite` | `https://aerocool.ua/#website` | `/` | Aerocool Ukraine | `confirmed` | Site-level сущность для поиска, publisher-связей и графа страниц. |
 | `aerocool-logo` | Aerocool logo | Логотип Aerocool | Логотип Aerocool | ImageObject | `ImageObject` | `https://aerocool.ua/#logo` | `/` | Aerocool Ukraine | `confirmed` | Общий визуальный identity node. |
 

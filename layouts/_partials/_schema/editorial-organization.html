@@ -1,0 +1,9 @@
+{{- /* Отдельный узел автора-организации для связного JSON-LD графа. */ -}}
+{{- $author := partial "editorial-author.html" . -}}
+{{- (dict
+  "@type" $author.type
+  "@id" $author.id
+  "name" $author.name
+  "url" $author.absoluteURL
+  "parentOrganization" (dict "@id" (printf "%s#organization" (.Site.BaseURL | absURL)))
+) | jsonify -}}

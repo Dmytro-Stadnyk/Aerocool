@@ -1,0 +1,6 @@
+{{- /* Автор выводится только на детальной странице статьи. */ -}}
+{{- $schemaTypes := .Params.schema_types | default (slice) -}}
+{{- if and .IsPage (in $schemaTypes "article") -}}
+  {{- $author := partial "editorial-author.html" . -}}
+  <span class="article-author">{{ i18n "article_author_label" }}: <a href="{{ $author.relativeURL }}" rel="author">{{ $author.name }}</a></span>
+{{- end -}}

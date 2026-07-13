@@ -145,7 +145,7 @@ SchemaApp checklist подчеркивает: если сущности отно
 - `Product.offers` вложен в `Product`;
 - `Product.brand` ссылается на один `Brand @id`;
 - `Product.aggregateRating` вложен в `Product` только если есть approved отзывы, видимые на этой же товарной странице;
-- `Article.author` и `Article.publisher` ссылаются на `Organization`;
+- `Article.author` и `NewsArticle.author` ссылаются по стабильному `@id` на отдельный узел подтвержденной организации «Редакция Aerocool Ukraine» с публичным `url`, а `publisher` ссылается на основную локальную организацию Aerocool Ukraine;
 - `BreadcrumbList` остается отдельной навигационной сущностью и не вкладывается в `Product` или `Article`.
 
 Правило: breadcrumb — навигация, а не смысловая часть товара или статьи. Его нормально держать отдельным узлом графа.

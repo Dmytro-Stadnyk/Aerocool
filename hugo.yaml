@@ -178,8 +178,8 @@ params:
     - кресло для гейминга
     - Synchronous Tilt кресло
 
-  # Организация-автор для RSS и совместимости с theme partials.
-  # Видимый author в meta-строке не выводится.
+  # Организация-автор по умолчанию для RSS и совместимости с theme partials.
+  # Детальные статьи и новости получают редакцию из локального helper.
   author: "Aerocool Advanced Technologies Corp."
 
   # PaperMod умеет выводить word count, но локальный page-meta.html намеренно его скрывает.

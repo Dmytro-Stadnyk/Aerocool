@@ -365,12 +365,12 @@
 
 Что делает:
 
-- управляет видимой meta-строкой под `H1` и в карточках листингов;
+- формирует фрагмент видимой meta-строки с датой и временем чтения под `H1` и в карточках листингов;
 - читает `.Params.schema_types`, `.Date`, `.ReadingTime`, `.Param "ShowReadingTime"` и `.Param "hideMeta"`;
 - для страниц со `schema_types: ["article", ...]` выводит дату публикации и время чтения;
 - для страниц со `schema_types: ["news", ...]` выводит только дату публикации;
 - для контактов, FAQ, страницы о бренде, каталога, серий, товаров, хабов, поиска и служебных страниц ничего не выводит;
-- не выводит количество слов, автора и список переводов.
+- не выводит количество слов, автора и список переводов: автор детальной статьи добавляется отдельно через [article-author.html](../../layouts/_partials/article-author.html).
 
 Где используется:
 
@@ -382,7 +382,8 @@
 
 | Тип страницы | Условие | Что видно пользователю |
 |---|---|---|
-| Статья | `schema_types` содержит `article` | дата публикации + время чтения |
+| Детальная статья | `schema_types` содержит `article` | автор-организация + дата публикации + время чтения; автор добавляется в `single.html` |
+| Карточка статьи | `schema_types` содержит `article` | дата публикации + время чтения |
 | Новость | `schema_types` содержит `news` | дата публикации |
 | Контакты | `schema_types` содержит `contact-page` | ничего |
 | FAQ | `schema_types` содержит `faq` | ничего |
@@ -395,7 +396,7 @@
 - `date` и `lastmod` остаются во front matter и используются SEO/schema-слоем, даже если дата не показана в интерфейсе;
 - `lastmod` для статей и новостей видимо выводится редакционным блоком [editorial-note.html](../../layouts/_partials/editorial-note.html), а не `page-meta.html`;
 - `ShowWordCount: true` может оставаться в [hugo.yaml](../../hugo.yaml), но локальный `page-meta.html` намеренно не показывает количество слов;
-- `author` может оставаться в head/schema-слое, но не должен возвращаться в видимую meta-строку без отдельного решения по реальным авторам или редакторам;
+- автор детальной статьи централизованно берется из [editorial-author.html](../../layouts/_partials/editorial-author.html), ведет на редакционную политику и не повторяется во front matter каждой статьи;
 - переключатель языка остается в шапке сайта через [header.html](../../layouts/_partials/header.html), а не в контентной meta-строке;
 - `hideMeta: true` остается ручным override для страниц, где нужно принудительно скрыть meta-строку.
 
@@ -409,9 +410,32 @@
 
 - `npm run build`;
 - проверить `/contact/`, `/faq/`, `/about/`, `/products/` и товарную страницу: видимой `post-meta` быть не должно;
-- проверить статью: должна быть дата публикации и время чтения, без количества слов, автора и списка переводов;
-- проверить новость: должна быть только дата публикации;
+- проверить детальную статью: должны быть связанный автор-организация, дата публикации и время чтения, без количества слов и списка переводов;
+- проверить карточку статьи: должны быть только дата публикации и время чтения;
+- проверить новость: в основной meta-строке должна быть только дата публикации, а автор-организация должен быть виден в редакционном блоке;
 - проверить `/ru/`-версии тех же URL.
+
+### `editorial-author.html`
+
+Файл: [editorial-author.html](../../layouts/_partials/editorial-author.html)
+
+Что делает:
+
+- читает подтвержденную сущность `aerocool-editorial-team` из [data/entities.yaml](../../data/entities.yaml);
+- возвращает локализованное имя «Редакція/Редакция Aerocool Ukraine»;
+- возвращает стабильный JSON-LD `@id` и ссылку на раздел редакционной политики текущей языковой версии About;
+- останавливает сборку, если сущность отсутствует, не подтверждена или локализованная About-страница не найдена;
+- служит единым источником для видимого автора, `<meta name="author">`, `Article` и `NewsArticle`.
+
+### `article-author.html`
+
+Файл: [article-author.html](../../layouts/_partials/article-author.html)
+
+Что делает:
+
+- выводит связанного автора-организацию только на детальной странице статьи;
+- не добавляет подпись в карточки листинга и не меняет компактную meta-строку новостей;
+- использует `rel="author"` и ведет на публичную редакционную политику в About.
 
 ### `page-image.html`
 
@@ -667,7 +691,8 @@
 
 - выводит видимый редакционный trust-блок на статьях и новостях;
 - срабатывает для страниц, где `schema_types` содержит `article` или `news`;
-- показывает редакционную ответственность Aerocool Украина;
+- на статье ссылается на публичную редакционную политику, не дублируя подпись автора из основной meta-строки;
+- на новости показывает связанного автора-организацию, потому что основная meta-строка новости содержит только дату;
 - объясняет, что характеристики, цены, гарантия и наличие сверяются с карточками товаров и служебными страницами сайта;
 - выводит дату последнего обновления из `.Lastmod`;
 - локализуется по языку страницы.
@@ -675,8 +700,8 @@
 Когда идти сюда:
 
 - если нужно изменить формулировку редакционной ответственности;
-- если появятся отдельные авторы, редакторы или reviewer-поля;
-- если Article/NewsArticle schema начнет читать персональные author/reviewer-данные.
+- если появится подтвержденный публичный персональный автор или рецензент и будет принято отдельное архитектурное решение;
+- если изменится публичная редакционная методика.
 
 ### `css.html`
 
@@ -1023,6 +1048,17 @@
 - удаляет повторяющиеся `entity_id`;
 - используется в `webpage`, `about-page`, `contact-page`, `collection`, `article` и `news` schema partials. Для товарных страниц `about_entities` и `mentions_entities` попадают в `WebPage`, а `Product` остается основным товарным узлом с `brand`, `offers`, `seller` и, только для реальных групп вариантов, staged `product_group_id`.
 
+### `editorial-organization.html`
+
+Файл: [editorial-organization.html](../../layouts/_partials/_schema/editorial-organization.html)
+
+Что делает:
+
+- добавляет в общий `@graph` самостоятельный узел автора-организации для статей и новостей;
+- берет имя, стабильный `@id` и локализованный публичный URL из [editorial-author.html](../../layouts/_partials/editorial-author.html);
+- связывает редакцию с основной Aerocool Ukraine через `parentOrganization`;
+- позволяет `Article.author` и `NewsArticle.author` использовать короткую ссылку по `@id` без дублирования полного объекта на каждой странице.
+
 ### `article.html`
 
 Файл: [article.html](../../layouts/_partials/_schema/article.html)
@@ -1030,6 +1066,7 @@
 Что делает:
 
 - строит `Article` schema для evergreen-материалов;
+- ссылается на отдельный узел «Редакция Aerocool Ukraine» как `author`, а основную локальную организацию сохраняет как `publisher`;
 - берет `image` через [page-image-list.html](../../layouts/_partials/_schema/page-image-list.html), чтобы основной `ImageObject` и дополнительные crops **16:9**, **4:3**, **1:1** попадали в JSON-LD одним списком.
 
 ### `news.html`
@@ -1039,6 +1076,7 @@
 Что делает:
 
 - строит `NewsArticle` schema для новостей;
+- ссылается на отдельный узел «Редакция Aerocool Ukraine» как `author`, а основную локальную организацию сохраняет как `publisher`;
 - берет `image` через [page-image-list.html](../../layouts/_partials/_schema/page-image-list.html), чтобы основной `ImageObject` и дополнительные crops **16:9**, **4:3**, **1:1** попадали в JSON-LD одним списком.
 
 ### `faq.html`
@@ -1088,7 +1126,8 @@
 - плохой `description` -> [page-description.html](../../layouts/_partials/page-description.html)
 - странный `H1` на большинстве страниц -> [page-h1.html](../../layouts/_partials/page-h1.html)
 - странный `H1` или hero на главной -> [home-hero.html](../../layouts/_shortcodes/home-hero.html)
-- лишняя дата, время чтения, количество слов или автор под `H1` -> [page-meta.html](../../layouts/_partials/page-meta.html)
+- лишняя дата, время чтения или количество слов под `H1` -> [page-meta.html](../../layouts/_partials/page-meta.html)
+- неправильный автор детальной статьи -> [article-author.html](../../layouts/_partials/article-author.html) и [editorial-author.html](../../layouts/_partials/editorial-author.html)
 - проблема с видимым FAQ на `/faq/` -> [layouts/faq/single.html](../../layouts/faq/single.html) и [faq-list.html](../../layouts/_shortcodes/faq-list.html)
 - проблема с feature-блоком “Что вы найдете” на `/articles/` -> [section-highlights-articles.html](../../layouts/_shortcodes/section-highlights-articles.html)
 - проблема с feature-блоком “Что уже обновлено” на `/news/` -> [section-highlights-news.html](../../layouts/_shortcodes/section-highlights-news.html)

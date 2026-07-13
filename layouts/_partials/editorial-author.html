@@ -1,0 +1,28 @@
+{{- /*
+Единый источник данных об авторе-организации для видимого текста,
+meta author и Article/NewsArticle JSON-LD.
+*/ -}}
+{{- $entityID := "aerocool-editorial-team" -}}
+{{- $entities := index hugo.Data "entities" -}}
+{{- $entity := index $entities $entityID -}}
+{{- if not $entity -}}
+  {{- errorf "editorial-author.html: сущность %q отсутствует в data/entities.yaml" $entityID -}}
+{{- end -}}
+{{- if ne $entity.status "confirmed" -}}
+  {{- errorf "editorial-author.html: сущность %q должна иметь status: confirmed" $entityID -}}
+{{- end -}}
+
+{{- $language := .Language.Name -}}
+{{- $name := index $entity.name $language | default $entity.name.en -}}
+{{- $aboutPage := .Site.GetPage "/about" -}}
+{{- if not $aboutPage -}}
+  {{- errorf "editorial-author.html: не найдена локализованная страница /about/ для %s" $language -}}
+{{- end -}}
+
+{{- return (dict
+  "id" $entity.current_jsonld_id
+  "type" $entity.schema_candidate
+  "name" $name
+  "relativeURL" (printf "%s#editorial-policy" $aboutPage.RelPermalink)
+  "absoluteURL" (printf "%s#editorial-policy" $aboutPage.Permalink)
+) -}}

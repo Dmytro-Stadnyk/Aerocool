@@ -19,7 +19,7 @@ schema_types: ["website", "product", "organization", "breadcrumbs"]
 Важно:
 
 - `schema_types` определяет, какие schema.org-сущности включает шаблонный слой.
-- `schema_types` также используется локальным helper [page-meta.html](../../layouts/_partials/page-meta.html) для видимой meta-строки: `article` показывает дату и время чтения, `news` показывает только дату, остальные типы страниц meta-строку не получают.
+- `schema_types` также используется локальными helper видимого слоя: `article` показывает на детальной странице связанного автора-организацию, дату и время чтения, карточка статьи — дату и время, `news` показывает только дату в основной meta-строке, остальные типы страниц meta-строку не получают. Авторство централизовано в [editorial-author.html](../../layouts/_partials/editorial-author.html).
 - `website`, `organization`, `brand`, `collection`, `article`, `news`, `product`, `faq`, `breadcrumbs`, `about-page`, `contact-page` являются рабочими флагами.
 - Опорные узлы вроде `logo` и `brand` могут подключаться автоматически как зависимости выбранных сущностей, чтобы в графе не было висячих `@id`-ссылок.
 - Registry-based узлы для `confirmed` materials, mechanisms, features, use cases, topics и policies подключаются автоматически из `about_entities` и `mentions_entities`. Они усиливают graph как `DefinedTerm` или объяснительные `Thing` nodes и не заменяют основные Product/Offer/Article/Page partials.
@@ -58,7 +58,7 @@ schema_types: ["website", "product", "organization", "breadcrumbs"]
 Новости `content/news/<slug>/index.md`
 `schema_types: ["website", "news", "organization", "breadcrumbs"]`
 
-Видимая meta-строка новости: только дата публикации.
+Видимая meta-строка новости: только дата публикации. Автор-организация виден в редакционном блоке и совпадает с `NewsArticle.author`.
 
 Листинг новостей `content/news/_index.md`
 `schema_types: ["website", "collection", "organization", "breadcrumbs"]`
@@ -66,7 +66,7 @@ schema_types: ["website", "product", "organization", "breadcrumbs"]
 Статьи `content/articles/<slug>/index.md`
 `schema_types: ["website", "article", "organization", "breadcrumbs"]`
 
-Видимая meta-строка статьи: дата публикации и время чтения.
+Видимая meta-строка детальной статьи: связанный автор-организация, дата публикации и время чтения. Карточка статьи показывает только дату и время чтения. `Article.author` использует ту же сущность редакции, а `publisher` остается основной организацией Aerocool Ukraine.
 
 Листинг статей `content/articles/_index.md`
 `schema_types: ["website", "collection", "organization", "breadcrumbs"]`

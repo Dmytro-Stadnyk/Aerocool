@@ -51,6 +51,23 @@ aerocool-ukraine:
     - "contact-page"
     - "faq-page"
 
+aerocool-editorial-team:
+  name:
+    en: "Aerocool Ukraine Editorial Team"
+    uk: "Редакція Aerocool Ukraine"
+    ru: "Редакция Aerocool Ukraine"
+  entity_class: "Organization"
+  schema_candidate: "Organization"
+  current_jsonld_id: "https://aerocool.ua/about/#editorial-policy"
+  entity_home: "/about/#editorial-policy"
+  owner: "Aerocool Ukraine"
+  status: "confirmed"
+  parent: "aerocool-ukraine"
+  related:
+    - "about-page"
+    - "articles-collection"
+    - "news-collection"
+
 aerocool-website:
   name:
     en: "Aerocool Ukraine website"

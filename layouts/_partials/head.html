@@ -103,7 +103,13 @@
 {{- end }}
 
 <!-- Additional meta -->
-<meta name="author" content="{{ partial "author.html" . }}">
+{{- $metaAuthor := partial "author.html" . -}}
+{{- $schemaTypes := .Params.schema_types | default (slice) -}}
+{{- if and .IsPage (or (in $schemaTypes "article") (in $schemaTypes "news")) -}}
+  {{- $editorialAuthor := partial "editorial-author.html" . -}}
+  {{- $metaAuthor = $editorialAuthor.name -}}
+{{- end }}
+<meta name="author" content="{{ $metaAuthor }}">
 
 <!-- Search engines verification -->
 {{- if site.Params.analytics.google.SiteVerificationTag }}

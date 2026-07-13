@@ -1347,6 +1347,8 @@ textarea.ui-field {
    - CTA-кнопки и card/surface links ниже живут отдельно;
    - так проект не смешивает обычные текстовые ссылки с кнопками. */
 .post-content a:not(.home-hero__cta):not(.ui-button):not(.ui-alert__action):not(.products-list__media-link):not(.products-list__title-link):not(.products-list__details):not(.review-summary__link):not(.home-choice-benefits__card):not(.home-choice-benefits__service):not([class*="bg-"]),
+.post-meta a,
+.editorial-note a,
 .related-links a,
 .footer a,
 .home-hero a:not(.home-hero__cta):not(.ui-button),
@@ -1363,6 +1365,8 @@ textarea.ui-field {
 }
 
 .post-content a:not(.home-hero__cta):not(.ui-button):not(.ui-alert__action):not(.products-list__media-link):not(.products-list__title-link):not(.products-list__details):not(.review-summary__link):not(.home-choice-benefits__card):not(.home-choice-benefits__service):not([class*="bg-"]):hover,
+.post-meta a:hover,
+.editorial-note a:hover,
 .related-links a:hover,
 .footer a:hover,
 .home-hero a:not(.home-hero__cta):not(.ui-button):hover,

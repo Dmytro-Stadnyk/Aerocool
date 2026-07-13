@@ -8,6 +8,7 @@
 {{- $dateModified := .Lastmod.Format "2006-01-02T15:04:05Z07:00" -}}
 {{- $aboutRefs := partial "_schema/entity-ref-list.html" (dict "site" .Site "ids" (.Params.about_entities | default (slice))) -}}
 {{- $mentionRefs := partial "_schema/entity-ref-list.html" (dict "site" .Site "ids" (.Params.mentions_entities | default (slice))) -}}
+{{- $editorialAuthor := partial "editorial-author.html" . -}}
 {{- $article := dict
   "@type" "Article"
   "@id" (printf "%s#article" $pageURL)
@@ -17,7 +18,7 @@
   "image" $pageImages
   "datePublished" $datePublished
   "dateModified" $dateModified
-  "author" (dict "@id" (printf "%s#organization" (.Site.BaseURL | absURL)))
+  "author" (dict "@id" $editorialAuthor.id)
   "publisher" (dict "@id" (printf "%s#organization" (.Site.BaseURL | absURL)))
   "isPartOf" (dict "@id" $websiteId)
   "articleSection" .Section

@@ -288,7 +288,7 @@ Knowledge graph может быть переиспользован за пред
 ### Приоритет P2
 
 1. Рассмотреть glossary или entity hub.
-2. Рассмотреть author/reviewer entities только при реальной редакционной модели.
+2. Поддерживать подтвержденную сущность автора-организации `aerocool-editorial-team`, связанную с публичной редакционной политикой. Не добавлять `Person` или `Reviewer` без реального публичного участника.
 3. Поддерживать `static/llms.txt` как краткий reuse-слой knowledge graph и карты ключевых URL.
 4. Подготовить данные для AI-chatbot только после production-стабилизации и актуализации product facts.
 5. Рассмотреть queryable graph или export только если появится реальная задача для internal tools, AI grounding или аналитики.

@@ -19,9 +19,13 @@
       {{ .Description }}
     </div>
     {{- end }}
-    {{- with partial "page-meta.html" . }}
+    {{- $articleAuthor := partial "article-author.html" . -}}
+    {{- $pageMeta := partial "page-meta.html" . -}}
+    {{- if or $articleAuthor $pageMeta }}
     <div class="post-meta">
-      {{- . -}}
+      {{- with $articleAuthor }}{{ . }}{{ end -}}
+      {{- if and $articleAuthor $pageMeta }}&nbsp;·&nbsp;{{ end -}}
+      {{- with $pageMeta }}{{ . }}{{ end -}}
     </div>
     {{- end }}
     {{- partial "editorial-note.html" . -}}

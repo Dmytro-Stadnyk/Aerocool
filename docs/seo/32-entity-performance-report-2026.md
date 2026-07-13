@@ -30,8 +30,8 @@ CSV-версия отчета: [32-entity-performance-report-2026.csv](32-entity
 
 | Метрика | Значение |
 | --- | ---: |
-| Сущности в реестре | `63` |
-| Confirmed-сущности | `61` |
+| Сущности в реестре | `64` |
+| Confirmed-сущности | `62` |
 | Planned-сущности | `0` |
 | Do-not-markup-сущности | `2` |
 | Разобранные content-страницы | `100` |
@@ -39,7 +39,7 @@ CSV-версия отчета: [32-entity-performance-report-2026.csv](32-entity
 | Ошибки парсинга JSON-LD | `0` |
 | Сущности с использованием в about | `46` |
 | Сущности с использованием в mentions | `48` |
-| Сущности со ссылками на `@id` в собранном графе | `61` |
+| Сущности со ссылками на `@id` в собранном графе | `62` |
 
 Ошибки парсинга JSON-LD не найдены.
 
@@ -104,6 +104,7 @@ CSV-версия отчета: [32-entity-performance-report-2026.csv](32-entity
 | about-page | confirmed | AboutPage | [/about/](https://aerocool.ua/about/) | 0 | 0 | 0 | 2 | 1 | pending-production | pending-production | pending-production | OK |
 | aerocool-brand | confirmed | Brand | [/about/](https://aerocool.ua/about/) | 8 | 34 | 0 | 284 | 96 | pending-production | pending-production | pending-production | OK |
 | aerocool-catalog | confirmed | Collection | [/products/](https://aerocool.ua/products/) | 8 | 26 | 0 | 66 | 1 | pending-production | pending-production | pending-production | OK |
+| aerocool-editorial-team | confirmed | Organization | [/about/#editorial-policy](https://aerocool.ua/about/#editorial-policy) | 0 | 0 | 0 | 100 | 50 | pending-production | pending-production | pending-production | OK |
 | aerocool-global-organization | confirmed | Organization | [https://aerocool.io/](https://aerocool.io/) | 2 | 2 | 0 | 388 | 96 | pending-production | pending-production | pending-production | OK |
 | aerocool-logo | confirmed | ImageObject | [/](https://aerocool.ua/) | 0 | 0 | 0 | 384 | 96 | pending-production | pending-production | pending-production | OK |
 | aerocool-ukraine | confirmed | Organization | [/about/](https://aerocool.ua/about/) | 8 | 2 | 0 | 440 | 96 | pending-production | pending-production | pending-production | OK |

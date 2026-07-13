@@ -20,6 +20,11 @@
     {{- $graph = $graph | append (transform.Unmarshal .) -}}
   {{- end -}}
 {{- end -}}
+{{- if and .IsPage (or (in $schemaTypes "article") (in $schemaTypes "news")) -}}
+  {{- with partial "_schema/editorial-organization.html" . -}}
+    {{- $graph = $graph | append (transform.Unmarshal .) -}}
+  {{- end -}}
+{{- end -}}
 {{- if or (in $schemaTypes "brand") (in $schemaTypes "organization") (in $schemaTypes "product") -}}
   {{- with partial "_schema/brand.html" . -}}
     {{- $graph = $graph | append (transform.Unmarshal .) -}}

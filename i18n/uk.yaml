@@ -11,3 +11,24 @@
     few: "{{ .Count }} слова"
     many: "{{ .Count }} слів"
     other: "{{ .Count }} слова"
+
+- id: article_author_label
+  translation: "Автор"
+
+- id: editorial_review_title
+  translation: "Редакційна перевірка"
+
+- id: editorial_method_prefix
+  translation: "Правила підготовки й перевірки описані в"
+
+- id: editorial_policy_label
+  translation: "редакційній політиці"
+
+- id: editorial_prepared_prefix
+  translation: "Матеріал підготувала"
+
+- id: editorial_checked
+  translation: "Характеристики, ціни, гарантія та наявність звіряються з картками товарів і службовими сторінками сайту."
+
+- id: editorial_updated_label
+  translation: "Оновлено"
