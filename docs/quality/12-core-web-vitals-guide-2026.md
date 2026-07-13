@@ -1,6 +1,6 @@
 # Руководство по Core Web Vitals 2026 для Aerocool
 
-Обновлено: 2026-07-10.
+Обновлено: 2026-07-13.
 
 Этот документ собирает в одном месте правила Core Web Vitals для проекта `Aerocool Ukraine`: что проверять, какие пороги считать хорошими, где искать причины просадки и как исправлять типовые проблемы на Hugo / Netlify / Tailwind CSS 4.3 сайте.
 
@@ -8,11 +8,11 @@
 
 - [quality/13-pagespeed-insights-audit.md](13-pagespeed-insights-audit.md) — ручная проверка опубликованных URL через PageSpeed Insights.
 - [quality/14-production-quality-gate-2026.md](14-production-quality-gate-2026.md) — финальный контроль качества перед production-релизом.
-- [audits/86-2026-06-21-netlify-rum-core-web-vitals-baseline.md](../audits/86-2026-06-21-netlify-rum-core-web-vitals-baseline.md) — текущий полевой CWV baseline по Netlify Real User Monitoring.
+- [audits/86-2026-06-21-netlify-rum-core-web-vitals-baseline.md](../audits/86-2026-06-21-netlify-rum-core-web-vitals-baseline.md) — исторический полевой срез Netlify Real User Monitoring за 2026-06-20—2026-06-21.
 - [audits/65-2026-05-26-core-web-vitals-current-audit.md](../audits/65-2026-05-26-core-web-vitals-current-audit.md) — исторический lab baseline на 2026-05-26.
 - [content/06-seo-image-shortcode.md](../content/06-seo-image-shortcode.md) — правила изображений в page bundle.
 - [seo/27-google-seo-audit-checklist-2026.md](../seo/27-google-seo-audit-checklist-2026.md) — общий SEO-аудит для сильного ранжирования в Google.
-- [seo/28-ssg-seo-checklist-2026.md](../seo/28-ssg-seo-checklist-2026.md) — общий SSG SEO-чеклист.
+- [seo/28-ssg-seo-checklist-2026.md](../seo/28-ssg-seo-checklist-2026.md) — итоговая SEO-проверка статического Hugo-сайта.
 - [deploy/16-netlify-routing.md](../deploy/16-netlify-routing.md) — Netlify redirects, headers и cache notes.
 
 Официальные источники:
@@ -29,24 +29,28 @@
 
 ## 1. Главная идея
 
-Core Web Vitals — это не декоративная оценка в одном отчете. Это набор пользовательских метрик, которые показывают, насколько быстро страница показывает главный контент, насколько быстро отвечает на действия и насколько стабильно держит layout.
+Core Web Vitals (CWV) — это не декоративная оценка в одном отчете. Это набор пользовательских метрик, которые показывают, насколько быстро страница выводит главный контент, насколько быстро отвечает на действия и насколько стабильно сохраняет компоновку (`layout`).
 
 Актуальные основные метрики:
 
-| Метрика | Что измеряет | Хороший уровень Google | Строгая цель Aerocool |
-|---|---|---:|---:|
-| `LCP` | скорость показа главного контента | ≤ 2.5 s | ≤ 2.0 s, лучше ≤ 1.5 s |
-| `INP` | отзывчивость на пользовательские действия | ≤ 200 ms | ≤ 150 ms, лучше ≤ 100 ms |
-| `CLS` | визуальная стабильность layout | ≤ 0.1 | 0 или почти 0 |
+| Метрика | Что измеряет | Хороший уровень Google |
+|---|---|---:|
+| `LCP` | скорость показа главного контента | ≤ 2.5 s |
+| `INP` | отзывчивость на пользовательские действия | ≤ 200 ms |
+| `CLS` | визуальная стабильность компоновки | ≤ 0.1 |
+
+Порог оценивается по 75-му процентилю реальных посещений отдельно для мобильных и настольных устройств. Более низкое значение полезно как запас прочности, но проект не объявляет произвольные значения `LCP ≤ 1.5 s` или `INP ≤ 100 ms` обязательным стандартом Google.
 
 Поддерживающие метрики:
 
-| Метрика | Зачем нужна | Рабочая цель |
+| Метрика | Зачем нужна | Диагностический ориентир |
 |---|---|---:|
 | `TTFB` | насколько быстро сервер начал отдавать HTML | ≤ 0.8 s |
-| `FCP` | когда появился первый видимый контент | ≤ 1.8 s, лучше ≤ 1.5 s |
+| `FCP` | когда появился первый видимый контент | ≤ 1.8 s |
 | `TBT` | lab-сигнал блокировки main thread, полезен для INP | чем ниже, тем лучше |
 | `Speed Index` | визуальная скорость загрузки | чем ниже, тем лучше |
+
+Эти показатели помогают искать причину проблемы, но не входят в текущий набор Core Web Vitals и не заменяют полевые LCP, INP и CLS.
 
 Важно: `FID` больше не считать основной метрикой Core Web Vitals. Для отзывчивости использовать `INP`.
 
@@ -112,7 +116,7 @@ Core Web Vitals помогают ранжированию, но не замен�
 | Search | `/search/`, `/ru/search/` | JS, noindex, интерактивность |
 | 404 | `/404.html` | служебная страница, noindex |
 
-Для `search` и `404` SEO score может быть намеренно нецелевым, но Performance, Accessibility и Best Practices все равно должны быть чистыми.
+Для `search` и `404` SEO score (лабораторный балл SEO) может быть намеренно нецелевым из-за `noindex`. Категории Performance, Accessibility и Best Practices всё равно проверяются на ошибки и регрессии, но для них не устанавливается требование получить ровно `100`.
 
 ## 5. Инструменты
 
@@ -296,16 +300,16 @@ LCP состоит из четырех частей:
 
 ```md
 {{< seo-image
-  src="wing-mesh-side.png"
-  width="800"
-  height="600"
-  alt="Вид сбоку кресла Aerocool WING Mesh Black"
-  title="Aerocool WING Mesh Black — вид сбоку"
+  src="02-material-macro-panels.webp"
+  width="1200"
+  height="800"
+  alt="Сравнение поверхностей Racer, Loft Air и Mesh крупным планом"
+  title="Материалы кресел Aerocool крупным планом"
   loading="lazy"
   preload=false
   fetchpriority=auto
-  class="mx-auto w-full max-w-[800px] rounded-xl"
-  sizes="(min-width: 848px) 800px, (max-width: 768px) calc(100vw - 28px), calc(100vw - 48px)"
+  class="mx-auto w-full max-w-[1200px] rounded-xl"
+  sizes="(min-width: 1198px) 1150px, (max-width: 768px) calc(100vw - 28px), calc(100vw - 48px)"
 />}}
 ```
 
@@ -467,28 +471,27 @@ https://pagespeed.web.dev/
 - [ ] Search/menu/view transitions не создают long tasks.
 - [ ] Search-страница не запрашивает `index.json` до непустого ввода пользователя.
 - [ ] Service worker не регистрируется в критическом окне первого рендера.
-- [ ] Mobile не хуже целевых CWV-порогов.
+- [ ] Мобильные и настольные полевые данные соответствуют официальным CWV-порогам Google либо отклонение зафиксировано как риск релиза.
 - [ ] PageSpeed Insights не показывает очевидных CWV-регрессий.
 - [ ] Netlify RUM проверен по p75 минимум в режимах `All Devices`, `Mobile` и `Desktop`.
 - [ ] После production deploy проверены RUM deploy marker и изменение `LCP`, `INP`, `CLS`.
 - [ ] После production-перехода Search Console Core Web Vitals monitor включен в регулярный контроль.
 
-## 16. Стандарт 10/10
+## 16. Критерии зрелого CWV-процесса
 
-Для Aerocool считать CWV-контур сильным, если:
+Для Aerocool считать процесс контроля CWV зрелым, если:
 
 | Уровень | Требование |
 |---|---|
-| Критические URL в PageSpeed | Performance 95+ |
-| Проверка desktop в PageSpeed | Performance 98+ |
-| Field LCP | ≤ 2.0 s, лучше ≤ 1.5 s |
-| Field INP | ≤ 150 ms, лучше ≤ 100 ms |
-| Field CLS | 0 или почти 0 |
-| TTFB | ≤ 0.8 s |
-| Images | responsive, sized, WebP + fallback; AVIF только при отдельном pipeline |
-| JS | минимум, без long tasks на критичных действиях |
-| CSS | без лишних блокирующих слоев |
-| Мониторинг | Netlify RUM + Search Console + PageSpeed Insights |
+| Полевой LCP | ≤ `2.5 s` на 75-м процентиле |
+| Полевой INP | ≤ `200 ms` на 75-м процентиле |
+| Полевой CLS | ≤ `0.1` на 75-м процентиле |
+| PageSpeed Insights | ключевые шаблоны проверены на мобильных и настольных устройствах; причины отклонений понятны; относительно принятого baseline нет необъяснимой регрессии |
+| TTFB и FCP | используются как диагностические показатели, а не как замена CWV |
+| Изображения | адаптивные, с фиксированными размерами, в WebP и с корректным резервным вариантом; AVIF — только при отдельном проверенном pipeline |
+| JavaScript | минимально необходимый; критические действия не создают длинных задач (`long tasks`) |
+| CSS | не содержит необоснованных блокирующих слоев |
+| Мониторинг | Netlify RUM, Search Console и PageSpeed Insights используются совместно после production-релиза |
 
 Финальное правило:
 

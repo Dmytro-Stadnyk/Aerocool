@@ -27,8 +27,14 @@ cover:
   relative: true
   hiddenInSingle: true
 schema_types: ["website", "article", "organization", "breadcrumbs"]
+about_entities:
+  - "<confirmed-primary-entity-id>"
+mentions_entities:
+  - "<confirmed-related-entity-id>"
 ---
 ```
+
+Замените шаблонные entity ID в угловых скобках на существующие `confirmed` ID из `data/entities.yaml` или удалите пустой блок. Не придумывайте ID внутри страницы: неизвестная или неподтвержденная сущность нарушает контракт проекта.
 
 Сразу после front matter, если у статьи есть локальная обложка в папке страницы:
 
@@ -82,12 +88,12 @@ schema_types: ["website", "article", "organization", "breadcrumbs"]
   src="02-<topic>.webp"
   width="1200"
   height="800"
-  alt="Описание первого смыслового visual на языке страницы"
+  alt="Описание первого смыслового изображения на языке страницы"
   loading="lazy"
   preload=false
   fetchpriority=auto
-  class="mx-auto w-full rounded-xl"
-  sizes="(min-width: 848px) 800px, (max-width: 768px) calc(100vw - 28px), calc(100vw - 48px)"
+  class="mx-auto w-full max-w-[1200px] rounded-xl"
+  sizes="(min-width: 1198px) 1150px, (max-width: 768px) calc(100vw - 28px), calc(100vw - 48px)"
 />}}
 
 ## Основной блок 2
@@ -102,12 +108,12 @@ schema_types: ["website", "article", "organization", "breadcrumbs"]
   src="03-<topic>.webp"
   width="1200"
   height="800"
-  alt="Описание второго смыслового visual на языке страницы"
+  alt="Описание второго смыслового изображения на языке страницы"
   loading="lazy"
   preload=false
   fetchpriority=auto
-  class="mx-auto w-full rounded-xl"
-  sizes="(min-width: 848px) 800px, (max-width: 768px) calc(100vw - 28px), calc(100vw - 48px)"
+  class="mx-auto w-full max-w-[1200px] rounded-xl"
+  sizes="(min-width: 1198px) 1150px, (max-width: 768px) calc(100vw - 28px), calc(100vw - 48px)"
 />}}
 
 ## Практические сценарии
@@ -124,7 +130,7 @@ schema_types: ["website", "article", "organization", "breadcrumbs"]
 
 ## Источники и границы
 
-Точечно указать official product sheet, инструкцию, товарную страницу или ограничение утверждения, если тема этого требует.
+Точечно указать официальную спецификацию производителя, инструкцию, товарную страницу или ограничение утверждения, если тема этого требует.
 
 ## Практический вывод
 

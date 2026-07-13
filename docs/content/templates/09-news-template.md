@@ -6,7 +6,7 @@
 
 Редакционный ориентир проекта: содержательная новость обычно имеет `5000+` знаков основного текста на каждую языковую версию. Это не SEO-требование: новость нельзя растягивать evergreen-объяснениями ради объема.
 
-Как пользоваться новичку: новость должна описывать реальный инфоповод, а не просто имитировать статью. Создай папку новости, добавь `index.md`, `index.ru.md`, локальную обложку `01-front.webp`, затем заполни front matter и текст по структуре ниже.
+Как пользоваться новичку: новость должна описывать реальный инфоповод, а не просто имитировать статью. Создайте папку новости, добавьте `index.md`, `index.ru.md`, локальную обложку `01-front.webp`, затем заполните front matter и текст по структуре ниже.
 
 ## Поля метаданных страницы
 
@@ -27,8 +27,14 @@ cover:
   relative: true
   hiddenInSingle: true
 schema_types: ["website", "news", "organization", "breadcrumbs"]
+about_entities:
+  - "<confirmed-primary-entity-id>"
+mentions_entities:
+  - "<confirmed-related-entity-id>"
 ---
 ```
+
+Замените шаблонные entity ID в угловых скобках на существующие `confirmed` ID из `data/entities.yaml` или удалите пустой блок. Новость не должна создавать сущность только ради разметки.
 
 Сразу после front matter, если у новости есть локальная обложка в папке страницы:
 
@@ -46,6 +52,12 @@ schema_types: ["website", "news", "organization", "breadcrumbs"]
   sizes="(min-width: 1198px) 1150px, (max-width: 768px) calc(100vw - 28px), calc(100vw - 48px)"
 />}}
 ```
+
+## Авторство
+
+Не добавляйте `author` или `reviewer` во front matter новости. Редакционный блок автоматически показывает подтвержденного автора-организацию «Редакция Aerocool Ukraine»; тот же объект используется в `NewsArticle.author`, а Aerocool Ukraine остается `publisher`.
+
+Персонального автора можно вводить только после подтверждения реального участия человека и синхронного обновления шаблонов, `data/entities.yaml`, редакционной политики и обеих локализаций.
 
 ## Структура текста
 
@@ -74,8 +86,8 @@ schema_types: ["website", "news", "organization", "breadcrumbs"]
   loading="lazy"
   preload=false
   fetchpriority=auto
-  class="mx-auto w-full rounded-xl"
-  sizes="(min-width: 848px) 800px, (max-width: 768px) calc(100vw - 28px), calc(100vw - 48px)"
+  class="mx-auto w-full max-w-[1200px] rounded-xl"
+  sizes="(min-width: 1198px) 1150px, (max-width: 768px) calc(100vw - 28px), calc(100vw - 48px)"
 />}}
 
 ## Как новость связана с широкими коммерческими запросами
@@ -94,7 +106,7 @@ schema_types: ["website", "news", "organization", "breadcrumbs"]
 
 ## Что читать дальше
 
-- [Связанный гайд](/articles/<slug>/)
+- [Связанное руководство](/articles/<slug>/)
 - [Сравнение моделей](/articles/<slug>/)
 ```
 

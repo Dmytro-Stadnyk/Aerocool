@@ -18,7 +18,9 @@
 
 - Hugo `0.164.0`.
 - Node.js `24.16.0`.
+- npm `11.13.0`.
 - Tailwind CSS и `@tailwindcss/cli` `4.3.0`.
+- `@netlify/database` `1.0.0`.
 - PaperMod как Git-подмодуль в `themes/PaperMod`.
 - Netlify для сборки, deploy и Functions.
 - Netlify Database / PostgreSQL для системы отзывов.
@@ -84,7 +86,7 @@ Hugo `0.164.0` запускает Tailwind через `css.TailwindCSS` и npm-�
 
 ## 6. Изображения
 
-- Текущий опубликованный контент использует WebP: на 2026-07-10 в `content/` проверено `188` WebP и `0` PNG/JPEG.
+- Текущий опубликованный контент использует WebP: на 2026-07-13 в `content/` проверено `188` WebP и `0` PNG/JPEG.
 - Все `12` главных товарных изображений `01-front.webp` имеют размер `2000x2000` и уникальны по SHA-256.
 - Не возвращать утверждения о текущих одинаковых товарных PNG: они относятся к историческим аудитам.
 - Обложка статьи или новости: `1536x1024` WebP.
@@ -180,6 +182,7 @@ npm run build:production
 - После изменений ссылок, URL или SEO-полей проверить canonical, hreflang, sitemap, breadcrumbs и локальные якоря.
 - После изменений `static/_redirects` проверить root, обычную 404 и forced scanner 404 на Netlify Deploy Preview.
 - После изменений форм проверить WebMCP-аннотации и обычную отправку без AI-агента.
+- Для contact form отдельно проверить серверный или операционный контроль согласия: HTML-атрибут `required` сам по себе не защищает прямой POST.
 - После изменений отзывов проверить `pending -> approved -> export -> visible HTML`.
 - В development HTML должен оставаться `noindex,nofollow`; перед production отдельно подтвердить `index,follow` только на индексируемых URL.
 - После изменений документации запустить `npm run docs:check`.
@@ -187,6 +190,6 @@ npm run build:production
 
 ## 14. Документация
 
-Единый маршрут чтения находится в `docs/01-documentation-map.md`. Постоянные руководства имеют номера `01–41`; аудиты `42–99` являются историческими снимками. Последний полный аудит — `docs/audits/100-2026-07-13-full-documentation-project-sync-audit-current.md`.
+Единый маршрут чтения находится в `docs/01-documentation-map.md`. Постоянные руководства имеют номера `01–41`; аудиты `42–100` являются историческими снимками. Последний полный аудит — `docs/audits/101-2026-07-13-full-documentation-project-sync-audit-current.md`.
 
 При изменении документации соблюдать `docs/architecture/02-documentation-style-guide.md`: русский язык, пояснения для новичка, sentence case в заголовках, проверяемые утверждения и актуальная дата.

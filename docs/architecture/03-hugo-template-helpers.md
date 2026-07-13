@@ -6,7 +6,7 @@
 
 Этот документ объясняет логику локальных вспомогательных шаблонов `partial` проекта Aerocool так, чтобы в ней мог быстро разобраться новичок.
 
-Текущая синхронизация документации с Hugo 0.164.0, Tailwind CSS 4.3, SEO/schema и CWV-практиками 2026 зафиксирована в [93-2026-07-07-hugo-0-164-update-audit.md](../audits/93-2026-07-07-hugo-0-164-update-audit.md). Историческая синхронизация лучших практик 2026 остается в [50-2026-05-13-documentation-2026-best-practices-sync-audit.md](../audits/50-2026-05-13-documentation-2026-best-practices-sync-audit.md).
+История перехода на Hugo 0.164.0 зафиксирована в [аудите 93](../audits/93-2026-07-07-hugo-0-164-update-audit.md), а ранняя синхронизация практик 2026 — в [аудите 50](../audits/50-2026-05-13-documentation-2026-best-practices-sync-audit.md). Последняя полная проверка текущего Hugo, Tailwind CSS, SEO/schema.org и Core Web Vitals находится в [карте документации](../01-documentation-map.md#5-текущий-аудит).
 
 Главная цель:
 
@@ -182,9 +182,9 @@
 ## Быстрая карта шаблонов отзывов
 
 - [layouts/_partials/reviews/form.html](../../layouts/_partials/reviews/form.html) — форма отправки отзыва в `POST /api/reviews`; выводится только для товара с включенными отзывами. Форма размечена как WebMCP-инструмент `submit_product_review`; шкала рейтинга описана через `fieldset`, а отдельный обязательный checkbox подтверждает обработку email и последующую публикацию имени, оценки, текста и даты после модерации.
-- [layouts/_partials/reviews/list.html](../../layouts/_partials/reviews/list.html) — список approved-отзывов текущего товара и языка из снимка, созданного во время сборки.
+- [layouts/_partials/reviews/list.html](../../layouts/_partials/reviews/list.html) — список approved-отзывов текущего товара из снимка, созданного во время сборки. Сейчас helper сначала берет общую группу `all` и только при ее отсутствии использует группу языка страницы; это временный двуязычный режим, а не автоматический перевод отзывов.
 - [layouts/_partials/reviews/stars.html](../../layouts/_partials/reviews/stars.html) — единый визуальный вывод шкалы рейтинга без собственной логики источника данных.
-- [layouts/_partials/reviews/summary-data.html](../../layouts/_partials/reviews/summary-data.html) — получает агрегированные данные рейтинга по `review_target_id` из `data/generated/reviews.json`.
+- [layouts/_partials/reviews/summary-data.html](../../layouts/_partials/reviews/summary-data.html) — получает агрегированные данные рейтинга по `review_target_id` из `data/generated/reviews.json`: предпочитает группу `all`, затем использует языковую группу как fallback.
 - [layouts/_partials/reviews/summary-inline.html](../../layouts/_partials/reviews/summary-inline.html) — компактный рейтинг для строк и небольших интерфейсных блоков.
 - [layouts/_partials/reviews/summary-card.html](../../layouts/_partials/reviews/summary-card.html) — вариант рейтинга для карточек товара.
 
@@ -259,7 +259,7 @@
 - shortcode сам переключает украинский и русский текст по языку страницы;
 - левая колонка содержит заголовок, краткое объяснение, блок “когда обращаться”, адрес, телефон, `support@aerocool.ua`, `sales@aerocool.ua`, быстрые ссылки на каталог, FAQ и серии, а также график `09:00 — 18:00` с понедельника по воскресенье;
 - правая колонка содержит Netlify form с honeypot, обязательными полями, локализованным success URL и checkbox согласия на обработку данных для ответа;
-- форма имеет WebMCP-атрибуты `toolname="contact_aerocool_ukraine"` и локализованный `tooldescription`, чтобы PageSpeed Agentic Browsing видел ее как понятный инструмент;
+- форма имеет WebMCP-атрибуты `toolname="contact_aerocool_ukraine"` и локализованный `tooldescription`, чтобы совместимый экспериментальный Agentic Browsing-аудит видел ее как понятный инструмент;
 - hidden-поля и honeypot получают технические `title`, а видимые поля сохраняют обычные `label`;
 - вместе с обращением Netlify Forms сохраняет `privacy_consent=accepted` и `privacy_policy_version=2026-07-13`; ссылка в label всегда ведет на `/privacy/` или `/ru/privacy/` того же языка;
 - markdown-файлы `content/contact/index.md` и `content/contact/index.ru.md` обычно должны содержать только вызов `{{< contact >}}`, чтобы не дублировать контактные данные ниже формы;

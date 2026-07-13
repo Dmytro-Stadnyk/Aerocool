@@ -1,507 +1,276 @@
-# Финальный SEO-чеклист для SSG-сайта в 2026 году
+# Финальный SEO-чек-лист статического Hugo-сайта 2026
 
 Обновлено: 2026-07-13.
 
-Этот файл — финальный список элементов для построения технически сильного SSG-сайта: Hugo, техническое SEO, schema.org, Core Web Vitals, контентная стратегия, entity SEO, E-E-A-T, мониторинг и развитие сайта. Он не обещает конкретную позицию в Google; он фиксирует, что должно быть сделано, чтобы сайт не проигрывал по технической базе и качеству сигналов.
+Этот документ задает итоговую проверку проекта Aerocool Ukraine как статического сайта, созданного генератором Hugo. Английский термин `SSG` означает `Static Site Generator`, то есть генератор статических сайтов: Hugo заранее создает HTML, который затем публикует Netlify.
 
-Синхронизировано 2026-07-13 с текущей проектной документацией и [техническим SERP-контрактом](36-hugo-yaml-serp-technical-contract-2026.md). Последняя полная проверка указана в [карте документации](../01-documentation-map.md#5-текущий-аудит), а аудит `50` хранит исторический снимок от 2026-05-13.
+Чек-лист не обещает конкретную позицию в Google. Его задача — убедиться, что поисковая система может обнаружить, просканировать, понять и правильно сопоставить страницы, а пользователь получает быстрый, доступный и правдивый сайт.
 
-Примечание для новичка: это общий стратегический чек-лист, а не список файлов, которые нужно сразу менять. Фактические правила проекта находятся в [README.md](../../README.md), [AGENTS.md](../../AGENTS.md), [контентном чек-листе](../content/07-content-seo-checklist-2026.md), [справочнике front matter](../content/05-front-matter-reference.md), [schema-чек-листе](20-schema-markup-quality-checklist-2026.md), [knowledge graph playbook](24-entities-knowledge-graph-playbook-2026.md), [SERP-контракте](36-hugo-yaml-serp-technical-contract-2026.md), [стратегии перелинковки](38-internal-linking-strategy-2026.md) и [руководстве PageSpeed](../quality/13-pagespeed-insights-audit.md).
+Для изменения конкретного слоя сначала используйте профильный документ:
 
----
+- front matter и контент — документы [05](../content/05-front-matter-reference.md) и [07](../content/07-content-seo-checklist-2026.md);
+- production-выпуск — документ [14](../quality/14-production-quality-gate-2026.md);
+- Netlify routing — документ [16](../deploy/16-netlify-routing.md);
+- отзывы — документ [17](../deploy/17-netlify-database-reviews.md);
+- schema.org — документы [20](20-schema-markup-quality-checklist-2026.md) и [21](21-ecommerce-structured-data-playbook-2026.md);
+- canonical, hreflang, sitemap и robots — документ [36](36-hugo-yaml-serp-technical-contract-2026.md);
+- внутренняя перелинковка — документ [38](38-internal-linking-strategy-2026.md).
 
-## 1. Платформа
+## 1. Источники правды
 
-| Элемент | Лучший вариант |
+Перед проверкой не угадывайте значения по документации:
+
+| Что проверяется | Источник правды |
 |---|---|
-| SSG | **Hugo / Astro** |
-| Хостинг | **Netlify / Cloudflare Pages / Vercel** |
-| CDN | Netlify Edge / Cloudflare CDN |
-| CSS | Tailwind CSS |
-| Поиск | Для Aerocool сейчас локальная search-страница Hugo/PaperMod; Pagefind можно рассмотреть отдельно |
-| Деплой | Git-репозиторий -> Netlify / Cloudflare Pages |
-| Версионирование | Git + GitHub |
-| CI-проверки | Для Aerocool сейчас локальная сборка и ручная PageSpeed-проверка опубликованных URL; отдельный GitHub Actions gate не используется |
-
----
-
-## 2. Техническое SEO
-
-| Элемент | Обязательно |
-|---|---|
-| Чистый HTML | Да |
-| Semantic HTML | Да |
-| Правильные `<title>` | Да |
-| Уникальные meta description | Да |
-| Canonical URL | Да |
-| hreflang для мультиязычности | Да |
-| sitemap.xml | Да |
-| sitemap index | Да, если много страниц |
-| robots.txt | Да |
-| Чистые URL | Да |
-| 301 / 308 redirects | Да |
-| 404 page | Да |
-| 410 для удалённых страниц | Да |
-| noindex для мусорных страниц | Да |
-| Pagination SEO | Да |
-| Breadcrumbs | Да |
-| Open Graph | Да |
-| Twitter / X Cards | Да |
-
----
-
-## 3. Структурированные данные и schema.org
-
-| Schema | Для чего |
-|---|---|
-| WebSite | Весь сайт |
-| WebPage | Каждая страница |
-| Organization | Компания / официальный сайт |
-| Brand | Бренд |
-| Product | Товар |
-| Offer | Цена / наличие |
-| AggregateRating | Рейтинг |
-| Review | Отзывы |
-| FAQPage | FAQ-блоки; после `2026-05-07` не считать Google FAQ rich result целью |
-| BreadcrumbList | Хлебные крошки |
-| Article | Статьи блога |
-| BlogPosting | Блоговые публикации |
-| CollectionPage | Категории |
-| ItemList | Списки товаров |
-| LocalBusiness | Если есть локальное представительство |
-| SearchAction | Поиск по сайту; с 2024-11-21 не дает отдельный sitelinks search box в Google |
-| ImageObject | Важные изображения |
-| VideoObject | Видео, если есть |
-| Person | Автор / эксперт / reviewer |
-
----
-
-## 4. Архитектура сайта
-
-| Элемент | Обязательно |
-|---|---|
-| Главная страница | Да |
-| Категории | Да |
-| Подкатегории | Да, если нужно |
-| Страницы товаров | Да |
-| Страницы сравнения | Да |
-| FAQ-раздел | Да |
-| Блог | Да |
-| Гайды | Да |
-| Glossary / словарь терминов | Очень желательно |
-| Страницы “как выбрать” | Да |
-| Страницы “лучшие товары” | Да |
-| Страницы “товар vs товар” | Да |
-| Страницы “бренд vs бренд” | Да |
-| About / О компании | Да |
-| Contact | Да |
-| Delivery / Payment / Warranty | Да |
-| Privacy Policy | Да |
-| Terms | Да |
-| Returns / Refunds | Да |
-
----
-
-## 5. Контентная SEO-система
-
-| Элемент | Обязательно |
-|---|---|
-| Keyword research | Да |
-| Keyword clustering | Да |
-| Search intent mapping | Да |
-| Topical map | Да |
-| Content calendar | Да |
-| Content briefs | Да |
-| Unique product descriptions | Да |
-| Category SEO text | Да |
-| FAQ для каждой категории | Да |
-| FAQ для каждого товара | Да |
-| Сравнительный контент | Да |
-| Buying guides | Да |
-| Problem-solving articles | Да |
-| Поддерживающие статьи | Да |
-| Content refresh system | Да |
-| Content pruning | Да |
-| Проверка duplicate content | Да |
-| Проверка cannibalization | Да |
-
----
-
-## 6. SEO сущностей
-
-| Entity | Что нужно сделать |
-|---|---|
-| Brand entity | Чётко описать бренд |
-| Organization entity | Чётко описать компанию |
-| Product entity | Связать товары с брендом |
-| Author entity | Добавить автора / эксперта |
-| Reviewer entity | Добавить проверяющего |
-| Category entity | Описать категории как отдельные сущности |
-| Country entity | Привязка к Украине / региону |
-| Language entity | Украинский / русский |
-| SameAs links | Соцсети, официальные профили, Wikidata, если есть |
-| About / Mentions | Использовать `about`, `mentions`, `sameAs` в JSON-LD |
-| Entity home | У каждой важной сущности должна быть каноническая страница или сильный блок |
-| Semantic triples | Проектировать связи как `subject -> predicate -> object` |
-| ProductGroup | Для вариантов товаров после появления видимой навигации |
-| Entity registry | Вести список бренда, организации, серий, моделей, материалов, механизмов и сценариев |
-
----
-
-## 7. Внутренняя перелинковка
-
-| Элемент | Обязательно |
-|---|---|
-| Breadcrumbs | Да |
-| Related products | Да |
-| Related articles | Да |
-| Category → product links | Да |
-| Product → category links | Да |
-| Article → product links | Да |
-| Article → category links | Да |
-| FAQ → guide links | Да |
-| Guide → comparison links | Да |
-| Ссылки из сравнений на товары | Да |
-| Footer links | Да |
-| Описательные contextual anchors | Да; неинформативный CTA дополняется названием страницы назначения в видимом или `sr-only` тексте |
-| Прямые ссылки на canonical URL | Да; без alias и redirect |
-| Валидные fragment links | Да; каждый `#fragment` существует в rendered HTML |
-| Orphan indexable pages | Нет |
-| Self-links текущего состояния | По возможности заменять неинтерактивным current-state элементом |
-| HTML sitemap | Желательно |
-| Hub pages | Да |
-| Topic clusters | Да |
-
----
-
-## 8. Производительность и Core Web Vitals
-
-Подробный локальный playbook для проекта: [12-core-web-vitals-guide-2026.md](../quality/12-core-web-vitals-guide-2026.md).
-
-| Элемент | Обязательно |
-|---|---|
-| LCP optimization | Да |
-| INP optimization | Да |
-| CLS optimization | Да |
-| Lazy loading images | Да |
-| Preload hero image | Да |
-| Responsive images | Да |
-| WebP output | Да |
-| AVIF output | Да, если есть отдельный pipeline |
-| Correct image dimensions | Да |
-| Font optimization | Да |
-| Font preload | Да |
-| `font-display: swap` | Да |
-| Critical CSS | Желательно |
-| Minimal JavaScript | Да |
-| CDN caching | Да |
-| Brotli / gzip | Да |
-| HTTP/2 или HTTP/3 | Да |
-| PageSpeed Performance 95–100 | Да |
-| Real field data monitoring | Да |
-
----
-
-## 9. Изображения
-
-| Элемент | Обязательно |
-|---|---|
-| Source images в хорошем качестве | Да |
-| JPEG / PNG / WebP source | Да |
-| WebP output | Да |
-| AVIF output | Да, если есть отдельный pipeline |
-| JPEG fallback | Да |
-| Responsive sizes | Да |
-| Width / height attributes | Да |
-| Lazy loading | Да |
-| Eager loading для hero | Да |
-| Descriptive alt text | Да |
-| ImageObject schema | Желательно |
-| Image sitemap | Желательно |
-| EXIF cleanup | Да |
-| Уникальные изображения | Очень желательно |
-
----
-
-## 10. Мультиязычность
-
-| Элемент | Обязательно |
-|---|---|
-| Отдельные URL для языков | Да |
-| hreflang | Да |
-| `x-default` | Не обязателен; добавлять только при наличии подходящей fallback-страницы для пользователей без совпавшего языка |
-| Canonical внутри своей языковой версии | Да |
-| Переводы без машинного мусора | Да |
-| Уникальные meta title/description | Да |
-| Переведённые breadcrumbs | Да |
-| Переведённые schema.org поля | Да |
-| Переведённые alt-тексты | Да |
-| Переведённый sitemap | Да |
-| Правильный `lang` в HTML | Да |
-| UA как основной язык | Да, для aerocool.ua |
-
----
-
-## 11. E-Commerce и SEO товаров
-
-| Элемент | Обязательно |
-|---|---|
-| Product pages | Да |
-| Category pages | Да |
-| Product schema | Да |
-| Offer schema | Да |
-| Цена | Да |
-| Availability | Да |
-| SKU / MPN / GTIN, если есть | Да |
-| Brand | Да |
-| Reviews | Да, если реальные |
-| AggregateRating | Да, если реальные |
-| Сравнительные таблицы | Да |
-| Pros / cons | Да |
-| FAQ | Да |
-| Delivery info | Да |
-| Warranty info | Да |
-| Return policy | Да |
-| Merchant Center | Да, если есть продажи |
-| Product feed | Да, если есть продажи |
-| Availability monitoring | Да |
-| Система обновления цен | Да |
-
----
-
-## 12. Доверие и E-E-A-T
-
-| Элемент | Обязательно |
-|---|---|
-| About page | Да |
-| Contact page | Да |
-| Company details | Да |
-| Real address, если есть | Да |
-| Phone / email | Да |
-| Author bio | Да |
-| Reviewer bio | Желательно |
-| Editorial policy | Желательно |
-| Warranty policy | Да |
-| Return policy | Да |
-| Privacy Policy | Да |
-| Terms of Service | Да |
-| Real photos | Желательно |
-| Real reviews | Да, если есть |
-| Brand mentions | Да |
-| External citations | Да, где уместно |
-| Updated date | Да |
-| Last reviewed date | Желательно |
-
----
-
-## 13. Авторитетность и Authority SEO
-
-| Элемент | Обязательно |
-|---|---|
-| Backlinks | Да |
-| Brand mentions | Да |
-| Digital PR | Да |
-| Guest posts | Желательно |
-| Product reviews на внешних сайтах | Да |
-| Local directories | Да |
-| Business citations | Да |
-| Social profiles | Да |
-| YouTube / video presence | Желательно |
-| Google Business Profile | Если есть локальный бизнес |
-| Partnerships | Желательно |
-| Press page | Желательно |
-
----
-
-## 14. UX и Conversion SEO
-
-| Элемент | Обязательно |
-|---|---|
-| Mobile-first дизайн | Да |
-| Простая навигация | Да |
-| Sticky header | Желательно |
-| Быстрый поиск | Да |
-| Фильтры товаров | Да |
-| Сравнительные таблицы | Да |
-| Чёткие CTA | Да |
-| Кнопка “Купить” / “Узнать цену” | Да |
-| FAQ рядом с решением | Да |
-| Trust badges | Желательно |
-| Reviews block | Да |
-| Delivery / warranty рядом с товаром | Да |
-| No intrusive popups | Да |
-| Accessibility | Да |
-
----
-
-## 15. Мониторинг и аналитика
-
-| Инструмент | Обязательно |
-|---|---|
-| Google Search Console | Да |
-| Bing Webmaster Tools | Да |
-| Google Analytics 4 | Да |
-| Plausible / Umami | Альтернатива |
-| PageSpeed Insights | Да |
-| PageSpeed Insights | Да; в Aerocool используется ручная проверка опубликованных URL |
-| CrUX monitoring | Да |
-| Server logs analysis | Желательно |
-| Broken link checker | Да |
-| Redirect checker | Да |
-| Sitemap checker | Да |
-| Schema validator | Да |
-| Rich Results Test | Да |
-| Uptime monitoring | Да |
-| SEO changelog | Да |
-| Rank tracking | Желательно |
-| Competitor monitoring | Да |
-
----
-
-## 16. Безопасность и надежность
-
-| Элемент | Обязательно |
-|---|---|
-| HTTPS | Да |
-| HSTS | Да |
-| Security headers | Да |
-| CSP | Желательно |
-| X-Content-Type-Options | Да |
-| Referrer-Policy | Да |
-| Permissions-Policy | Да |
-| Clean redirects | Да |
-| No mixed content | Да |
-| Stable deployment | Да |
-| Rollback system | Да |
-| Backup контента | Да |
-
----
-
-## 17. PWA и Modern Web
-
-| Элемент | Нужно |
-|---|---|
-| manifest.webmanifest | Да |
-| theme-color | Да |
-| icons | Да |
-| offline page | Желательно |
-| service worker | Желательно |
-| app shortcuts | Можно |
-| installable PWA | Не всегда обязательно |
-| View Transitions API | Желательно для UX |
-| Speculation Rules API | Желательно осторожно |
-| Search page | Да; в Aerocool сейчас локальная search-страница, Pagefind не установлен |
-
----
-
-## 18. Видимость в AI и LLM
-
-| Элемент | Желательно |
-|---|---|
-| Чёткие определения | Да |
-| FAQ-структура | Да |
-| Таблицы | Да |
-| Списки характеристик | Да |
-| Entity-rich контент | Да |
-| Авторитетные страницы | Да |
-| Цитируемые блоки | Да |
-| `llms.txt` | Внедрен в `static/llms.txt`; поддерживать как краткую Markdown-карту сайта с ключевыми URL и всеми товарными страницами в `uk`/`ru`, не как P0 ranking lever и не как замену sitemap/schema.org |
-| Хорошая структура headings | Да |
-| Короткие summary-блоки | Да |
-| Glossary | Да |
-| Prompt-аудит | Да, через AI Search entity map |
-| Citation ownership | Да, если AI-платформы показывают источники |
-| Brand sentiment | Да, через ручной AI-аудит |
-
----
-
-## 19. Финальная формула
-
-```text
-Top SEO SSG Website =
-Hugo / Astro
-+ Clean HTML
-+ Perfect Technical SEO
-+ Structured Data
-+ Entity SEO
-+ Topical Authority
-+ Strong Internal Linking
-+ Excellent Core Web Vitals
-+ High-Quality Content
-+ Trust / E-E-A-T
-+ Backlinks / Mentions
-+ Monitoring
-+ Continuous Updates
-```
-
----
-
-## Абсолютный минимум для сильного SEO-проекта
-
-```text
-1. Hugo / Astro
-2. CDN
-3. Clean semantic HTML
-4. Core Web Vitals
-5. sitemap.xml
-6. robots.txt
-7. canonical
-8. hreflang
-9. schema.org
-10. breadcrumbs
-11. internal linking
-12. keyword clustering
-13. search intent mapping
-14. topical map
-15. product/category/blog architecture
-16. unique content
-17. content refresh
-18. Search Console
-19. analytics
-20. backlinks / mentions
-```
-
----
-
-## Для Aerocool-сайта
-
-```text
-Hugo
-+ Netlify
-+ Tailwind CSS
-+ локальная search-страница
-+ WebP output
-+ AVIF, если есть отдельный pipeline
-+ PWA
-+ schema.org @graph
-+ hreflang UA/RU
-+ canonical
-+ breadcrumbs
-+ product pages
-+ category pages
-+ buying guides
-+ comparison pages
-+ FAQ
-+ topical clusters
-+ internal linking
-+ Search Console
-+ Merchant Center
-+ backlinks / brand mentions
-```
-
----
-
-## Итог
-
-Для максимального SEO важен не просто SSG. Важна система:
-
-```text
-Техническая база
-+ контентная стратегия
-+ структура сайта
-+ доверие
-+ внешняя авторитетность
-+ постоянное обновление
-```
-
-Для проекта на Hugo это особенно удобно, потому что Hugo даёт полный контроль над HTML, URL, шаблонами, schema.org, мультиязычностью, sitemap, robots.txt, производительностью и структурой сайта.
+| Версии Hugo и Node.js | `mise.toml` |
+| npm-пакеты и команды | `package.json`, `package-lock.json` |
+| Языки, меню, permalink и sitemap | `hugo.yaml` |
+| Netlify build, redirects и headers | `netlify.toml`, `static/_redirects` |
+| Видимый текст и коммерческие факты страницы | `content/` и front matter |
+| Сущности | `data/entities.yaml` |
+| Approved-отзывы | Netlify Database и build-time снимок `data/generated/reviews.json` |
+| Фактический результат | Готовый HTML в `public/` и опубликованный URL |
+
+Документ описывает текущий стек: Hugo `0.164.0`, Node.js `24.16.0`, Tailwind CSS и `@tailwindcss/cli` `4.3.0`, PaperMod, Netlify и Netlify Database.
+
+## 2. Сборка и индексируемость
+
+- [ ] `npm install` завершается без ошибки зависимостей.
+- [ ] `./scripts/script_check.sh` проходит полностью.
+- [ ] `npm run build:production` завершается без Hugo warning или template error, требующего исправления.
+- [ ] `npm run docs:check` проходит после изменения документации.
+- [ ] Development и Branch Deploy остаются в `noindex,nofollow`.
+- [ ] Production-индексация включается только после прохождения документа `14`.
+- [ ] Основные страницы production-сборки получают `index,follow`.
+- [ ] Поиск, 404, success pages, aliases и другие служебные URL сохраняют предусмотренный `noindex`.
+- [ ] Страницы пагинации следуют зафиксированной политике `noindex,follow` и имеют canonical на себя.
+
+Для новичка: robots meta управляет правом конкретной HTML-страницы участвовать в поиске. Наличие URL в sitemap не отменяет `noindex`.
+
+## 3. URL, canonical и локализация
+
+- [ ] Каждый основной URL существует и отвечает без цепочки переадресаций.
+- [ ] Canonical ведет на текущий URL той же языковой версии.
+- [ ] Украинская версия использует основной путь без `/ru/`.
+- [ ] Русская версия использует `/ru/`.
+- [ ] Для каждой переведенной пары есть взаимные `hreflang="uk-UA"` и `hreflang="ru-UA"`.
+- [ ] `x-default` не добавляется без отдельной нейтральной страницы выбора языка.
+- [ ] Sitemap содержит только предназначенные для индексации canonical URL.
+- [ ] Alias `/page/1/` не попадает в sitemap и канонизируется на первый листинг.
+- [ ] Удаленный URL получает подтвержденный redirect или честную 404; неизвестный scanner URL не превращается в SEO-redirect.
+
+После изменения URL проверяются оба языка, sitemap, canonical, hreflang, breadcrumbs и все входящие ссылки.
+
+## 4. HTML и метаданные страницы
+
+- [ ] В документе ровно один видимый H1.
+- [ ] Для обычного контента H1 создает шаблон; Markdown `# H1` не добавляется.
+- [ ] `title` уникален, точен и не обещает неподтвержденное.
+- [ ] `description` объясняет назначение страницы и соответствует видимому содержимому.
+- [ ] `lang` в HTML совпадает с языком страницы.
+- [ ] Open Graph и X/Twitter metadata используют правильные заголовок, описание и изображение.
+- [ ] Даты публикации и изменения совпадают с `date` и `lastmod`.
+- [ ] Статья показывает автора-организацию, дату и время чтения по текущему шаблонному контракту.
+- [ ] Новость показывает дату в основной meta-строке и автора в редакционном блоке.
+
+Meta description не является гарантией текста сниппета: Google может выбрать фрагмент видимого контента, если он лучше отвечает запросу.
+
+## 5. Структурированные данные
+
+- [ ] На индексируемой основной странице есть один валидный JSON-LD-блок с единым `@graph`.
+- [ ] `WebPage.url` и все главные `@id` построены от canonical URL.
+- [ ] `BreadcrumbList` совпадает с видимыми breadcrumbs.
+- [ ] `Article` и `NewsArticle` совпадают с видимыми датами, авторством и изображениями.
+- [ ] `Product` содержит только видимые и подтвержденные цену, наличие, SKU, MPN, GTIN, гарантию, доставку, возврат и способы оплаты.
+- [ ] `ProductGroup` используется только для реальных вариантов одной модели с видимой навигацией между ними.
+- [ ] `Review` и `AggregateRating` создаются только из реальных approved-отзывов, видимых на той же товарной странице.
+- [ ] `FAQPage` повторяет видимый FAQ, но не рассматривается как цель Google FAQ rich result.
+- [ ] `HowTo` не добавляется без полноценной видимой пошаговой инструкции.
+- [ ] `about_entities`, `mentions_entities` и `product_group_id` существуют в `data/entities.yaml`.
+- [ ] `sameAs` означает идентичность сущности, а не просто тематическую связь.
+- [ ] Schema.org Validator разбирает JSON-LD без ошибки.
+- [ ] Google Rich Results Test используется только для типов, которые Google поддерживает как расширенный результат.
+
+Техническая валидность schema.org не доказывает качество. Разметка с невидимыми или неподтвержденными фактами остается дефектом, даже если валидатор принимает JSON.
+
+## 6. Контент и языковой паритет
+
+- [ ] Украинская и русская версии передают одинаковые факты, характеристики, ссылки и ограничения.
+- [ ] Перевод естественный; технические названия и поля не переводятся произвольно.
+- [ ] Изменение смысла выполняется в обеих версиях одного page bundle.
+- [ ] `date` сохраняет дату публикации, а `lastmod` отражает содержательную правку.
+- [ ] Текст отвечает на интент пользователя, а не повторяет ключевую фразу ради плотности.
+- [ ] Факты о здоровье, официальном статусе, совместимости, наградах и характеристиках имеют подтверждение.
+- [ ] Статья или новость отделяет факт от редакционного вывода.
+- [ ] Служебные privacy- и image-license-страницы понятны человеку и согласованы со связанным JSON-LD.
+
+Ориентиры объема из AGENTS используются как проверка полноты, а не как требование раздувать текст.
+
+## 7. Товарные и коммерческие страницы
+
+- [ ] Товар доступен из общего каталога и своей серии.
+- [ ] Название, модель, цвет и материал соответствуют изображению.
+- [ ] Цена, валюта, наличие и `priceValidUntil` совпадают в front matter, видимом HTML и JSON-LD.
+- [ ] Доставка, возврат, гарантия и оплата совпадают с действующей общей политикой.
+- [ ] SKU, MPN и GTIN не придуманы и не копируются между разными товарами.
+- [ ] Характеристики описывают конкретную модель, а не всю серию без основания.
+- [ ] Переключатель вариантов ведет только к реальным соседним вариантам.
+- [ ] Отзывы проходят цепочку `pending -> approved -> export -> visible HTML`.
+- [ ] Approved-отзыв не публикуется без проверки `target_id`, языка, содержания и согласия.
+
+В текущей архитектуре новый approved-отзыв становится видимым после следующего deploy, потому что Hugo создает HTML во время сборки.
+
+## 8. Изображения
+
+- [ ] Обложка статьи или новости имеет размер `1536x1024` и формат WebP.
+- [ ] Обычное изображение в теле статьи или новости обычно имеет размер `1200x800` WebP.
+- [ ] Главное изображение товара имеет размер `2000x2000` WebP и точно соответствует варианту.
+- [ ] Article/news и вторичные изображения используют shortcode `seo-image`.
+- [ ] Первое товарное изображение задается через `image` и галерею, а не дублируется в Markdown.
+- [ ] `width`, `height`, `srcset`, `sizes`, `loading` и `fetchpriority` соответствуют роли изображения.
+- [ ] LCP-изображение загружается eagerly и получает высокий приоритет только там, где оно действительно является LCP-кандидатом.
+- [ ] Вторичные изображения загружаются lazily.
+- [ ] `alt` описывает конкретный объект или сцену на языке страницы.
+- [ ] Нет placeholder, watermark, TEST, случайного AI-текста или подмены модели.
+- [ ] Дополнительный товарный кадр имеет имя, разрешенное `gallery-image-meta.html`.
+- [ ] Изображения schema.org существуют, доступны для сканирования и соответствуют видимой странице.
+
+AVIF или JPEG fallback не являются обязательными только ради чек-листа. Новый формат добавляется после измерения пользы, поддержки pipeline и проверки качества.
+
+## 9. Внутренняя перелинковка
+
+- [ ] Каждая индексируемая страница имеет хотя бы одну входящую HTML-ссылку.
+- [ ] Ссылка использует настоящий `<a href>` и ведет сразу на canonical URL.
+- [ ] Анкор описывает страницу назначения.
+- [ ] Короткий CTA товарной карточки получает полное доступное имя через `sr-only`.
+- [ ] UK-страница не ведет на RU-URL вне переключателя языка, и наоборот.
+- [ ] Локальный `#fragment` существует на целевой странице.
+- [ ] Нет пустых `href`, `href="#"` или `javascript:`.
+- [ ] Related-блок объясним содержанием и не превращается в массовую сетку ссылок.
+- [ ] Текущий язык, номер пагинации или активный вариант не создают бессмысленную ссылку на себя.
+- [ ] Внешняя ссылка добавляется ради источника или пользы пользователю, а не ради видимости.
+
+Количество ссылок не является самостоятельной SEO-целью. Важны обнаруживаемость страницы, точность анкоров и естественная связь тем.
+
+## 10. Производительность и Core Web Vitals
+
+- [ ] LCP, INP и CLS проверяются отдельно для mobile и desktop.
+- [ ] Измеряются полевые данные CrUX/Search Console, когда они доступны.
+- [ ] Лабораторный Lighthouse используется для диагностики, а не как замена полевым данным.
+- [ ] Нет произвольного требования «Performance 100» или «95–100» без контекста устройства и задачи.
+- [ ] Критический CSS не блокируется лишними пакетами.
+- [ ] JavaScript загружается только для реального поведения интерфейса.
+- [ ] Ширина и высота изображений предотвращают layout shift.
+- [ ] Стабильные URL изображений не получают `immutable`; fingerprinted assets могут его использовать.
+- [ ] Шрифты не создают заметный CLS и имеют подходящий `font-display`.
+- [ ] Service worker и manifest проверяются функционально.
+
+Отдельной PWA-категории в актуальном PageSpeed Insights нет. Экспериментальный Agentic Browsing/WebMCP проверяется отдельно и не формирует обычный взвешенный балл `0–100`.
+
+## 11. Доступность и UX
+
+- [ ] Страница полностью доступна с клавиатуры.
+- [ ] Фокус видим и следует логичному порядку.
+- [ ] Кнопка является `<button>`, а переход — ссылкой `<a>`.
+- [ ] Поля формы имеют связанные labels и понятные сообщения об ошибках.
+- [ ] Группы radio/checkbox используют `fieldset` и `legend`, где это необходимо.
+- [ ] Цвет не является единственным способом передать состояние.
+- [ ] Контраст и размер текста подходят для чтения.
+- [ ] Меню, фильтры, галерея, вкладки и переключатель языка работают на mobile и desktop.
+- [ ] Основной контент остается доступным без WebMCP и без AI-агента.
+- [ ] Не используются intrusive popups, искусственные счетчики или ложные trust badges.
+
+SEO не оправдывает плохой интерфейс. Страница создается прежде всего для пользователя, а не для робота.
+
+## 12. Netlify, безопасность и маршрутизация
+
+- [ ] `static/_redirects` сохраняет root rewrite и forced `404!` для scanner/sensitive URL.
+- [ ] Не добавлен общий fallback `/* /404.html 404`.
+- [ ] 404 действительно возвращает статус 404 на Deploy Preview.
+- [ ] Static headers из `netlify.toml` проверены на опубликованном URL.
+- [ ] Function response самостоятельно задает CORS, cache и security headers, которые ему нужны.
+- [ ] Fingerprinted assets получают длительный cache; стабильные image/favicon URLs перепроверяются без старого browser cache.
+- [ ] CSP, HSTS, `X-Content-Type-Options`, `Referrer-Policy` и `Permissions-Policy` проверены на опубликованном URL.
+- [ ] Нет mixed content, открытых секретов или персональных данных в Git.
+- [ ] Переменные Functions задаются через Netlify UI, CLI или API, а не через `netlify.toml`.
+
+## 13. Формы, privacy и отзывы
+
+- [ ] Контактная форма и форма отзыва работают как обычный HTML без AI-агента.
+- [ ] Пользователь явно подтверждает отправку и согласие; `toolautosubmit` не используется.
+- [ ] Сервер или утвержденный операционный процесс проверяет согласие при прямом POST.
+- [ ] Политика конфиденциальности на обоих языках доступна из формы и подвала.
+- [ ] Подтверждены контролер, правовое основание, сроки хранения и трансграничная передача.
+- [ ] `REVIEW_EMAIL_HASH_SALT` существует в окружении Netlify Functions.
+- [ ] Function не возвращает email, хеш, IP или технические данные в публичный HTML.
+- [ ] Модератор проверяет `target_id` до перевода отзыва в `approved`.
+- [ ] Лимиты, credits, compute, bandwidth и стоимость Netlify Database проверены в Dashboard.
+
+HTML `required` полезен, но не является серверной защитой от прямого запроса.
+
+## 14. WebMCP, `llms.txt` и AI-поиск
+
+- [ ] WebMCP остается progressive enhancement поверх доступной HTML-формы.
+- [ ] Описания инструментов короткие, точные и не обещают невозможное.
+- [ ] Записывающие действия требуют явного подтверждения пользователя.
+- [ ] Внешнее и пользовательское содержимое считается недоверенным.
+- [ ] `readOnlyHint` ставится только действительно read-only инструменту.
+- [ ] `untrustedContentHint` используется для результатов с внешним или пользовательским содержимым.
+- [ ] `static/llms.txt` остается краткой Markdown-картой, а не вторым sitemap.
+- [ ] `llms.txt` не описывается как фактор ранжирования Google.
+- [ ] Нет специальной «AI schema», не поддерживаемой schema.org и видимым контентом.
+
+## 15. Мониторинг после production-запуска
+
+- [ ] Google Search Console подтверждает индексацию canonical URL и отсутствие случайного `noindex`.
+- [ ] Sitemap принят без системных ошибок.
+- [ ] Проверены отчеты по Product snippets, Merchant listings и другим поддерживаемым типам.
+- [ ] CrUX и Core Web Vitals анализируются по mobile и desktop после накопления данных.
+- [ ] Netlify RUM используется как дополнительный полевой источник, а не единственная истина.
+- [ ] Отслеживаются 404, redirect chains, server errors и изменения внешних ссылок.
+- [ ] Запросы и целевые страницы анализируются в Search Console до создания новых посадочных URL.
+- [ ] Метрики AI referral отделены от органического поиска и не используются как доказательство ранжирования.
+- [ ] Изменения фиксируются с датой, причиной и ожидаемым показателем.
+
+Не добавляйте GA4, Bing Webmaster Tools, rank tracker или другой сервис только потому, что он встречается в универсальном чек-листе. Инструмент подключается после решения о данных, privacy, владельце и процессе использования.
+
+## 16. Последовательность перед релизом
+
+1. Проверить источники правды и незакоммиченные изменения.
+2. Запустить `npm run docs:check`.
+3. Запустить `./scripts/script_check.sh`.
+4. Запустить `npm run build:production`.
+5. Проверить готовый HTML: robots, canonical, hreflang, sitemap, JSON-LD, ссылки и изображения.
+6. Создать Deploy Preview и проверить 404, redirects, headers, формы и mobile/desktop интерфейс.
+7. Пройти [production quality gate](../quality/14-production-quality-gate-2026.md).
+8. Только после явного решения изменить production environment и включить индексацию.
+9. После deploy повторить проверку реального URL без опоры на локальный HTML.
+10. Начать полевой мониторинг и не объявлять успех до появления данных.
+
+## 17. Запрещенные упрощения
+
+- Нельзя считать успешную Hugo-сборку полной SEO-проверкой.
+- Нельзя считать PageSpeed score доказательством индексации или качества контента.
+- Нельзя добавлять schema.org ради количества типов.
+- Нельзя создавать новую страницу только ради одного варианта ключевой фразы.
+- Нельзя публиковать рейтинг, юридический факт, цену или характеристику без источника правды.
+- Нельзя считать sitemap заменой внутренней перелинковки.
+- Нельзя считать `llms.txt` заменой robots, sitemap, canonical или schema.org.
+- Нельзя включать production-индексацию одним изменением без проверки опубликованного результата.
+
+## 18. Официальные источники
+
+- [Google Search Essentials](https://developers.google.com/search/docs/essentials)
+- [Google: общие правила структурированных данных](https://developers.google.com/search/docs/appearance/structured-data/sd-policies)
+- [Google: локализованные версии страниц](https://developers.google.com/search/docs/specialty/international/localized-versions)
+- [Google: рекомендации по изображениям](https://developers.google.com/search/docs/appearance/google-images)
+- [Google: Core Web Vitals](https://developers.google.com/search/docs/appearance/core-web-vitals)
+- [Hugo: multilingual mode](https://gohugo.io/configuration/languages/)
+- [Hugo: sitemap](https://gohugo.io/configuration/sitemap/)
+- [Netlify: redirects](https://docs.netlify.com/manage/routing/redirects/overview/)
+- [Netlify: headers](https://docs.netlify.com/manage/routing/headers/)
+- [Netlify: Functions](https://docs.netlify.com/build/functions/overview/)
+
+## 19. Итог
+
+Сильный SSG-сайт — это не список модных инструментов. Для Aerocool это согласованная система: проверяемые факты в `content/`, точные Hugo-шаблоны, корректные URL, доступный HTML, честная schema.org-разметка, быстрые изображения, безопасные формы, контролируемый Netlify deploy и измерение после production-запуска.

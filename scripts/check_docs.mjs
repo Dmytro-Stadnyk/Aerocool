@@ -158,6 +158,21 @@ for (const file of markdownFiles) {
 
 const sortedNumbers = [...numbers.keys()].sort((left, right) => left - right);
 const maxNumber = sortedNumbers.at(-1) || 0;
+const currentAuditFile = numbers.get(maxNumber);
+const currentAuditPath = currentAuditFile ? relative(currentAuditFile) : "";
+
+if (!currentAuditPath.startsWith("docs/audits/")) {
+  errors.push("docs/: последний номер должен принадлежать текущему аудиту");
+}
+
+for (const file of entryFiles) {
+  const source = fs.readFileSync(file, "utf8");
+  if (currentAuditPath && !source.includes(currentAuditPath)) {
+    errors.push(
+      `${relative(file)}: нет ссылки на текущий полный аудит ${currentAuditPath}`,
+    );
+  }
+}
 
 for (let number = 1; number <= maxNumber; number += 1) {
   if (!numbers.has(number)) {
@@ -204,6 +219,9 @@ for (const file of [...entryFiles, ...markdownFiles]) {
   if (relative(file).startsWith("docs/audits/") && number < maxNumber) {
     if (!/Архивная оговорка \d{4}-\d{2}-\d{2}/.test(source)) {
       errors.push(`${relative(file)}: исторический аудит не имеет архивной оговорки`);
+    }
+    if (/^Статус: текущий полный аудит\.$/m.test(source)) {
+      errors.push(`${relative(file)}: исторический аудит все еще помечен как текущий`);
     }
   }
 

@@ -1,6 +1,6 @@
 # Шаблон страницы серии
 
-Обновлено: 2026-07-10.
+Обновлено: 2026-07-13.
 
 Использовать для страниц серий в `content/products/<series>/_index.md` и `_index.ru.md`.
 
@@ -27,8 +27,14 @@ cover:
   relative: true
   hiddenInSingle: true
 schema_types: ["website", "collection", "organization", "breadcrumbs"]
+about_entities:
+  - "<confirmed-series-entity-id>"
+mentions_entities:
+  - "<confirmed-related-entity-id>"
 ---
 ```
+
+Замените шаблонные ID в угловых скобках на существующие `confirmed` ID из `data/entities.yaml`. Основной ID должен описывать саму серию, а `mentions_entities` — только модели, материалы, механизмы и сценарии, раскрытые в видимом тексте.
 
 ## Структура текста
 

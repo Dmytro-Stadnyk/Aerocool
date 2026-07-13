@@ -1,6 +1,6 @@
 # База ключевых слов Aerocool 2026
 
-Обновлено: 2026-07-10.
+Обновлено: 2026-07-13.
 
 Этот документ фиксирует рабочую базу ключевых слов проекта `Aerocool Ukraine` после анализа всего публичного контента сайта и текущей SEO-документации. Полная табличная база находится рядом в [30-keyword-database-2026.csv](30-keyword-database-2026.csv), стратегический порядок развития семантического ядра описан в [35-semantic-core-keyword-strategy-2026.md](35-semantic-core-keyword-strategy-2026.md), контентный roadmap расширения — в [40-content-expansion-keyword-roadmap-2026.md](40-content-expansion-keyword-roadmap-2026.md), а операционная Top-1 growth system — в [41-semantic-core-top1-growth-system-2026.md](41-semantic-core-top1-growth-system-2026.md).
 
@@ -8,9 +8,9 @@
 
 ## Что было проанализировано
 
-- `100` отслеживаемых markdown-файлов в `content/**/*.md`.
-- `50` украинских и `50` русских отслеживаемых страниц.
-- Главная, About, Contact, FAQ, Image License, Search, Contact Success.
+- `102` отслеживаемых markdown-файла в `content/**/*.md`.
+- `51` украинская и `51` русская отслеживаемая страница.
+- Главная, About, Contact, FAQ, Image License, Privacy, Search, Contact Success.
 - Хабы `/products/`, `/articles/`, `/news/`.
 - `3` страницы серий в двух языках: `SKY`, `WING`, `XTAL`.
 - `12` товарных вариантов в двух языках.
@@ -19,7 +19,7 @@
 - `hugo.yaml`, где заданы глобальные `description` и `params.keywords`.
 - [18-seo-keyword-map-2026.md](18-seo-keyword-map-2026.md), где уже описана стратегическая карта интентов.
 
-Служебные страницы `/search/` и страницы подтверждения формы не считаются SEO-посадочными, но учитывались как часть корпуса, чтобы не принять их за новые цели для ранжирования. Страницы `/image-license/` и `/ru/image-license/` считаются поддерживающими legal/trust URL: они не являются коммерческими посадочными, но заведены в базу, потому что поддерживают ImageObject license metadata и доверительный слой сайта.
+Служебные страницы `/search/` и страницы подтверждения формы не считаются SEO-посадочными, но учитывались как часть корпуса, чтобы не принять их за новые цели для ранжирования. Страницы `/image-license/`, `/privacy/` и их русские версии считаются поддерживающими legal/trust URL: они не являются коммерческими посадочными, но заведены в базу, потому что поддерживают права на изображения, прозрачность обработки данных и доверительный слой сайта.
 
 ## Вывод по текущему покрытию
 
@@ -39,7 +39,7 @@
 
 Главная зона роста теперь не в простом добавлении новых ключей, а в управлении уже опубликованной семантикой: защита от каннибализации между похожими гайдами, подключение данных Google Search Console, уточнение приоритетов по реальным показам и расширение коммерческих фактов только там, где они подтверждены командой Aerocool Украина.
 
-В этом проходе база подготовлена для дальнейшей аналитики: у строк больше нет обобщенной цели `product pages`, хабы `/articles/` и `/news/` получили собственные keyword-строки, страницы прав на изображения получили support-ключи, добавлены новые material/B2B/purchase long-tail строки, product-level price/availability/specs строки, content-expansion growth строки, а CSV содержит пустые поля для будущей выгрузки Google Search Console.
+В этом проходе база подготовлена для дальнейшей аналитики: у строк больше нет обобщенной цели `product pages`, хабы `/articles/` и `/news/` получили собственные keyword-строки, страницы прав на изображения и конфиденциальности получили support-ключи, добавлены material/B2B/purchase long-tail строки, product-level price/availability/specs строки, content-expansion growth строки, а CSV содержит пустые поля для будущей выгрузки Google Search Console.
 
 ## Как пользоваться базой
 
@@ -93,7 +93,7 @@ CSV-файл содержит строки вида:
 | `mechanic` | Механики и технические объяснения | статьи про `Synchronous Tilt`, `SYNC4/SYNC5`, WING/XTAL |
 | `adjustment` | Регулировки | статья про `7D/8D/11D`, товары и серии |
 | `comparison` | Выбор между моделями/сериями | статьи-сравнения |
-| `support` | FAQ, гарантия, доставка, контакты, права на изображения | `/faq/`, `/contact/`, `/image-license/` |
+| `support` | FAQ, гарантия, доставка, контакты, права на изображения, конфиденциальность | `/faq/`, `/contact/`, `/image-license/`, `/privacy/` |
 | `news` | Запуски и уточнения каталога | `/news/` и отдельные новости |
 
 ## Контроль каннибализации
@@ -140,7 +140,7 @@ CSV-файл содержит строки вида:
 
 - Стратегическая карта интентов: [18-seo-keyword-map-2026.md](18-seo-keyword-map-2026.md).
 - Стратегия развития семантического ядра: [35-semantic-core-keyword-strategy-2026.md](35-semantic-core-keyword-strategy-2026.md).
-- Roadmap расширения контента и ключей: [40-content-expansion-keyword-roadmap-2026.md](40-content-expansion-keyword-roadmap-2026.md).
+- План расширения контента и ключей: [40-content-expansion-keyword-roadmap-2026.md](40-content-expansion-keyword-roadmap-2026.md).
 - Операционная система развития и Top-1 strategy: [41-semantic-core-top1-growth-system-2026.md](41-semantic-core-top1-growth-system-2026.md).
 - Контентные правила: [07-content-seo-checklist-2026.md](../content/07-content-seo-checklist-2026.md).
 - Front matter и SEO-поля: [05-front-matter-reference.md](../content/05-front-matter-reference.md).
@@ -148,18 +148,18 @@ CSV-файл содержит строки вида:
 
 ## Краткий снимок базы
 
-Всего в CSV: `389` ключевых строк.
+Всего в CSV: `391` ключевая строка.
 
 | Срез | Количество |
 | --- | ---: |
 | `P0` | 98 |
-| `P1` | 170 |
+| `P1` | 172 |
 | `P2` | 119 |
 | `P3` | 2 |
 | `current` | 337 |
-| `supporting` | 7 |
+| `supporting` | 9 |
 | `growth` | 45 |
-| `single_url` | 307 |
+| `single_url` | 309 |
 | `url_group` | 82 |
 
 Срез по этапам пути:
@@ -170,7 +170,7 @@ CSV-файл содержит строки вида:
 | `awareness` | 67 |
 | `purchase` | 90 |
 | `navigation` | 12 |
-| `support` | 22 |
+| `support` | 24 |
 
 Срез по бизнес-ценности:
 
@@ -178,7 +178,7 @@ CSV-файл содержит строки вида:
 | --- | ---: |
 | `high` | 186 |
 | `medium` | 166 |
-| `low` | 37 |
+| `low` | 39 |
 
 Срез по мастер-кластерам:
 
@@ -190,7 +190,7 @@ CSV-файл содержит строки вида:
 | `spec` | 25 |
 | `product type modifier` | 24 |
 | `material` | 22 |
-| `support` | 22 |
+| `support` | 24 |
 | `brand` | 20 |
 | `series` | 18 |
 | `transaction` | 18 |

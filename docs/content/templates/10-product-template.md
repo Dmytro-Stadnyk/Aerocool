@@ -4,7 +4,7 @@
 
 Использовать для новых карточек товаров в `content/products/<series>/<model>/index.md` и `index.ru.md`.
 
-Как пользоваться новичку: каждая модель, цвет и материал живут в своей папке как отдельная папка страницы Hugo (`page bundle`). Внутри должны быть украинский `index.md`, русский `index.ru.md` и точные изображения этого варианта. Не копируй характеристики или главное изображение из другой модели, если они не подтверждены для этой версии.
+Как пользоваться новичку: каждая модель, цвет и материал живут в своей папке как отдельная страница Hugo (`page bundle`). Внутри должны быть украинский `index.md`, русский `index.ru.md` и точные изображения этого варианта. Не копируйте характеристики или главное изображение из другой модели, если они не подтверждены для этой версии.
 
 Целевой стандарт для проекта `Aerocool`: одна товарная страница обычно пишется в формате `6000+` знаков основного текста на каждую языковую версию. Объем набирается через сценарии использования, характеристики, сравнения, FAQ и коммерческий следующий шаг, а не через повторение рекламных формулировок.
 
@@ -20,6 +20,11 @@ summary: "Aerocool <MODEL> — кресло серии <SERIES> с <ADJUSTABILIT
 date: 2026-04-21T10:00:00+03:00
 lastmod: 2026-04-21T10:00:00+03:00
 schema_types: ["website", "product", "organization", "breadcrumbs"]
+about_entities:
+  - "<confirmed-product-entity-id>"
+mentions_entities:
+  - "<confirmed-related-entity-id>"
+product_group_id: "<confirmed-product-group-id>" # удалить для модели без реальных вариантов
 slug: "<slug>"
 categories: ["<series>"]
 tags: ["aerocool", "эргономичное кресло", "<commercial-cluster>", "<series>", "<variant>"]
@@ -32,7 +37,7 @@ cover:
 price: 0
 sku: "<SKU>"
 review_target_id: "<stable-review-id>" # одинаковый для uk/ru версии одного товара
-reviews_enabled: false                  # true только после подключения partials отзывов
+reviews_enabled: true                   # текущий стандарт каталога; false только при намеренном отключении
 warranty: 12
 availability: InStock
 priceValidUntil: 2027-12-31
@@ -53,6 +58,8 @@ payment_methods:             # необязательно
   - "https://schema.org/CreditCard"
 ---
 ```
+
+Все entity ID должны существовать в `data/entities.yaml` и иметь подходящий статус. `product_group_id` оставляйте только для реальной группы вариантов одной модели; для самостоятельного товара строку нужно удалить. Главная product entity в `about_entities` является источником подтвержденного `material` для `Product` JSON-LD.
 
 ## Структура текста
 

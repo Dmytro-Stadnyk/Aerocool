@@ -22,9 +22,9 @@ https://aerocool.ua
 
 | Группа | Количество URL |
 | --- | ---: |
-| Украинские страницы | `48` |
-| Русские страницы | `48` |
-| Всего URL с JSON-LD | `96` |
+| Украинские страницы | `49` |
+| Русские страницы | `49` |
+| Всего URL с JSON-LD | `98` |
 
 Что не входит в список:
 
@@ -51,7 +51,7 @@ Schema.org Validator проверяет синтаксис и распознав
 1. Главные страницы: `/`, `/ru/`.
 2. Каталог и серии: `/products/`, `/products/sky/`, `/products/wing/`, `/products/xtal/` и русские версии.
 3. Все product pages.
-4. `/faq/`, `/contact/`, `/about/`, `/image-license/` и русские версии.
+4. `/faq/`, `/contact/`, `/about/`, `/image-license/`, `/privacy/` и русские версии.
 5. Статьи и новости.
 
 ## 4. Украинские URL
@@ -63,6 +63,7 @@ Schema.org Validator проверяет синтаксис и распознав
 - [ ] https://dev--hugo-aerocool.netlify.app/contact/
 - [ ] https://dev--hugo-aerocool.netlify.app/faq/
 - [ ] https://dev--hugo-aerocool.netlify.app/image-license/
+- [ ] https://dev--hugo-aerocool.netlify.app/privacy/
 
 ### 4.2. Каталог, серии и товары
 
@@ -125,6 +126,7 @@ Schema.org Validator проверяет синтаксис и распознав
 - [ ] https://dev--hugo-aerocool.netlify.app/ru/contact/
 - [ ] https://dev--hugo-aerocool.netlify.app/ru/faq/
 - [ ] https://dev--hugo-aerocool.netlify.app/ru/image-license/
+- [ ] https://dev--hugo-aerocool.netlify.app/ru/privacy/
 
 ### 5.2. Каталог, серии и товары
 

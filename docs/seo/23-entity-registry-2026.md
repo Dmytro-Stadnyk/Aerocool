@@ -6,13 +6,13 @@
 
 Этот документ — канонический реестр сущностей проекта `Aerocool Ukraine`. Он нужен для управляемого Entity SEO, AI Search, `about_entities`, `mentions_entities`, `ProductGroup`, `Product.color`, `additionalProperty`, `llms.txt`, будущего `Callable Actions Registry` и структурированного [data/entities.yaml](../../data/entities.yaml).
 
-Если вы впервые работаете с entity-полями, сначала прочитайте [Entity Registry: гайд для новичка](22-entity-registry-beginner-guide-2026.md).
+Если вы впервые работаете с полями сущностей, сначала прочитайте [руководство по реестру для новичка](22-entity-registry-beginner-guide-2026.md).
 
 Реестр не заменяет `schema_types`. Поле `schema_types` по-прежнему выбирает типы JSON-LD, а registry фиксирует стабильные сущности, `@id`, entity home, связи, владельца фактов и условия внедрения.
 
 ## Проверенный снимок реестра
 
-Повторно проверено 2026-07-13: в `data/entities.yaml` зафиксировано `64` сущности — `62 confirmed`, `0 planned` и `2 do-not-markup`. Неизвестных ссылок из front matter нет; `about_entities` и `mentions_entities` используют только `confirmed` сущности; `product_group_id` остается только у реальных цветовых вариантов WING/XTAL и указывает на `confirmed` ProductGroup. Отдельная подтвержденная сущность `aerocool-editorial-team` связывает видимое авторство статей и новостей с публичной редакционной политикой.
+Повторно проверено 2026-07-13: в `data/entities.yaml` зафиксировано `65` сущностей — `63 confirmed`, `0 planned` и `2 do-not-markup`. Неизвестных ссылок из front matter нет; `about_entities` и `mentions_entities` используют только `confirmed` сущности; `product_group_id` остается только у реальных цветовых вариантов WING/XTAL и указывает на `confirmed` ProductGroup. Сущность `aerocool-editorial-team` связывает видимое авторство статей и новостей с публичной редакционной политикой, а `privacy-policy` — две локализованные страницы конфиденциальности с доверительным слоем проекта.
 
 Оценка Entity Registry: `9.7 / 10`.
 
@@ -52,8 +52,8 @@
 - Не создавать новые schema nodes, если человек не видит соответствующий факт на странице.
 - Hugo генерирует отдельные registry-based JSON-LD nodes для `confirmed` сущностей классов `Material`, `Mechanism`, `Feature`, `UseCase`, `ContentTopic` и `Policy`, если они используются в `about_entities` или `mentions_entities`. Product, Organization, Brand, WebPage и Collection nodes не дублируются, потому что для них уже есть отдельные schema partials.
 - Registry-based nodes должны оставаться объяснительными: они называют сущность, дают стабильный `@id`, `entity_home`, localized `name`, `alternateName`, `identifier`, `termCode` для `DefinedTerm`, `url` и `subjectOf`, но не заменяют Product/Offer/FAQ/Article schema. Не добавлять в `DefinedTerm` свойства, которые Schema.org Validator не принимает для этого типа, например `inLanguage` или `isRelatedTo`.
-- Registry refs в `about`, `mentions`, `hasVariant` и похожих связях должны передавать не только `@id`, но и `@type` из `schema_candidate`. Это защищает от ситуации, когда валидатор видит ссылку на `CollectionPage`, `Product`, `DefinedTerm` или `Policy` как объект без типа.
-- Agentic actions не добавлять в JSON-LD, пока нет реального business endpoint, owner, input validation, success/failure states и видимого процесса для пользователя.
+- Ссылки на реестр (`registry refs`) в `about`, `mentions`, `hasVariant` и похожих связях должны передавать не только `@id`, но и `@type` из `schema_candidate`. Это защищает от ситуации, когда валидатор видит ссылку на `CollectionPage`, `Product`, `DefinedTerm` или `Policy` как объект без типа.
+- Агентные действия (`agentic actions`) не добавлять в JSON-LD, пока нет реальной бизнес-точки API (`endpoint`), ответственного владельца, проверки входных данных, состояний успеха и ошибки и видимого процесса для пользователя.
 
 ## 3. Статусы сущностей
 
@@ -68,18 +68,18 @@
 
 | Поле | Значение |
 | --- | --- |
-| `entity_id` | Стабильный внутренний ID, который используют future front matter и resolver |
-| `name_uk` / `name_ru` / `name_en` | Локализованные названия для редакторов и будущих UI/schema helpers |
+| `entity_id` | Стабильный внутренний ID, который используют поля front matter и resolver — шаблонный механизм разрешения ссылок на сущности |
+| `name_uk` / `name_ru` / `name_en` | Локализованные названия для редакторов и будущих вспомогательных шаблонов интерфейса и schema.org |
 | `entity_class` | Класс сущности: Brand, Organization, ProductSeries, ProductGroup, Product, ProductVariant, Material, Mechanism, UseCase, Policy, ContentHub |
 | `schema_candidate` | Возможный тип Schema.org; не всегда активен прямо сейчас |
 | `current_jsonld_id` | Текущий `@id`, который уже выводят Hugo-шаблоны |
-| `future_jsonld_id` | Стабильный `@id` для registry-managed nodes, которые не выводятся базовыми Product/Organization/Page partials |
+| `future_jsonld_id` | Стабильный `@id` для управляемых реестром узлов, которые пока не выводятся базовыми partial-шаблонами Product, Organization или Page |
 | `entity_home` | Лучший URL на `aerocool.ua`, который объясняет сущность |
 | `owner` | Ответственный за фактическую точность |
 | `status` | Статус сущности в registry |
 | `sameAs` | Только внешние ссылки на точное совпадение сущности |
 | `parent` | Родительская сущность в графе |
-| `related` | Полезные связанные сущности для будущих `mentions` |
+| `related` | Полезные связанные сущности, которые можно использовать в будущих связях `mentions` после проверки видимого контекста |
 
 ## 5. Правила для ID
 
@@ -143,7 +143,7 @@
 
 ## 10. Сущности `ProductGroup`, активные для вариантов
 
-`ProductGroup` выводится только для реальных вариантов одной модели, где есть видимая навигация между вариантами. Одиночные товары не получают ProductGroup. На 2026-05-31 активны только четыре цветовые группы WING/XTAL.
+`ProductGroup` выводится только для реальных вариантов одной модели, где есть видимая навигация между вариантами. Одиночные товары не получают `ProductGroup`. На 2026-07-13 подтверждены четыре цветовые группы WING и XTAL.
 
 Validator-safe правило для `ProductGroup`: выводить `@type`, `@id`, `name`, `productGroupID`, `url`, `brand`, `hasVariant` и `variesBy`; не добавлять `inLanguage` и `isPartOf`, потому что Schema.org Validator не принимает эти свойства для `ProductGroup`.
 
@@ -185,12 +185,12 @@ Validator-safe правило для `ProductGroup`: выводить `@type`, `
 
 | entity_id | name_en | name_uk | name_ru | entity_class | schema_candidate | entity_home | status | Сильные страницы | Примечания |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `synchronous-tilt` | Synchronous Tilt | Synchronous Tilt | Synchronous Tilt | Mechanism | `DefinedTerm` или `Thing` | `/articles/what-is-synchronous-tilt/` | `confirmed` | гайд по sync tilt; товарные страницы | Главная сущность синхронного наклона. |
-| `sync4-mechanism` | SYNC4 | SYNC4 | SYNC4 | Mechanism | `DefinedTerm` или `Thing` | `/articles/sync4-sync5-mechanism-guide/` | `confirmed` | гайд SYNC4/SYNC5; SKY Light | Использовать там, где в видимом товарном контенте указан SYNC4. |
-| `sync5-mechanism` | SYNC5 | SYNC5 | SYNC5 | Mechanism | `DefinedTerm` или `Thing` | `/articles/sync4-sync5-mechanism-guide/` | `confirmed` | гайд SYNC4/SYNC5; SKY 360, WING, XTAL | Использовать там, где в видимом товарном контенте указан SYNC5. |
-| `7d-adjustment` | 7D adjustment | 7D регулювання | 7D регулировка | Feature | `DefinedTerm` или `Thing` | `/articles/how-to-choose-chair-by-adjustability/` | `confirmed` | гайд по регулировкам; страницы XTAL | Раскрывается через видимые товарные `characteristics` / `additionalProperty`, если они есть. |
-| `8d-adjustment` | 8D adjustment | 8D регулювання | 8D регулировка | Feature | `DefinedTerm` или `Thing` | `/articles/how-to-choose-chair-by-adjustability/` | `confirmed` | гайд по регулировкам; SKY Light | Раскрывается через видимые товарные `characteristics` / `additionalProperty`, если они есть. |
-| `11d-adjustment` | 11D adjustment | 11D регулювання | 11D регулировка | Feature | `DefinedTerm` или `Thing` | `/articles/how-to-choose-chair-by-adjustability/` | `confirmed` | гайд по регулировкам; SKY 360, WING | Раскрывается через видимые товарные `characteristics` / `additionalProperty`, если они есть. |
+| `synchronous-tilt` | Synchronous Tilt | Synchronous Tilt | Synchronous Tilt | Mechanism | `DefinedTerm` или `Thing` | `/articles/what-is-synchronous-tilt/` | `confirmed` | руководство по синхронному наклону; товарные страницы | Главная сущность синхронного наклона. |
+| `sync4-mechanism` | SYNC4 | SYNC4 | SYNC4 | Mechanism | `DefinedTerm` или `Thing` | `/articles/sync4-sync5-mechanism-guide/` | `confirmed` | руководство SYNC4/SYNC5; SKY Light | Использовать там, где в видимом товарном контенте указан SYNC4. |
+| `sync5-mechanism` | SYNC5 | SYNC5 | SYNC5 | Mechanism | `DefinedTerm` или `Thing` | `/articles/sync4-sync5-mechanism-guide/` | `confirmed` | руководство SYNC4/SYNC5; SKY 360, WING, XTAL | Использовать там, где в видимом товарном контенте указан SYNC5. |
+| `7d-adjustment` | 7D adjustment | 7D регулювання | 7D регулировка | Feature | `DefinedTerm` или `Thing` | `/articles/how-to-choose-chair-by-adjustability/` | `confirmed` | руководство по регулировкам; страницы XTAL | Раскрывается через видимые товарные `characteristics` / `additionalProperty`, если они есть. |
+| `8d-adjustment` | 8D adjustment | 8D регулювання | 8D регулировка | Feature | `DefinedTerm` или `Thing` | `/articles/how-to-choose-chair-by-adjustability/` | `confirmed` | руководство по регулировкам; SKY Light | Раскрывается через видимые товарные `characteristics` / `additionalProperty`, если они есть. |
+| `11d-adjustment` | 11D adjustment | 11D регулювання | 11D регулировка | Feature | `DefinedTerm` или `Thing` | `/articles/how-to-choose-chair-by-adjustability/` | `confirmed` | руководство по регулировкам; SKY 360, WING | Раскрывается через видимые товарные `characteristics` / `additionalProperty`, если они есть. |
 | `dual-backrest` | Dual backrest | подвійна спинка | двойная спинка | Feature | `DefinedTerm` или `Thing` | `/articles/what-is-dual-backrest/` | `confirmed` | страницы WING; отдельная статья про Dual backrest | Активировано `2026-05-26`; использовать только там, где видимо обсуждается двойная спинка WING. |
 | `replaceable-elements` | Replaceable elements | змінні елементи | сменные элементы | Feature | `DefinedTerm` или `Thing` | `/articles/what-is-fully-replaceable-design/` | `confirmed` | страницы XTAL; отдельная статья про replaceable design | Активировано `2026-05-26`; использовать только там, где видимо обсуждаются сменные элементы XTAL. |
 | `lumbar-support` | Lumbar support | поперекова підтримка | поясничная поддержка | Feature | `DefinedTerm` или `Thing` | `/products/` | `confirmed` | товарные страницы и страницы серий | Активировано `2026-05-31`; раскрывается через видимые товарные `characteristics` / `additionalProperty`, если они есть. |
@@ -222,6 +222,7 @@ Validator-safe правило для `ProductGroup`: выводить `@type`, `
 | `warranty-policy` | Warranty | Гарантія | Гарантия | `WarrantyPromise` / policy reference | `/faq/` | product front matter | Aerocool Ukraine | `confirmed` | Использует `warranty`. |
 | `price-validity-policy` | Price validity | Актуальність ціни | Актуальность цены | Offer validity reference | product front matter | product front matter | Aerocool Ukraine | `confirmed` | `priceValidUntil: 2027-12-31` подтверждено `2026-05-07`. |
 | `image-license-policy` | Image usage rights | Права на використання зображень | Права на использование изображений | `Thing` / image policy reference | `/image-license/` | image license page | Aerocool Ukraine + Global Aerocool | `confirmed` | Источник для `ImageObject.license` и `ImageObject.acquireLicensePage`. |
+| `privacy-policy` | Privacy policy | Політика конфіденційності | Политика конфиденциальности | `Thing` / privacy policy reference | `/privacy/` | privacy page | Aerocool Ukraine | `confirmed` | Связывает локализованные privacy-страницы с формами и организацией; не заменяет юридическую проверку контролера данных и оснований обработки. |
 
 ## 16. Карта сущностей для редакционного контента
 

@@ -1,8 +1,10 @@
-# Netlify Database для отзывов с безопасной SEO-архитектурой
+# Netlify Database для товарных отзывов с безопасной SEO-архитектурой
 
 Обновлено: 2026-07-13.
 
-Этот документ объясняет, как в проекте `Aerocool Ukraine` использовать `Netlify Database` для собственной системы отзывов к товарам и статьям.
+Этот документ объясняет, как в проекте `Aerocool Ukraine` работает собственная система отзывов о товарах на базе `Netlify Database`.
+
+Текущий runtime-контракт поддерживает только `target_type=product`: это ограничение задано в `netlify/functions/reviews.mjs`, а `scripts/export_reviews.mjs` также экспортирует только товарные записи. Значение `article` разрешено исторически заложенной схемой таблицы как резерв на будущее, но форма, Function, экспорт и публичный шаблон статей его сейчас не реализуют.
 
 Главная цель: не просто сохранять отзывы, а поддерживать безопасный процесс, в котором `Product` JSON-LD получает рейтинг только из реальных публичных approved-отзывов, видимых пользователю на той же странице.
 
@@ -38,6 +40,7 @@
 - добавлена отдельная миграция `20260713120000_add-review-privacy-consent`, которая не переписывает уже примененную первую миграцию и добавляет доказательство согласия;
 - миграция локально применена через `netlify database migrations apply`;
 - добавлена функция `netlify/functions/reviews.mjs` для `POST /api/reviews`; другие методы получают `405 Method Not Allowed`;
+- функция принимает только товарные отзывы с `target_type=product`, а exporter игнорирует любые другие типы;
 - все текущие товарные страницы в украинской и русской версии получили стабильный `review_target_id` и `reviews_enabled: true`;
 - форма отзывов выводится только для товаров с явными `review_target_id` и `reviews_enabled: true`, содержит локализованную ссылку на `/privacy/` и обязательный checkbox без предварительной отметки;
 - локально и на Netlify branch `dev` проверено, что `POST /api/reviews` создает запись в `reviews` со статусом `pending`;
@@ -46,7 +49,7 @@
 - `Product.aggregateRating` строится из того же снимка и не выводится, если у товара нет approved-отзывов;
 - на `https://dev--hugo-aerocool.netlify.app/products/sky/light/#reviews` проверен полный цикл: отправка отзыва, ручная модерация `pending -> approved`, новый deploy `dev`, появление видимого отзыва на странице.
 
-Netlify Database доступна только на credit-based plans и расходует credits на compute и bandwidth. Официальная страница указывала бесплатное хранение данных только до 2026-07-01; эта дата уже прошла. Перед production-нагрузкой обязательно проверять актуальные тарифы, расход credits и лимиты именно в Netlify Dashboard. Документация проекта не считает базу безусловно бесплатной.
+Netlify Database доступна только на credit-based plans и расходует credits на compute и bandwidth. Официальная страница указывала бесплатное хранение данных только до 2026-07-01; эта дата уже прошла. Перед production-нагрузкой обязательно проверять актуальные тарифы, расход credits и лимиты именно в Netlify Dashboard. Документация проекта не считает базу безусловно бесплатной и не переносит устаревшую акционную цену на текущий период.
 
 ### Обязательная переменная `REVIEW_EMAIL_HASH_SALT`
 
@@ -101,6 +104,17 @@ approved review в Netlify Database
 
 На ветке `dev` этот сценарий уже подтвержден на `SKY Light`. `Product.aggregateRating` подключен к тому же снимку и появляется только при наличии видимых approved-отзывов. После масштабирования на каталог устаревшие `rating.value` и `rating.count` удалены из товарного front matter; следующий операционный шаг — поддерживать модерацию, пересборку после одобрения и проверку отчетов rich results на branch/production.
 
+### Что означают статусы модерации
+
+| Статус | Значение | Публичный вывод |
+| --- | --- | --- |
+| `pending` | Новый отзыв ожидает ручной проверки. | Нет. |
+| `approved` | Отзыв проверен и разрешен к публикации. | Да, после следующей сборки/deploy. |
+| `rejected` | Отзыв отклонен из-за содержания, несоответствия товару или правил публикации. | Нет. |
+| `spam` | Автоматическая, рекламная или злоупотребляющая отправка. | Нет. |
+
+Перед переводом в `approved` модератор обязан проверить соответствие `target_id`, URL, модели, языка, оценки и текста. Function проверяет формат полей и товарный путь, но не сверяет `target_id` с реальным каталогом автоматически.
+
 ### Полный алгоритм V1
 
 1. Создать миграцию `reviews`. Готово: `20260526171923_create-reviews-table`.
@@ -146,8 +160,8 @@ approved review в Netlify Database
 Не делать:
 
 - не начинать с красивой админки;
-- не подключать отзывы сразу ко всем товарам;
-- не подключать статьи до проверки товарного pipeline;
+- не расширять систему на статьи или неподтвержденные типы целей до отдельной реализации и проверки;
+- не подключать новый товар без стабильного `review_target_id` в обеих языковых версиях;
 - не добавлять `Review` JSON-LD раньше visible approved отзывов;
 - не возвращать front matter `rating.value` / `rating.count` как источник `Product.aggregateRating`.
 
@@ -196,7 +210,7 @@ local netlify dev -> локальная база на машине разраб�
 https://dev--hugo-aerocool.netlify.app/
 ```
 
-По подтверждению поддержки Netlify для этого проекта branch-сайт `dev--hugo-aerocool.netlify.app` можно использовать для частых автодеплоев и тестирования без расходования production-лимитов основного домена.
+Branch-сайт `dev--hugo-aerocool.netlify.app` можно использовать для частых автодеплоев и тестирования отдельно от production database branch. По текущей credit-модели branch deploy и Deploy Preview не расходуют deployment credits, но это не означает нулевую общую стоимость: web requests, Functions, database compute, bandwidth и хранение расходуют применимые credits/ресурсы аккаунта. Фактический расход проверять в Netlify Dashboard.
 
 Для отзывов это значит:
 
@@ -334,7 +348,7 @@ ON reviews (author_email_hash);
 
 Поля:
 
-- `target_type` говорит, к чему относится отзыв: товар или статья;
+- `target_type` говорит, к чему относится отзыв. Таблица допускает `product` и резервное `article`, но текущие Function и exporter поддерживают только `product`;
 - `target_id` — стабильный ID объекта отзыва;
 - `target_url` — URL страницы, с которой отправили отзыв;
 - `language` — язык страницы;
@@ -499,6 +513,8 @@ Approved-записи читает [scripts/export_reviews.mjs](../../scripts/ex
 
 Автоматическая retention-задача пока не реализована. До ее появления ответственный за модерацию не реже одного раза в месяц проверяет старые строки в Netlify Database и фиксирует удаление. Нельзя обещать срок в публичной политике и одновременно оставлять старые записи без операционной проверки.
 
+До production нужно подтвердить точное физическое или юридическое лицо, которое определяет цели и способы обработки данных, правовые основания, трансграничную обработку у Netlify и ответственного за обращения. Техническая реализация согласия не заменяет юридическую проверку опубликованной политики.
+
 ### 9.2. Что пока не реализовано
 
 Следующие маршруты являются возможным будущим интерфейсом чтения и модерации, а не текущим API:
@@ -535,7 +551,7 @@ PATCH /api/admin/reviews/:id
 
 `Review` в JSON-LD можно добавлять только для тех отзывов, которые видны пользователю на странице.
 
-Для статей в v1 отзывы можно показывать как публичный UGC-блок, но не добавлять `AggregateRating` в `Article` JSON-LD. Основной SEO-сценарий review rich results для проекта — товарные страницы.
+Отзывы к статьям не входят в текущую v1: для них нет формы, поддерживаемого API-контракта, exporter или публичного шаблона. Если этот сценарий появится отдельным этапом, UGC можно показывать после модерации, но `AggregateRating` не следует добавлять в `Article` JSON-LD. Текущий SEO-сценарий review rich results для проекта — только товарные страницы.
 
 ## 11. Что проверять после изменений
 
@@ -558,6 +574,7 @@ netlify dev
 - `POST /api/reviews` создает только `pending`;
 - запрос без `privacy_consent=accepted` получает `400` и не создает строку;
 - принятая строка содержит `privacy_consent=true`, непустые `privacy_consent_at` и `privacy_policy_version`;
+- в deploy context задан непустой `REVIEW_EMAIL_HASH_SALT`, а два одинаковых email без знания секрета нельзя восстановить из публичных данных;
 - публичная функция не отдает email;
 - если добавлен административный endpoint, он защищен аутентификацией и авторизацией;
 - `approved` отзыв попадает в build-time export;
@@ -579,12 +596,14 @@ netlify dev
 - не принимать отзыв без явного согласия и не ставить checkbox заранее;
 - не выводить email автора публично;
 - не разрешать HTML в тексте отзыва без жесткой очистки;
-- не хранить секреты в `netlify.toml`.
+- не хранить секреты в `netlify.toml`;
 - не запускать production-функцию без `REVIEW_EMAIL_HASH_SALT`;
 
 ## 13. Официальная база
 
 - Netlify Database: `https://docs.netlify.com/build/data-and-storage/netlify-database/`
+- Netlify Database billing and usage: `https://docs.netlify.com/build/data-and-storage/netlify-database/billing-and-usage/`
+- Netlify credit-based plans: `https://docs.netlify.com/manage/accounts-and-billing/billing/billing-for-credit-based-plans/how-credits-work/`
 - Netlify Database CLI: `https://docs.netlify.com/build/data-and-storage/netlify-database/cli/`
 - Netlify Database API: `https://docs.netlify.com/build/data-and-storage/netlify-database/api/`
 - Netlify environment variables for Functions: `https://docs.netlify.com/build/functions/environment-variables/`

@@ -102,7 +102,7 @@ layouts/_partials/footer.html
 - `assets/js/site.js` получает `/sw.js` через `getServiceWorkerUrl()`;
 - policy разрешает только локальный `/sw.js`.
 
-Не заменять этот код на прямой `navigator.serviceWorker.register('/sw.js')`. В Chrome при включенных Trusted Types это ломает PWA-аудит и дает console error `This document requires 'TrustedScriptURL' assignment`.
+Не заменять этот код на прямой `navigator.serviceWorker.register('/sw.js')`. В Chrome при включенных Trusted Types такая строка блокирует регистрацию service worker и дает console error `This document requires 'TrustedScriptURL' assignment`. Отдельного PWA-балла в актуальном PageSpeed Insights больше нет, поэтому проверять нужно саму регистрацию, управление `start_url`, manifest и ошибки консоли.
 
 Поэтому новичку важно помнить:
 

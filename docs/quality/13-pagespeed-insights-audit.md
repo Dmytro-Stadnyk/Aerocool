@@ -1,8 +1,10 @@
-# Проверка через PageSpeed Insights
+# Проверка через PageSpeed Insights и Agentic Browsing
 
-Обновлено: 2026-07-10.
+Обновлено: 2026-07-13.
 
-Этот документ фиксирует текущий стандарт проекта `Aerocool Ukraine`: автоматический браузерный performance-аудит внутри репозитория больше не используется. Для оценки скорости, Core Web Vitals, Accessibility, Best Practices, SEO, PWA и Agentic Browsing использовать внешний сервис [PageSpeed Insights](https://pagespeed.web.dev/).
+Этот документ фиксирует текущий стандарт проекта `Aerocool Ukraine`: автоматический браузерный performance-аудит внутри репозитория больше не используется. Для оценки скорости, Core Web Vitals, Accessibility, Best Practices и SEO использовать внешний сервис [PageSpeed Insights](https://pagespeed.web.dev/). Экспериментальные проверки Agentic Browsing/WebMCP выполнять отдельно в совместимой версии Chrome/Lighthouse; они не являются стабильной стандартной категорией PageSpeed Insights.
+
+Важно: отдельная категория PWA удалена из Lighthouse 12 и PageSpeed Insights еще в 2024 году. Наличие service worker и manifest по-прежнему проверяется функционально, но проект не требует несуществующий `PWA score 100`.
 
 ## 1. Зачем это нужно
 
@@ -14,7 +16,7 @@ PageSpeed Insights проще для проекта и владельца сай
 - показывает и лабораторную проверку конкретного URL, и реальные field data, когда они накопятся;
 - подходит для ручной production-проверки после каждого важного deploy.
 
-Для новичка: PageSpeed Insights — это не один общий балл. В нем есть разные блоки. Блоки Agentic Browsing/WebMCP помогают проверить, распознает ли совместимый AI-агент формы и служебный `llms.txt`. Они не заменяют SEO, schema.org, Core Web Vitals и ручную проверку сайта человеком. Google Search не требует `llms.txt` и не использует его как положительный или отрицательный сигнал видимости и ранжирования.
+Для новичка: PageSpeed Insights — это не один общий балл. Он показывает лабораторные Lighthouse-данные конкретного запуска и, когда доступны, полевые CrUX-данные за скользящий период 28 дней. Экспериментальные Agentic Browsing/WebMCP-аудиты помогают проверить, распознает ли совместимый AI-агент формы и служебный `llms.txt`, но запускаются и оцениваются отдельно. Они не заменяют SEO, schema.org, Core Web Vitals и ручную проверку сайта человеком. Google Search не требует `llms.txt` и не использует его как положительный или отрицательный сигнал видимости и ранжирования.
 
 ## 2. Что удалено из проекта
 
@@ -40,8 +42,9 @@ Netlify теперь должен только собрать и опублик�
 | Статья | одна статья в `uk` и `ru` |
 | Новость | одна новость в `uk` и `ru` |
 | FAQ | `https://aerocool.ua/faq/` и `https://aerocool.ua/ru/faq/` |
-| Contact | `https://aerocool.ua/contact/` и `https://aerocool.ua/ru/contact/` |
-| Search | `https://aerocool.ua/search/` и `https://aerocool.ua/ru/search/` |
+| Контакты | `https://aerocool.ua/contact/` и `https://aerocool.ua/ru/contact/` |
+| Конфиденциальность | `https://aerocool.ua/privacy/` и `https://aerocool.ua/ru/privacy/` |
+| Поиск | `https://aerocool.ua/search/` и `https://aerocool.ua/ru/search/` |
 | 404 | `https://aerocool.ua/404.html` |
 
 Для Branch Deploy проверять тот же набор, но на URL вида `https://dev--hugo-aerocool.netlify.app/`.
@@ -55,11 +58,13 @@ Netlify теперь должен только собрать и опублик�
 5. Проверить, нет ли console errors, CSP errors, missing resources и явных regressions.
 6. Если страница в `development/noindex`, не считать SEO score финальным для indexability.
 7. После production-переключения отдельно проверить `index,follow`, sitemap, canonical, hreflang и schema.
-8. Если менялись формы, `static/llms.txt`, headers или Agentic Browsing-подсказки, дополнительно открыть блоки WebMCP и `llms.txt`.
+8. Если менялись формы, `static/llms.txt`, headers или Agentic Browsing-подсказки, отдельно запустить совместимый экспериментальный Agentic Browsing-аудит.
 
-## 4.1. Что смотреть в Agentic Browsing
+### 4.1. Что смотреть в экспериментальном Agentic Browsing
 
-PageSpeed может показывать отдельные проверки для WebMCP и `llms.txt`. В проекте они нужны для трех вещей:
+По состоянию на 2026-07-13 Agentic Browsing остается экспериментальным направлением Lighthouse для Chrome 150+ и WebMCP origin trial. Он может быть недоступен в обычном PageSpeed Insights или стабильном браузере. В отличие от четырех основных Lighthouse-категорий, этот аудит не формирует обычный взвешенный балл `0–100`: отдельные проверки могут быть fractional, pass/fail или informational.
+
+В проекте эти проверки нужны для трех вещей:
 
 - чтобы AI-агент нашел форму контакта, форму отзыва или фильтр каталога;
 - чтобы браузер получил понятную схему полей формы;
@@ -78,23 +83,23 @@ PageSpeed может показывать отдельные проверки д
 
 Текущий профильный снимок и пример локальной проверки зафиксированы в [96-2026-07-08-webmcp-llms-agentic-readiness-audit.md](../audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md).
 
-## 5. Целевые ориентиры
+## 5. Критерии результата
 
-Для проекта считать сильным результатом:
+PageSpeed и Lighthouse используются для диагностики, а не для выполнения произвольной числовой нормы:
 
 | Блок | Цель |
 |---|---|
-| Performance | `95+`, лучше `99-100` |
-| Accessibility | `100` |
-| Best Practices | `100` |
-| SEO | `100` на production-indexable страницах |
-| PWA | `100`, если страница участвует в PWA-контуре |
-| Agentic Browsing | без WebMCP schema issues на страницах с формами |
-| LCP | ≤ `2.0 s`, лучше ≤ `1.5 s` |
-| INP | ≤ `150 ms`, лучше ≤ `100 ms` |
-| CLS | `0` или почти `0` |
+| Performance | Нет обязательного score; сравнить несколько запусков, найти конкретный bottleneck и не допустить регрессии |
+| Accessibility | Нет необъясненных серьезных ошибок; дополнительно пройти клавиатурную и ручную проверку |
+| Best Practices | Нет необъясненных ошибок браузера, безопасности или загрузки ресурсов |
+| SEO | Нет критических технических ошибок на production-indexable страницах; индексацию отдельно подтвердить в Search Console |
+| Agentic Browsing, отдельно | Нет ошибок схем WebMCP на страницах с формами; не сводить к баллу `0–100` |
+| Service worker и manifest, отдельно | Регистрация без ошибок console, корректные `start_url` и manifest |
+| Полевой LCP | ≤ `2.5 s` на 75-м процентиле |
+| Полевой INP | ≤ `200 ms` на 75-м процентиле |
+| Полевой CLS | ≤ `0.1` на 75-м процентиле |
 
-Если PageSpeed показывает SEO ниже `100` на `dev` Branch Deploy из-за `noindex`, это ожидаемо. Финальную SEO-оценку считать только после production-переключения.
+Если PageSpeed снижает SEO-score на `dev` Branch Deploy из-за `noindex`, это ожидаемо. Финальную индексируемость проверяют только после production-переключения и по реальному URL.
 
 ## 6. Что делать при просадке
 
@@ -124,14 +129,14 @@ PageSpeed может показывать отдельные проверки д
 - web fonts;
 - поздно вставляемые блоки.
 
-Если PageSpeed показывает WebMCP warning:
+Если экспериментальный Agentic Browsing-аудит показывает WebMCP warning:
 
 - у формы проверить `toolname` и `tooldescription`;
 - у обычных полей проверить `name`, связанный `label`, `title` или `toolparamdescription`;
 - у checkbox/radio-групп проверить `fieldset`, `legend`, `aria-description` и `toolparamdescription` на группе;
 - не добавлять `toolautosubmit` к contact/review формам без отдельного решения: пользователь должен видеть и подтверждать отправку.
 
-Если PageSpeed показывает проблему `llms.txt`:
+Если экспериментальный Agentic Browsing-аудит показывает проблему `llms.txt`:
 
 - проверить, что файл доступен по `/llms.txt`;
 - проверить, что он написан в Markdown;
@@ -146,9 +151,9 @@ PageSpeed может показывать отдельные проверки д
 Перед ручной проверкой опубликованного URL запускать:
 
 ```bash
-npm run build
-npm run build:production
+npm run docs:check
 ./scripts/script_check.sh
+npm run build:production
 ```
 
 Если менялись redirects, headers, CSP или 404:
@@ -158,7 +163,7 @@ npm run build:production
 ./scripts/script_check_routes.sh
 ```
 
-PageSpeed Insights проверяет опубликованный URL, поэтому локальная Hugo-сборка не заменяет ручную проверку.
+PageSpeed Insights проверяет опубликованный URL, поэтому локальная Hugo-сборка не заменяет ручную проверку. Agentic Browsing проверять отдельным совместимым Chrome/Lighthouse-прогоном.
 
 Если нужно предварительно проверить Agentic Browsing локально, использовать временный Lighthouse/Chrome-прогон вне root-зависимостей проекта. Не добавлять Lighthouse как постоянную зависимость в `package.json` без отдельного решения.
 
@@ -166,7 +171,15 @@ PageSpeed Insights проверяет опубликованный URL, поэт
 
 - Не возвращать браузерный audit plugin в `netlify.toml` без отдельного решения.
 - Не добавлять тяжелые Chrome-аудит зависимости в root `package.json`.
+- Не искать или не требовать отдельный PWA score: этой категории больше нет в актуальном Lighthouse/PSI.
 - Не считать `dev` Branch Deploy финальной SEO-indexability проверкой, пока Netlify собирает сайт в `development`.
 - Не гнаться за числом `100`, если правка ухудшает контент, UX или конверсию.
 - Не использовать WebMCP как способ скрыть или заменить обычные видимые подписи формы.
 - Не дублировать в `llms.txt` коммерческие product facts, если источником правды уже являются видимые страницы и JSON-LD.
+
+## 9. Официальные источники
+
+- [PageSpeed Insights: лабораторные и полевые данные](https://developers.google.com/speed/docs/insights/v5/about).
+- [PageSpeed Insights release notes: удаление PWA-категории](https://developers.google.com/speed/docs/insights/release_notes).
+- [Agentic Browsing scoring в Lighthouse](https://developer.chrome.com/docs/lighthouse/agentic-browsing/scoring).
+- [Google AI features and your website](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide).

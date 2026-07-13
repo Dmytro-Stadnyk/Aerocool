@@ -19,7 +19,10 @@ mise.toml говорит компьютеру:
 
 - `Hugo 0.164.0`
 - `Node 24.16.0`
-- `Tailwind CSS 4.3.0`
+- `npm 11.13.0`, поставляемый с закрепленной версией Node.js;
+- `Tailwind CSS 4.3.0`;
+- `@tailwindcss/cli 4.3.0`;
+- `@netlify/database 1.0.0`.
 
 `Hugo` и `Node` зафиксированы в двух местах:
 
@@ -64,7 +67,7 @@ mise ls --installed
 
 Если команды показывают `Hugo 0.164.0` и `Node 24.16.0`, всё хорошо.
 
-Примечание на 2026-07-07: проект обновлен до pinned-версии `0.164.0` в `mise.toml` и `netlify.toml`. Node target остается `24.16.0`. Следующие обновления Hugo делать только отдельной задачей с повторной сборкой, Tailwind/CWV/SEO-проверками и обновлением этого документа.
+Примечание на 2026-07-13: проект использует закрепленную (pinned) версию Hugo `0.164.0` в `mise.toml` и `netlify.toml`. Целевая версия Node остается `24.16.0`. Следующие обновления Hugo делать только отдельной задачей с повторной сборкой, Tailwind/CWV/SEO-проверками и обновлением этого документа.
 
 Примечание: если `mise current` показывает предупреждение вида `hugo@0.164.0 is specified ... but not installed` или `node@24.16.0 is specified ... but not installed`, обычная команда `hugo version` может взять глобальную системную версию Hugo. Сначала запустите `mise install` или проверочную команду через `mise exec --`, чтобы `mise` установил закрепленные версии.
 
@@ -106,7 +109,8 @@ npm -v
 Ожидаемо:
 
 - Hugo должен быть `0.164.0`;
-- Node должен быть `24.x`.
+- Node должен быть `v24.16.0`;
+- npm должен быть `11.13.0` в текущем закрепленном окружении.
 
 Если текущая оболочка не подхватила версии, запускайте команды через `mise exec --`:
 
@@ -147,7 +151,7 @@ npm install
 npm run dev
 ```
 
-Обычная development-сборка:
+Обычная сборка для разработки:
 
 ```bash
 npm run build
@@ -165,7 +169,7 @@ mise exec -- ./scripts/script_check.sh
 npm run entity:report
 ```
 
-Generated CSV отчета не редактировать вручную: внешние GSC/AI/business-метрики добавлять в [32-entity-performance-overrides.csv](../seo/32-entity-performance-overrides.csv).
+Сгенерированный CSV отчета не редактировать вручную: внешние метрики GSC, AI и бизнеса добавлять в [32-entity-performance-overrides.csv](../seo/32-entity-performance-overrides.csv).
 
 Локальная production-сборка:
 
@@ -190,7 +194,7 @@ Hugo `css.TailwindCSS` запускает Tailwind CSS CLI как Node-инст�
 - не переходить на standalone Tailwind CLI;
 - не удалять `package-lock.json` без причины.
 
-Состояние на 2026-07-13: репозиторий по-прежнему фиксирует Node.js `24.16.0`, но [официальная таблица релизов Node.js](https://nodejs.org/en/about/previous-releases) уже показывает более новый выпуск линии 24 LTS, а версия [`24.17.0`](https://nodejs.org/en/blog/release/v24.17.0) была security-релизом. Это не повод молча менять документацию или одну конфигурацию. Обновление до актуального исправляющего выпуска Node.js 24 нужно провести отдельной приоритетной задачей: синхронно изменить `mise.toml` и `netlify.toml`, установить зависимости, выполнить обе сборки и проверить Tailwind, Functions и опубликованный Branch Deploy.
+Состояние на 2026-07-13: репозиторий по-прежнему фиксирует Node.js `24.16.0`, но [официальная таблица релизов Node.js](https://nodejs.org/en/about/previous-releases) уже показывает выпуск `24.18.0` в линии 24 LTS; предшествующий [`24.17.0`](https://nodejs.org/en/blog/release/v24.17.0) был security-релизом. Это не повод молча менять только документацию или одну конфигурацию. Обновление до актуального исправляющего выпуска Node.js 24 нужно провести отдельной приоритетной задачей: синхронно изменить `mise.toml` и `netlify.toml`, установить зависимости, выполнить обе сборки и проверить Tailwind, Functions и опубликованный Branch Deploy.
 
 Tailwind в проекте собирается через Hugo `css.TailwindCSS`, а не отдельным `tailwind --watch`.
 

@@ -8,11 +8,12 @@
 
 ## 1. Где живут правила
 
-В проекте есть два слоя routing-настроек:
+В проекте есть два источника routing-настроек:
 
 - `static/_redirects` — plain text `_redirects` для Netlify. Hugo копирует его в `public/_redirects` как статический файл. Здесь живет явный root rewrite `/ -> /index.html` и forced `404!` для scanner URL.
-- `static/llms.txt` — корневой Markdown-файл для LLM/AI-агентов. Hugo копирует его в `public/llms.txt`, а опубликованный сайт отдает его по `/llms.txt`.
 - `netlify.toml` — основной Netlify config со сборкой и статическими headers. Общий fallback на `404` не нужен: Netlify автоматически использует `public/404.html`.
+
+Связанный статический файл `static/llms.txt` не управляет маршрутизацией. Hugo лишь копирует его в `public/llms.txt`, чтобы опубликованный сайт отдавал краткую Markdown-карту по `/llms.txt` для совместимых LLM/AI-инструментов.
 
 Netlify обрабатывает `_redirects` раньше правил из `netlify.toml`. Внутри файла первое совпавшее правило выигрывает, поэтому более конкретные правила должны стоять выше более общих.
 
@@ -148,11 +149,11 @@ Trusted Types включены через CSP, поэтому DOM XSS sinks и �
 assets/js/site.js
 ```
 
-Функция `getServiceWorkerUrl()` создает policy `aerocool-service-worker` и разрешает только локальный `/sw.js`. Не заменять ее обратно на прямой `navigator.serviceWorker.register('/sw.js')`: при текущем CSP Chrome блокирует такую строку ошибкой `This document requires 'TrustedScriptURL' assignment`, а PageSpeed затем может показать PWA-проблему со service worker или `start_url`.
+Функция `getServiceWorkerUrl()` создает policy `aerocool-service-worker` и разрешает только локальный `/sw.js`. Не заменять ее обратно на прямой `navigator.serviceWorker.register('/sw.js')`: при текущем CSP Chrome блокирует такую строку ошибкой `This document requires 'TrustedScriptURL' assignment`. Отдельного PWA-балла в актуальном PageSpeed Insights нет; проверять нужно регистрацию service worker, управление `start_url`, manifest и отсутствие ошибок в console.
 
 Не добавлять `Cross-Origin-Embedder-Policy` автоматически вместе с COOP. COEP может ломать кросс-ориджин ресурсы, если они не отдают нужные CORS/CORP headers. Для текущего PageSpeed warning достаточно COOP.
 
-WebMCP в Chrome требует origin isolation и permissions policy, но это не означает, что в проект нужно автоматически добавлять COEP или широкий `Permissions-Policy`. Текущий WebMCP-слой реализован как declarative form annotations в HTML и проверяется через PageSpeed/Lighthouse Agentic Browsing. Если будущая версия Chrome или PageSpeed потребует новые headers для WebMCP, менять `netlify.toml` только после отдельной проверки на Deploy Preview, потому что headers могут повлиять на изображения, service worker и внешние ресурсы.
+WebMCP в Chrome требует origin isolation и permissions policy, но это не означает, что в проект нужно автоматически добавлять COEP или широкий `Permissions-Policy`. Текущий WebMCP-слой реализован как declarative form annotations в HTML и проверяется отдельным экспериментальным Agentic Browsing-аудитом в совместимом Chrome/Lighthouse. Если будущая версия Chrome или WebMCP потребует новые headers, менять `netlify.toml` только после отдельной проверки на Deploy Preview, потому что headers могут повлиять на изображения, service worker и внешние ресурсы.
 
 Для cache rules не использовать brace glob в `for`, например `/*.{css,js,woff2}`. Netlify CLI трактует такие значения как route pattern и может вернуть ошибку `invalid regular expression: incomplete {} quantifier`. Вместо этого держать явные правила вроде `/assets/*`, `/images/*`, `/*.svg`, `/*.webmanifest`.
 
@@ -236,4 +237,4 @@ https://pagespeed.web.dev/
 
 Минимальный набор URL и целевые ориентиры описаны в [quality/13-pagespeed-insights-audit.md](../quality/13-pagespeed-insights-audit.md). Если менялись `static/_redirects`, CSP, headers или 404, сначала выполнить routing-проверки из раздела 8, затем уже смотреть PageSpeed.
 
-Если менялся `static/llms.txt` или WebMCP-разметка форм, в PageSpeed дополнительно смотреть Agentic Browsing-блоки: покрытие форм WebMCP, зарегистрированные инструменты WebMCP, валидность схем и рекомендации по `llms.txt`.
+Если менялся `static/llms.txt` или WebMCP-разметка форм, отдельно запускать совместимый экспериментальный Agentic Browsing-аудит: проверить покрытие форм WebMCP, зарегистрированные инструменты, валидность схем и рекомендации по `llms.txt`. Этот аудит может отсутствовать в обычном PageSpeed Insights и не дает стандартный взвешенный балл `0–100`.

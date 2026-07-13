@@ -45,6 +45,7 @@
 - `pagination.pagerSize` стал единым источником правды для листингов;
 - `build.buildStats` и `module.mounts` поддерживают Tailwind CSS 4.3 через Hugo pipeline;
 - `robots.txt`, canonical, hreflang, sitemap index и языковые sitemap генерируются;
+- `x-default` намеренно отсутствует: отдельной нейтральной страницы выбора языка нет, а взаимные `uk-UA` и `ru-UA` соответствуют текущей архитектуре;
 - JSON-LD не включается ложным флагом в конфиге, а управляется локальными partials и `schema_types`;
 - Agentic Browsing слой не требует новых индексируемых URL: WebMCP живет в HTML-формах, а `llms.txt` отдается как статический корневой Markdown-файл;
 - Netlify development/noindex gate сохранен до отдельного production-решения.
@@ -52,7 +53,6 @@
 Почему не `10 / 10`:
 
 - production-индексация все еще заблокирована в Netlify через `--environment development`;
-- в `head` и sitemap нет `x-default`, это не P0, но для мультиязычного проекта можно рассмотреть как P2-улучшение;
 - `Goldmark unsafe: true` оправдан, но требует дисциплины по сырому HTML в `content/**/*.md`;
 - `params.keywords` остается только внутренним/theme-compatible fallback и не должен восприниматься как Google ranking lever;
 - финальная оценка SERP-готовности невозможна без опубликованного production URL, Google Search Console, PageSpeed Insights и проверки реальных запросов.
@@ -93,7 +93,7 @@
    - `/products/`, серия, товар, статья, новость в двух языках;
    - `robots.txt`;
    - `sitemap.xml`, `/uk/sitemap.xml`, `/ru/sitemap.xml`;
-- canonical, hreflang и meta-тег robots;
+   - canonical, hreflang и meta-тег robots;
    - служебные страницы `noindex`;
    - пагинация `noindex,follow`.
 3. Подключить Google Search Console и отправить sitemap index `https://aerocool.ua/sitemap.xml`.
@@ -101,7 +101,7 @@
 
 ### P2. Для усиления готовности к поисковой выдаче
 
-1. Рассмотреть `x-default` для главной и языковых пар, если нужен явный fallback для пользователей без украинского/русского предпочтения.
+1. Сохранять отсутствие `x-default`, пока нет отдельной нейтральной страницы выбора языка. Рассматривать его только вместе с реальным fallback-URL и пользовательским сценарием, а не как обязательный SEO-тег.
 2. Сделать контрольный crawler-аудит production-сайта после переключения:
    - нет дублей;
    - нет индексируемых `/page/2+`;
@@ -113,13 +113,13 @@
    - решение принимать только по опубликованным URL.
 5. Для `Goldmark unsafe: true` поддерживать правило: повторяемые HTML-блоки выносить в shortcode/partial, а не копировать сырой HTML в `content/`.
 
-### P3. для ростовой SEO-стратегии
+### P3. Для ростовой SEO-стратегии
 
 1. Развивать отдельные посадочные страницы только по validated intent из `docs/seo/30-keyword-database-2026.md` и `docs/seo/35-semantic-core-keyword-strategy-2026.md`.
 2. После появления реальных данных Search Console обновлять:
    - `docs/seo/32-entity-performance-overrides.csv`;
    - keyword priority;
-- карта внутренней перелинковки;
+   - карту внутренней перелинковки;
    - title/description для страниц с высоким impression, но низким CTR.
 3. Для товаров поддерживать `priceValidUntil`, наличие, гарантию, доставку и возврат через `docs/seo/31-product-facts-maintenance-process-2026.md`.
 4. Не добавлять выдуманные отзывы или ручные рейтинги: `AggregateRating` должен строиться только из снимка approved-отзывов.
@@ -173,9 +173,9 @@ public/ru/index.json
 - hreflang пары взаимные;
 - sitemap содержит только canonical URL;
 - search JSON парсится;
-- Tailwind CSS не теряет классы после правок шаблонов.
+- Tailwind CSS не теряет классы после правок шаблонов;
 - `public/llms.txt` существует, содержит H1 и Markdown-ссылки;
-- страницы с формами сохраняют `toolname`, `tooldescription` и валидные WebMCP-параметры.
+- страницы с формами сохраняют `toolname`, `tooldescription` и валидные WebMCP-параметры;
 - обычная отправка форм без AI по-прежнему работает, а агентные сценарии выбирают нужный инструмент, передают корректные параметры и не обходят подтверждение пользователя.
 
 ## 6.1. WebMCP и `llms.txt` простыми словами

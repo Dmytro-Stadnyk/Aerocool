@@ -87,6 +87,14 @@ FAQ `content/faq/index.md`
 Видимая meta-строка контактов не выводится.
 Видимые контактные факты страницы `/contact/` рендерятся через `layouts/_shortcodes/contact.html`, а JSON-LD `ContactPage` ссылается на локальную `Organization`. Адрес, телефон, email и график работы в `local-organization.html` должны совпадать с видимым contact-блоком.
 
+Условия использования изображений `content/image-license/index.md`
+`schema_types: ["website", "organization", "breadcrumbs"]`
+
+Политика конфиденциальности `content/privacy/index.md`
+`schema_types: ["website", "organization", "breadcrumbs"]`
+
+Эти trust-страницы используют общий `WebPage`, Organization и breadcrumbs. Не добавляйте специальный schema.org type, которого фактически нет в шаблонном слое; связь с политиками формируется через подтвержденные entity ID.
+
 Поиск `content/search.md`
 `schema_types: ["website", "organization", "breadcrumbs"]`
 
