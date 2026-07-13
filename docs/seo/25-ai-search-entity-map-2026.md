@@ -287,7 +287,7 @@ Follow-up вопросы после основного prompt:
 | Доставка | `OfferShippingDetails` / policy | product front matter + `/faq/` | Product, FAQ | Front matter — источник правды; UI и FAQ подтверждают |
 | Возврат | `MerchantReturnPolicy` | product front matter + `/faq/` | Product, FAQ | Front matter — источник правды; UI и FAQ подтверждают |
 | Гарантия | `WarrantyPromise` / `PropertyValue` | product front matter + products + `/faq/` | Product pages | Показывать видимо перед расширением schema |
-| Политика конфиденциальности | `Thing` / policy entity | `/privacy/` | Формы, footer, Organization graph | Поддерживать только фактические поля и поставщиков; до production подтвердить владельца/контролера данных и пройти юридическую проверку |
+| Политика конфиденциальности | `Thing` / policy entity | `/privacy/` | Формы, footer, Organization graph | Поддерживать только фактические поля и поставщиков; владелец данных подтвержден как ТОВ «Aerocool», текущая редакция — `2026-07-13-v2` |
 
 ## 8. План развития schema.org для поиска с AI
 

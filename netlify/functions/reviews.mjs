@@ -7,7 +7,7 @@ const MIN_REVIEW_LENGTH = 20;
 const MAX_REVIEW_LENGTH = 2000;
 const MAX_NAME_LENGTH = 80;
 const MAX_EMAIL_LENGTH = 254;
-const PRIVACY_POLICY_VERSION = "2026-07-13";
+const PRIVACY_POLICY_VERSION = "2026-07-13-v2";
 
 const noStoreHeaders = {
   "Cache-Control": "no-store",
@@ -48,6 +48,7 @@ export default async (req) => {
     authorEmail: getFormValue(form, "author_email").toLowerCase(),
     body: normalizeReviewBody(getFormValue(form, "body")),
     privacyConsent: getFormValue(form, "privacy_consent"),
+    privacyPolicyVersion: getFormValue(form, "privacy_policy_version"),
   };
 
   const validationError = validateReview(review);
@@ -191,6 +192,10 @@ function validateReview(review) {
 
   if (review.privacyConsent !== "accepted") {
     return "Privacy consent is required.";
+  }
+
+  if (review.privacyPolicyVersion !== PRIVACY_POLICY_VERSION) {
+    return "Privacy policy version is invalid.";
   }
 
   return "";

@@ -222,7 +222,7 @@ Validator-safe правило для `ProductGroup`: выводить `@type`, `
 | `warranty-policy` | Warranty | Гарантія | Гарантия | `WarrantyPromise` / policy reference | `/faq/` | product front matter | Aerocool Ukraine | `confirmed` | Использует `warranty`. |
 | `price-validity-policy` | Price validity | Актуальність ціни | Актуальность цены | Offer validity reference | product front matter | product front matter | Aerocool Ukraine | `confirmed` | `priceValidUntil: 2027-12-31` подтверждено `2026-05-07`. |
 | `image-license-policy` | Image usage rights | Права на використання зображень | Права на использование изображений | `Thing` / image policy reference | `/image-license/` | image license page | Aerocool Ukraine + Global Aerocool | `confirmed` | Источник для `ImageObject.license` и `ImageObject.acquireLicensePage`. |
-| `privacy-policy` | Privacy policy | Політика конфіденційності | Политика конфиденциальности | `Thing` / privacy policy reference | `/privacy/` | privacy page | Aerocool Ukraine | `confirmed` | Связывает локализованные privacy-страницы с формами и организацией; не заменяет юридическую проверку контролера данных и оснований обработки. |
+| `privacy-policy` | Privacy policy | Політика конфіденційності | Политика конфиденциальности | `Thing` / privacy policy reference | `/privacy/` | privacy page | ТОВ «Aerocool» | `confirmed` | Связывает локализованные privacy-страницы с формами и организацией; редакция `2026-07-13-v2` фиксирует подтвержденного владельца данных, основания обработки и передачу Netlify. |
 
 ## 16. Карта сущностей для редакционного контента
 

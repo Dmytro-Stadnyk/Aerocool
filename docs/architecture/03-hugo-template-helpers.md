@@ -261,7 +261,8 @@
 - правая колонка содержит Netlify form с honeypot, обязательными полями, локализованным success URL и checkbox согласия на обработку данных для ответа;
 - форма имеет WebMCP-атрибуты `toolname="contact_aerocool_ukraine"` и локализованный `tooldescription`, чтобы совместимый экспериментальный Agentic Browsing-аудит видел ее как понятный инструмент;
 - hidden-поля и honeypot получают технические `title`, а видимые поля сохраняют обычные `label`;
-- вместе с обращением Netlify Forms сохраняет `privacy_consent=accepted` и `privacy_policy_version=2026-07-13`; ссылка в label всегда ведет на `/privacy/` или `/ru/privacy/` того же языка;
+- вместе с обращением Netlify Forms сохраняет `privacy_consent=accepted` и `privacy_policy_version=2026-07-13-v2`; label называет ТОВ «Aerocool», предупреждает об обработке Netlify за пределами Украины и ведет на `/privacy/` или `/ru/privacy/` того же языка;
+- прямой POST без точного согласия не становится обращением: обязательный порядок проверки и удаления не позднее одного рабочего дня зафиксирован в [production gate](../quality/14-production-quality-gate-2026.md#31-утвержденный-контроль-прямых-post-контактной-формы);
 - markdown-файлы `content/contact/index.md` и `content/contact/index.ru.md` обычно должны содержать только вызов `{{< contact >}}`, чтобы не дублировать контактные данные ниже формы;
 - отдельный markdown-раздел соцсетей на `/contact/` не используется; глобальные социальные ссылки остаются в footer и в schema global organization/brand.
 

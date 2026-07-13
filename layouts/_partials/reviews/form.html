@@ -2,12 +2,14 @@
 {{- $reviewTargetID := .Params.review_target_id | default (.Params.sku | default .File.Dir) -}}
 {{- $targetURL := .Permalink -}}
 {{- $privacyURL := cond $isRu "/ru/privacy/" "/privacy/" -}}
+{{- $privacyPolicyVersion := "2026-07-13-v2" -}}
 
 <form class="review-form mt-8" method="POST" action="/api/reviews" toolname="submit_product_review" tooldescription="{{ cond $isRu "Отправляет отзыв о товаре Aerocool на модерацию. Email нужен только для проверки и не публикуется." "Надсилає відгук про товар Aerocool на модерацію. Email потрібен лише для перевірки і не публікується." }}">
   <input type="hidden" name="target_type" value="product" title="{{ cond $isRu "Тип объекта отзыва" "Тип об'єкта відгуку" }}">
   <input type="hidden" name="target_id" value="{{ $reviewTargetID }}" title="{{ cond $isRu "Идентификатор товара для отзыва" "Ідентифікатор товару для відгуку" }}">
   <input type="hidden" name="target_url" value="{{ $targetURL }}" title="{{ cond $isRu "URL товара для возврата после отправки" "URL товару для повернення після надсилання" }}">
   <input type="hidden" name="language" value="{{ .Language.Name }}" title="{{ cond $isRu "Язык отзыва" "Мова відгуку" }}">
+  <input type="hidden" name="privacy_policy_version" value="{{ $privacyPolicyVersion }}" title="{{ cond $isRu "Версия политики конфиденциальности" "Версія політики конфіденційності" }}">
 
   <p class="review-form__honeypot" aria-hidden="true">
     <label>
@@ -58,12 +60,12 @@
   </div>
 
   <div class="ui-consent review-form__consent">
-    <input id="review-privacy-consent" type="checkbox" name="privacy_consent" value="accepted" required title="{{ cond $isRu "Согласие на обработку и публикацию данных отзыва" "Згода на обробку та публікацію даних відгуку" }}" toolparamdescription="{{ cond $isRu "Подтверждает ознакомление с политикой конфиденциальности, обработку email для проверки и публикацию отзыва после модерации." "Підтверджує ознайомлення з політикою конфіденційності, обробку email для перевірки та публікацію відгуку після модерації." }}">
+    <input id="review-privacy-consent" type="checkbox" name="privacy_consent" value="accepted" required title="{{ cond $isRu "Согласие на обработку и публикацию данных отзыва" "Згода на обробку та публікацію даних відгуку" }}" toolparamdescription="{{ cond $isRu "Подтверждает обработку данных ТОВ Aerocool, передачу Netlify за пределы Украины и публикацию отзыва после модерации." "Підтверджує обробку даних ТОВ Aerocool, передавання Netlify за межі України та публікацію відгуку після модерації." }}">
     <label for="review-privacy-consent">
       {{- if $isRu -}}
-      Я ознакомился с <a href="{{ $privacyURL }}" class="ui-link">политикой конфиденциальности</a>, согласен на обработку имени и email для проверки, а после модерации — на публикацию имени, оценки, текста и даты отзыва.
+      Я ознакомился с <a href="{{ $privacyURL }}" class="ui-link">политикой конфиденциальности</a> и согласен, чтобы ТОВ «Aerocool» обработало имя и email для проверки, передало данные Netlify для обработки за пределами Украины, а после модерации опубликовало имя, оценку, текст и дату отзыва.
       {{- else -}}
-      Я ознайомився з <a href="{{ $privacyURL }}" class="ui-link">політикою конфіденційності</a>, згоден на обробку імені та email для перевірки, а після модерації — на публікацію імені, оцінки, тексту й дати відгуку.
+      Я ознайомився з <a href="{{ $privacyURL }}" class="ui-link">політикою конфіденційності</a> та згоден, щоб ТОВ «Aerocool» обробило ім'я й email для перевірки, передало дані Netlify для обробки за межами України, а після модерації опублікувало ім'я, оцінку, текст і дату відгуку.
       {{- end -}}
     </label>
   </div>
