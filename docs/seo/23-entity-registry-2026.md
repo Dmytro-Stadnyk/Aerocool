@@ -1,8 +1,8 @@
 # Реестр сущностей Aerocool 2026
 
-Обновлено: 2026-07-10.
+Обновлено: 2026-07-13.
 
-Реестр остается документом управления сущностями: `confirmed` сущности можно использовать в JSON-LD, а новые `staged` или `planned` сущности не должны становиться сильными связями без видимого подтверждения на странице. Аудиты `50`, `57` и `68` сохраняют историю формирования реестра; текущее состояние сверяется с `data/entities.yaml`, [entity performance report](32-entity-performance-report-2026.md) и [аудитом 99](../audits/99-2026-07-10-full-documentation-project-sync-audit-current.md).
+Реестр остается документом управления сущностями: `confirmed` сущности можно использовать в JSON-LD, а новые `staged` или `planned` сущности не должны становиться сильными связями без видимого подтверждения на странице. Аудиты `50`, `57` и `68` сохраняют историю формирования реестра; текущее состояние сверяется с `data/entities.yaml`, [отчетом по сущностям](32-entity-performance-report-2026.md) и актуальным аудитом из [карты документации](../01-documentation-map.md#5-текущий-аудит).
 
 Этот документ — канонический реестр сущностей проекта `Aerocool Ukraine`. Он нужен для управляемого Entity SEO, AI Search, `about_entities`, `mentions_entities`, `ProductGroup`, `Product.color`, `additionalProperty`, `llms.txt`, будущего `Callable Actions Registry` и структурированного [data/entities.yaml](../../data/entities.yaml).
 
@@ -277,7 +277,7 @@ Validator-safe правило для `ProductGroup`: выводить `@type`, `
 | `return-policy` | `appliesTo` | Product offers | product front matter и `/faq/` |
 | `warranty-policy` | `appliesTo` | Product offers | product front matter и `/faq/` |
 
-## 19. Связь с Front Matter страницы
+## 19. Связь с метаданными страницы
 
 Шаблоны поддерживают `about_entities`, `mentions_entities` и `product_group_id`. На `2026-05-07` эти поля заполнены на приоритетных страницах: главной, about, contact, FAQ, product/article/news hubs, страницах серий, актуальных статьях, актуальных новостях и товарных страницах. На `2026-05-31` одиночные ProductGroup-записи удалены, `product_group_id` остался только у реальных групп моделей с несколькими вариантами, а четыре ProductGroup-сущности WING/XTAL стали активны в JSON-LD.
 
@@ -348,7 +348,7 @@ wing-racer-black:
   status: "confirmed"
 ```
 
-Требования К Resolver:
+Требования к механизму разрешения сущностей:
 
 - возвращать локализованное отображаемое название;
 - возвращать `@id`;
@@ -357,9 +357,10 @@ wing-racer-black:
 - поддерживать `about`, `mentions`, `isVariantOf` и `inProductGroupWithID`;
 - генерировать registry-based nodes для confirmed dictionary/policy entities, используемых в `about_entities` и `mentions_entities`;
 - выводить `Product.color` из product-сущностей registry;
+- выводить локализованный `Product.material` по ссылке `material` только для подтвержденной сущности материала;
 - выводить `Product.additionalProperty` из видимых `characteristics`.
 
-## 21. Будущий `Callable Actions Registry`
+## 21. Будущий реестр вызываемых действий
 
 `How Marketers Can Prepare Their Organization for the Agentic Web` добавляет будущий слой: AI agents должны понимать не только сущности, но и допустимые действия. Для Aerocool это P3-документация, а не текущий JSON-LD/API-вывод.
 
@@ -423,6 +424,7 @@ Action нельзя создавать как “идею”. Он должен 
 9. Выполнено `2026-05-31`: удалить одиночные ProductGroup-записи и оставить `product_group_id` только для реальных цветовых групп вариантов WING/XTAL.
 10. Выполнено `2026-05-31`: удалить дубликат `products-collection` и оставить `aerocool-catalog` как единственную каноническую сущность каталога.
 11. Выполнено `2026-05-31`: выводить `ProductGroup`, `isVariantOf` и `inProductGroupWithID` для четырех подтвержденных цветовых групп вариантов WING/XTAL.
-12. Выполнено `2026-05-31`: выводить `Product.color` из registry и `Product.additionalProperty` из видимых `characteristics`.
+12. Выполнено `2026-05-31`: выводить `Product.color` из реестра и `Product.additionalProperty` из видимых `characteristics`.
 13. Выполнено `2026-07-08`: использовать registry и карту ключевых URL как input для минимального `static/llms.txt`; дальше поддерживать файл как краткую карту сайта, а не как дубликат Entity Registry.
-14. Держать `Callable Actions Registry` как P3-документацию, пока не появятся реальные business endpoints и владельцы.
+14. Выполнено `2026-07-12`: выводить локализованный `Product.material` по подтвержденной ссылке `material` главной товарной сущности.
+15. Держать `Callable Actions Registry` как P3-документацию, пока не появятся реальные business endpoints и владельцы.

@@ -1,6 +1,6 @@
 # Руководство по `schema_types`
 
-Обновлено: 2026-07-10.
+Обновлено: 2026-07-13.
 
 В проекте `Aerocool` используется только поле `schema_types`.
 
@@ -35,6 +35,7 @@ schema_types: ["website", "product", "organization", "breadcrumbs"]
 - Image license metadata (`license`, `acquireLicensePage`, `creator`, `creditText`, `copyrightNotice`) внедрена централизованно для `ImageObject`: основное изображение страницы и логотип получают эти поля через schema partials, а видимая страница условий находится по `/image-license/` и `/ru/image-license/`.
 - Чистый Schema Validator не равен гарантии rich results: для Google данные в JSON-LD должны совпадать с видимым контентом страницы.
 - Для `product` источник правды по коммерческим фактам — front matter товарной страницы; schema partial читает эти поля, а видимый товарный блок и `/faq/` должны их подтверждать. Операционный процесс описан в [31-product-facts-maintenance-process-2026.md](31-product-facts-maintenance-process-2026.md).
+- Для `product` поля `color` и `material` формируются из главной подтвержденной товарной сущности в `data/entities.yaml`. `material` должен ссылаться на существующую подтвержденную сущность материала; шаблон берет ее локализованное название и выводит `Product.material`.
 - Текущий план усиления графа и качества rich results хранится в [26-json-ld-graph-audit-roadmap-2026.md](26-json-ld-graph-audit-roadmap-2026.md).
 - QA-правила schema.org-графа, schema drift и ownership описаны в [20-schema-markup-quality-checklist-2026.md](20-schema-markup-quality-checklist-2026.md).
 - Entity strategy, `@id`, `sameAs`, `about` и `mentions` проектируются через [23-entity-registry-2026.md](23-entity-registry-2026.md), [22-entity-registry-beginner-guide-2026.md](22-entity-registry-beginner-guide-2026.md), [24-entities-knowledge-graph-playbook-2026.md](24-entities-knowledge-graph-playbook-2026.md) и [25-ai-search-entity-map-2026.md](25-ai-search-entity-map-2026.md).

@@ -1,6 +1,6 @@
 # Практическое руководство по структурированным данным для E-Commerce 2026
 
-Обновлено: 2026-07-10.
+Обновлено: 2026-07-13.
 
 Этот документ переводит `Guide to E-Commerce Structured Data` от SchemaApp в локальные правила для товарного каталога `Aerocool Ukraine`.
 
@@ -8,7 +8,7 @@
 
 Документ синхронизирован с текущими Google Search Central правилами для `Product`, merchant listings и product variants. Внешние SchemaApp материалы используются как стратегический слой, но eligibility для Google rich results всегда проверять по официальной документации Google.
 
-Текущий порядок внедрения ratings, product facts, `ProductGroup` и production gate задают [регламент product facts](31-product-facts-maintenance-process-2026.md), [чек-лист schema](20-schema-markup-quality-checklist-2026.md), [entity performance report](32-entity-performance-report-2026.md) и [production gate](../quality/14-production-quality-gate-2026.md). Аудиты `59` и `68` сохраняют исторический контекст на май 2026 года; текущее состояние проверяет [аудит 99](../audits/99-2026-07-10-full-documentation-project-sync-audit-current.md).
+Текущий порядок внедрения рейтингов, товарных фактов, `ProductGroup` и проверки перед выпуском задают [регламент товарных фактов](31-product-facts-maintenance-process-2026.md), [чек-лист schema.org](20-schema-markup-quality-checklist-2026.md), [отчет по сущностям](32-entity-performance-report-2026.md) и [проверка перед production](../quality/14-production-quality-gate-2026.md). Аудиты `59` и `68` сохраняют исторический контекст на май 2026 года; последняя полная проверка указана в [карте документации](../01-documentation-map.md#5-текущий-аудит).
 
 ## 1. Связь с текущими документами
 
@@ -40,6 +40,7 @@
 - `sku`;
 - `brand`;
 - `seller`;
+- `color` и локализованный `material` из подтвержденной товарной сущности в `data/entities.yaml`;
 - `shippingDetails`;
 - `hasMerchantReturnPolicy`;
 - `acceptedPaymentMethod`;
@@ -67,6 +68,7 @@
 | Brand | schema `Brand @id` | Обязательно |
 | SKU | front matter + visible commercial block | Обязательно |
 | Product images | `image`, `cover.image`, visible `products/gallery.html` | Обязательно |
+| Color / material | главная товарная сущность в `data/entities.yaml` + видимые характеристики | Желательно и уже реализовано |
 | Breadcrumbs | template layer | Обязательно для product pages |
 | Reviews / rating | только реальные видимые данные | Опционально и рискованно |
 | MPN / GTIN | front matter, если официально известны | Желательно |
@@ -155,6 +157,7 @@ FAQ полезен для e-commerce не как ставка на Google FAQ ri
 
 - сохранять текущий стандарт `image + cover.image + products/gallery.html`;
 - для товарной галереи класть дополнительные изображения в page bundle товара: шаблон сам выводит их как миниатюры и не требует отдельного front matter поля;
+- использовать только смысловые имена, поддержанные `gallery-image-meta.html`; неизвестное имя останавливает сборку, а SVG автоматически в галерею не входит;
 - primary image должен показывать реальный товар, а не абстрактную иллюстрацию;
 - для product rich results и Google Images желательно иметь высокое разрешение;
 - `ImageObject` получает централизованную image license metadata и ведет на `/image-license/` или `/ru/image-license/`; не задавать эти поля в товарном front matter;
@@ -203,7 +206,7 @@ Schema помогает E-E-A-T только тогда, когда усилив
 
 ## 10. Очередь внедрения
 
-### P0
+### Приоритет P0
 
 1. Поддерживать актуальный алгоритм review-системы из [17-netlify-database-reviews.md](../deploy/17-netlify-database-reviews.md): миграция `reviews`, `POST /api/reviews`, moderation flow, build-time export и Hugo review block. Базовый pipeline готов.
 2. Внедрить `review_target_id` и `reviews_enabled` сначала только на одном тестовом товаре в `uk` и `ru`, затем масштабировать на текущий каталог. Готово для текущих товаров.
@@ -214,14 +217,14 @@ Schema помогает E-E-A-T только тогда, когда усилив
 7. Держать видимый commercial block, `/faq/` и `Product` JSON-LD синхронными с front matter по доставке, возврату, оплате и гарантии.
 8. При каждом изменении product facts брать подтверждение у команды Aerocool Украина и проходить регламент [31-product-facts-maintenance-process-2026.md](31-product-facts-maintenance-process-2026.md).
 
-### P1
+### Приоритет P1
 
 1. Поддерживать активный `ProductGroup` только для реальных вариантов одной модели; новые группы добавлять только после видимой variant-навигации.
-2. Поддерживать `Product.color` через registry и `Product.additionalProperty` через видимый `characteristics`.
+2. Поддерживать `Product.color` и `Product.material` через реестр сущностей, а `Product.additionalProperty` — через видимый `characteristics`. Реализовано; новые материалы добавлять только как подтвержденные сущности.
 3. Расширить product image strategy до набора `1:1`, `4:3`, `16:9`.
 4. Подготовить реальные HowTo-материалы только там, где есть пошаговый контент.
 
-### P2
+### Приоритет P2
 
 1. Добавить `Review` в JSON-LD только после появления реальных видимых approved отзывов.
 2. Добавить `VideoObject` только после появления реальных product videos.

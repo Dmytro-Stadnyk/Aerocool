@@ -357,7 +357,7 @@ function buildMarkdownReport(rows, contentPages, renderedGraph) {
   const topMentions = topRows(rows, (row) => row.mentionPages.length);
   const topRendered = topRows(rows, (row) => row.renderedIDRefs);
 
-  return `# Отчет по эффективности сущностей (Entity Performance Report) 2026
+  return `# Отчет по эффективности сущностей 2026
 
 Обновлено: ${date}.
 

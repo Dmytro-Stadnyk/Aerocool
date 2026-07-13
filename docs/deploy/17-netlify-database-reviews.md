@@ -1,14 +1,14 @@
-# Netlify Database для SEO-first отзывов
+# Netlify Database для отзывов с безопасной SEO-архитектурой
 
-Обновлено: 2026-07-10.
+Обновлено: 2026-07-13.
 
 Этот документ объясняет, как в проекте `Aerocool Ukraine` использовать `Netlify Database` для собственной системы отзывов к товарам и статьям.
 
-Главная цель: не просто сохранять отзывы, а сделать SEO-безопасный review pipeline, где `Product` JSON-LD получает рейтинг только из реальных, публичных, approved отзывов, которые видны пользователю на странице.
+Главная цель: не просто сохранять отзывы, а поддерживать безопасный процесс, в котором `Product` JSON-LD получает рейтинг только из реальных публичных approved-отзывов, видимых пользователю на той же странице.
 
 ## Как пользоваться новичку
 
-Если ты раньше не работал с `Netlify Database`, читай документ в таком порядке:
+Если опыта работы с Netlify Database нет, читайте документ в таком порядке:
 
 1. Раздел 1 объясняет, что уже подключено.
 2. Раздел 2 дает актуальный алгоритм работ.
@@ -20,11 +20,11 @@
 8. Раздел 8 объясняет SEO-first pipeline.
 9. Раздел 11 показывает, что проверять после изменений.
 
-Не начинай с формы на сайте. Для SEO сначала нужно зафиксировать данные, модерацию и build-time экспорт approved отзывов.
+Не начинайте с формы на сайте. Сначала нужно зафиксировать структуру данных, модерацию и экспорт approved-отзывов во время сборки.
 
 ## 1. Текущий статус
 
-Проверено 2026-07-10:
+Проверено 2026-07-13:
 
 - `Netlify CLI` установлен через `brew`;
 - версия CLI: `netlify-cli/26.2.0` локально проверена через `netlify --version`;
@@ -67,7 +67,7 @@ https://app.netlify.com/projects/hugo-aerocool/database
 
 ## 2. Актуальный алгоритм работ
 
-Это текущий порядок внедрения review-системы после подключения `Netlify Database`.
+Это текущий порядок работы системы отзывов после подключения Netlify Database.
 
 ### Уже сделано
 
@@ -222,11 +222,7 @@ local netlify dev -> локальная база
 
 ## 4. Базовые команды
 
-Все команды выполнять из корня проекта:
-
-```bash
-cd /Users/stadnyk/MEGA/Aerocool
-```
+Все команды выполнять из корня репозитория.
 
 Проверить аккаунт и привязку проекта:
 
@@ -442,13 +438,10 @@ node scripts/export_reviews.mjs
 
 ## 9. Netlify Functions для API отзывов
 
-Для review-системы нужны функции:
+### 9.1. Что реализовано сейчас
 
 ```text
 POST /api/reviews
-GET /api/reviews?target_id=...
-GET /api/admin/reviews
-PATCH /api/admin/reviews/:id
 ```
 
 `POST /api/reviews`:
@@ -465,7 +458,7 @@ PATCH /api/admin/reviews/:id
 netlify/functions/reviews.mjs
 ```
 
-Функция принимает только `POST`, читает `application/x-www-form-urlencoded`, `multipart/form-data` или `application/json`, проверяет honeypot `bot-field`, валидирует поля, считает `author_email_hash` на сервере и записывает отзыв в `reviews` со статусом `pending`.
+Функция принимает только `POST`, читает `application/x-www-form-urlencoded`, `multipart/form-data` или `application/json`, проверяет ловушку для ботов `bot-field`, валидирует поля, считает `author_email_hash` на сервере и записывает отзыв в `reviews` со статусом `pending`. Любой другой HTTP-метод, включая `GET`, получает `405 Method Not Allowed` с `Allow: POST`; функция не читает и не публикует approved-отзывы.
 
 После успешной записи функция возвращает `303 See Other` на товарную страницу:
 
@@ -483,36 +476,30 @@ SELECT id, target_id, language, rating, author_name, status FROM reviews
 
 Важно: этот тестовый отзыв был создан в локальной базе, поднятой через `netlify dev`. В Netlify Dashboard он не виден. Для remote-проверки использовать branch-сайт `dev` и database branch `dev` в Netlify Dashboard.
 
-Админские функции:
+Approved-записи читает [scripts/export_reviews.mjs](../../scripts/export_reviews.mjs) перед сборкой Hugo. Скрипт формирует `data/generated/reviews.json`; публичный HTML не запрашивает базу во время открытия страницы.
 
-- показывают `pending` отзывы;
-- переводят отзыв в `approved`, `rejected` или `spam`;
-- после `approved` должны запускать Netlify build hook, чтобы Hugo пересобрал HTML и JSON-LD.
+### 9.2. Что пока не реализовано
 
-Для функций использовать современный формат Netlify:
+Следующие маршруты являются возможным будущим интерфейсом чтения и модерации, а не текущим API:
 
-```typescript
-import type { Context, Config } from "@netlify/functions";
-import { getDatabase } from "@netlify/database";
-
-export default async (req: Request, context: Context) => {
-  const db = getDatabase();
-
-  const rows = await db.sql`
-    SELECT *
-    FROM reviews
-    WHERE status = ${"approved"}
-  `;
-
-  return Response.json(rows);
-};
-
-export const config: Config = {
-  path: "/api/reviews",
-};
+```text
+GET /api/reviews?target_id=...
+GET /api/admin/reviews
+PATCH /api/admin/reviews/:id
 ```
 
-Текущая функция уже существует и написана как JavaScript-модуль `.mjs`; она не импортирует типы `Context` или `Config`, поэтому отдельный пакет `@netlify/functions` ей не нужен. Добавьте его как dev dependency только при переходе на TypeScript или при использовании helpers из этого пакета.
+Будущие административные маршруты должны:
+
+- требовать надежную аутентификацию и авторизацию;
+- показывать `pending`-отзывы без раскрытия приватных данных публичному API;
+- переводить отзыв в `approved`, `rejected` или `spam`;
+- после `approved` запускать Netlify build hook, чтобы Hugo пересобрал HTML и JSON-LD.
+
+Пока эти маршруты отсутствуют, статус изменяется вручную в Netlify Dashboard, после чего запускается новый deploy.
+
+При реализации административного API сначала выбирают механизм аутентификации и модель прав, затем ограничивают методы, поля ответа и журналируют изменения статуса. Нельзя копировать в production пример `SELECT *` без проверки администратора: такая функция способна раскрыть email и другие приватные данные.
+
+Текущая функция использует современный Netlify-формат с `default export` и `config`, но написана как JavaScript-модуль `.mjs`. Она не импортирует типы `Context` или `Config`, поэтому пакет `@netlify/functions` ей не нужен. Добавляйте его как зависимость разработки только при переходе на TypeScript или использовании вспомогательных функций этого пакета.
 
 ## 10. Правила SEO для отзывов
 
@@ -549,7 +536,7 @@ netlify dev
 
 - `POST /api/reviews` создает только `pending`;
 - публичная функция не отдает email;
-- admin endpoint защищен;
+- если добавлен административный endpoint, он защищен аутентификацией и авторизацией;
 - `approved` отзыв попадает в build-time export;
 - `data/generated/reviews.json` содержит только approved отзывы;
 - Hugo не выводит `AggregateRating`, если approved отзывов нет;

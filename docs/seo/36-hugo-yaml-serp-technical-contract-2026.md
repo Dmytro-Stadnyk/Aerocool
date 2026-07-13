@@ -1,6 +1,6 @@
-# `hugo.yaml` как SERP-технический контракт 2026
+# `hugo.yaml` как технический контракт поисковой выдачи 2026
 
-Обновлено: 2026-07-10.
+Обновлено: 2026-07-13.
 
 Этот документ объясняет, как текущий [hugo.yaml](../../hugo.yaml) влияет на SEO, индексацию, мультиязычность, Core Web Vitals, structured data, Agentic Browsing и готовность проекта `Aerocool Ukraine` к борьбе за сильные позиции в Google Search.
 
@@ -25,6 +25,7 @@
 - Chrome WebMCP: `https://developer.chrome.com/docs/ai/webmcp`
 - Chrome WebMCP Declarative API: `https://developer.chrome.com/docs/ai/webmcp/declarative-api`
 - Chrome WebMCP tool security: `https://developer.chrome.com/docs/ai/webmcp/secure-tools`
+- Chrome WebMCP evals: `https://developer.chrome.com/docs/ai/webmcp/evals`
 - Google Search documentation updates: `https://developers.google.com/search/updates`
 - `llms.txt` proposal: `https://llmstxt.org/`
 
@@ -81,7 +82,7 @@
 
 ## 4. Рекомендации по приоритету
 
-### P1. перед Production
+### P1. Перед production
 
 1. Переключать Netlify на production только отдельным релизом:
    - `hugo --environment production --gc --minify`;
@@ -98,7 +99,7 @@
 3. Подключить Google Search Console и отправить sitemap index `https://aerocool.ua/sitemap.xml`.
 4. Проверить ключевые URL через PageSpeed Insights после Netlify deploy, а не только локально.
 
-### P2. для усиления SERP-готовности
+### P2. Для усиления готовности к поисковой выдаче
 
 1. Рассмотреть `x-default` для главной и языковых пар, если нужен явный fallback для пользователей без украинского/русского предпочтения.
 2. Сделать контрольный crawler-аудит production-сайта после переключения:
@@ -123,7 +124,7 @@
 3. Для товаров поддерживать `priceValidUntil`, наличие, гарантию, доставку и возврат через `docs/seo/31-product-facts-maintenance-process-2026.md`.
 4. Не добавлять выдуманные отзывы или ручные рейтинги: `AggregateRating` должен строиться только из снимка approved-отзывов.
 
-## 5. SERP-контракт для всего проекта
+## 5. Контракт поисковой выдачи для всего проекта
 
 Чтобы проект реально претендовал на сильные позиции, один `hugo.yaml` недостаточен. Контракт такой:
 
@@ -134,7 +135,7 @@
 | Entity graph | `data/entities.yaml`, `schema_types`, `_seo` partials | Сущности видимы в тексте и связаны в JSON-LD без выдуманных фактов |
 | Товары | product front matter, product templates, review export | Реальные product facts, approved reviews, `Product`/`Offer` без fake data |
 | Изображения | page bundles, `seo-image`, gallery partials | Уникальные WebP, `alt`, размеры, LCP preload, schema image set |
-| Agentic Browsing | `static/llms.txt`, WebMCP-атрибуты форм | Краткая карта сайта для LLM/AI-агентов и валидные схемы contact/review/filter форм |
+| Agentic Browsing | `static/llms.txt`, WebMCP-атрибуты форм | Краткая карта сайта, валидные схемы форм и отдельные проверки выбора инструмента, параметров и подтверждения действия |
 | Производительность | Hugo Pipes, Tailwind 4.3, Netlify headers | Хорошие CWV на published URL, минимум JS, стабильные размеры изображений |
 | Мониторинг | PageSpeed Insights, Google Search Console, Schema Validator | Регулярная проверка реальных URL и реальных запросов |
 
@@ -175,6 +176,7 @@ public/ru/index.json
 - Tailwind CSS не теряет классы после правок шаблонов.
 - `public/llms.txt` существует, содержит H1 и Markdown-ссылки;
 - страницы с формами сохраняют `toolname`, `tooldescription` и валидные WebMCP-параметры.
+- обычная отправка форм без AI по-прежнему работает, а агентные сценарии выбирают нужный инструмент, передают корректные параметры и не обходят подтверждение пользователя.
 
 ## 6.1. WebMCP и `llms.txt` простыми словами
 
@@ -191,7 +193,9 @@ Google Search в обновлении от 2026-06-15 прямо указал, �
 
 WebMCP остается экспериментальным API. При добавлении imperative tools нужно учитывать indirect prompt injection, помечать внешнее или пользовательское содержимое через `untrustedContentHint`, применять `readOnlyHint` только к действиям без изменения состояния и придерживаться ориентиров Chrome: до `500` символов на описание инструмента, `150` на описание параметра, `30` на имя и `1.5K` на отдельный результат.
 
-При изменении этого слоя читать [аудит 96 с уточнением от 2026-07-10](../audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md), а результат проверять через PageSpeed Insights на опубликованном URL.
+Chrome отдельно рекомендует проверять агентный путь как систему: правильный выбор инструмента, корректность параметров и завершение пользовательской задачи. Такие проверки дополняют, но не заменяют детерминированные тесты обычного интерфейса. Автоматизированного набора WebMCP-сценариев в репозитории пока нет, поэтому перед production используется ручной протокол из [production gate](../quality/14-production-quality-gate-2026.md).
+
+При изменении этого слоя читать [аудит 96 с уточнениями от 2026-07-10 и 2026-07-13](../audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md), а результат проверять на опубликованном URL.
 
 ## 7. Итог
 

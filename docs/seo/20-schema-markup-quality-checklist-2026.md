@@ -1,6 +1,6 @@
-# Чек-лист качества Schema-разметки 2026
+# Чек-лист качества schema.org-разметки 2026
 
-Обновлено: 2026-07-10.
+Обновлено: 2026-07-13.
 
 Этот документ переводит `Schema Markup Checklist` и универсальные выводы из `Definitive Guide to Healthcare Structured Data in SEO` от SchemaApp в локальный QA-чеклист для `Aerocool Ukraine`. Его задача — проверять не только валидность JSON-LD, но и качество schema.org-графа: правильные типы, полезные свойства, связи между сущностями, устойчивые `@id`, отсутствие schema drift и соответствие schema-стратегии реальной цели страницы.
 
@@ -10,10 +10,10 @@
 
 Текущий порядок внедрения задают [JSON-LD roadmap](26-json-ld-graph-audit-roadmap-2026.md), [регламент product facts](31-product-facts-maintenance-process-2026.md), [entity performance report](32-entity-performance-report-2026.md) и [список URL для валидаторов](33-schema-validator-url-checklist-2026.md). Аудиты `47`, `50`, `55`, `57` и `59` сохраняют историю источников и прежних решений.
 Операционный регламент поддержки product facts: [31-product-facts-maintenance-process-2026.md](31-product-facts-maintenance-process-2026.md).
-Image license metadata внедрена через видимую страницу `/image-license/` и централизованный schema helper. Аудит `68` фиксирует состояние на 2026-05-31, а текущую техническую проверку выполняет [аудит 99](../audits/99-2026-07-10-full-documentation-project-sync-audit-current.md).
+Метаданные лицензии изображений внедрены через видимую страницу `/image-license/` и централизованный schema.org-шаблон. Аудит `68` фиксирует состояние на 2026-05-31, а последняя полная техническая проверка указана в [карте документации](../01-documentation-map.md#5-текущий-аудит).
 Обновление `2026-05-25` учитывает статью Schema App [Stop Chasing Visibility. Build Understanding.](https://www.schemaapp.com/schema-markup/stop-chasing-visibility-build-understanding/) и официальный Google guide [Optimizing your website for generative AI features on Google Search](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide).
 
-## 0. Рамка для AI Search
+## 0. Рамка для поиска с AI
 
 Structured data не является отдельным AI-хаком. В Google generative AI search нет специального schema.org-типа, который нужно добавить “для AI”. Поэтому качество разметки в проекте оценивается не по количеству свойств, а по тому, насколько точно graph помогает машинам понять реальные сущности и связи.
 
@@ -25,7 +25,7 @@ Structured data не является отдельным AI-хаком. В Googl
 - не считать `llms.txt` или chunking заменой видимого контента, индексации, entity registry и JSON-LD graph;
 - считать лучшей schema-разметкой ту, которая синхронизирована с источником правды и снижает риск неправильного представления бренда, товара или условий покупки.
 
-## 1. Семь проверок Schema-разметки
+## 1. Семь проверок schema.org-разметки
 
 | # | Проверка | Приоритет | Смысл для Aerocool |
 | ---: | --- | --- | --- |
@@ -126,14 +126,14 @@ Healthcare-гайд полезен как напоминание: schema.org typ
 - `gtin13`, если есть официальный GTIN;
 - `color`;
 - `material`;
-- `additionalProperty` для механизма, подлокотников, базы, роликов, гарантии, сценария использования;
+- `additionalProperty` для видимых технических характеристик, например механизма, подлокотников, базы и роликов;
 - `isVariantOf` / `inProductGroupWithID` для confirmed ProductGroup вариантов.
 
-На `2026-05-31` `Product.color` выводится из registry, а `Product.additionalProperty` строится из видимой вкладки `characteristics`. Если характеристика не видна пользователю, она не должна попадать в `additionalProperty`.
+На `2026-07-13` `Product.color` и ссылка на материал читаются из главной товарной сущности реестра. Если сущность материала имеет статус `confirmed`, шаблон берет локализованное название и выводит `Product.material`. `Product.additionalProperty` строится из видимой вкладки `characteristics`; невидимая характеристика не должна попадать в JSON-LD.
 
 Для цены, наличия, гарантии, доставки, возврата, оплаты, `priceValidUntil`, цвета и характеристик использовать регламент [31-product-facts-maintenance-process-2026.md](31-product-facts-maintenance-process-2026.md): сначала бизнес-подтверждение, затем front matter или registry, затем видимый HTML, JSON-LD и `/faq/`, если факт относится к общей политике.
 
-Открытый риск: `aggregateRating`. Его нужно держать только при реальном и видимом источнике рейтинга/отзывов. Целевой источник для проекта — approved отзывы из `Netlify Database`, выгруженные на build в `data/generated/reviews.json`.
+Контрольная граница для `aggregateRating`: свойство выводится только при наличии реальных approved-отзывов из Netlify Database, выгруженных во время сборки в `data/generated/reviews.json` и видимых на той же странице. Ручные значения рейтинга во front matter запрещены.
 
 ## 4. Вложенность и иерархия
 
@@ -235,7 +235,7 @@ PDF особенно полезен здесь: важна не просто с�
 
 Официальные `sameAs` ссылки проверять раз в квартал: URL должен быть живым, стабильным и по-прежнему представлять global Aerocool, а не локальное представительство или стороннюю карточку.
 
-## 8. Расхождение Schema-разметки с видимым контентом
+## 8. Расхождение schema.org-разметки с видимым контентом
 
 Schema drift — расхождение между JSON-LD и видимым контентом.
 
@@ -266,7 +266,7 @@ Schema drift — расхождение между JSON-LD и видимым к�
 - при переносе URL;
 - при изменении локализации `uk` / `ru`.
 
-## 9. Метаданные лицензии изображений (Image License Metadata)
+## 9. Метаданные лицензии изображений
 
 Текущий проект создает `ImageObject` для primary image страницы и логотипа. С `2026-05-31` каждый такой `ImageObject` получает:
 
@@ -282,7 +282,7 @@ Schema drift — расхождение между JSON-LD и видимым к�
 
 Для товарных изображений по-прежнему обязательны crawlable visible images, корректный `alt`, `contentUrl`, `width`, `height` и соответствие изображения реальному товару.
 
-## 10. QA-процесс на уровне страницы
+## 10. Контроль качества на уровне страницы
 
 Использовать этот чеклист для ключевых страниц после schema/content изменений.
 
@@ -332,7 +332,7 @@ Structured data должна быть связана с целью страни�
 
 Schema strategy — это ongoing process. После production-запуска отслеживать не только validator pass, но и Search Console, rich result reports, AI Search-аудит, schema drift и реальные бизнес-действия.
 
-### Schema как Performance Layer
+### Schema.org как измеримый слой
 
 `Impact of Schema Markup` усиливает важную рамку: schema в 2026 году нельзя оценивать только по принципу “валидно / невалидно” или “есть rich result / нет rich result”. Для Aerocool schema должна работать как слой измеримой производительности.
 

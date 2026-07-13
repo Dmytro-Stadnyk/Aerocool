@@ -1,6 +1,6 @@
-# Практическое руководство по сущностям и Knowledge Graph 2026
+# Практическое руководство по сущностям и графу знаний 2026
 
-Обновлено: 2026-07-10.
+Обновлено: 2026-07-13.
 
 Базовая синхронизация документации с лучшими практиками 2026 зафиксирована в [50-2026-05-13-documentation-2026-best-practices-sync-audit.md](../audits/50-2026-05-13-documentation-2026-best-practices-sync-audit.md). Дополнительный PDF-аудит Schema App по connected schema, Content Knowledge Graphs, impact и Agentic Web зафиксирован в [57-2026-05-17-schemaapp-pdf-agentic-graph-impact-analysis.md](../audits/57-2026-05-17-schemaapp-pdf-agentic-graph-impact-analysis.md). Customer stories/case studies Schema App по real-world entity linking, migrations и product visibility зафиксированы в [59-2026-05-18-schemaapp-customer-stories-case-studies-audit.md](../audits/59-2026-05-18-schemaapp-customer-stories-case-studies-audit.md). Обновление `2026-05-25` учитывает статью Schema App [Stop Chasing Visibility. Build Understanding.](https://www.schemaapp.com/schema-markup/stop-chasing-visibility-build-understanding/) и официальный Google guide [Optimizing your website for generative AI features on Google Search](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide).
 
@@ -34,7 +34,7 @@ Entity — это вещь или концепт, который являетс�
 
 Ключевое отличие: keyword — это строка поиска, topic — группа связанных запросов, entity — объект с атрибутами и связями.
 
-## 2. Зачем Knowledge Graph нужен в SEO
+## 2. Зачем граф знаний нужен в SEO
 
 Knowledge graph — это сеть отношений между сущностями, описанная контролируемым словарем. В проекте таким словарем выступает Schema.org, а формат вывода — JSON-LD.
 
@@ -61,7 +61,7 @@ Knowledge graph — это сеть отношений между сущност
 - `about_entities`, `mentions_entities`, `product_group_id`, `related_*` и видимые внутренние ссылки должны усиливать одну и ту же карту связей;
 - graph-аудит должен проверять не только валидность JSON, но и то, насколько уверенно машина может понять бренд, товар, серию, материал, механизм и условия покупки.
 
-## 3. Три шага построения Knowledge Graph
+## 3. Три шага построения графа знаний
 
 | Шаг | Что делать в Aerocool | Результат |
 | --- | --- | --- |
@@ -73,7 +73,7 @@ Knowledge graph — это сеть отношений между сущност
 
 Customer stories Schema App подтверждают практическую сторону этой модели: knowledge graph должен быть измеримым. Для Aerocool это означает регулярный [отчет по эффективности сущностей (Entity Performance Report)](32-entity-performance-report-2026.md) `entity -> entity home -> pages about -> pages mentions -> rendered node -> GSC/AI/business signal`, а не только наличие `data/entities.yaml`.
 
-### Граф знаний контента жизненного цикла (Lifecycle Content Knowledge Graph)
+### Граф знаний контента жизненного цикла
 
 Новые материалы Schema App уточняют: Content Knowledge Graph — это не только JSON-LD на страницах, а reusable data layer, который нужно создавать, размещать, поддерживать и переиспользовать.
 
@@ -212,7 +212,7 @@ Knowledge graph можно проектировать через тройки:
 
 Aerocool уже находится выше уровня keyword/topics благодаря хабам, сериям, товарам и JSON-LD graph. Следующий рост — не больше ключей, а явнее entity home, `about`, `mentions`, поддержка активного `ProductGroup` только для реальных вариантов, `Product.color`, `additionalProperty` и registry governance.
 
-## 10. Аудит пробелов контента через Knowledge Graph
+## 10. Аудит пробелов контента через граф знаний
 
 Использовать knowledge graph как инструмент анализа контента.
 
@@ -231,7 +231,7 @@ Aerocool уже находится выше уровня keyword/topics благ
 
 Результат аудита должен превращаться в контентные задачи, а не только в schema-задачи.
 
-### Отчет покрытия сущностей (Entity Coverage Report)
+### Отчет покрытия сущностей
 
 Раз в месяц после production-запуска готовить простую таблицу покрытия сущностей.
 
@@ -248,7 +248,7 @@ Aerocool уже находится выше уровня keyword/topics благ
 - если важная коммерческая сущность не имеет AI/GSC signal после индексации, нужен контентный или внутренний linking-аудит;
 - если rendered node отсутствует для confirmed dictionary/policy entity, проверить resolver и статус в [data/entities.yaml](../../data/entities.yaml).
 
-## 11. Что дает Knowledge Graph кроме SEO
+## 11. Что дает граф знаний кроме SEO
 
 Knowledge graph может быть переиспользован за пределами классического SEO:
 
@@ -263,7 +263,7 @@ Knowledge graph может быть переиспользован за пред
 
 ## 12. Очередь работ
 
-### P0
+### Приоритет P0
 
 1. Поддерживать текущие стабильные `@id` без случайных изменений.
 2. Не добавлять external `sameAs` без ручной проверки точности.
@@ -271,7 +271,7 @@ Knowledge graph может быть переиспользован за пред
 4. Считать `/faq/` главным entity home для текущих service policies.
 5. Не использовать `additionalType`, пока не подтвержден внешний термин и его отношение к базовому Schema.org типу.
 
-### P1
+### Приоритет P1
 
 1. Выполнено `2026-05-07`: initial entity registry создан в [23-entity-registry-2026.md](23-entity-registry-2026.md).
 2. Выполнено `2026-05-07`: entity home для `Synchronous Tilt`, `SYNC4`, `SYNC5`, `Mesh`, `Racer`, `Loft Air`, `Dual backrest` зафиксированы.
@@ -285,7 +285,7 @@ Knowledge graph может быть переиспользован за пред
 10. Провести content gap audit по entity map.
 11. Добавить entity coverage report и graph inventory после production-запуска.
 
-### P2
+### Приоритет P2
 
 1. Рассмотреть glossary или entity hub.
 2. Рассмотреть author/reviewer entities только при реальной редакционной модели.

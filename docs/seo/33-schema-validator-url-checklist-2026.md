@@ -1,6 +1,6 @@
-# Чеклист URL для Schema.org Validator 2026
+# Список URL для проверки в Schema.org Validator 2026
 
-Обновлено: 2026-07-10.
+Обновлено: 2026-07-13.
 
 Этот документ содержит полный список публичных URL для ручной проверки через [validator.schema.org](https://validator.schema.org/). Список собран из rendered HTML в `public/**/*.html`: сюда попали только страницы, где реально есть `application/ld+json`.
 

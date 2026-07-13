@@ -1,6 +1,6 @@
 # Карта сущностей для поиска с AI 2026
 
-Обновлено: 2026-07-10.
+Обновлено: 2026-07-13.
 
 Этот документ переводит идеи из `Mastering AI Search`, `Schema Markup and AI Search`, `Designing Content for Humans and Machines`, `How to Prepare Your Content for Generative AI Search`, `Impact of Schema Markup` и `How Marketers Can Prepare Their Organization for the Agentic Web` от SchemaApp в практическую систему для проекта `Aerocool Ukraine`: какие сущности нужно закрепить на сайте, какие AI Search-метрики отслеживать, какие prompt-наборы проверять и как развивать JSON-LD graph без переспама.
 
@@ -12,7 +12,7 @@
 
 Важно: AI Search-слой не заменяет Google Search Essentials, people-first content, Core Web Vitals и structured data quality. До production-запуска и индексации AI Search считать мониторинговым и entity-governance слоем, а не причиной внедрять chatbot, NLWeb, MCP или chunking-стратегию как P0. Минимальный `llms.txt` внедрен как служебная карта сайта для совместимых систем, но он не является заменой sitemap, robots, schema.org или видимого контента. Google Search 2026-06-15 отдельно уточнил: `llms.txt` ему не требуется и не влияет на видимость или ранжирование ни положительно, ни отрицательно.
 
-### Уточнение после Google AI Guide и Schema App
+## Уточнение после руководства Google и статьи Schema App
 
 Для проекта нельзя формулировать AI Search как “добавить schema и получить AI visibility”. Корректная рамка такая:
 
@@ -288,7 +288,7 @@ Follow-up вопросы после основного prompt:
 | Возврат | `MerchantReturnPolicy` | product front matter + `/faq/` | Product, FAQ | Front matter — источник правды; UI и FAQ подтверждают |
 | Гарантия | `WarrantyPromise` / `PropertyValue` | product front matter + products + `/faq/` | Product pages | Показывать видимо перед расширением schema |
 
-## 8. План развития Schema для поиска с AI
+## 8. План развития schema.org для поиска с AI
 
 Не добавлять новые свойства только ради количества. Сначала видимый контент и источник правды, затем JSON-LD.
 
@@ -304,7 +304,7 @@ Follow-up вопросы после основного prompt:
 | P2 | `sameAs` | Brand, Organization, entities | Только точные официальные профили или авторитетные knowledge bases |
 | Done | `llms.txt` | Root static file | Минимальная Markdown-карта сайта внедрена в `static/llms.txt`; поддерживать как краткий навигационный файл, не как второй sitemap |
 
-## 9. Front Matter и связи
+## 9. Метаданные страницы и связи
 
 Текущие шаблоны читают `schema_types`. Это правило не менять.
 
@@ -435,7 +435,7 @@ AI-friendly контент не должен быть короче или бед
 
 ## 14. Очередь работ
 
-### P0
+### Приоритет P0
 
 1. Переключить Netlify на production только после финальной готовности.
 2. Проверить `index,follow`, sitemap, служебные `noindex` страницы и PageSpeed Insights на реальном URL.
@@ -444,7 +444,7 @@ AI-friendly контент не должен быть короче или бед
 5. Добавить в AI-аудит поля для sentiment, citation ownership и prompt variant.
 6. Проверить, что ключевые типы страниц собраны из повторяемых контентных компонентов.
 
-### P1
+### Приоритет P1
 
 1. Подготовить технический дизайн для `about` и `mentions`.
 2. Поддерживать активный `ProductGroup` только для реальных вариантов одной модели; новые группы не добавлять без видимой variant navigation.
@@ -455,7 +455,7 @@ AI-friendly контент не должен быть короче или бед
 7. Описать компонентные паттерны для product, series, article, news и FAQ страниц.
 8. Заполнять внешние GSC/AI/business-метрики в [отчете по эффективности сущностей (Entity Performance Report)](32-entity-performance-report-2026.md) после production-индексации.
 
-### P2
+### Приоритет P2
 
 1. Спроектировать glossary или entity hub.
 2. Поддерживать текущий `static/llms.txt` кратким: H1, дата обновления, описание, ссылки на ключевые URL, все товарные URL в `uk` и `ru`, sitemap и robots.

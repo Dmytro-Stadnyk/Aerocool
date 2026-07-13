@@ -1,10 +1,10 @@
 # Маршрутизация Netlify и принудительная 404
 
-Обновлено: 2026-07-10.
+Обновлено: 2026-07-13.
 
 Этот документ описывает, как в проекте устроены Netlify redirects, HTTP headers и кастомная `404`.
 
-Правила сверены 2026-07-10 с официальной документацией [Netlify redirects](https://docs.netlify.com/manage/routing/redirects/overview/), [custom headers](https://docs.netlify.com/manage/routing/headers/) и [caching](https://docs.netlify.com/build/caching/caching-overview/). Аудиты `50` и `69` сохраняют историю прежней синхронизации и отказа от локального браузерного плагина.
+Правила сверены 2026-07-13 с официальной документацией [Netlify redirects](https://docs.netlify.com/manage/routing/redirects/overview/), [пользовательских заголовков](https://docs.netlify.com/manage/routing/headers/) и [кэширования](https://docs.netlify.com/build/caching/caching-overview/). Аудиты `50` и `69` сохраняют историю прежней синхронизации и отказа от локального браузерного плагина.
 
 ## 1. Где живут правила
 
@@ -168,7 +168,7 @@ WebMCP в Chrome требует origin isolation и permissions policy, но э�
 
 Атомарный deploy очищает или инвалидирует кэш Netlify CDN для изменившихся статических файлов, но не может очистить уже заполненный кэш браузера посетителя. Поэтому `immutable` разрешен только для content-hashed URL. Сам факт, что файл меняется через новый deploy, недостаточен.
 
-Переходный статус 2026-07-10: локальный `netlify.toml` уже исправлен, но опубликованный `https://aerocool.ua/images/logo.svg` до следующего deploy продолжает отдавать прежний `Cache-Control: public,max-age=31536000,immutable`. После deploy обязательно подтвердите, что `/images/logo.svg` и favicon/SVG/webmanifest отдают `max-age=0,must-revalidate`, а fingerprinted `/assets/*` сохраняют длительный `immutable`.
+Переходный статус 2026-07-13: Branch Deploy `dev` уже отдает для `/images/logo.svg` правильный `Cache-Control: public,max-age=0,must-revalidate`, а ресурс `/assets/*` с отпечатком содержимого сохраняет `public,max-age=31536000,immutable`. Основной домен `https://aerocool.ua/images/logo.svg` все еще отдает прежний `immutable`, потому что соответствующее изменение еще не перенесено в production-ветку. После следующего production-развертывания эту проверку нужно повторить для логотипа, favicon, SVG, webmanifest и ресурса `/assets/*` с отпечатком.
 
 Custom headers из `netlify.toml` применяются только к файлам из backing store Netlify. Они не добавляются автоматически к ответам Netlify Functions, Edge Functions или proxy. Функция должна самостоятельно вернуть `Cache-Control`, CORS и другие необходимые заголовки. Текущая `netlify/functions/reviews.mjs` возвращает `Cache-Control: no-store` для всех своих ответов.
 

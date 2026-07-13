@@ -1,6 +1,6 @@
 # Реестр сущностей: гайд для новичка
 
-Обновлено: 2026-07-10.
+Обновлено: 2026-07-13.
 
 Базовая синхронизация документации с лучшими практиками 2026 зафиксирована в [50-2026-05-13-documentation-2026-best-practices-sync-audit.md](../audits/50-2026-05-13-documentation-2026-best-practices-sync-audit.md).
 
@@ -54,7 +54,7 @@ Entity Registry решает эту проблему. Он говорит:
 
 Это машинный источник для Hugo-шаблонов. Если `entity_id` отсутствует здесь, шаблон не сможет превратить его в JSON-LD reference.
 
-### Front Matter страниц
+### Метаданные страниц
 
 Файлы в `content/`, например:
 
@@ -72,7 +72,7 @@ mentions_entities:
 product_group_id: "wing-racer-product-group"
 ```
 
-### Schema-Partial-файлы Hugo
+### Шаблоны schema.org в Hugo
 
 Шаблоны в `layouts/_partials/_schema/` читают front matter, проверяют `entity_id` через [data/entities.yaml](../../data/entities.yaml) и выводят JSON-LD только для безопасных сущностей.
 
@@ -175,9 +175,9 @@ product_group_id: "wing-racer-product-group"
 
 ## 9. Как выбрать правильные ID сущностей
 
-Сначала открой [data/entities.yaml](../../data/entities.yaml).
+Сначала откройте [data/entities.yaml](../../data/entities.yaml).
 
-Найди нужную сущность по понятному имени:
+Найдите нужную сущность по понятному имени:
 
 - бренд: `aerocool-brand`;
 - локальная организация: `aerocool-ukraine`;

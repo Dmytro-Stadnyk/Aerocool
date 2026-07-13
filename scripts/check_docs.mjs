@@ -5,14 +5,21 @@ const root = process.cwd();
 const docsRoot = path.join(root, "docs");
 const errors = [];
 let localLinkCount = 0;
+const sourceArchiveNames = new Set(["XTAL", "SKY LITE", "SKY 360", "WING 360"]);
 
 function collectFiles(dir) {
   const files = [];
 
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (entry.name === "XTAL") continue;
-
     const fullPath = path.join(dir, entry.name);
+    if (
+      dir === docsRoot &&
+      entry.isDirectory() &&
+      sourceArchiveNames.has(entry.name)
+    ) {
+      continue;
+    }
+
     if (entry.isDirectory()) files.push(...collectFiles(fullPath));
     else files.push(fullPath);
   }
@@ -69,6 +76,35 @@ function checkLocalLinks(file, lines) {
   }
 }
 
+function checkHeadingOrder(file, lines) {
+  let previousLevel = 0;
+
+  for (const [index, line] of lines.entries()) {
+    const match = line.match(/^(#{1,6})\s+\S/);
+    if (!match) continue;
+
+    const level = match[1].length;
+    if (previousLevel > 0 && level > previousLevel + 1) {
+      errors.push(
+        `${relative(file)}:${index + 1}: пропущен уровень заголовка H${previousLevel + 1}`,
+      );
+    }
+    previousLevel = level;
+  }
+}
+
+function findServiceFiles(dir) {
+  const files = [];
+
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) files.push(...findServiceFiles(fullPath));
+    else if (entry.name === ".DS_Store") files.push(fullPath);
+  }
+
+  return files;
+}
+
 const allDocumentationFiles = collectFiles(docsRoot);
 const markdownFiles = allDocumentationFiles
   .filter((file) => file.endsWith(".md"))
@@ -77,6 +113,20 @@ const csvFiles = allDocumentationFiles.filter((file) => file.endsWith(".csv"));
 const entryFiles = [path.join(root, "README.md"), path.join(root, "AGENTS.md")];
 const mapSource = fs.readFileSync(path.join(docsRoot, "01-documentation-map.md"), "utf8");
 const numbers = new Map();
+
+for (const archiveName of sourceArchiveNames) {
+  const archivePath = path.join(docsRoot, archiveName);
+  if (!fs.existsSync(archivePath) || !fs.statSync(archivePath).isDirectory()) {
+    errors.push(`docs/${archiveName}/: отсутствует архив исходников производителя`);
+  }
+  if (!mapSource.includes(`docs/${archiveName}/`)) {
+    errors.push(`docs/${archiveName}/: архив не описан в карте документации`);
+  }
+}
+
+for (const file of findServiceFiles(docsRoot)) {
+  errors.push(`${relative(file)}: служебный файл .DS_Store должен быть удален`);
+}
 
 for (const file of markdownFiles) {
   const name = path.basename(file);
@@ -145,6 +195,12 @@ for (const file of [...entryFiles, ...markdownFiles]) {
 
   const name = path.basename(file);
   const number = Number(name.match(/^(\d+)-/)?.[1] || 0);
+  const isActiveDocument = entryFiles.includes(file) || number <= 41;
+
+  if (isActiveDocument && source.includes("/Users/stadnyk/")) {
+    errors.push(`${relative(file)}: найден машинно-зависимый путь /Users/stadnyk/`);
+  }
+
   if (relative(file).startsWith("docs/audits/") && number < maxNumber) {
     if (!/Архивная оговорка \d{4}-\d{2}-\d{2}/.test(source)) {
       errors.push(`${relative(file)}: исторический аудит не имеет архивной оговорки`);
@@ -157,6 +213,7 @@ for (const file of [...entryFiles, ...markdownFiles]) {
     }
   }
 
+  checkHeadingOrder(file, lines);
   checkLocalLinks(file, lines);
 }
 
@@ -170,6 +227,6 @@ if (errors.length > 0) {
   process.exitCode = 1;
 } else {
   console.log(
-    `Проверка документации пройдена: ${markdownFiles.length} Markdown, ${csvFiles.length} CSV, ${localLinkCount} локальных ссылок, номера 01-${maxNumber}.`,
+    `Проверка документации пройдена: ${markdownFiles.length} Markdown, ${csvFiles.length} CSV, ${sourceArchiveNames.size} архива исходников, ${localLinkCount} локальных ссылок, номера 01-${maxNumber}.`,
   );
 }
