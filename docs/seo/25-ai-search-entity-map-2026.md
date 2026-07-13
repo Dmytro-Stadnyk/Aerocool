@@ -267,7 +267,7 @@ Follow-up вопросы после основного prompt:
 | Entity | Тип Schema.org | Каноническая страница | Где усиливать | Следующее действие |
 | --- | --- | --- | --- | --- |
 | Aerocool | `Brand` | `/` или `/about/` | Home, About, Product, Collection | Использовать стабильный `@id`; глобальные соцпрофили держать как `sameAs` бренда/global organization |
-| Aerocool Ukraine | `Organization` / `OnlineStore`, если подтвердится модель магазина | `/about/`, `/contact/`, `/faq/` | Organization graph, FAQ, Contact | Local facts подтверждены `2026-05-07`; не расширять до `OnlineStore`; связь с глобальным Aerocool через `parentOrganization` и `brand`, без local `sameAs` |
+| Aerocool Ukraine | `Organization` / `OnlineStore`, если подтвердится модель магазина | `/about/`, `/contact/`, `/faq/` | Organization graph, FAQ, Contact | Официальный статус сайта и связь с глобальной Aerocool подтверждены владельцем проекта `2026-07-13`; local facts подтверждены `2026-05-07`; не расширять до `OnlineStore`; использовать `parentOrganization` и `brand`, без local `sameAs` |
 | Каталог кресел | `CollectionPage` | `/products/` | Product hub, series pages | Связать с сериями и коммерческими интентами |
 | SKY | `ProductSeries` / `CollectionPage` | `/products/sky/` | Серия, товары, статьи | SKY Light и SKY 360 остаются самостоятельными Product внутри серии, без ProductGroup |
 | WING | `ProductSeries` / `CollectionPage` | `/products/wing/` | Серия, товары, статьи | ProductGroup использовать только для моделей с реальными цветовыми вариантами |

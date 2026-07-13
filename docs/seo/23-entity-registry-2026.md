@@ -103,7 +103,7 @@
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `aerocool-brand` | Aerocool | Aerocool | Aerocool | Brand | `Brand` | `https://aerocool.io/#brand` | `/about/` | Global Aerocool + Aerocool Ukraine | `confirmed` | Глобальный бренд. Официальные глобальные социальные профили находятся здесь как `sameAs`. |
 | `aerocool-global-organization` | Aerocool Advanced Technologies Corp. | Aerocool Advanced Technologies Corp. | Aerocool Advanced Technologies Corp. | Organization | `Organization` | `https://aerocool.io/#organization` | `https://aerocool.io/` | Global Aerocool | `confirmed` | Глобальная родительская организация. |
-| `aerocool-ukraine` | Aerocool Ukraine | Aerocool Україна | Aerocool Украина | Organization | `Organization` | `https://aerocool.ua/#organization` | `/about/` + `/contact/` | Aerocool Ukraine | `confirmed` | Локальные факты подтверждены `2026-05-07`; локальный `sameAs` для глобальных social profiles не используется. |
+| `aerocool-ukraine` | Aerocool Ukraine | Aerocool Україна | Aerocool Украина | Organization | `Organization` | `https://aerocool.ua/#organization` | `/about/` + `/contact/` | Aerocool Ukraine | `confirmed` | Официальный статус сайта и связь с глобальной Aerocool подтверждены владельцем проекта `2026-07-13`; локальные business facts подтверждены `2026-05-07`; локальный `sameAs` для глобальных social profiles не используется. |
 | `aerocool-website` | Aerocool Ukraine website | Сайт Aerocool Україна | Сайт Aerocool Украина | WebSite | `WebSite` | `https://aerocool.ua/#website` | `/` | Aerocool Ukraine | `confirmed` | Site-level сущность для поиска, publisher-связей и графа страниц. |
 | `aerocool-logo` | Aerocool logo | Логотип Aerocool | Логотип Aerocool | ImageObject | `ImageObject` | `https://aerocool.ua/#logo` | `/` | Aerocool Ukraine | `confirmed` | Общий визуальный identity node. |
 
@@ -118,7 +118,7 @@
 | `aerocool-brand`, `aerocool-global-organization` | `https://x.com/AerocoolGlobal` | `confirmed` | Официальный глобальный профиль. |
 | `aerocool-brand`, `aerocool-global-organization` | `https://www.linkedin.com/company/aerocool-advanced-technologies-corp./` | `confirmed` | Официальный глобальный профиль. |
 | `aerocool-brand`, `aerocool-global-organization` | `https://www.youtube.com/@AeroCoolGlobal` | `confirmed` | Официальный глобальный профиль. |
-| `aerocool-ukraine` | отсутствует | `confirmed` | Локальная сущность использует `parentOrganization` и `brand`, а не локальный `sameAs`. |
+| `aerocool-ukraine` | отсутствует | `confirmed` | Официальная связь с глобальной Aerocool подтверждена владельцем проекта `2026-07-13`; локальная сущность использует `parentOrganization` и `brand`, а не локальный `sameAs`. |
 
 ## 8. Сущности страниц и контентных хабов
 
