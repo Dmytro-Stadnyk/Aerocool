@@ -25,6 +25,7 @@
 {{- with site.GetPage "/about" }}{{- $pagesScratch.SetInMap "sections" .RelPermalink . -}}{{- end -}}
 {{- with site.GetPage "/contact" }}{{- $pagesScratch.SetInMap "sections" .RelPermalink . -}}{{- end -}}
 {{- with site.GetPage "/image-license" }}{{- $pagesScratch.SetInMap "sections" .RelPermalink . -}}{{- end -}}
+{{- with site.GetPage "/privacy" }}{{- $pagesScratch.SetInMap "sections" .RelPermalink . -}}{{- end -}}
 {{- $seriesScratch := newScratch -}}
 {{- range slice "sky" "wing" "xtal" -}}
   {{- with site.GetPage (printf "/products/%s" .) -}}
@@ -82,7 +83,7 @@
           <ul role="list" class="site-footer__list mt-6 space-y-4">
             {{- range $pagesScratch.GetSortedMapValues "sections" }}
             <li>
-              <a href="{{ .RelPermalink }}" class="ui-footer-link">{{ .Title }}</a>
+              <a href="{{ .RelPermalink }}" class="ui-footer-link">{{ .LinkTitle }}</a>
             </li>
             {{- end }}
           </ul>
@@ -92,7 +93,7 @@
           <ul role="list" class="site-footer__list mt-6 space-y-4">
             {{- range $seriesScratch.GetSortedMapValues "pages" }}
             <li>
-              <a href="{{ .RelPermalink }}" class="ui-footer-link">{{ .Title }}</a>
+              <a href="{{ .RelPermalink }}" class="ui-footer-link">{{ .LinkTitle }}</a>
             </li>
             {{- end }}
           </ul>

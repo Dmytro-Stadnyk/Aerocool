@@ -7,6 +7,7 @@ const MIN_REVIEW_LENGTH = 20;
 const MAX_REVIEW_LENGTH = 2000;
 const MAX_NAME_LENGTH = 80;
 const MAX_EMAIL_LENGTH = 254;
+const PRIVACY_POLICY_VERSION = "2026-07-13";
 
 const noStoreHeaders = {
   "Cache-Control": "no-store",
@@ -46,6 +47,7 @@ export default async (req) => {
     authorName: normalizeInlineText(getFormValue(form, "author_name")),
     authorEmail: getFormValue(form, "author_email").toLowerCase(),
     body: normalizeReviewBody(getFormValue(form, "body")),
+    privacyConsent: getFormValue(form, "privacy_consent"),
   };
 
   const validationError = validateReview(review);
@@ -69,7 +71,10 @@ export default async (req) => {
         author_email,
         author_email_hash,
         body,
-        status
+        status,
+        privacy_consent,
+        privacy_consent_at,
+        privacy_policy_version
       )
       VALUES (
         ${review.targetType},
@@ -81,7 +86,10 @@ export default async (req) => {
         ${review.authorEmail},
         ${authorEmailHash},
         ${review.body},
-        ${"pending"}
+        ${"pending"},
+        ${true},
+        NOW(),
+        ${PRIVACY_POLICY_VERSION}
       )
     `;
   } catch (error) {
@@ -179,6 +187,10 @@ function validateReview(review) {
     review.body.length > MAX_REVIEW_LENGTH
   ) {
     return "Review length is invalid.";
+  }
+
+  if (review.privacyConsent !== "accepted") {
+    return "Privacy consent is required.";
   }
 
   return "";

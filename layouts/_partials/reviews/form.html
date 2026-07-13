@@ -1,6 +1,7 @@
 {{- $isRu := eq .Language.Name "ru" -}}
 {{- $reviewTargetID := .Params.review_target_id | default (.Params.sku | default .File.Dir) -}}
 {{- $targetURL := .Permalink -}}
+{{- $privacyURL := cond $isRu "/ru/privacy/" "/privacy/" -}}
 
 <form class="review-form mt-8" method="POST" action="/api/reviews" toolname="submit_product_review" tooldescription="{{ cond $isRu "Отправляет отзыв о товаре Aerocool на модерацию. Email нужен только для проверки и не публикуется." "Надсилає відгук про товар Aerocool на модерацію. Email потрібен лише для перевірки і не публікується." }}">
   <input type="hidden" name="target_type" value="product" title="{{ cond $isRu "Тип объекта отзыва" "Тип об'єкта відгуку" }}">
@@ -54,6 +55,17 @@
   <div class="review-form__body">
     <label for="review-body">{{ cond $isRu "Отзыв" "Відгук" }}</label>
     <textarea id="review-body" name="body" required minlength="20" maxlength="2000" title="{{ cond $isRu "Текст отзыва о товаре" "Текст відгуку про товар" }}" class="ui-field" placeholder="{{ cond $isRu "Что стоит знать об этой модели?" "Що варто знати про цю модель?" }}"></textarea>
+  </div>
+
+  <div class="ui-consent review-form__consent">
+    <input id="review-privacy-consent" type="checkbox" name="privacy_consent" value="accepted" required title="{{ cond $isRu "Согласие на обработку и публикацию данных отзыва" "Згода на обробку та публікацію даних відгуку" }}" toolparamdescription="{{ cond $isRu "Подтверждает ознакомление с политикой конфиденциальности, обработку email для проверки и публикацию отзыва после модерации." "Підтверджує ознайомлення з політикою конфіденційності, обробку email для перевірки та публікацію відгуку після модерації." }}">
+    <label for="review-privacy-consent">
+      {{- if $isRu -}}
+      Я ознакомился с <a href="{{ $privacyURL }}" class="ui-link">политикой конфиденциальности</a>, согласен на обработку имени и email для проверки, а после модерации — на публикацию имени, оценки, текста и даты отзыва.
+      {{- else -}}
+      Я ознайомився з <a href="{{ $privacyURL }}" class="ui-link">політикою конфіденційності</a>, згоден на обробку імені та email для перевірки, а після модерації — на публікацію імені, оцінки, тексту й дати відгуку.
+      {{- end -}}
+    </label>
   </div>
 
   <div class="review-form__actions">

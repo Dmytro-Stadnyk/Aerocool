@@ -143,7 +143,7 @@
 - [layouts/_shortcodes/home-choice-benefits.html](../../layouts/_shortcodes/home-choice-benefits.html) — блок преимуществ выбора: механика, регулировки, материалы и сценарии.
 - [layouts/_shortcodes/seo-image.html](../../layouts/_shortcodes/seo-image.html) — контентные изображения с контролем LCP/lazy loading.
 - [layouts/_shortcodes/faq-list.html](../../layouts/_shortcodes/faq-list.html) — видимый список FAQ из front matter.
-- [layouts/_shortcodes/contact.html](../../layouts/_shortcodes/contact.html) — контактная `side-by-side` секция для `/contact/` и `/ru/contact/`; содержит Netlify form и WebMCP-аннотации `contact_aerocool_ukraine`.
+- [layouts/_shortcodes/contact.html](../../layouts/_shortcodes/contact.html) — контактная `side-by-side` секция для `/contact/` и `/ru/contact/`; содержит Netlify form, WebMCP-аннотации `contact_aerocool_ukraine`, обязательное согласие и ссылку на локализованную политику конфиденциальности.
 - [layouts/_shortcodes/contact-success-alert.html](../../layouts/_shortcodes/contact-success-alert.html) — success alert после отправки контактной формы на `/contact/success/` и `/ru/contact/success/`.
 - [layouts/_shortcodes/about-intro.html](../../layouts/_shortcodes/about-intro.html) — верхний two-column description блок на `/about/` и `/ru/about/`.
 - [layouts/_shortcodes/about-series-preview.html](../../layouts/_shortcodes/about-series-preview.html) — три входа в серии `SKY`, `WING`, `XTAL` на about-странице.
@@ -181,7 +181,7 @@
 
 ## Быстрая карта шаблонов отзывов
 
-- [layouts/_partials/reviews/form.html](../../layouts/_partials/reviews/form.html) — форма отправки отзыва в `POST /api/reviews`; выводится только для товара с включенными отзывами. Форма размечена как WebMCP-инструмент `submit_product_review`; шкала рейтинга описана через `fieldset`, потому что это один параметр `rating`, состоящий из radio-кнопок.
+- [layouts/_partials/reviews/form.html](../../layouts/_partials/reviews/form.html) — форма отправки отзыва в `POST /api/reviews`; выводится только для товара с включенными отзывами. Форма размечена как WebMCP-инструмент `submit_product_review`; шкала рейтинга описана через `fieldset`, а отдельный обязательный checkbox подтверждает обработку email и последующую публикацию имени, оценки, текста и даты после модерации.
 - [layouts/_partials/reviews/list.html](../../layouts/_partials/reviews/list.html) — список approved-отзывов текущего товара и языка из снимка, созданного во время сборки.
 - [layouts/_partials/reviews/stars.html](../../layouts/_partials/reviews/stars.html) — единый визуальный вывод шкалы рейтинга без собственной логики источника данных.
 - [layouts/_partials/reviews/summary-data.html](../../layouts/_partials/reviews/summary-data.html) — получает агрегированные данные рейтинга по `review_target_id` из `data/generated/reviews.json`.
@@ -258,9 +258,10 @@
 
 - shortcode сам переключает украинский и русский текст по языку страницы;
 - левая колонка содержит заголовок, краткое объяснение, блок “когда обращаться”, адрес, телефон, `support@aerocool.ua`, `sales@aerocool.ua`, быстрые ссылки на каталог, FAQ и серии, а также график `09:00 — 18:00` с понедельника по воскресенье;
-- правая колонка содержит Netlify form с honeypot, обязательными полями и локализованным success URL;
+- правая колонка содержит Netlify form с honeypot, обязательными полями, локализованным success URL и checkbox согласия на обработку данных для ответа;
 - форма имеет WebMCP-атрибуты `toolname="contact_aerocool_ukraine"` и локализованный `tooldescription`, чтобы PageSpeed Agentic Browsing видел ее как понятный инструмент;
 - hidden-поля и honeypot получают технические `title`, а видимые поля сохраняют обычные `label`;
+- вместе с обращением Netlify Forms сохраняет `privacy_consent=accepted` и `privacy_policy_version=2026-07-13`; ссылка в label всегда ведет на `/privacy/` или `/ru/privacy/` того же языка;
 - markdown-файлы `content/contact/index.md` и `content/contact/index.ru.md` обычно должны содержать только вызов `{{< contact >}}`, чтобы не дублировать контактные данные ниже формы;
 - отдельный markdown-раздел соцсетей на `/contact/` не используется; глобальные социальные ссылки остаются в footer и в schema global organization/brand.
 
@@ -608,8 +609,8 @@
 
 Что делает:
 
-- рендерит footer;
-- подключает footer-links;
+- рендерит активный footer и сам собирает его основные ссылки;
+- добавляет локализованную политику конфиденциальности в sitewide-навигацию и использует короткие подписи `linkTitle`;
 - рендерит copyright;
 - выводит JSON-LD через `_seo/jsonld.html` для обычных страниц;
 - регистрирует клиентские скрипты;
@@ -627,8 +628,9 @@
 
 Что делает:
 
-- выводит SEO/sitewide блок ссылок в footer;
-- собирает основные разделы и ключевые серии.
+- выводит самостоятельный совместимый SEO/sitewide блок ссылок для footer-разметки;
+- собирает основные разделы, политику конфиденциальности и ключевые серии через `linkTitle`;
+- в текущем `footer.html` напрямую не вызывается: активный footer собирает те же ссылки внутри собственного шаблона.
 
 Когда идти сюда:
 

@@ -35,10 +35,11 @@
 - выбран режим `Direct SQL`;
 - sample data не создавались;
 - создана первая миграция `20260526171923_create-reviews-table`;
+- добавлена отдельная миграция `20260713120000_add-review-privacy-consent`, которая не переписывает уже примененную первую миграцию и добавляет доказательство согласия;
 - миграция локально применена через `netlify database migrations apply`;
 - добавлена функция `netlify/functions/reviews.mjs` для `POST /api/reviews`; другие методы получают `405 Method Not Allowed`;
 - все текущие товарные страницы в украинской и русской версии получили стабильный `review_target_id` и `reviews_enabled: true`;
-- форма отзывов выводится только для товаров с явными `review_target_id` и `reviews_enabled: true`;
+- форма отзывов выводится только для товаров с явными `review_target_id` и `reviews_enabled: true`, содержит локализованную ссылку на `/privacy/` и обязательный checkbox без предварительной отметки;
 - локально и на Netlify branch `dev` проверено, что `POST /api/reviews` создает запись в `reviews` со статусом `pending`;
 - добавлен build-time export `scripts/export_reviews.mjs`, который пишет approved отзывы в `data/generated/reviews.json`;
 - товарный шаблон и карточки товаров умеют показывать approved-отзывы и средний рейтинг из сгенерированного снимка;
@@ -318,7 +319,10 @@ CREATE TABLE reviews (
   moderation_note TEXT,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   approved_at TIMESTAMPTZ,
-  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  privacy_consent BOOLEAN NOT NULL DEFAULT FALSE,
+  privacy_consent_at TIMESTAMPTZ,
+  privacy_policy_version TEXT
 );
 
 CREATE INDEX reviews_target_status_idx
@@ -337,9 +341,12 @@ ON reviews (author_email_hash);
 - `rating` — оценка 1-5;
 - `author_email` хранится приватно и не выводится в публичный HTML;
 - `author_email_hash` нужен для дедупликации и антиспама без публичного email;
-- `status` управляет модерацией.
+- `status` управляет модерацией;
+- `privacy_consent` фиксирует факт обязательного согласия;
+- `privacy_consent_at` хранит серверное время принятия формы;
+- `privacy_policy_version` показывает, с какой редакцией политики согласился автор.
 
-В фактической миграции также добавлен триггер `reviews_set_updated_at`, который обновляет `updated_at` при изменении строки. Это нужно для будущей модерации: когда отзыв переводят из `pending` в `approved`, дата обновления меняется автоматически.
+Первая фактическая миграция также добавляет триггер `reviews_set_updated_at`, который обновляет `updated_at` при изменении строки. Вторая миграция добавляет три privacy-поля и constraint: для записи с `privacy_consent=true` время и версия политики не могут быть пустыми. Старые записи получают `privacy_consent=false`; новые записи функция создает только после явного подтверждения пользователя.
 
 ## 7. `review_target_id` для товаров
 
@@ -449,6 +456,7 @@ POST /api/reviews
 - принимает отзыв;
 - проверяет поля;
 - очищает текст;
+- требует `privacy_consent=accepted`;
 - ставит статус `pending`;
 - не публикует отзыв сразу.
 
@@ -458,7 +466,7 @@ POST /api/reviews
 netlify/functions/reviews.mjs
 ```
 
-Функция принимает только `POST`, читает `application/x-www-form-urlencoded`, `multipart/form-data` или `application/json`, проверяет ловушку для ботов `bot-field`, валидирует поля, считает `author_email_hash` на сервере и записывает отзыв в `reviews` со статусом `pending`. Любой другой HTTP-метод, включая `GET`, получает `405 Method Not Allowed` с `Allow: POST`; функция не читает и не публикует approved-отзывы.
+Функция принимает только `POST`, читает `application/x-www-form-urlencoded`, `multipart/form-data` или `application/json`, проверяет ловушку для ботов `bot-field`, валидирует поля и обязательное согласие, считает `author_email_hash` на сервере и записывает отзыв в `reviews` со статусом `pending`. Сервер, а не hidden-поле клиента, задает `privacy_policy_version=2026-07-13` и время согласия. Любой другой HTTP-метод, включая `GET`, получает `405 Method Not Allowed` с `Allow: POST`; функция не читает и не публикует approved-отзывы.
 
 После успешной записи функция возвращает `303 See Other` на товарную страницу:
 
@@ -477,6 +485,19 @@ SELECT id, target_id, language, rating, author_name, status FROM reviews
 Важно: этот тестовый отзыв был создан в локальной базе, поднятой через `netlify dev`. В Netlify Dashboard он не виден. Для remote-проверки использовать branch-сайт `dev` и database branch `dev` в Netlify Dashboard.
 
 Approved-записи читает [scripts/export_reviews.mjs](../../scripts/export_reviews.mjs) перед сборкой Hugo. Скрипт формирует `data/generated/reviews.json`; публичный HTML не запрашивает базу во время открытия страницы.
+
+### 9.1.1. Согласие, публикация и сроки хранения
+
+Форма заранее не отмечает checkbox. Текст рядом с ним отдельно объясняет две операции: приватную обработку имени и email для проверки, а после модерации — публичный вывод имени, оценки, текста и даты. Email, `privacy_consent_at` и `privacy_policy_version` не попадают в build-time export.
+
+Операционный регламент хранения должен соответствовать опубликованной политике:
+
+- `pending`, `rejected` и `spam` пересматривать и удалять не позднее 12 месяцев после создания или последней модерации;
+- approved-отзыв и приватный email хранить, пока отзыв опубликован и нужен для подтверждения происхождения или обработки запроса автора;
+- после удаления публичного отзыва удалить связанные приватные данные в течение 30 дней, если нет законной причины хранить их дольше;
+- не использовать email автора для рассылки без отдельного добровольного согласия.
+
+Автоматическая retention-задача пока не реализована. До ее появления ответственный за модерацию не реже одного раза в месяц проверяет старые строки в Netlify Database и фиксирует удаление. Нельзя обещать срок в публичной политике и одновременно оставлять старые записи без операционной проверки.
 
 ### 9.2. Что пока не реализовано
 
@@ -535,6 +556,8 @@ netlify dev
 Проверить:
 
 - `POST /api/reviews` создает только `pending`;
+- запрос без `privacy_consent=accepted` получает `400` и не создает строку;
+- принятая строка содержит `privacy_consent=true`, непустые `privacy_consent_at` и `privacy_policy_version`;
 - публичная функция не отдает email;
 - если добавлен административный endpoint, он защищен аутентификацией и авторизацией;
 - `approved` отзыв попадает в build-time export;
@@ -553,6 +576,7 @@ netlify dev
 - не показывать `AggregateRating` без видимых approved отзывов;
 - не агрегировать отзывы серии в рейтинг отдельного товара;
 - не публиковать отзыв без модерации;
+- не принимать отзыв без явного согласия и не ставить checkbox заранее;
 - не выводить email автора публично;
 - не разрешать HTML в тексте отзыва без жесткой очистки;
 - не хранить секреты в `netlify.toml`.
@@ -564,7 +588,11 @@ netlify dev
 - Netlify Database CLI: `https://docs.netlify.com/build/data-and-storage/netlify-database/cli/`
 - Netlify Database API: `https://docs.netlify.com/build/data-and-storage/netlify-database/api/`
 - Netlify environment variables for Functions: `https://docs.netlify.com/build/functions/environment-variables/`
+- Netlify Forms submissions and PII management: `https://docs.netlify.com/manage/forms/submissions/`
+- Netlify Privacy Statement: `https://www.netlify.com/privacy/`
 - Netlify caching: `https://docs.netlify.com/build/caching/caching-overview/`
+- Закон Украины «О защите персональных данных»: `https://zakon.rada.gov.ua/laws/show/2297-17#Text`
+- Защита персональных данных у Уполномоченного Верховной Рады Украины по правам человека: `https://ombudsman.gov.ua/uk/zahist-personalnih-danih`
 - Google Review Snippet structured data: `https://developers.google.com/search/docs/appearance/structured-data/review-snippet`
 
 ## 14. Связанные документы

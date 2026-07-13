@@ -1088,6 +1088,22 @@ image-license-policy:
     - "aerocool-brand"
     - "aerocool-ukraine"
 
+privacy-policy:
+  name:
+    en: "Privacy policy"
+    uk: "Політика конфіденційності"
+    ru: "Политика конфиденциальности"
+  entity_class: "Policy"
+  schema_candidate: "Thing"
+  future_jsonld_id: "https://aerocool.ua/privacy/#privacy-policy"
+  entity_home: "/privacy/"
+  source_of_truth: "privacy page"
+  owner: "Aerocool Ukraine"
+  status: "confirmed"
+  related:
+    - "aerocool-ukraine"
+    - "contact-page"
+
 online-store:
   name:
     en: "Online store"
