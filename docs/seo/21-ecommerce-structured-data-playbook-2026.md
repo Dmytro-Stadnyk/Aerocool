@@ -1,6 +1,6 @@
 # Практическое руководство по структурированным данным электронной коммерции 2026
 
-Обновлено: 2026-07-14.
+Обновлено: 2026-07-15.
 
 Этот документ переводит рекомендации `Guide to E-Commerce Structured Data` от Schema App в локальные правила товарного каталога `Aerocool Ukraine`.
 
@@ -40,7 +40,7 @@
 - `sku`;
 - `brand`;
 - `seller`;
-- `color` и локализованный `material` из подтвержденной товарной сущности в `data/entities.yaml`;
+- официальный `color` из `official_color` и локализованный `material` из подтвержденной товарной сущности в `data/entities.yaml`; нормализованный технический `color` не выводится как коммерческое название;
 - `shippingDetails`;
 - `hasMerchantReturnPolicy`;
 - `acceptedPaymentMethod`;
@@ -182,7 +182,7 @@ PDF выделяет три типовых подхода к вариантам 
 - связать варианты через `isVariantOf` или `inProductGroupWithID`;
 - использовать variant-specific `sku`, `color`, `material`, `image`, `offers`.
 
-Видимая навигация уже есть на уровне UI: `variant-swatches.html` строит цветовые ссылки из `product_group_id` и `data/entities.yaml`. На `2026-05-31` четыре реальные WING/XTAL цветовые группы переведены в `confirmed` и выводят `ProductGroup`, `isVariantOf` и `inProductGroupWithID` в JSON-LD. Одиночные товары не получают `product_group_id` и связываются с линейкой через `about_entities`, registry-поле `series` и страницу серии.
+Видимая навигация уже есть на уровне UI: `variant-swatches.html` строит цветовые ссылки из `product_group_id` и `data/entities.yaml`. На `2026-05-31` четыре реальные WING 360/XTAL цветовые группы переведены в `confirmed` и выводят `ProductGroup`, `isVariantOf` и `inProductGroupWithID` в JSON-LD. Одиночные товары не получают `product_group_id` и связываются с линейкой через `about_entities`, registry-поле `series` и страницу серии.
 
 ## 9. E-E-A-T для E-Commerce
 
@@ -209,8 +209,8 @@ Schema помогает E-E-A-T только тогда, когда усилив
 
 1. Все `24` языковые товарные страницы имеют стабильные `review_target_id` и `reviews_enabled: true`.
 2. `Product.aggregateRating` читает только сгенерированный снимок approved-отзывов; ручной `rating` во front matter удален.
-3. `ProductGroup` активен только для четырех реальных групп вариантов WING/XTAL.
-4. `Product.color` и `Product.material` читаются из подтвержденного реестра сущностей.
+3. `ProductGroup` активен только для четырех реальных групп вариантов WING 360/XTAL.
+4. `Product.name` читается из локализованного канонического `name`, `Product.color` — из подтвержденного `official_color`, а `Product.material` — из `material` в реестре сущностей. Нормализованный `color` остается техническим токеном CSS-свотча.
 5. `Product.additionalProperty` строится из видимой вкладки `characteristics`.
 6. Видимый коммерческий блок, `/faq/` и JSON-LD используют согласованный товарный front matter.
 

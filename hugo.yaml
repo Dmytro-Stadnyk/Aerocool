@@ -19,7 +19,7 @@ theme: PaperMod
 disablePathToLower: false
 
 # false включает чистые URL без .html на конце.
-# Пример: /products/sky/light/ вместо /products/sky/light.html.
+# Пример: /products/sky/lite/ вместо /products/sky/lite.html.
 uglyURLs: false
 
 # false оставляет относительные ссылки относительными.
@@ -156,7 +156,7 @@ params:
   # Глобальное описание используется как fallback, если у страницы нет своего description.
   # Языковые версии ниже задают более точные локализованные fallback-описания.
   description: >
-    Официальный сайт Aerocool в Украине: игровые, офисные и компьютерные кресла серий SKY, WING и XTAL
+    Официальный сайт Aerocool в Украине: игровые, офисные и компьютерные кресла серий SKY, WING 360 и XTAL
     для работы, home office и гейминга.
 
   # Глобальный семантический список тем.
@@ -169,9 +169,9 @@ params:
     - офисные кресла aerocool
     - компьютерные кресла aerocool
     - aerocool sky
-    - aerocool wing
+    - aerocool wing 360
     - aerocool xtal
-    - aerocool sky light
+    - aerocool sky lite
     - aerocool sky 360
     - кресло для home office
     - кресло для работы за компьютером
@@ -295,7 +295,7 @@ languages:
     params:
       # Украинский fallback description для страниц без собственного description.
       description: >
-        Офіційний сайт Aerocool в Україні. Ігрові, офісні та комп'ютерні крісла серій SKY, WING і XTAL
+        Офіційний сайт Aerocool в Україні. Ігрові, офісні та комп'ютерні крісла серій SKY, WING 360 і XTAL
         для роботи, home office та геймінгу.
 
       # Украинский семантический список тем.
@@ -309,9 +309,9 @@ languages:
         - офісні крісла aerocool
         - комп'ютерні крісла aerocool
         - aerocool sky
-        - aerocool wing
+        - aerocool wing 360
         - aerocool xtal
-        - aerocool sky light
+        - aerocool sky lite
         - aerocool sky 360
         - крісло для home office
         - крісло для роботи за комп'ютером
@@ -366,7 +366,7 @@ languages:
     params:
       # Русский fallback description для страниц без собственного description.
       description: >
-        Официальный сайт Aerocool в Украине. Игровые, офисные и компьютерные кресла серий SKY, WING и XTAL
+        Официальный сайт Aerocool в Украине. Игровые, офисные и компьютерные кресла серий SKY, WING 360 и XTAL
         для работы, home office и гейминга.
 
       # Русский семантический список тем.
@@ -380,9 +380,9 @@ languages:
         - офисные кресла aerocool
         - компьютерные кресла aerocool
         - aerocool sky
-        - aerocool wing
+        - aerocool wing 360
         - aerocool xtal
-        - aerocool sky light
+        - aerocool sky lite
         - aerocool sky 360
         - кресло для home office
         - кресло для работы за компьютером

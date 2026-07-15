@@ -164,7 +164,7 @@ aerocool-catalog:
   status: "confirmed"
   related:
     - "sky-series"
-    - "wing-series"
+    - "wing-360-series"
     - "xtal-series"
     - "gaming-chair"
     - "office-chair"
@@ -211,7 +211,7 @@ sky-series:
   parent: "aerocool-catalog"
   status: "confirmed"
   products:
-    - "sky-light"
+    - "sky-lite"
     - "sky-360"
   related:
     - "mesh-material"
@@ -221,23 +221,23 @@ sky-series:
     - "computer-chair"
     - "home-office"
 
-wing-series:
+wing-360-series:
   name:
-    en: "Aerocool WING"
-    uk: "Aerocool WING"
-    ru: "Aerocool WING"
+    en: "Aerocool WING 360"
+    uk: "Aerocool WING 360"
+    ru: "Aerocool WING 360"
   entity_class: "ProductSeries"
   schema_candidate: "CollectionPage"
-  current_jsonld_id: "https://aerocool.ua/products/wing/#collection"
-  entity_home: "/products/wing/"
+  current_jsonld_id: "https://aerocool.ua/products/wing-360/#collection"
+  entity_home: "/products/wing-360/"
   parent: "aerocool-catalog"
   status: "confirmed"
   products:
-    - "wing-racer-black"
-    - "wing-racer-dark-grey"
-    - "wing-loft-air-light-grey"
-    - "wing-loft-air-dark-grey"
-    - "wing-mesh-black"
+    - "wing-360-racer-black"
+    - "wing-360-racer-dark-grey"
+    - "wing-360-loft-air-light-grey"
+    - "wing-360-loft-air-dark-grey"
+    - "wing-360-mesh-black"
   related:
     - "racer-material"
     - "loft-air-material"
@@ -273,35 +273,35 @@ xtal-series:
     - "computer-chair"
     - "home-office"
 
-wing-racer-product-group:
+wing-360-racer-product-group:
   name:
-    en: "Aerocool WING Racer"
-    uk: "Aerocool WING Racer"
-    ru: "Aerocool WING Racer"
+    en: "Aerocool WING 360 Racer"
+    uk: "Aerocool WING 360 Racer"
+    ru: "Aerocool WING 360 Racer"
   entity_class: "ProductGroup"
   schema_candidate: "ProductGroup"
-  future_jsonld_id: "https://aerocool.ua/products/wing/#wing-racer-product-group"
-  entity_home: "/products/wing/"
+  future_jsonld_id: "https://aerocool.ua/products/wing-360/#wing-360-racer-product-group"
+  entity_home: "/products/wing-360/"
   status: "confirmed"
   variants:
-    - "wing-racer-black"
-    - "wing-racer-dark-grey"
+    - "wing-360-racer-black"
+    - "wing-360-racer-dark-grey"
   varies_by:
     - "color"
 
-wing-loft-air-product-group:
+wing-360-loft-air-product-group:
   name:
-    en: "Aerocool WING Loft Air"
-    uk: "Aerocool WING Loft Air"
-    ru: "Aerocool WING Loft Air"
+    en: "Aerocool WING 360 Loft Air"
+    uk: "Aerocool WING 360 Loft Air"
+    ru: "Aerocool WING 360 Loft Air"
   entity_class: "ProductGroup"
   schema_candidate: "ProductGroup"
-  future_jsonld_id: "https://aerocool.ua/products/wing/#wing-loft-air-product-group"
-  entity_home: "/products/wing/"
+  future_jsonld_id: "https://aerocool.ua/products/wing-360/#wing-360-loft-air-product-group"
+  entity_home: "/products/wing-360/"
   status: "confirmed"
   variants:
-    - "wing-loft-air-light-grey"
-    - "wing-loft-air-dark-grey"
+    - "wing-360-loft-air-light-grey"
+    - "wing-360-loft-air-dark-grey"
   varies_by:
     - "color"
 
@@ -353,6 +353,7 @@ sky-360:
   gtin13: "4711530967553"
   material: "mesh-material"
   color: "black"
+  official_color: "Mesh Black"
   adjustability: "11d-adjustment"
   mechanism: "sync5-mechanism"
   status: "confirmed"
@@ -364,22 +365,23 @@ sky-360:
     - "synchronous-tilt"
     - "home-office"
 
-sky-light:
+sky-lite:
   name:
-    en: "Aerocool SKY Light"
-    uk: "Aerocool SKY Light"
-    ru: "Aerocool SKY Light"
+    en: "Aerocool SKY Lite"
+    uk: "Aerocool SKY Lite"
+    ru: "Aerocool SKY Lite"
   entity_class: "Product"
   schema_candidate: "Product"
-  current_jsonld_id: "https://aerocool.ua/products/sky/light/#product"
-  entity_home: "/products/sky/light/"
+  current_jsonld_id: "https://aerocool.ua/products/sky/lite/#product"
+  entity_home: "/products/sky/lite/"
   parent: "sky-series"
   series: "sky-series"
-  sku: "SKY-LIGHT-001"
+  sku: "SKY-LITE-001"
   mpn: "TEGC-3106101.11"
   gtin13: "4711530967577"
   material: "mesh-material"
   color: "black"
+  official_color: "Mesh Black"
   adjustability: "8d-adjustment"
   mechanism: "sync4-mechanism"
   status: "confirmed"
@@ -392,135 +394,140 @@ sky-light:
     - "office-chair"
     - "home-office"
 
-wing-loft-air-dark-grey:
+wing-360-loft-air-dark-grey:
   name:
-    en: "Aerocool WING Loft Air Dark Grey"
-    uk: "Aerocool WING Loft Air Dark Grey"
-    ru: "Aerocool WING Loft Air Dark Grey"
+    en: "Aerocool WING 360 Loft Air Dark Grey"
+    uk: "Aerocool WING 360 Loft Air Dark Grey"
+    ru: "Aerocool WING 360 Loft Air Dark Grey"
   entity_class: "ProductVariant"
   schema_candidate: "Product"
-  current_jsonld_id: "https://aerocool.ua/products/wing/loft-air-dark-grey/#product"
-  entity_home: "/products/wing/loft-air-dark-grey/"
-  parent: "wing-loft-air-product-group"
-  series: "wing-series"
-  sku: "WING-LADG-001"
+  current_jsonld_id: "https://aerocool.ua/products/wing-360/loft-air-dark-grey/#product"
+  entity_home: "/products/wing-360/loft-air-dark-grey/"
+  parent: "wing-360-loft-air-product-group"
+  series: "wing-360-series"
+  sku: "WING360-LADG-001"
   mpn: "TEGC-309700Z.Z1"
   gtin13: "4711530966501"
   material: "loft-air-material"
   color: "dark-grey"
+  official_color: "Loft Air Dark Grey"
   adjustability: "11d-adjustment"
   mechanism: "sync5-mechanism"
   status: "confirmed"
   related:
-    - "wing-series"
+    - "wing-360-series"
     - "loft-air-material"
     - "11d-adjustment"
     - "sync5-mechanism"
     - "dual-backrest"
     - "home-office"
 
-wing-loft-air-light-grey:
+wing-360-loft-air-light-grey:
   name:
-    en: "Aerocool WING Loft Air Light Grey"
-    uk: "Aerocool WING Loft Air Light Grey"
-    ru: "Aerocool WING Loft Air Light Grey"
+    en: "Aerocool WING 360 Loft Air Light Grey"
+    uk: "Aerocool WING 360 Loft Air Light Grey"
+    ru: "Aerocool WING 360 Loft Air Light Grey"
   entity_class: "ProductVariant"
   schema_candidate: "Product"
-  current_jsonld_id: "https://aerocool.ua/products/wing/loft-air-light-grey/#product"
-  entity_home: "/products/wing/loft-air-light-grey/"
-  parent: "wing-loft-air-product-group"
-  series: "wing-series"
-  sku: "WING-LALG-001"
+  current_jsonld_id: "https://aerocool.ua/products/wing-360/loft-air-light-grey/#product"
+  entity_home: "/products/wing-360/loft-air-light-grey/"
+  parent: "wing-360-loft-air-product-group"
+  series: "wing-360-series"
+  sku: "WING360-LALG-001"
   mpn: "TEGC-3097004.41"
   gtin13: "4711530966518"
   material: "loft-air-material"
   color: "light-grey"
+  official_color: "Loft Air Light Grey"
   adjustability: "11d-adjustment"
   mechanism: "sync5-mechanism"
   status: "confirmed"
   related:
-    - "wing-series"
+    - "wing-360-series"
     - "loft-air-material"
     - "11d-adjustment"
     - "sync5-mechanism"
     - "dual-backrest"
     - "home-office"
 
-wing-mesh-black:
+wing-360-mesh-black:
   name:
-    en: "Aerocool WING Mesh Black"
-    uk: "Aerocool WING Mesh Black"
-    ru: "Aerocool WING Mesh Black"
+    en: "Aerocool WING 360 Mesh Black"
+    uk: "Aerocool WING 360 Mesh Black"
+    ru: "Aerocool WING 360 Mesh Black"
   entity_class: "Product"
   schema_candidate: "Product"
-  current_jsonld_id: "https://aerocool.ua/products/wing/mesh-black/#product"
-  entity_home: "/products/wing/mesh-black/"
-  parent: "wing-series"
-  series: "wing-series"
-  sku: "WING-MB-001"
+  current_jsonld_id: "https://aerocool.ua/products/wing-360/mesh-black/#product"
+  entity_home: "/products/wing-360/mesh-black/"
+  parent: "wing-360-series"
+  series: "wing-360-series"
+  sku: "WING360-MB-001"
   mpn: "TEGC-3098001.11"
   gtin13: "4711530966525"
   material: "mesh-material"
   color: "black"
+  official_color: "Mesh Black"
   adjustability: "11d-adjustment"
   mechanism: "sync5-mechanism"
   status: "confirmed"
   related:
-    - "wing-series"
+    - "wing-360-series"
     - "mesh-material"
     - "11d-adjustment"
     - "sync5-mechanism"
     - "dual-backrest"
     - "hot-room"
 
-wing-racer-black:
+wing-360-racer-black:
   name:
-    en: "Aerocool WING Racer Black"
-    uk: "Aerocool WING Racer Black"
-    ru: "Aerocool WING Racer Black"
+    en: "Aerocool WING 360 Racer Black"
+    uk: "Aerocool WING 360 Racer Black"
+    ru: "Aerocool WING 360 Racer Black"
   entity_class: "ProductVariant"
   schema_candidate: "Product"
-  current_jsonld_id: "https://aerocool.ua/products/wing/racer-black/#product"
-  entity_home: "/products/wing/racer-black/"
-  parent: "wing-racer-product-group"
-  series: "wing-series"
-  sku: "WING-RB-001"
+  current_jsonld_id: "https://aerocool.ua/products/wing-360/racer-black/#product"
+  entity_home: "/products/wing-360/racer-black/"
+  parent: "wing-360-racer-product-group"
+  series: "wing-360-series"
+  sku: "WING360-RB-001"
   mpn: "TEGC-3096001.11"
   gtin13: "4711530966488"
   material: "racer-material"
   color: "black"
+  official_color: "Racer Black"
   adjustability: "11d-adjustment"
   mechanism: "sync5-mechanism"
   status: "confirmed"
   related:
-    - "wing-series"
+    - "wing-360-series"
     - "racer-material"
     - "11d-adjustment"
     - "sync5-mechanism"
     - "dual-backrest"
     - "gaming-chair"
 
-wing-racer-dark-grey:
+wing-360-racer-dark-grey:
   name:
-    en: "Aerocool WING Racer Dark Grey"
-    uk: "Aerocool WING Racer Dark Grey"
-    ru: "Aerocool WING Racer Dark Grey"
+    en: "Aerocool WING 360 Racer Dark Grey"
+    uk: "Aerocool WING 360 Racer Dark Grey"
+    ru: "Aerocool WING 360 Racer Dark Grey"
   entity_class: "ProductVariant"
   schema_candidate: "Product"
-  current_jsonld_id: "https://aerocool.ua/products/wing/racer-dark-grey/#product"
-  entity_home: "/products/wing/racer-dark-grey/"
-  parent: "wing-racer-product-group"
-  series: "wing-series"
-  sku: "WING-RDG-001"
+  current_jsonld_id: "https://aerocool.ua/products/wing-360/racer-dark-grey/#product"
+  entity_home: "/products/wing-360/racer-dark-grey/"
+  parent: "wing-360-racer-product-group"
+  series: "wing-360-series"
+  sku: "WING360-RDG-001"
   mpn: "TEGC-309600Z.Z1"
   gtin13: "4711530966495"
   material: "racer-material"
   color: "dark-grey"
+  official_color: "Racer Dark Grey"
   adjustability: "11d-adjustment"
   mechanism: "sync5-mechanism"
   status: "confirmed"
   related:
-    - "wing-series"
+    - "wing-360-series"
     - "racer-material"
     - "11d-adjustment"
     - "sync5-mechanism"
@@ -543,6 +550,7 @@ xtal-loft-air-dark-grey:
   gtin13: "4711530966792"
   material: "loft-air-material"
   color: "dark-grey"
+  official_color: "Loft Air Dark Grey"
   adjustability: "7d-adjustment"
   mechanism: "sync5-mechanism"
   status: "confirmed"
@@ -570,6 +578,7 @@ xtal-loft-air-light-grey:
   gtin13: "4711530966808"
   material: "loft-air-material"
   color: "light-grey"
+  official_color: "Loft Air Light Grey"
   adjustability: "7d-adjustment"
   mechanism: "sync5-mechanism"
   status: "confirmed"
@@ -597,6 +606,7 @@ xtal-mesh-black:
   gtin13: "4711530966815"
   material: "mesh-material"
   color: "black"
+  official_color: "Mesh Black"
   adjustability: "7d-adjustment"
   mechanism: "sync5-mechanism"
   status: "confirmed"
@@ -624,6 +634,7 @@ xtal-racer-black:
   gtin13: "4711530966778"
   material: "racer-material"
   color: "black"
+  official_color: "Racer Black"
   adjustability: "7d-adjustment"
   mechanism: "sync5-mechanism"
   status: "confirmed"
@@ -651,6 +662,7 @@ xtal-racer-dark-grey:
   gtin13: "4711530966785"
   material: "racer-material"
   color: "dark-grey"
+  official_color: "Racer Dark Grey"
   adjustability: "7d-adjustment"
   mechanism: "sync5-mechanism"
   status: "confirmed"
@@ -758,7 +770,7 @@ sync4-mechanism:
   status: "confirmed"
   related:
     - "synchronous-tilt"
-    - "sky-light"
+    - "sky-lite"
 
 sync5-mechanism:
   name:
@@ -773,7 +785,7 @@ sync5-mechanism:
   related:
     - "synchronous-tilt"
     - "sky-360"
-    - "wing-series"
+    - "wing-360-series"
     - "xtal-series"
 
 7d-adjustment:
@@ -800,7 +812,7 @@ sync5-mechanism:
   entity_home: "/articles/how-to-choose-chair-by-adjustability/"
   status: "confirmed"
   related:
-    - "sky-light"
+    - "sky-lite"
 
 11d-adjustment:
   name:
@@ -814,7 +826,7 @@ sync5-mechanism:
   status: "confirmed"
   related:
     - "sky-360"
-    - "wing-series"
+    - "wing-360-series"
 
 dual-backrest:
   name:
@@ -827,7 +839,7 @@ dual-backrest:
   entity_home: "/articles/what-is-dual-backrest/"
   status: "confirmed"
   related:
-    - "wing-series"
+    - "wing-360-series"
     - "11d-adjustment"
     - "sync5-mechanism"
     - "long-sitting"
@@ -869,11 +881,11 @@ armrests-4d-x-360:
     ru: "подлокотники 4D X 360"
   entity_class: "Feature"
   schema_candidate: "DefinedTerm"
-  future_jsonld_id: "https://aerocool.ua/products/wing/#armrests-4d-x-360"
-  entity_home: "/products/wing/"
+  future_jsonld_id: "https://aerocool.ua/products/wing-360/#armrests-4d-x-360"
+  entity_home: "/products/wing-360/"
   status: "confirmed"
   related:
-    - "wing-series"
+    - "wing-360-series"
     - "11d-adjustment"
 
 armrests-3d-x-360:
@@ -901,7 +913,7 @@ gaming-chair:
   entity_home: "/products/"
   status: "confirmed"
   related:
-    - "wing-series"
+    - "wing-360-series"
     - "xtal-series"
     - "racer-material"
 
@@ -932,7 +944,7 @@ computer-chair:
   status: "confirmed"
   related:
     - "sky-series"
-    - "wing-series"
+    - "wing-360-series"
     - "xtal-series"
 
 ergonomic-chair:

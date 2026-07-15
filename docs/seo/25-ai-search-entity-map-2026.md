@@ -1,6 +1,6 @@
 # Карта сущностей для поиска с AI 2026
 
-Обновлено: 2026-07-13.
+Обновлено: 2026-07-15.
 
 Этот документ переводит идеи материалов Schema App об AI-поиске, сущностях и агентном вебе в практическую систему для проекта `Aerocool Ukraine`: какие сущности закрепить на сайте, какие метрики поиска с AI отслеживать, какие наборы пользовательских запросов проверять и как развивать JSON-LD-граф без переспама.
 
@@ -40,7 +40,7 @@ Customer stories Wells Fargo, Henry Ford Health и MasterControl усилива�
 После статьи Schema App от `2026-05-21` приоритет формулируется строже: измерять нужно не только visibility, но и understanding. В отчете фиксировать, понял ли AI:
 
 - что `Aerocool Ukraine` — локальный сайт/представительство в Украине, связанное с global Aerocool;
-- что каталог состоит из серий `SKY`, `WING`, `XTAL` и конкретных вариантов;
+- что каталог состоит из серий `SKY`, `WING 360`, `XTAL` и конкретных вариантов;
 - что product facts берутся из подтвержденного front matter и поддерживаются по регламенту [31-product-facts-maintenance-process-2026.md](31-product-facts-maintenance-process-2026.md);
 - что доставка, возврат, гарантия и оплата подтверждаются `/faq/`;
 - что рекомендации должны опираться на реальные характеристики, а не на общие фразы про игровые кресла.
@@ -152,14 +152,14 @@ Follow-up вопросы после основного prompt:
 ### Серии и модели
 
 - `Aerocool SKY крісло`
-- `Aerocool WING крісло`
+- `Aerocool WING 360 крісло`
 - `Aerocool XTAL крісло`
 - `Aerocool SKY 360`
-- `Aerocool SKY Light`
-- `Aerocool WING Racer`
+- `Aerocool SKY Lite`
+- `Aerocool WING 360 Racer`
 - `Aerocool XTAL Loft Air`
 - `Aerocool SKY кресло`
-- `Aerocool WING кресло`
+- `Aerocool WING 360 кресло`
 - `Aerocool XTAL кресло`
 
 ### Материалы и механизмы
@@ -178,11 +178,11 @@ Follow-up вопросы после основного prompt:
 ### Выбор и сравнение
 
 - `яке крісло Aerocool обрати для home office`
-- `чим відрізняються Aerocool SKY і WING`
+- `чим відрізняються Aerocool SKY і WING 360`
 - `Aerocool SKY чи XTAL`
 - `крісло для постави і довгої роботи`
 - `какое кресло Aerocool выбрать для home office`
-- `чем отличаются Aerocool SKY и WING`
+- `чем отличаются Aerocool SKY и WING 360`
 - `Aerocool SKY или XTAL`
 - `кресло для осанки и долгой работы`
 
@@ -193,7 +193,7 @@ Follow-up вопросы после основного prompt:
 | Персона | Обучение | Сравнение | Анализ стоимости | Рекомендация | Покупка | Поддержка |
 | --- | --- | --- | --- | --- | --- | --- |
 | Home office worker | `як облаштувати робоче місце для довгої роботи` | `mesh чи екошкіра для home office крісла` | `скільки коштує нормальне офісне крісло в Україні` | `яке крісло Aerocool обрати для роботи вдома` | `де купити Aerocool SKY з доставкою по Україні` | `як налаштувати крісло для довгої роботи` |
-| Gamer | `що важливо в ігровому кріслі для довгих сесій` | `Aerocool SKY чи WING для геймінгу` | `чи варте дорожче ігрове крісло своїх грошей` | `краще ігрове крісло Aerocool для вентиляції` | `купити ігрове крісло Aerocool в Україні` | `як доглядати за матеріалом крісла Aerocool` |
+| Gamer | `що важливо в ігровому кріслі для довгих сесій` | `Aerocool SKY чи WING 360 для геймінгу` | `чи варте дорожче ігрове крісло своїх грошей` | `краще ігрове крісло Aerocool для вентиляції` | `купити ігрове крісло Aerocool в Україні` | `як доглядати за матеріалом крісла Aerocool` |
 | Office buyer | `які крісла потрібні для офісної команди` | `офісні крісла mesh проти шкірозамінника` | `вартість комплекту крісел для офісу` | `яка серія Aerocool підходить для офісу` | `де замовити кілька крісел Aerocool` | `гарантія і повернення крісел Aerocool` |
 | Student | `що потрібно для зручного навчального місця` | `компактне комп'ютерне крісло чи ігрове крісло` | `недороге крісло для навчання і комп'ютера` | `яке крісло Aerocool вибрати для маленької кімнати` | `купити комп'ютерне крісло Aerocool` | `як зібрати і налаштувати крісло` |
 
@@ -252,7 +252,7 @@ Follow-up вопросы после основного prompt:
 - `Aerocool SKY -> is series of -> Aerocool chairs`;
 - `Aerocool SKY 360 -> brand -> Aerocool`;
 - `Aerocool SKY 360 -> has material -> Mesh`;
-- `Aerocool WING -> mentions -> Synchronous Tilt`;
+- `Aerocool WING 360 -> mentions -> Synchronous Tilt`;
 - `Home office guide -> about -> office chair`;
 - `Product page -> seller -> Aerocool Ukraine`;
 - `Product variant -> isVariantOf -> ProductGroup`.
@@ -269,10 +269,10 @@ Follow-up вопросы после основного prompt:
 | Aerocool | `Brand` | `/` или `/about/` | Home, About, Product, Collection | Использовать стабильный `@id`; глобальные соцпрофили держать как `sameAs` бренда/global organization |
 | Aerocool Ukraine | `Organization` / `OnlineStore`, если подтвердится модель магазина | `/about/`, `/contact/`, `/faq/` | Organization graph, FAQ, Contact | Официальный статус сайта и связь с глобальной Aerocool подтверждены владельцем проекта `2026-07-13`; local facts подтверждены `2026-05-07`; не расширять до `OnlineStore`; использовать `parentOrganization` и `brand`, без local `sameAs` |
 | Каталог кресел | `CollectionPage` | `/products/` | Product hub, series pages | Связать с сериями и коммерческими интентами |
-| SKY | `ProductSeries` / `CollectionPage` | `/products/sky/` | Серия, товары, статьи | SKY Light и SKY 360 остаются самостоятельными Product внутри серии, без ProductGroup |
-| WING | `ProductSeries` / `CollectionPage` | `/products/wing/` | Серия, товары, статьи | ProductGroup использовать только для моделей с реальными цветовыми вариантами |
+| SKY | `ProductSeries` / `CollectionPage` | `/products/sky/` | Серия, товары, статьи | SKY Lite и SKY 360 остаются самостоятельными Product внутри серии, без ProductGroup |
+| WING 360 | `ProductSeries` / `CollectionPage` | `/products/wing-360/` | Серия, товары, статьи | ProductGroup использовать только для моделей с реальными цветовыми вариантами |
 | XTAL | `ProductSeries` / `CollectionPage` | `/products/xtal/` | Серия, товары, статьи | ProductGroup использовать только для моделей с реальными цветовыми вариантами |
-| Товар / товарный вариант | `Product` | `/products/<series>/<model>/` | Product pages | `color` из registry; `additionalProperty` из видимой вкладки характеристик |
+| Товар / товарный вариант | `Product` | `/products/<series>/<model>/` | Product pages | `official_color` из registry для `Product.color`; технический `color` только для свотча; `additionalProperty` из видимой вкладки характеристик |
 | Игровое кресло | `Thing` / product category | `/products/`, статьи | Hubs, products, articles | Использовать как `about` для релевантных страниц |
 | Офисное кресло | `Thing` / product category | `/products/`, статьи | Hubs, products, articles | Использовать как `about` для home office страниц |
 | Компьютерное кресло | `Thing` / product category | `/products/`, статьи | Hubs, products, articles | Связать с выбором для работы и учебы |
@@ -298,7 +298,7 @@ Follow-up вопросы после основного prompt:
 | Выполнено | Источник `aggregateRating` | `Product` | Только реальные approved-отзывы из build-time снимка, видимые на той же странице |
 | Выполнено | `about` | `Article`, `NewsArticle`, `CollectionPage` и другие подходящие типы | Используются подтвержденные сущности из front matter |
 | Выполнено | `mentions` | `Article`, `NewsArticle`, `Product`, `CollectionPage` | Используются явные связанные товары, серии и темы |
-| Выполнено | `ProductGroup` | Варианты внутри одной модели | Активно для четырех WING/XTAL групп; новые группы добавлять только при видимой навигации |
+| Выполнено | `ProductGroup` | Варианты внутри одной модели | Активно для четырех WING 360/XTAL групп; новые группы добавлять только при видимой навигации |
 | Выполнено | `additionalProperty` | `Product` | Строится из видимой вкладки `characteristics`; скрытые факты запрещены |
 | P2 | `DefinedTerm` / glossary layer | Articles, glossary or FAQ sections | Нужны реальные объяснения терминов |
 | Выполнено для организации | Авторский слой | `Article`, `NewsArticle` | Централизованная организация «Редакция Aerocool Ukraine»; `Person` только для реального публичного автора |
@@ -315,7 +315,7 @@ Follow-up вопросы после основного prompt:
 - `mentions_entities`;
 - `product_group_id`.
 
-На `2026-05-07` эти поля точечно заполнены на priority pages. На `2026-05-31` singleton ProductGroup вычищены: `product_group_id` оставлен только для реальных WING/XTAL цветовых вариантов, четыре группы переведены в `confirmed`, а JSON-LD выводит `ProductGroup`, `isVariantOf` и `inProductGroupWithID`. Новые значения не добавлять массово: каждое значение должно существовать в [data/entities.yaml](../../data/entities.yaml), иметь статус `confirmed` для JSON-LD и быть видимо раскрыто в тексте, ссылках, навигации или характеристиках страницы.
+На `2026-05-07` эти поля точечно заполнены на priority pages. На `2026-05-31` singleton ProductGroup вычищены: `product_group_id` оставлен только для реальных WING 360/XTAL цветовых вариантов, четыре группы переведены в `confirmed`, а JSON-LD выводит `ProductGroup`, `isVariantOf` и `inProductGroupWithID`. Новые значения не добавлять массово: каждое значение должно существовать в [data/entities.yaml](../../data/entities.yaml), иметь статус `confirmed` для JSON-LD и быть видимо раскрыто в тексте, ссылках, навигации или характеристиках страницы.
 
 Поля управляемой перелинковки уже используются шаблонным блоком “Что посмотреть дальше”:
 
@@ -324,7 +324,7 @@ Follow-up вопросы после основного prompt:
 - `related_articles`;
 - `related_news`.
 
-Их добавлять точечно, когда нужно уточнить редакционный приоритет related-блока. `related_series` принимает только `sky`, `wing`, `xtal`; `related_products`, `related_articles` и `related_news` хранят языконезависимые пути страниц без начального `/` и без `/ru/`, например `products/wing/racer-black` или `articles/what-is-dual-backrest`. Эти поля не заменяют видимые ссылки и не участвуют напрямую в JSON-LD.
+Их добавлять точечно, когда нужно уточнить редакционный приоритет related-блока. `related_series` принимает только `sky`, `wing-360`, `xtal`; `related_products`, `related_articles` и `related_news` хранят языконезависимые пути страниц без начального `/` и без `/ru/`, например `products/wing-360/racer-black` или `articles/what-is-dual-backrest`. Эти поля не заменяют видимые ссылки и не участвуют напрямую в JSON-LD.
 
 Поля, которые пока остаются проектными и требуют отдельного решения:
 
@@ -362,7 +362,7 @@ AI-friendly контент не должен быть короче или бед
 
 - `Synchronous Tilt — это механизм синхронного отклонения спинки и сиденья, который помогает удерживать более естественную посадку во время долгой работы.`
 - `Mesh-спинка лучше подходит пользователям, которым важна вентиляция, особенно летом или при долгих сессиях за компьютером.`
-- `Серия SKY ближе к универсальному игровому и рабочему сценарию, WING — к более выраженной поддержке, XTAL — к визуально легкому и современному рабочему месту.`
+- `Серия SKY ближе к универсальному игровому и рабочему сценарию, WING 360 — к более выраженной поддержке, XTAL — к визуально легкому и современному рабочему месту.`
 
 Эти блоки должны быть локализованы отдельно для `uk` и `ru`, а не машинно скопированы без редакторской проверки.
 

@@ -144,8 +144,17 @@
   {{- $product = merge $product (dict "gtin13" .) -}}
 {{- end -}}
 {{- with $productEntity -}}
-  {{- with .color -}}
-    {{- $product = merge $product (dict "color" (replace (printf "%s" .) "-" " ")) -}}
+  {{- $nameMap := .name | default dict -}}
+  {{- $productName := index $nameMap $.Language.Name | default (index $nameMap "uk") | default (index $nameMap "en") -}}
+  {{- with $productName -}}
+    {{- $product = merge $product (dict "name" .) -}}
+  {{- end -}}
+  {{- with .official_color -}}
+    {{- $product = merge $product (dict "color" .) -}}
+  {{- else -}}
+    {{- with .color -}}
+      {{- $product = merge $product (dict "color" (replace (printf "%s" .) "-" " ")) -}}
+    {{- end -}}
   {{- end -}}
   {{- with .material -}}
     {{- $materialEntity := index $entities . -}}

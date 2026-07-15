@@ -1,6 +1,6 @@
 # Регламент поддержки товарных фактов 2026
 
-Обновлено: 2026-07-13.
+Обновлено: 2026-07-15.
 
 Этот документ описывает операционный процесс поддержки товарных фактов для каталога Aerocool Ukraine: кто подтверждает данные, где их менять, что проверять после изменения и как не допустить рассинхронизацию между front matter, видимой страницей, JSON-LD и `/faq/`.
 
@@ -21,7 +21,8 @@
 | Возврат | `return_days`, `return_method`, `return_fees` | товарная страница, `/faq/` |
 | Оплата | `payment_methods` | товарная страница, `/faq/` |
 | Характеристики | `characteristics` | вкладка или блок характеристик товара |
-| Цвет | `color` в `data/entities.yaml` + видимая характеристика цвета | товарная страница, цветовые точки в карточках, переключатели вариантов |
+| Официальное обозначение варианта | `official_color` в `data/entities.yaml` + видимая характеристика цвета | `Product.color`, товарная страница и сравнение вариантов |
+| Технический цвет свотча | `color` в `data/entities.yaml` | цветовые точки в карточках и переключатели вариантов |
 | Материал | `material` главной товарной сущности + подтвержденная сущность материала в `data/entities.yaml` | `Product.material`, видимая характеристика и фильтры каталога |
 | Варианты | `product_group_id`, реестр сущностей | переключатели и соседние страницы вариантов |
 | Отзывы | `review_target_id`, `reviews_enabled`, `data/generated/reviews.json` | видимый блок отзывов |
@@ -43,11 +44,36 @@
 
 Главное правило: сначала обновляется front matter товара, потом видимый контент и проверки. Шаблон [layouts/_partials/_schema/product.html](../../layouts/_partials/_schema/product.html) читает данные из front matter и реестра. Его не нужно менять ради одной новой цены, срока доставки или способа оплаты.
 
-Если меняется цвет товара, источник правды для `Product.color` — [data/entities.yaml](../../data/entities.yaml), а видимая характеристика цвета должна быть обновлена в той же задаче. В листингах [layouts/_partials/products/color-dots.html](../../layouts/_partials/products/color-dots.html) сначала использует цвета реальной группы из `product_group_id`; для одиночного товара без группы берет `color` из главной товарной сущности через `about_entities`.
+Если меняется официальное обозначение варианта, источник правды для `Product.color` — поле `official_color` в [data/entities.yaml](../../data/entities.yaml), а видимая характеристика цвета должна быть обновлена в той же задаче. Отдельное поле `color` хранит нормализованный технический токен `black`, `dark-grey` или `light-grey` для CSS-свотчей. В листингах [layouts/_partials/products/color-dots.html](../../layouts/_partials/products/color-dots.html) сначала использует цвета реальной группы из `product_group_id`; для одиночного товара без группы берет технический `color` из главной товарной сущности через `about_entities`.
 
 Если меняется материал товара, обновляют ссылку `material` главной товарной сущности и проверяют, что сущность материала существует, локализована и имеет статус `confirmed`. Шаблон выводит локализованное название как `Product.material`; произвольную строку материала во front matter добавлять не нужно.
 
 Если меняется слой рейтингов и отзывов, источник правды — approved-отзывы в Netlify Database и экспорт во время сборки в `data/generated/reviews.json`, а не front matter товара. Этот JSON-файл генерируется перед сборкой и не хранится в Git.
+
+### 2.1. Канонические названия, цвета, URL и ID
+
+Следующие значения подтверждены производителем и самим брендом `2026-07-15`. Они являются обязательными для front matter, видимого текста, ссылок, меню, `data/entities.yaml`, schema.org и ID отзывов.
+
+В JSON-LD поле `Product.name` должно точно совпадать с каноническим названием из таблицы. Расширенный HTML `title` или H1 может добавлять понятное описание категории, но не меняет официальное имя модели.
+
+| Каноническое название товара | Официальный цвет | Канонический URL | ID сущности и отзыва |
+| --- | --- | --- | --- |
+| Aerocool SKY Lite | Mesh Black | `/products/sky/lite/` | `sky-lite` |
+| Aerocool SKY 360 | Mesh Black | `/products/sky/360/` | `sky-360` |
+| Aerocool XTAL Racer Black | Racer Black | `/products/xtal/racer-black/` | `xtal-racer-black` |
+| Aerocool XTAL Racer Dark Grey | Racer Dark Grey | `/products/xtal/racer-dark-grey/` | `xtal-racer-dark-grey` |
+| Aerocool XTAL Loft Air Dark Grey | Loft Air Dark Grey | `/products/xtal/loft-air-dark-grey/` | `xtal-loft-air-dark-grey` |
+| Aerocool XTAL Loft Air Light Grey | Loft Air Light Grey | `/products/xtal/loft-air-light-grey/` | `xtal-loft-air-light-grey` |
+| Aerocool XTAL Mesh Black | Mesh Black | `/products/xtal/mesh-black/` | `xtal-mesh-black` |
+| Aerocool WING 360 Racer Black | Racer Black | `/products/wing-360/racer-black/` | `wing-360-racer-black` |
+| Aerocool WING 360 Racer Dark Grey | Racer Dark Grey | `/products/wing-360/racer-dark-grey/` | `wing-360-racer-dark-grey` |
+| Aerocool WING 360 Loft Air Dark Grey | Loft Air Dark Grey | `/products/wing-360/loft-air-dark-grey/` | `wing-360-loft-air-dark-grey` |
+| Aerocool WING 360 Loft Air Light Grey | Loft Air Light Grey | `/products/wing-360/loft-air-light-grey/` | `wing-360-loft-air-light-grey` |
+| Aerocool WING 360 Mesh Black | Mesh Black | `/products/wing-360/mesh-black/` | `wing-360-mesh-black` |
+
+Канонический URL серии WING 360 — `/products/wing-360/`, ID серии — `wing-360-series`. В текущем проекте запрещены прежнее написание `SKY Light`, маршрут `/products/sky/light/`, официальный заголовок `WING` без `360`, маршрут `/products/wing/` и ID с прежним префиксом `wing-`. Проект еще не запущен в production, поэтому для исправленных маршрутов не создаются `aliases` или redirects.
+
+MPN и GTIN являются отдельными подтвержденными идентификаторами производителя. Исправление названия, URL или внутреннего ID не дает права изменять MPN и GTIN без нового подтверждения.
 
 ## 3. Роли
 
@@ -88,14 +114,14 @@
 
 ### Изменение одного товара
 
-Пример: изменилась цена `SKY Light`, добавился GTIN, уточнен цвет или характеристика.
+Пример: изменилась цена `SKY Lite`, добавился GTIN, уточнен цвет или характеристика.
 
 Нужно обновить:
 
 - украинский front matter `content/products/<series>/<model>/index.md`;
 - русский front matter `content/products/<series>/<model>/index.ru.md`;
 - видимый товарный текст или характеристики в обеих языковых версиях;
-- `data/entities.yaml`, если меняется факт реестра, например `color` или `material`;
+- `data/entities.yaml`, если меняется факт реестра, например `official_color`, технический `color` или `material`;
 - цветовую точку в карточках `/products/`, страницы серии и обоих языков;
 - `lastmod` в измененных content-файлах.
 

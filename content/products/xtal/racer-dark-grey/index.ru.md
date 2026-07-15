@@ -4,7 +4,7 @@ linkTitle: "Racer Dark Grey"
 description: "Купить Aerocool XTAL Racer Dark Grey в Украине — кресло XTAL с 7D регулировкой, Synchronous Tilt, сменными элементами и Leatherette."
 summary: "Aerocool XTAL Racer Dark Grey — игровое и компьютерное кресло серии XTAL с 7D регулировкой, сменными элементами и обивкой Leatherette."
 date: 2026-03-19
-lastmod: 2026-07-11
+lastmod: 2026-07-15
 schema_types: ["website", "product", "organization", "breadcrumbs"]
 about_entities:
   - "xtal-racer-dark-grey"
@@ -141,13 +141,13 @@ Aerocool XTAL Racer Dark Grey подходит, если хочется плот
 
 ## Кому эта модель может не подойти
 
-XTAL Racer Dark Grey может не подойти, если вы ожидаете от кресла активной поддержки WING или максимального количества регулировок. Для этого лучше смотреть **WING Racer Dark Grey**.
+XTAL Racer Dark Grey может не подойти, если вы ожидаете от кресла активной поддержки WING 360 или максимального количества регулировок. Для этого лучше смотреть **WING 360 Racer Dark Grey**.
 
 Если Racer Dark Grey кажется правильным по цвету, еще раз проверьте условия комнаты. Для более прохладного пространства плотная поверхность уместна, а для теплого помещения Mesh или Loft Air могут быть комфортнее.
 
 ## Сравнение с альтернативами Aerocool
 
-Сравнение с Racer Black решает только вопрос цвета. Если вам не подходит сама плотность Leatherette, переходите сразу к XTAL Loft Air Dark Grey или Mesh Black; если не хватает **7D** и спокойной спинки, смотрите WING Racer Dark Grey.
+Сравнение с Racer Black решает только вопрос цвета. Если вам не подходит сама плотность Leatherette, переходите сразу к XTAL Loft Air Dark Grey или Mesh Black; если не хватает **7D** и спокойной спинки, смотрите WING 360 Racer Dark Grey.
 
 Эта версия оправдана, когда темно-серый оттенок лучше подходит комнате, а характеристики XTAL уже закрывают ваш сценарий. Не переплачивайте за другой цвет в ожидании новой посадки: для заметной эргономической разницы нужно менять серию, а не оттенок Racer.
 
@@ -169,7 +169,7 @@ Dark Grey имеет смысл для пользователя, котором�
 
 Если хотите глубже разобраться в механике, материалах и различиях между моделями, начните с этих материалов:
 
-- [Aerocool WING или XTAL: сравнение серий](/ru/articles/wing-vs-xtal/)
+- [Aerocool WING 360 или XTAL: сравнение серий](/ru/articles/wing-360-vs-xtal/)
 - [Racer, Loft Air или Mesh: как выбрать поверхность](/ru/articles/racer-vs-loft-air-vs-mesh/)
 - [7D, 8D или 11D: как читать регулировки](/ru/articles/how-to-choose-chair-by-adjustability/)
 - [Как выбрать кресло Aerocool под свой сценарий](/ru/articles/how-to-choose-aerocool-chair/)

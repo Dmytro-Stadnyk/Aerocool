@@ -1,6 +1,6 @@
 # Отчет по эффективности сущностей 2026
 
-Обновлено: 2026-07-13.
+Обновлено: 2026-07-15.
 
 Этот отчет связывает реестр сущностей, front matter и собранный JSON-LD. Он показывает, какие сущности являются главными темами страниц, какие упоминаются как связанные и сколько раз их стабильные `@id` встречаются в готовом JSON-LD-графе.
 
@@ -51,7 +51,7 @@ CSV-версия отчета: [32-entity-performance-report-2026.csv](32-entity
 | office-chair | 30 | [/products/](https://aerocool.ua/products/) |
 | home-office | 28 | [/articles/how-to-choose-aerocool-chair/](https://aerocool.ua/articles/how-to-choose-aerocool-chair/) |
 | chair-selection | 20 | [/articles/how-to-choose-aerocool-chair/](https://aerocool.ua/articles/how-to-choose-aerocool-chair/) |
-| wing-series | 20 | [/products/wing/](https://aerocool.ua/products/wing/) |
+| wing-360-series | 20 | [/products/wing-360/](https://aerocool.ua/products/wing-360/) |
 | xtal-series | 20 | [/products/xtal/](https://aerocool.ua/products/xtal/) |
 | gaming-chair | 14 | [/products/](https://aerocool.ua/products/) |
 | sky-series | 12 | [/products/sky/](https://aerocool.ua/products/sky/) |
@@ -75,7 +75,7 @@ CSV-версия отчета: [32-entity-performance-report-2026.csv](32-entity
 | racer-material | 42 | [/articles/racer-vs-loft-air-vs-mesh/](https://aerocool.ua/articles/racer-vs-loft-air-vs-mesh/) |
 | sky-series | 40 | [/products/sky/](https://aerocool.ua/products/sky/) |
 | gaming-chair | 38 | [/products/](https://aerocool.ua/products/) |
-| wing-series | 36 | [/products/wing/](https://aerocool.ua/products/wing/) |
+| wing-360-series | 36 | [/products/wing-360/](https://aerocool.ua/products/wing-360/) |
 
 ## 5. Сущности с наибольшим числом ссылок на `@id`
 
@@ -110,7 +110,7 @@ CSV-версия отчета: [32-entity-performance-report-2026.csv](32-entity
 | aerocool-ukraine | confirmed | Organization | [/about/](https://aerocool.ua/about/) | 10 | 2 | 0 | 448 | 98 | pending-production | pending-production | pending-production | OK |
 | aerocool-website | confirmed | WebSite | [/](https://aerocool.ua/) | 0 | 0 | 0 | 130 | 49 | pending-production | pending-production | pending-production | OK |
 | armrests-3d-x-360 | confirmed | Feature | [/products/sky/](https://aerocool.ua/products/sky/) | 0 | 4 | 0 | 10 | 4 | pending-production | pending-production | pending-production | OK |
-| armrests-4d-x-360 | confirmed | Feature | [/products/wing/](https://aerocool.ua/products/wing/) | 0 | 12 | 0 | 26 | 12 | pending-production | pending-production | pending-production | OK |
+| armrests-4d-x-360 | confirmed | Feature | [/products/wing-360/](https://aerocool.ua/products/wing-360/) | 0 | 12 | 0 | 26 | 12 | pending-production | pending-production | pending-production | OK |
 | articles-collection | confirmed | Collection | [/articles/](https://aerocool.ua/articles/) | 6 | 0 | 0 | 14 | 1 | pending-production | pending-production | pending-production | OK |
 | chair-selection | confirmed | ContentTopic | [/articles/how-to-choose-aerocool-chair/](https://aerocool.ua/articles/how-to-choose-aerocool-chair/) | 20 | 2 | 0 | 66 | 22 | pending-production | pending-production | pending-production | OK |
 | computer-chair | confirmed | UseCase | [/products/](https://aerocool.ua/products/) | 36 | 42 | 0 | 206 | 78 | pending-production | pending-production | pending-production | OK |
@@ -141,20 +141,20 @@ CSV-версия отчета: [32-entity-performance-report-2026.csv](32-entity
 | return-policy | confirmed | Policy | [/faq/](https://aerocool.ua/faq/) | 2 | 26 | 0 | 56 | 28 | pending-production | pending-production | pending-production | OK |
 | review-layer | do-not-markup | Review |  | 0 | 0 | 0 | 0 | 0 | pending-production | pending-production | pending-production | do-not-markup |
 | sky-360 | confirmed | Product | [/products/sky/360/](https://aerocool.ua/products/sky/360/) | 6 | 14 | 0 | 40 | 1 | pending-production | pending-production | pending-production | OK |
-| sky-light | confirmed | Product | [/products/sky/light/](https://aerocool.ua/products/sky/light/) | 6 | 14 | 0 | 40 | 1 | pending-production | pending-production | pending-production | OK |
+| sky-lite | confirmed | Product | [/products/sky/lite/](https://aerocool.ua/products/sky/lite/) | 6 | 14 | 0 | 40 | 1 | pending-production | pending-production | pending-production | OK |
 | sky-series | confirmed | ProductSeries | [/products/sky/](https://aerocool.ua/products/sky/) | 12 | 40 | 0 | 96 | 1 | pending-production | pending-production | pending-production | OK |
 | sync4-mechanism | confirmed | Mechanism | [/articles/sync4-sync5-mechanism-guide/](https://aerocool.ua/articles/sync4-sync5-mechanism-guide/) | 4 | 28 | 0 | 92 | 32 | pending-production | pending-production | pending-production | OK |
 | sync5-mechanism | confirmed | Mechanism | [/articles/sync4-sync5-mechanism-guide/](https://aerocool.ua/articles/sync4-sync5-mechanism-guide/) | 4 | 48 | 0 | 142 | 52 | pending-production | pending-production | pending-production | OK |
 | synchronous-tilt | confirmed | Mechanism | [/articles/what-is-synchronous-tilt/](https://aerocool.ua/articles/what-is-synchronous-tilt/) | 6 | 64 | 0 | 184 | 70 | pending-production | pending-production | pending-production | OK |
 | warranty-policy | confirmed | Policy | [/faq/](https://aerocool.ua/faq/) | 2 | 26 | 0 | 56 | 28 | pending-production | pending-production | pending-production | OK |
-| wing-loft-air-dark-grey | confirmed | ProductVariant | [/products/wing/loft-air-dark-grey/](https://aerocool.ua/products/wing/loft-air-dark-grey/) | 2 | 8 | 0 | 24 | 1 | pending-production | pending-production | pending-production | OK |
-| wing-loft-air-light-grey | confirmed | ProductVariant | [/products/wing/loft-air-light-grey/](https://aerocool.ua/products/wing/loft-air-light-grey/) | 2 | 6 | 0 | 20 | 1 | pending-production | pending-production | pending-production | OK |
-| wing-loft-air-product-group | confirmed | ProductGroup | [/products/wing/](https://aerocool.ua/products/wing/) | 0 | 0 | 4 | 8 | 4 | pending-production | pending-production | pending-production | активный ProductGroup |
-| wing-mesh-black | confirmed | Product | [/products/wing/mesh-black/](https://aerocool.ua/products/wing/mesh-black/) | 2 | 8 | 0 | 20 | 1 | pending-production | pending-production | pending-production | OK |
-| wing-racer-black | confirmed | ProductVariant | [/products/wing/racer-black/](https://aerocool.ua/products/wing/racer-black/) | 2 | 6 | 0 | 20 | 1 | pending-production | pending-production | pending-production | OK |
-| wing-racer-dark-grey | confirmed | ProductVariant | [/products/wing/racer-dark-grey/](https://aerocool.ua/products/wing/racer-dark-grey/) | 2 | 4 | 0 | 16 | 1 | pending-production | pending-production | pending-production | OK |
-| wing-racer-product-group | confirmed | ProductGroup | [/products/wing/](https://aerocool.ua/products/wing/) | 0 | 0 | 4 | 8 | 4 | pending-production | pending-production | pending-production | активный ProductGroup |
-| wing-series | confirmed | ProductSeries | [/products/wing/](https://aerocool.ua/products/wing/) | 20 | 36 | 0 | 98 | 1 | pending-production | pending-production | pending-production | OK |
+| wing-360-loft-air-dark-grey | confirmed | ProductVariant | [/products/wing-360/loft-air-dark-grey/](https://aerocool.ua/products/wing-360/loft-air-dark-grey/) | 2 | 8 | 0 | 24 | 1 | pending-production | pending-production | pending-production | OK |
+| wing-360-loft-air-light-grey | confirmed | ProductVariant | [/products/wing-360/loft-air-light-grey/](https://aerocool.ua/products/wing-360/loft-air-light-grey/) | 2 | 6 | 0 | 20 | 1 | pending-production | pending-production | pending-production | OK |
+| wing-360-loft-air-product-group | confirmed | ProductGroup | [/products/wing-360/](https://aerocool.ua/products/wing-360/) | 0 | 0 | 4 | 8 | 4 | pending-production | pending-production | pending-production | активный ProductGroup |
+| wing-360-mesh-black | confirmed | Product | [/products/wing-360/mesh-black/](https://aerocool.ua/products/wing-360/mesh-black/) | 2 | 8 | 0 | 20 | 1 | pending-production | pending-production | pending-production | OK |
+| wing-360-racer-black | confirmed | ProductVariant | [/products/wing-360/racer-black/](https://aerocool.ua/products/wing-360/racer-black/) | 2 | 6 | 0 | 20 | 1 | pending-production | pending-production | pending-production | OK |
+| wing-360-racer-dark-grey | confirmed | ProductVariant | [/products/wing-360/racer-dark-grey/](https://aerocool.ua/products/wing-360/racer-dark-grey/) | 2 | 4 | 0 | 16 | 1 | pending-production | pending-production | pending-production | OK |
+| wing-360-racer-product-group | confirmed | ProductGroup | [/products/wing-360/](https://aerocool.ua/products/wing-360/) | 0 | 0 | 4 | 8 | 4 | pending-production | pending-production | pending-production | активный ProductGroup |
+| wing-360-series | confirmed | ProductSeries | [/products/wing-360/](https://aerocool.ua/products/wing-360/) | 20 | 36 | 0 | 98 | 1 | pending-production | pending-production | pending-production | OK |
 | xtal-loft-air-dark-grey | confirmed | ProductVariant | [/products/xtal/loft-air-dark-grey/](https://aerocool.ua/products/xtal/loft-air-dark-grey/) | 2 | 8 | 0 | 24 | 1 | pending-production | pending-production | pending-production | OK |
 | xtal-loft-air-light-grey | confirmed | ProductVariant | [/products/xtal/loft-air-light-grey/](https://aerocool.ua/products/xtal/loft-air-light-grey/) | 2 | 6 | 0 | 20 | 1 | pending-production | pending-production | pending-production | OK |
 | xtal-loft-air-product-group | confirmed | ProductGroup | [/products/xtal/](https://aerocool.ua/products/xtal/) | 0 | 0 | 4 | 8 | 4 | pending-production | pending-production | pending-production | активный ProductGroup |

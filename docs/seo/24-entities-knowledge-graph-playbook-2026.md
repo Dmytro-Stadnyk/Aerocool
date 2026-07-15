@@ -1,6 +1,6 @@
 # Практическое руководство по сущностям и графу знаний 2026
 
-Обновлено: 2026-07-13.
+Обновлено: 2026-07-15.
 
 История анализа материалов Schema App сохранена в аудитах [50](../audits/50-2026-05-13-documentation-2026-best-practices-sync-audit.md), [57](../audits/57-2026-05-17-schemaapp-pdf-agentic-graph-impact-analysis.md) и [59](../audits/59-2026-05-18-schemaapp-customer-stories-case-studies-audit.md). Текущие правила также учитывают статью Schema App [Stop Chasing Visibility. Build Understanding.](https://www.schemaapp.com/schema-markup/stop-chasing-visibility-build-understanding/) и официальное руководство Google [Optimizing your website for generative AI features on Google Search](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide).
 
@@ -25,7 +25,7 @@
 
 - бренд `Aerocool`;
 - локальная организация `Aerocool Ukraine`;
-- серия `SKY`, `WING`, `XTAL`;
+- серия `SKY`, `WING 360`, `XTAL`;
 - конкретная модель;
 - материал `Mesh`, `Racer`, `Loft Air`;
 - механизм `Synchronous Tilt`, `SYNC4`, `SYNC5`;
@@ -98,7 +98,7 @@
 | Aerocool Ukraine | `/about/`, `/contact/`, `/faq/` | Нужны организация, контакты, сервисная модель |
 | Catalog | `/products/` | Главный вход в коммерческую структуру |
 | SKY | `/products/sky/` | Главная страница серии |
-| WING | `/products/wing/` | Главная страница серии |
+| WING 360 | `/products/wing-360/` | Главная страница серии |
 | XTAL | `/products/xtal/` | Главная страница серии |
 | Товар или его вариант | `/products/<series>/<model>/` | Главная страница конкретного товара или варианта |
 | FAQ и сервисные политики | `/faq/` | Главный источник фактов о доставке, оплате, возврате и гарантии |
@@ -118,8 +118,8 @@
 - `Aerocool SKY 360 -> brand -> Aerocool`;
 - `Aerocool SKY 360 -> seller -> Aerocool Ukraine`;
 - `Aerocool SKY 360 -> memberOf/about -> Aerocool SKY series`;
-- `Aerocool WING Racer Black -> isVariantOf -> WING Racer ProductGroup`;
-- `Aerocool WING -> has material -> Mesh`;
+- `Aerocool WING 360 Racer Black -> isVariantOf -> WING 360 Racer ProductGroup`;
+- `Aerocool WING 360 -> has material -> Mesh`;
 - `Synchronous Tilt -> used in -> Aerocool chair models`;
 - `Home office guide -> about -> office chair`;
 - `Product page -> mentions -> warranty policy`;
@@ -279,9 +279,9 @@ Aerocool уже находится выше уровня отдельных кл
 4. Выполнено `2026-05-07`: `ProductGroup` и `product_group_id` спроектированы; `ProductGroup` выводится только для подтвержденной сущности.
 5. Выполнено `2026-05-07`: добавлено [руководство по реестру для новичка](22-entity-registry-beginner-guide-2026.md).
 6. Выполнено `2026-05-07`: приоритетные страницы получили `about_entities`, `mentions_entities` и предварительные `product_group_id`.
-7. Выполнено `2026-05-31`: singleton ProductGroup удалены; `product_group_id` оставлен только для реальных WING/XTAL цветовых вариантов.
-8. Выполнено `2026-05-31`: четыре WING/XTAL ProductGroup переведены в `confirmed` и активированы в JSON-LD через `ProductGroup`, `isVariantOf` и `inProductGroupWithID`.
-9. Выполнено `2026-05-31`: `Product.color` выводится из реестра, а `Product.additionalProperty` строится из видимой вкладки `characteristics`.
+7. Выполнено `2026-05-31`: singleton ProductGroup удалены; `product_group_id` оставлен только для реальных WING 360/XTAL цветовых вариантов.
+8. Выполнено `2026-05-31`: четыре WING 360/XTAL ProductGroup переведены в `confirmed` и активированы в JSON-LD через `ProductGroup`, `isVariantOf` и `inProductGroupWithID`.
+9. Выполнено `2026-05-31`, уточнено `2026-07-15`: `Product.color` выводится из официального `official_color` реестра, технический `color` обслуживает CSS-свотчи, а `Product.additionalProperty` строится из видимой вкладки `characteristics`.
 10. Выполнять проверку пробелов контента по карте сущностей перед созданием новых страниц.
 11. Выполнено: [отчет покрытия сущностей](32-entity-performance-report-2026.md) генерируется командой `npm run entity:report`; сигналы GSC и AI остаются пустыми до production-индексации и появления данных.
 

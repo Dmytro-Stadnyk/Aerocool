@@ -22,7 +22,7 @@
   {{- end }}
 {{- end }}
 {{- $seriesActions := slice }}
-{{- range slice "sky" "wing" "xtal" }}
+{{- range slice "sky" "wing-360" "xtal" }}
   {{- with site.GetPage (printf "/products/%s" .) }}
     {{- $seriesActions = $seriesActions | append . }}
   {{- end }}

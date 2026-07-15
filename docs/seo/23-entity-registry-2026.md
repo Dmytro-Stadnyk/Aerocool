@@ -1,6 +1,6 @@
 # Реестр сущностей Aerocool 2026
 
-Обновлено: 2026-07-13.
+Обновлено: 2026-07-15.
 
 Реестр остается документом управления сущностями: `confirmed` сущности можно использовать в JSON-LD, а новые `staged` или `planned` сущности не должны становиться сильными связями без видимого подтверждения на странице. Аудиты `50`, `57` и `68` сохраняют историю формирования реестра; текущее состояние сверяется с `data/entities.yaml`, [отчетом по сущностям](32-entity-performance-report-2026.md) и актуальным аудитом из [карты документации](../01-documentation-map.md#5-текущий-аудит).
 
@@ -12,13 +12,13 @@
 
 ## Проверенный снимок реестра
 
-Повторно проверено 2026-07-13: в `data/entities.yaml` зафиксировано `65` сущностей — `63 confirmed`, `0 planned` и `2 do-not-markup`. Неизвестных ссылок из front matter нет; `about_entities` и `mentions_entities` используют только `confirmed` сущности; `product_group_id` остается только у реальных цветовых вариантов WING/XTAL и указывает на `confirmed` ProductGroup. Сущность `aerocool-editorial-team` связывает видимое авторство статей и новостей с публичной редакционной политикой, а `privacy-policy` — две локализованные страницы конфиденциальности с доверительным слоем проекта.
+Повторно проверено 2026-07-13: в `data/entities.yaml` зафиксировано `65` сущностей — `63 confirmed`, `0 planned` и `2 do-not-markup`. Неизвестных ссылок из front matter нет; `about_entities` и `mentions_entities` используют только `confirmed` сущности; `product_group_id` остается только у реальных цветовых вариантов WING 360/XTAL и указывает на `confirmed` ProductGroup. Сущность `aerocool-editorial-team` связывает видимое авторство статей и новостей с публичной редакционной политикой, а `privacy-policy` — две локализованные страницы конфиденциальности с доверительным слоем проекта.
 
 Оценка Entity Registry: `9.7 / 10`.
 
 Активация `2026-05-26`: `dual-backrest`, `replaceable-elements` и `long-sitting` переведены в `confirmed`, потому что для них уже есть сильный видимый контент, стабильные entity homes и точечное использование в front matter.
 
-Активация `2026-05-31`: четыре реальные ProductGroup для WING/XTAL цветовых вариантов переведены в `confirmed`, duplicate registry ID `products-collection` удален в пользу канонического `aerocool-catalog`, а `lumbar-support`, `armrests-4d-x-360`, `armrests-3d-x-360`, `hot-room`, `leatherette-material` и `fabric-material` включены как `confirmed` сущности. Дополнительно добавлена `image-license-policy`: она описывает видимую страницу условий использования изображений и поддерживает `ImageObject.license` / `ImageObject.acquireLicensePage`.
+Активация `2026-05-31`: четыре реальные ProductGroup для WING 360/XTAL цветовых вариантов переведены в `confirmed`, duplicate registry ID `products-collection` удален в пользу канонического `aerocool-catalog`, а `lumbar-support`, `armrests-4d-x-360`, `armrests-3d-x-360`, `hot-room`, `leatherette-material` и `fabric-material` включены как `confirmed` сущности. Дополнительно добавлена `image-license-policy`: она описывает видимую страницу условий использования изображений и поддерживает `ImageObject.license` / `ImageObject.acquireLicensePage`.
 
 Главные открытые задачи registry-слоя:
 
@@ -129,7 +129,7 @@
 | `about-page` | About Aerocool Ukraine | Про Aerocool Україна | Об Aerocool Украина | AboutPage | `AboutPage` | `https://aerocool.ua/about/#webpage` | `/about/` | `confirmed` | `aerocool-brand`, `aerocool-ukraine`, `aerocool-global-organization` |
 | `contact-page` | Contacts | Контакти | Контакты | ContactPage | `ContactPage` | `https://aerocool.ua/contact/#webpage` | `/contact/` | `confirmed` | `aerocool-ukraine` |
 | `faq-page` | FAQ | FAQ | FAQ | FAQPage | `FAQPage` | `https://aerocool.ua/faq/#faq` | `/faq/` | `confirmed` | `delivery-policy`, `payment-policy`, `return-policy`, `warranty-policy` |
-| `aerocool-catalog` | Aerocool chairs catalog | Каталог крісел Aerocool | Каталог кресел Aerocool | Collection | `CollectionPage` | `https://aerocool.ua/products/#collection` | `/products/` | `confirmed` | `gaming-chair`, `office-chair`, `computer-chair`, `sky-series`, `wing-series`, `xtal-series` |
+| `aerocool-catalog` | Aerocool chairs catalog | Каталог крісел Aerocool | Каталог кресел Aerocool | Collection | `CollectionPage` | `https://aerocool.ua/products/#collection` | `/products/` | `confirmed` | `gaming-chair`, `office-chair`, `computer-chair`, `sky-series`, `wing-360-series`, `xtal-series` |
 | `articles-collection` | Aerocool articles | Статті Aerocool | Статьи Aerocool | Collection | `CollectionPage` | `https://aerocool.ua/articles/#collection` | `/articles/` | `confirmed` | `chair-selection`, `ergonomic-chair`, `aerocool-catalog` |
 | `news-collection` | Aerocool news | Новини Aerocool | Новости Aerocool | Collection | `CollectionPage` | `https://aerocool.ua/news/#collection` | `/news/` | `confirmed` | `aerocool-brand`, `aerocool-catalog` |
 
@@ -137,20 +137,20 @@
 
 | entity_id | name_en | name_uk | name_ru | entity_class | current_schema | future_schema | current_jsonld_id | entity_home | status | Главные связи |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `sky-series` | Aerocool SKY | Aerocool SKY | Aerocool SKY | ProductSeries | `CollectionPage` | Коллекция списка товаров/серии | `https://aerocool.ua/products/sky/#collection` | `/products/sky/` | `confirmed` | parent `aerocool-catalog`; товары `sky-light`, `sky-360`; mentions `mesh-material`, `sync4-mechanism`, `sync5-mechanism` |
-| `wing-series` | Aerocool WING | Aerocool WING | Aerocool WING | ProductSeries | `CollectionPage` | Коллекция списка товаров/серии | `https://aerocool.ua/products/wing/#collection` | `/products/wing/` | `confirmed` | parent `aerocool-catalog`; товары WING; ProductGroup только для цветовых вариантов моделей; mentions `racer-material`, `loft-air-material`, `mesh-material`, `11d-adjustment`, `dual-backrest` |
+| `sky-series` | Aerocool SKY | Aerocool SKY | Aerocool SKY | ProductSeries | `CollectionPage` | Коллекция списка товаров/серии | `https://aerocool.ua/products/sky/#collection` | `/products/sky/` | `confirmed` | parent `aerocool-catalog`; товары `sky-lite`, `sky-360`; mentions `mesh-material`, `sync4-mechanism`, `sync5-mechanism` |
+| `wing-360-series` | Aerocool WING 360 | Aerocool WING 360 | Aerocool WING 360 | ProductSeries | `CollectionPage` | Коллекция списка товаров/серии | `https://aerocool.ua/products/wing-360/#collection` | `/products/wing-360/` | `confirmed` | parent `aerocool-catalog`; товары WING 360; ProductGroup только для цветовых вариантов моделей; mentions `racer-material`, `loft-air-material`, `mesh-material`, `11d-adjustment`, `dual-backrest` |
 | `xtal-series` | Aerocool XTAL | Aerocool XTAL | Aerocool XTAL | ProductSeries | `CollectionPage` | Коллекция списка товаров/серии | `https://aerocool.ua/products/xtal/#collection` | `/products/xtal/` | `confirmed` | parent `aerocool-catalog`; товары XTAL; ProductGroup только для цветовых вариантов моделей; mentions `racer-material`, `loft-air-material`, `mesh-material`, `7d-adjustment`, `replaceable-elements` |
 
 ## 10. Сущности `ProductGroup`, активные для вариантов
 
-`ProductGroup` выводится только для реальных вариантов одной модели, где есть видимая навигация между вариантами. Одиночные товары не получают `ProductGroup`. На 2026-07-13 подтверждены четыре цветовые группы WING и XTAL.
+`ProductGroup` выводится только для реальных вариантов одной модели, где есть видимая навигация между вариантами. Одиночные товары не получают `ProductGroup`. На 2026-07-13 подтверждены четыре цветовые группы WING 360 и XTAL.
 
 Validator-safe правило для `ProductGroup`: выводить `@type`, `@id`, `name`, `productGroupID`, `url`, `brand`, `hasVariant` и `variesBy`; не добавлять `inLanguage` и `isPartOf`, потому что Schema.org Validator не принимает эти свойства для `ProductGroup`.
 
 | entity_id | name_en | future_jsonld_id | entity_home | varies_by | variants | status | Условие поддержки |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `wing-racer-product-group` | Aerocool WING Racer | `https://aerocool.ua/products/wing/#wing-racer-product-group` | `/products/wing/` | цвет | `wing-racer-black`, `wing-racer-dark-grey` | `confirmed` | Поддерживать swatches-ссылки и факты конкретного варианта. |
-| `wing-loft-air-product-group` | Aerocool WING Loft Air | `https://aerocool.ua/products/wing/#wing-loft-air-product-group` | `/products/wing/` | цвет | `wing-loft-air-light-grey`, `wing-loft-air-dark-grey` | `confirmed` | Поддерживать swatches-ссылки и факты конкретного варианта. |
+| `wing-360-racer-product-group` | Aerocool WING 360 Racer | `https://aerocool.ua/products/wing-360/#wing-360-racer-product-group` | `/products/wing-360/` | цвет | `wing-360-racer-black`, `wing-360-racer-dark-grey` | `confirmed` | Поддерживать swatches-ссылки и факты конкретного варианта. |
+| `wing-360-loft-air-product-group` | Aerocool WING 360 Loft Air | `https://aerocool.ua/products/wing-360/#wing-360-loft-air-product-group` | `/products/wing-360/` | цвет | `wing-360-loft-air-light-grey`, `wing-360-loft-air-dark-grey` | `confirmed` | Поддерживать swatches-ссылки и факты конкретного варианта. |
 | `xtal-racer-product-group` | Aerocool XTAL Racer | `https://aerocool.ua/products/xtal/#xtal-racer-product-group` | `/products/xtal/` | цвет | `xtal-racer-black`, `xtal-racer-dark-grey` | `confirmed` | Поддерживать swatches-ссылки и факты конкретного варианта. |
 | `xtal-loft-air-product-group` | Aerocool XTAL Loft Air | `https://aerocool.ua/products/xtal/#xtal-loft-air-product-group` | `/products/xtal/` | цвет | `xtal-loft-air-light-grey`, `xtal-loft-air-dark-grey` | `confirmed` | Поддерживать swatches-ссылки и факты конкретного варианта. |
 
@@ -159,12 +159,12 @@ Validator-safe правило для `ProductGroup`: выводить `@type`, `
 | entity_id | entity_class | name_en | SKU | MPN | GTIN-13 | series | material | color | adjustability | mechanism | current_jsonld_id | entity_home | product_group |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `sky-360` | Product | Aerocool SKY 360 | `SKY-360-001` | `TEGC-3105101.11` | `4711530967553` | `sky-series` | `mesh-material` | black | `11d-adjustment` | `sync5-mechanism` | `https://aerocool.ua/products/sky/360/#product` | `/products/sky/360/` |  |
-| `sky-light` | Product | Aerocool SKY Light | `SKY-LIGHT-001` | `TEGC-3106101.11` | `4711530967577` | `sky-series` | `mesh-material` | black | `8d-adjustment` | `sync4-mechanism` | `https://aerocool.ua/products/sky/light/#product` | `/products/sky/light/` |  |
-| `wing-loft-air-dark-grey` | ProductVariant | Aerocool WING Loft Air Dark Grey | `WING-LADG-001` | `TEGC-309700Z.Z1` | `4711530966501` | `wing-series` | `loft-air-material` | dark-grey | `11d-adjustment` | `sync5-mechanism` | `https://aerocool.ua/products/wing/loft-air-dark-grey/#product` | `/products/wing/loft-air-dark-grey/` | `wing-loft-air-product-group` |
-| `wing-loft-air-light-grey` | ProductVariant | Aerocool WING Loft Air Light Grey | `WING-LALG-001` | `TEGC-3097004.41` | `4711530966518` | `wing-series` | `loft-air-material` | light-grey | `11d-adjustment` | `sync5-mechanism` | `https://aerocool.ua/products/wing/loft-air-light-grey/#product` | `/products/wing/loft-air-light-grey/` | `wing-loft-air-product-group` |
-| `wing-mesh-black` | Product | Aerocool WING Mesh Black | `WING-MB-001` | `TEGC-3098001.11` | `4711530966525` | `wing-series` | `mesh-material` | black | `11d-adjustment` | `sync5-mechanism` | `https://aerocool.ua/products/wing/mesh-black/#product` | `/products/wing/mesh-black/` |  |
-| `wing-racer-black` | ProductVariant | Aerocool WING Racer Black | `WING-RB-001` | `TEGC-3096001.11` | `4711530966488` | `wing-series` | `racer-material` | black | `11d-adjustment` | `sync5-mechanism` | `https://aerocool.ua/products/wing/racer-black/#product` | `/products/wing/racer-black/` | `wing-racer-product-group` |
-| `wing-racer-dark-grey` | ProductVariant | Aerocool WING Racer Dark Grey | `WING-RDG-001` | `TEGC-309600Z.Z1` | `4711530966495` | `wing-series` | `racer-material` | dark-grey | `11d-adjustment` | `sync5-mechanism` | `https://aerocool.ua/products/wing/racer-dark-grey/#product` | `/products/wing/racer-dark-grey/` | `wing-racer-product-group` |
+| `sky-lite` | Product | Aerocool SKY Lite | `SKY-LITE-001` | `TEGC-3106101.11` | `4711530967577` | `sky-series` | `mesh-material` | black | `8d-adjustment` | `sync4-mechanism` | `https://aerocool.ua/products/sky/lite/#product` | `/products/sky/lite/` |  |
+| `wing-360-loft-air-dark-grey` | ProductVariant | Aerocool WING 360 Loft Air Dark Grey | `WING360-LADG-001` | `TEGC-309700Z.Z1` | `4711530966501` | `wing-360-series` | `loft-air-material` | dark-grey | `11d-adjustment` | `sync5-mechanism` | `https://aerocool.ua/products/wing-360/loft-air-dark-grey/#product` | `/products/wing-360/loft-air-dark-grey/` | `wing-360-loft-air-product-group` |
+| `wing-360-loft-air-light-grey` | ProductVariant | Aerocool WING 360 Loft Air Light Grey | `WING360-LALG-001` | `TEGC-3097004.41` | `4711530966518` | `wing-360-series` | `loft-air-material` | light-grey | `11d-adjustment` | `sync5-mechanism` | `https://aerocool.ua/products/wing-360/loft-air-light-grey/#product` | `/products/wing-360/loft-air-light-grey/` | `wing-360-loft-air-product-group` |
+| `wing-360-mesh-black` | Product | Aerocool WING 360 Mesh Black | `WING360-MB-001` | `TEGC-3098001.11` | `4711530966525` | `wing-360-series` | `mesh-material` | black | `11d-adjustment` | `sync5-mechanism` | `https://aerocool.ua/products/wing-360/mesh-black/#product` | `/products/wing-360/mesh-black/` |  |
+| `wing-360-racer-black` | ProductVariant | Aerocool WING 360 Racer Black | `WING360-RB-001` | `TEGC-3096001.11` | `4711530966488` | `wing-360-series` | `racer-material` | black | `11d-adjustment` | `sync5-mechanism` | `https://aerocool.ua/products/wing-360/racer-black/#product` | `/products/wing-360/racer-black/` | `wing-360-racer-product-group` |
+| `wing-360-racer-dark-grey` | ProductVariant | Aerocool WING 360 Racer Dark Grey | `WING360-RDG-001` | `TEGC-309600Z.Z1` | `4711530966495` | `wing-360-series` | `racer-material` | dark-grey | `11d-adjustment` | `sync5-mechanism` | `https://aerocool.ua/products/wing-360/racer-dark-grey/#product` | `/products/wing-360/racer-dark-grey/` | `wing-360-racer-product-group` |
 | `xtal-loft-air-dark-grey` | ProductVariant | Aerocool XTAL Loft Air Dark Grey | `XTAL-LADG-001` | `TEGC-210010Z.Z1` | `4711530966792` | `xtal-series` | `loft-air-material` | dark-grey | `7d-adjustment` | `sync5-mechanism` | `https://aerocool.ua/products/xtal/loft-air-dark-grey/#product` | `/products/xtal/loft-air-dark-grey/` | `xtal-loft-air-product-group` |
 | `xtal-loft-air-light-grey` | ProductVariant | Aerocool XTAL Loft Air Light Grey | `XTAL-LALG-001` | `TEGC-2100104.41` | `4711530966808` | `xtal-series` | `loft-air-material` | light-grey | `7d-adjustment` | `sync5-mechanism` | `https://aerocool.ua/products/xtal/loft-air-light-grey/#product` | `/products/xtal/loft-air-light-grey/` | `xtal-loft-air-product-group` |
 | `xtal-mesh-black` | Product | Aerocool XTAL Mesh Black | `XTAL-MB-001` | `TEGC-2101101.11` | `4711530966815` | `xtal-series` | `mesh-material` | black | `7d-adjustment` | `sync5-mechanism` | `https://aerocool.ua/products/xtal/mesh-black/#product` | `/products/xtal/mesh-black/` |  |
@@ -186,15 +186,15 @@ Validator-safe правило для `ProductGroup`: выводить `@type`, `
 | entity_id | name_en | name_uk | name_ru | entity_class | schema_candidate | entity_home | status | Сильные страницы | Примечания |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `synchronous-tilt` | Synchronous Tilt | Synchronous Tilt | Synchronous Tilt | Mechanism | `DefinedTerm` или `Thing` | `/articles/what-is-synchronous-tilt/` | `confirmed` | руководство по синхронному наклону; товарные страницы | Главная сущность синхронного наклона. |
-| `sync4-mechanism` | SYNC4 | SYNC4 | SYNC4 | Mechanism | `DefinedTerm` или `Thing` | `/articles/sync4-sync5-mechanism-guide/` | `confirmed` | руководство SYNC4/SYNC5; SKY Light | Использовать там, где в видимом товарном контенте указан SYNC4. |
-| `sync5-mechanism` | SYNC5 | SYNC5 | SYNC5 | Mechanism | `DefinedTerm` или `Thing` | `/articles/sync4-sync5-mechanism-guide/` | `confirmed` | руководство SYNC4/SYNC5; SKY 360, WING, XTAL | Использовать там, где в видимом товарном контенте указан SYNC5. |
+| `sync4-mechanism` | SYNC4 | SYNC4 | SYNC4 | Mechanism | `DefinedTerm` или `Thing` | `/articles/sync4-sync5-mechanism-guide/` | `confirmed` | руководство SYNC4/SYNC5; SKY Lite | Использовать там, где в видимом товарном контенте указан SYNC4. |
+| `sync5-mechanism` | SYNC5 | SYNC5 | SYNC5 | Mechanism | `DefinedTerm` или `Thing` | `/articles/sync4-sync5-mechanism-guide/` | `confirmed` | руководство SYNC4/SYNC5; SKY 360, WING 360, XTAL | Использовать там, где в видимом товарном контенте указан SYNC5. |
 | `7d-adjustment` | 7D adjustment | 7D регулювання | 7D регулировка | Feature | `DefinedTerm` или `Thing` | `/articles/how-to-choose-chair-by-adjustability/` | `confirmed` | руководство по регулировкам; страницы XTAL | Раскрывается через видимые товарные `characteristics` / `additionalProperty`, если они есть. |
-| `8d-adjustment` | 8D adjustment | 8D регулювання | 8D регулировка | Feature | `DefinedTerm` или `Thing` | `/articles/how-to-choose-chair-by-adjustability/` | `confirmed` | руководство по регулировкам; SKY Light | Раскрывается через видимые товарные `characteristics` / `additionalProperty`, если они есть. |
-| `11d-adjustment` | 11D adjustment | 11D регулювання | 11D регулировка | Feature | `DefinedTerm` или `Thing` | `/articles/how-to-choose-chair-by-adjustability/` | `confirmed` | руководство по регулировкам; SKY 360, WING | Раскрывается через видимые товарные `characteristics` / `additionalProperty`, если они есть. |
-| `dual-backrest` | Dual backrest | подвійна спинка | двойная спинка | Feature | `DefinedTerm` или `Thing` | `/articles/what-is-dual-backrest/` | `confirmed` | страницы WING; отдельная статья про Dual backrest | Активировано `2026-05-26`; использовать только там, где видимо обсуждается двойная спинка WING. |
+| `8d-adjustment` | 8D adjustment | 8D регулювання | 8D регулировка | Feature | `DefinedTerm` или `Thing` | `/articles/how-to-choose-chair-by-adjustability/` | `confirmed` | руководство по регулировкам; SKY Lite | Раскрывается через видимые товарные `characteristics` / `additionalProperty`, если они есть. |
+| `11d-adjustment` | 11D adjustment | 11D регулювання | 11D регулировка | Feature | `DefinedTerm` или `Thing` | `/articles/how-to-choose-chair-by-adjustability/` | `confirmed` | руководство по регулировкам; SKY 360, WING 360 | Раскрывается через видимые товарные `characteristics` / `additionalProperty`, если они есть. |
+| `dual-backrest` | Dual backrest | подвійна спинка | двойная спинка | Feature | `DefinedTerm` или `Thing` | `/articles/what-is-dual-backrest/` | `confirmed` | страницы WING 360; отдельная статья про Dual backrest | Активировано `2026-05-26`; использовать только там, где видимо обсуждается двойная спинка WING 360. |
 | `replaceable-elements` | Replaceable elements | змінні елементи | сменные элементы | Feature | `DefinedTerm` или `Thing` | `/articles/what-is-fully-replaceable-design/` | `confirmed` | страницы XTAL; отдельная статья про replaceable design | Активировано `2026-05-26`; использовать только там, где видимо обсуждаются сменные элементы XTAL. |
 | `lumbar-support` | Lumbar support | поперекова підтримка | поясничная поддержка | Feature | `DefinedTerm` или `Thing` | `/products/` | `confirmed` | товарные страницы и страницы серий | Активировано `2026-05-31`; раскрывается через видимые товарные `characteristics` / `additionalProperty`, если они есть. |
-| `armrests-4d-x-360` | 4D X 360 armrests | підлокітники 4D X 360 | подлокотники 4D X 360 | Feature | `DefinedTerm` или `Thing` | `/products/wing/` | `confirmed` | страницы WING | Активировано `2026-05-31`; раскрывается через видимые товарные `characteristics` / `additionalProperty`, если они есть. |
+| `armrests-4d-x-360` | 4D X 360 armrests | підлокітники 4D X 360 | подлокотники 4D X 360 | Feature | `DefinedTerm` или `Thing` | `/products/wing-360/` | `confirmed` | страницы WING 360 | Активировано `2026-05-31`; раскрывается через видимые товарные `characteristics` / `additionalProperty`, если они есть. |
 | `armrests-3d-x-360` | 3D X 360 armrests | підлокітники 3D X 360 | подлокотники 3D X 360 | Feature | `DefinedTerm` или `Thing` | `/products/sky/` | `confirmed` | страницы SKY 360 | Активировано `2026-05-31`; раскрывается через видимые товарные `characteristics` / `additionalProperty`, если они есть. |
 
 ## 14. Сущности сценариев использования и поисковых интентов
@@ -230,29 +230,29 @@ Validator-safe правило для `ProductGroup`: выводить `@type`, `
 
 | Страница | Основные `about_entities` | Кандидаты `mentions_entities` | Статус |
 | --- | --- | --- | --- |
-| `/articles/how-to-choose-aerocool-chair/` | `chair-selection`, `aerocool-catalog` | `sky-series`, `wing-series`, `xtal-series`, `gaming-chair`, `office-chair`, `computer-chair`, `home-office`, `racer-material`, `loft-air-material`, `mesh-material` | `confirmed` |
-| `/articles/how-to-choose-chair-by-adjustability/` | `7d-adjustment`, `8d-adjustment`, `11d-adjustment` | `sky-series`, `wing-series`, `xtal-series`, `sky-light`, `sky-360`, `synchronous-tilt` | `confirmed` |
+| `/articles/how-to-choose-aerocool-chair/` | `chair-selection`, `aerocool-catalog` | `sky-series`, `wing-360-series`, `xtal-series`, `gaming-chair`, `office-chair`, `computer-chair`, `home-office`, `racer-material`, `loft-air-material`, `mesh-material` | `confirmed` |
+| `/articles/how-to-choose-chair-by-adjustability/` | `7d-adjustment`, `8d-adjustment`, `11d-adjustment` | `sky-series`, `wing-360-series`, `xtal-series`, `sky-lite`, `sky-360`, `synchronous-tilt` | `confirmed` |
 | `/articles/racer-vs-loft-air-vs-mesh/` | `racer-material`, `loft-air-material`, `mesh-material` | `leatherette-material`, `fabric-material`, `hot-room`, `gaming-chair`, `office-chair`, `home-office` | `confirmed` |
-| `/articles/sky-light-vs-sky-360/` | `sky-series` | `sky-light`, `sky-360`, `8d-adjustment`, `11d-adjustment`, `sync4-mechanism`, `sync5-mechanism`, `home-office` | `confirmed` |
-| `/articles/sync4-sync5-mechanism-guide/` | `sync4-mechanism`, `sync5-mechanism` | `synchronous-tilt`, `sky-light`, `sky-360`, `wing-series`, `xtal-series` | `confirmed` |
+| `/articles/sky-lite-vs-sky-360/` | `sky-series` | `sky-lite`, `sky-360`, `8d-adjustment`, `11d-adjustment`, `sync4-mechanism`, `sync5-mechanism`, `home-office` | `confirmed` |
+| `/articles/sync4-sync5-mechanism-guide/` | `sync4-mechanism`, `sync5-mechanism` | `synchronous-tilt`, `sky-lite`, `sky-360`, `wing-360-series`, `xtal-series` | `confirmed` |
 | `/articles/what-is-synchronous-tilt/` | `synchronous-tilt` | `sync4-mechanism`, `sync5-mechanism`, `office-chair`, `home-office`, `long-sitting` | `confirmed` |
-| `/articles/wing-vs-xtal/` | `wing-series`, `xtal-series` | `11d-adjustment`, `7d-adjustment`, `dual-backrest`, `replaceable-elements`, `racer-material`, `loft-air-material`, `mesh-material`, `gaming-chair`, `computer-chair`, `home-office` | `confirmed` |
-| `/articles/what-is-dual-backrest/` | `dual-backrest`, `wing-series` | `long-sitting`, `gaming-chair`, `office-chair`, `home-office`, `sync5-mechanism`, `11d-adjustment`, товары и варианты WING | `confirmed` |
+| `/articles/wing-360-vs-xtal/` | `wing-360-series`, `xtal-series` | `11d-adjustment`, `7d-adjustment`, `dual-backrest`, `replaceable-elements`, `racer-material`, `loft-air-material`, `mesh-material`, `gaming-chair`, `computer-chair`, `home-office` | `confirmed` |
+| `/articles/what-is-dual-backrest/` | `dual-backrest`, `wing-360-series` | `long-sitting`, `gaming-chair`, `office-chair`, `home-office`, `sync5-mechanism`, `11d-adjustment`, товары и варианты WING 360 | `confirmed` |
 | `/articles/what-is-fully-replaceable-design/` | `replaceable-elements`, `xtal-series` | `long-sitting`, `gaming-chair`, `office-chair`, `home-office`, `sync5-mechanism`, `7d-adjustment`, товары и варианты XTAL | `confirmed` |
-| `/articles/chair-for-posture-and-long-work/` | `chair-selection`, `long-sitting`, `ergonomic-chair`, `office-chair` | `dual-backrest`, `replaceable-elements`, `sky-series`, `wing-series`, `xtal-series`, mechanisms, materials | `confirmed` |
-| `/articles/gaming-chair-long-sessions/` | `gaming-chair`, `long-sitting`, `chair-selection` | `dual-backrest`, `replaceable-elements`, `wing-series`, `xtal-series`, `sky-series`, materials | `confirmed` |
+| `/articles/chair-for-posture-and-long-work/` | `chair-selection`, `long-sitting`, `ergonomic-chair`, `office-chair` | `dual-backrest`, `replaceable-elements`, `sky-series`, `wing-360-series`, `xtal-series`, mechanisms, materials | `confirmed` |
+| `/articles/gaming-chair-long-sessions/` | `gaming-chair`, `long-sitting`, `chair-selection` | `dual-backrest`, `replaceable-elements`, `wing-360-series`, `xtal-series`, `sky-series`, materials | `confirmed` |
 
 ## 17. Карта сущностей для новостей
 
 | Страница | Основные `about_entities` | Кандидаты `mentions_entities` | Статус |
 | --- | --- | --- | --- |
-| `/news/sky-series-launch/` | `sky-series` | `sky-light`, `sky-360`, `office-chair`, `computer-chair`, `home-office` | `confirmed` |
-| `/news/wing-series-launch/` | `wing-series` | `wing-racer-product-group`, `wing-loft-air-product-group`, `wing-mesh-black`, `11d-adjustment`, `dual-backrest` | `confirmed` |
+| `/news/sky-series-launch/` | `sky-series` | `sky-lite`, `sky-360`, `office-chair`, `computer-chair`, `home-office` | `confirmed` |
+| `/news/wing-360-series-launch/` | `wing-360-series` | `wing-360-racer-product-group`, `wing-360-loft-air-product-group`, `wing-360-mesh-black`, `11d-adjustment`, `dual-backrest` | `confirmed` |
 | `/news/xtal-series-launch/` | `xtal-series` | `xtal-racer-product-group`, `xtal-loft-air-product-group`, `xtal-mesh-black`, `7d-adjustment`, `replaceable-elements` | `confirmed` |
 | `/news/sky-360-launch/` | `sky-360` | `sky-series`, `11d-adjustment`, `sync5-mechanism`, `synchronous-tilt`, `home-office` | `confirmed` |
-| `/news/sky-light-launch/` | `sky-light` | `sky-series`, `8d-adjustment`, `sync4-mechanism`, `synchronous-tilt`, `office-chair` | `confirmed` |
-| `/news/loft-air-and-mesh-focus/` | `loft-air-material`, `mesh-material` | `wing-loft-air-product-group`, `xtal-loft-air-product-group`, `wing-mesh-black`, `xtal-mesh-black`, `hot-room` | `confirmed` |
-| `/news/sync4-sync5-mechanism-update/` | `sync4-mechanism`, `sync5-mechanism` | `synchronous-tilt`, `sky-series`, `wing-series`, `xtal-series` | `confirmed` |
+| `/news/sky-lite-launch/` | `sky-lite` | `sky-series`, `8d-adjustment`, `sync4-mechanism`, `synchronous-tilt`, `office-chair` | `confirmed` |
+| `/news/loft-air-and-mesh-focus/` | `loft-air-material`, `mesh-material` | `wing-360-loft-air-product-group`, `xtal-loft-air-product-group`, `wing-360-mesh-black`, `xtal-mesh-black`, `hot-room` | `confirmed` |
+| `/news/sync4-sync5-mechanism-update/` | `sync4-mechanism`, `sync5-mechanism` | `synchronous-tilt`, `sky-series`, `wing-360-series`, `xtal-series` | `confirmed` |
 
 ## 18. Тройки связей между сущностями
 
@@ -262,26 +262,26 @@ Validator-safe правило для `ProductGroup`: выводить `@type`, `
 | --- | --- | --- | --- |
 | `aerocool-ukraine` | `brand` | `aerocool-brand` | schema локальной организации |
 | `aerocool-ukraine` | `parentOrganization` | `aerocool-global-organization` | schema локальной организации |
-| `aerocool-catalog` | `hasPart` | `sky-series`, `wing-series`, `xtal-series` | `/products/` |
-| `sky-series` | `hasProduct` | `sky-light`, `sky-360` | `/products/sky/` |
-| `wing-series` | `hasProduct` | товары и варианты WING | `/products/wing/` |
+| `aerocool-catalog` | `hasPart` | `sky-series`, `wing-360-series`, `xtal-series` | `/products/` |
+| `sky-series` | `hasProduct` | `sky-lite`, `sky-360` | `/products/sky/` |
+| `wing-360-series` | `hasProduct` | товары и варианты WING 360 | `/products/wing-360/` |
 | `xtal-series` | `hasProduct` | товары и варианты XTAL | `/products/xtal/` |
-| `wing-racer-product-group` | `hasVariant` | `wing-racer-black`, `wing-racer-dark-grey` | видимая навигация вариантов |
-| `wing-loft-air-product-group` | `hasVariant` | `wing-loft-air-light-grey`, `wing-loft-air-dark-grey` | видимая навигация вариантов |
+| `wing-360-racer-product-group` | `hasVariant` | `wing-360-racer-black`, `wing-360-racer-dark-grey` | видимая навигация вариантов |
+| `wing-360-loft-air-product-group` | `hasVariant` | `wing-360-loft-air-light-grey`, `wing-360-loft-air-dark-grey` | видимая навигация вариантов |
 | `xtal-racer-product-group` | `hasVariant` | `xtal-racer-black`, `xtal-racer-dark-grey` | видимая навигация вариантов |
 | `xtal-loft-air-product-group` | `hasVariant` | `xtal-loft-air-light-grey`, `xtal-loft-air-dark-grey` | видимая навигация вариантов |
 | `racer-material` | `isMaterialOf` | варианты товаров Racer | товарные страницы |
 | `loft-air-material` | `isMaterialOf` | варианты товаров Loft Air | товарные страницы |
 | `mesh-material` | `isMaterialOf` | товары SKY и Mesh | товарные страницы |
-| `sync4-mechanism` | `usedIn` | `sky-light` | товарная страница |
-| `sync5-mechanism` | `usedIn` | `sky-360`, товары/варианты WING, товары/варианты XTAL | товарные страницы |
+| `sync4-mechanism` | `usedIn` | `sky-lite` | товарная страница |
+| `sync5-mechanism` | `usedIn` | `sky-360`, товары/варианты WING 360, товары/варианты XTAL | товарные страницы |
 | `delivery-policy` | `appliesTo` | Product offers | product front matter и `/faq/` |
 | `return-policy` | `appliesTo` | Product offers | product front matter и `/faq/` |
 | `warranty-policy` | `appliesTo` | Product offers | product front matter и `/faq/` |
 
 ## 19. Связь с метаданными страницы
 
-Шаблоны поддерживают `about_entities`, `mentions_entities` и `product_group_id`. На `2026-05-07` эти поля заполнены на приоритетных страницах: главной, about, contact, FAQ, product/article/news hubs, страницах серий, актуальных статьях, актуальных новостях и товарных страницах. На `2026-05-31` одиночные ProductGroup-записи удалены, `product_group_id` остался только у реальных групп моделей с несколькими вариантами, а четыре ProductGroup-сущности WING/XTAL стали активны в JSON-LD.
+Шаблоны поддерживают `about_entities`, `mentions_entities` и `product_group_id`. На `2026-05-07` эти поля заполнены на приоритетных страницах: главной, about, contact, FAQ, product/article/news hubs, страницах серий, актуальных статьях, актуальных новостях и товарных страницах. На `2026-05-31` одиночные ProductGroup-записи удалены, `product_group_id` остался только у реальных групп моделей с несколькими вариантами, а четыре ProductGroup-сущности WING 360/XTAL стали активны в JSON-LD.
 
 Будущие добавления по-прежнему нужно делать постранично после проверки этого registry и видимого контента страницы.
 
@@ -289,8 +289,8 @@ Validator-safe правило для `ProductGroup`: выводить `@type`, `
 
 ```yaml
 about_entities:
-  - wing-racer-black
-  - wing-series
+  - wing-360-racer-black
+  - wing-360-series
   - gaming-chair
 mentions_entities:
   - racer-material
@@ -299,10 +299,10 @@ mentions_entities:
   - synchronous-tilt
   - delivery-policy
   - warranty-policy
-product_group_id: "wing-racer-product-group"
+product_group_id: "wing-360-racer-product-group"
 variant_attributes:
   material: "racer-material"
-  color: "black"
+  color: "Racer Black"
 ```
 
 Пример статьи:
@@ -322,7 +322,7 @@ mentions_entities:
 
 - `about_entities` должны содержать главную тему страницы.
 - `mentions_entities` должны содержать видимо обсуждаемые связанные товары, серии, материалы, механизмы, сценарии использования и политики.
-- `product_group_id` должен указывать на реальную multi-variant сущность из раздела 10; сейчас подходят и выводятся в JSON-LD только четыре группы WING/XTAL.
+- `product_group_id` должен указывать на реальную multi-variant сущность из раздела 10; сейчас подходят и выводятся в JSON-LD только четыре группы WING 360/XTAL.
 - `variant_attributes` должны содержать только видимые атрибуты.
 - Неизвестные значения `entity_id` должны ломать QA до production.
 - Значения сущностей должны быть стабильными ID, а не отображаемыми названиями.
@@ -332,18 +332,21 @@ mentions_entities:
 Структурированный источник resolver теперь находится в [data/entities.yaml](../../data/entities.yaml). Его форма соответствует такому паттерну:
 
 ```yaml
-wing-racer-black:
+wing-360-racer-black:
   name:
-    en: "Aerocool WING Racer Black"
-    uk: "Aerocool WING Racer Black"
-    ru: "Aerocool WING Racer Black"
+    en: "Aerocool WING 360 Racer Black"
+    uk: "Aerocool WING 360 Racer Black"
+    ru: "Aerocool WING 360 Racer Black"
   entity_class: "ProductVariant"
   schema_candidate: "Product"
-  current_jsonld_id: "https://aerocool.ua/products/wing/racer-black/#product"
-  entity_home: "/products/wing/racer-black/"
-  parent: "wing-racer-product-group"
+  current_jsonld_id: "https://aerocool.ua/products/wing-360/racer-black/#product"
+  entity_home: "/products/wing-360/racer-black/"
+  parent: "wing-360-racer-product-group"
+  material: "racer-material"
+  color: "black"
+  official_color: "Racer Black"
   related:
-    - "wing-series"
+    - "wing-360-series"
     - "racer-material"
     - "11d-adjustment"
     - "sync5-mechanism"
@@ -358,7 +361,9 @@ wing-racer-black:
 - по умолчанию фильтровать будущие `planned`, `needs-review` и `do-not-markup` сущности из JSON-LD;
 - поддерживать `about`, `mentions`, `isVariantOf` и `inProductGroupWithID`;
 - генерировать registry-based nodes для confirmed dictionary/policy entities, используемых в `about_entities` и `mentions_entities`;
-- выводить `Product.color` из product-сущностей registry;
+- выводить канонический `Product.name` из локализованного `name` product-сущности;
+- выводить `Product.color` из `official_color` product-сущности;
+- использовать нормализованный `color` только как CSS-токен свотча;
 - выводить локализованный `Product.material` по ссылке `material` только для подтвержденной сущности материала;
 - выводить `Product.additionalProperty` из видимых `characteristics`.
 
@@ -423,10 +428,10 @@ Action нельзя создавать как “идею”. Он должен 
 6. Выполнено `2026-05-07`: выводить optional `about` и `mentions` из resolver, когда поля есть во front matter.
 7. Выполнено `2026-05-07`: добавить [22-entity-registry-beginner-guide-2026.md](22-entity-registry-beginner-guide-2026.md).
 8. Выполнено `2026-05-07`: заполнить `about_entities`, `mentions_entities` и staged `product_group_id` на приоритетных страницах.
-9. Выполнено `2026-05-31`: удалить одиночные ProductGroup-записи и оставить `product_group_id` только для реальных цветовых групп вариантов WING/XTAL.
+9. Выполнено `2026-05-31`: удалить одиночные ProductGroup-записи и оставить `product_group_id` только для реальных цветовых групп вариантов WING 360/XTAL.
 10. Выполнено `2026-05-31`: удалить дубликат `products-collection` и оставить `aerocool-catalog` как единственную каноническую сущность каталога.
-11. Выполнено `2026-05-31`: выводить `ProductGroup`, `isVariantOf` и `inProductGroupWithID` для четырех подтвержденных цветовых групп вариантов WING/XTAL.
-12. Выполнено `2026-05-31`: выводить `Product.color` из реестра и `Product.additionalProperty` из видимых `characteristics`.
+11. Выполнено `2026-05-31`: выводить `ProductGroup`, `isVariantOf` и `inProductGroupWithID` для четырех подтвержденных цветовых групп вариантов WING 360/XTAL.
+12. Выполнено `2026-05-31`, уточнено `2026-07-15`: выводить `Product.color` из подтвержденного `official_color`, оставлять нормализованный `color` CSS-свотчам и строить `Product.additionalProperty` из видимых `characteristics`.
 13. Выполнено `2026-07-08`: использовать registry и карту ключевых URL как input для минимального `static/llms.txt`; дальше поддерживать файл как краткую карту сайта, а не как дубликат Entity Registry.
 14. Выполнено `2026-07-12`: выводить локализованный `Product.material` по подтвержденной ссылке `material` главной товарной сущности.
 15. Держать `Callable Actions Registry` как P3-документацию, пока не появятся реальные business endpoints и владельцы.

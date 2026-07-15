@@ -1,6 +1,6 @@
 # Реестр сущностей: руководство для новичка
 
-Обновлено: 2026-07-13.
+Обновлено: 2026-07-15.
 
 Это руководство объясняет `Entity Registry`, то есть реестр сущностей, простым языком. Его задача — помочь человеку, который впервые открыл проект `Aerocool Ukraine`, понять, зачем нужен реестр, где он хранится и как аккуратно добавлять `about_entities`, `mentions_entities` и `product_group_id` в страницы сайта.
 
@@ -12,23 +12,23 @@
 
 - `Aerocool` — бренд.
 - `Aerocool Ukraine` — локальная организация.
-- `Aerocool WING` — серия кресел.
-- `Aerocool WING Racer Black` — конкретный товар.
+- `Aerocool WING 360` — серия кресел.
+- `Aerocool WING 360 Racer Black` — конкретный товар.
 - `Synchronous Tilt` — механизм.
 - `Mesh` — тип поверхности.
 - `Доставка` — сервисная политика.
 
-Если написать в тексте “WING”, человек поймет из контекста, что речь о серии кресел. Поисковая система или AI-модель тоже может догадаться, но ей лучше дать ясную структуру: это не случайное слово, а конкретная сущность с постоянным идентификатором.
+Если написать в тексте “WING 360”, человек поймет из контекста, что речь о серии кресел. Поисковая система или AI-модель тоже может догадаться, но ей лучше дать ясную структуру: это не случайное слово, а конкретная сущность с постоянным идентификатором.
 
 ## 2. Зачем проекту реестр сущностей
 
 Без реестра каждый автор может называть одну и ту же сущность по-разному:
 
-- `wing`;
-- `aerocool-wing`;
-- `wing-series`;
-- `WING chairs`;
-- `серия Wing`.
+- `wing-360`;
+- `aerocool-wing 360`;
+- `wing-360-series`;
+- `WING 360 chairs`;
+- `серия WING 360`.
 
 Для человека это почти одно и то же. Для JSON-LD и графа знаний (`knowledge graph`) это риск: одна реальная сущность начинает выглядеть как несколько разных объектов.
 
@@ -57,17 +57,17 @@
 Файлы в `content/`, например:
 
 - `content/_index.md`;
-- `content/products/wing/racer-black/index.md`;
+- `content/products/wing-360/racer-black/index.md`;
 - `content/articles/how-to-choose-aerocool-chair/index.md`.
 
 Именно сюда точечно добавляются:
 
 ```yaml
 about_entities:
-  - "wing-series"
+  - "wing-360-series"
 mentions_entities:
   - "synchronous-tilt"
-product_group_id: "wing-racer-product-group"
+product_group_id: "wing-360-racer-product-group"
 ```
 
 ### Шаблоны schema.org в Hugo
@@ -106,17 +106,17 @@ product_group_id: "wing-racer-product-group"
 
 > “Какие главные сущности объясняет эта страница?”
 
-Пример для страницы серии WING:
+Пример для страницы серии WING 360:
 
 ```yaml
 about_entities:
-  - "wing-series"
+  - "wing-360-series"
   - "gaming-chair"
   - "computer-chair"
   - "office-chair"
 ```
 
-Здесь страница действительно о серии WING и о сценариях, где она применяется.
+Здесь страница действительно о серии WING 360 и о сценариях, где она применяется.
 
 Пример для статьи про материалы:
 
@@ -140,13 +140,13 @@ about_entities:
 ```yaml
 mentions_entities:
   - "sky-series"
-  - "wing-series"
+  - "wing-360-series"
   - "xtal-series"
   - "home-office"
   - "synchronous-tilt"
 ```
 
-Статья не только о серии SKY или WING, но эти сущности помогают раскрыть выбор.
+Статья не только о серии SKY или WING 360, но эти сущности помогают раскрыть выбор.
 
 ## 8. `product_group_id`: к какой группе вариантов относится товар
 
@@ -155,12 +155,12 @@ mentions_entities:
 Пример:
 
 ```yaml
-product_group_id: "wing-racer-product-group"
+product_group_id: "wing-360-racer-product-group"
 ```
 
-Это значит: конкретный товар, например `WING Racer Black`, относится к группе вариантов `WING Racer`, где есть минимум два соседних варианта одной модели.
+Это значит: конкретный товар, например `WING 360 Racer Black`, относится к группе вариантов `WING 360 Racer`, где есть минимум два соседних варианта одной модели.
 
-Важно: в текущем проекте четыре реальные WING/XTAL группы уже `confirmed`, поэтому для них JSON-LD выводит `ProductGroup`, `isVariantOf` и `inProductGroupWithID`. Новую группу можно добавлять только после двух условий:
+Важно: в текущем проекте четыре реальные WING 360/XTAL группы уже `confirmed`, поэтому для них JSON-LD выводит `ProductGroup`, `isVariantOf` и `inProductGroupWithID`. Новую группу можно добавлять только после двух условий:
 
 1. На странице или в серии есть понятная видимая навигация между вариантами.
 2. Соответствующая сущность `ProductGroup` есть в реестре и переведена в `confirmed`.
@@ -181,7 +181,7 @@ product_group_id: "wing-racer-product-group"
 - локальная организация: `aerocool-ukraine`;
 - каталог: `aerocool-catalog`;
 - серия SKY: `sky-series`;
-- серия WING: `wing-series`;
+- серия WING 360: `wing-360-series`;
 - серия XTAL: `xtal-series`;
 - материал Mesh: `mesh-material`;
 - механизм SYNC5: `sync5-mechanism`;
@@ -235,7 +235,7 @@ about_entities:
   - "aerocool-catalog"
 mentions_entities:
   - "sky-series"
-  - "wing-series"
+  - "wing-360-series"
   - "xtal-series"
 ```
 
@@ -248,7 +248,7 @@ about_entities:
   - "aerocool-catalog"
 mentions_entities:
   - "sky-series"
-  - "wing-series"
+  - "wing-360-series"
   - "xtal-series"
   - "gaming-chair"
   - "office-chair"
@@ -260,14 +260,14 @@ mentions_entities:
 
 ```yaml
 about_entities:
-  - "wing-racer-black"
-  - "wing-series"
+  - "wing-360-racer-black"
+  - "wing-360-series"
   - "gaming-chair"
 mentions_entities:
   - "racer-material"
   - "sync5-mechanism"
   - "11d-adjustment"
-product_group_id: "wing-racer-product-group"
+product_group_id: "wing-360-racer-product-group"
 ```
 
 ### Раздел FAQ

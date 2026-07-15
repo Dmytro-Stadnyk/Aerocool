@@ -32,7 +32,7 @@
     {{- if not $hideSeries -}}
       {{- $groups = $groups | append (dict "name" "series" "label" $seriesLabel "description" $seriesDescription "options" (slice
         (dict "value" "sky" "label" "SKY")
-        (dict "value" "wing" "label" "WING")
+        (dict "value" "wing-360" "label" "WING 360")
         (dict "value" "xtal" "label" "XTAL")
       )) -}}
     {{- end -}}

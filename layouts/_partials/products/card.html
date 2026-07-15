@@ -69,8 +69,8 @@
 {{- $seriesLabel := "" -}}
 {{- if in ($page.Params.categories | default (slice)) "sky" -}}
   {{- $seriesLabel = "SKY" -}}
-{{- else if in ($page.Params.categories | default (slice)) "wing" -}}
-  {{- $seriesLabel = "WING" -}}
+{{- else if in ($page.Params.categories | default (slice)) "wing-360" -}}
+  {{- $seriesLabel = "WING 360" -}}
 {{- else if in ($page.Params.categories | default (slice)) "xtal" -}}
   {{- $seriesLabel = "XTAL" -}}
 {{- end -}}

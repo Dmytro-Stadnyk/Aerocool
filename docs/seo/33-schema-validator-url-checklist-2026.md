@@ -1,6 +1,6 @@
 # Список URL для проверки в Schema.org Validator 2026
 
-Обновлено: 2026-07-13.
+Обновлено: 2026-07-15.
 
 Этот документ содержит полный список публичных URL для ручной проверки через [validator.schema.org](https://validator.schema.org/). Список собран из rendered HTML в `public/**/*.html`: сюда попали только страницы, где реально есть `application/ld+json`.
 
@@ -49,7 +49,7 @@ Schema.org Validator проверяет синтаксис и распознав
 Сначала проверять:
 
 1. Главные страницы: `/`, `/ru/`.
-2. Каталог и серии: `/products/`, `/products/sky/`, `/products/wing/`, `/products/xtal/` и русские версии.
+2. Каталог и серии: `/products/`, `/products/sky/`, `/products/wing-360/`, `/products/xtal/` и русские версии.
 3. Все product pages.
 4. `/faq/`, `/contact/`, `/about/`, `/image-license/`, `/privacy/` и русские версии.
 5. Статьи и новости.
@@ -70,13 +70,13 @@ Schema.org Validator проверяет синтаксис и распознав
 - [ ] https://dev--hugo-aerocool.netlify.app/products/
 - [ ] https://dev--hugo-aerocool.netlify.app/products/sky/
 - [ ] https://dev--hugo-aerocool.netlify.app/products/sky/360/
-- [ ] https://dev--hugo-aerocool.netlify.app/products/sky/light/
-- [ ] https://dev--hugo-aerocool.netlify.app/products/wing/
-- [ ] https://dev--hugo-aerocool.netlify.app/products/wing/loft-air-dark-grey/
-- [ ] https://dev--hugo-aerocool.netlify.app/products/wing/loft-air-light-grey/
-- [ ] https://dev--hugo-aerocool.netlify.app/products/wing/mesh-black/
-- [ ] https://dev--hugo-aerocool.netlify.app/products/wing/racer-black/
-- [ ] https://dev--hugo-aerocool.netlify.app/products/wing/racer-dark-grey/
+- [ ] https://dev--hugo-aerocool.netlify.app/products/sky/lite/
+- [ ] https://dev--hugo-aerocool.netlify.app/products/wing-360/
+- [ ] https://dev--hugo-aerocool.netlify.app/products/wing-360/loft-air-dark-grey/
+- [ ] https://dev--hugo-aerocool.netlify.app/products/wing-360/loft-air-light-grey/
+- [ ] https://dev--hugo-aerocool.netlify.app/products/wing-360/mesh-black/
+- [ ] https://dev--hugo-aerocool.netlify.app/products/wing-360/racer-black/
+- [ ] https://dev--hugo-aerocool.netlify.app/products/wing-360/racer-dark-grey/
 - [ ] https://dev--hugo-aerocool.netlify.app/products/xtal/
 - [ ] https://dev--hugo-aerocool.netlify.app/products/xtal/loft-air-dark-grey/
 - [ ] https://dev--hugo-aerocool.netlify.app/products/xtal/loft-air-light-grey/
@@ -96,13 +96,13 @@ Schema.org Validator проверяет синтаксис и распознав
 - [ ] https://dev--hugo-aerocool.netlify.app/articles/how-to-choose-aerocool-chair/
 - [ ] https://dev--hugo-aerocool.netlify.app/articles/how-to-choose-chair-by-adjustability/
 - [ ] https://dev--hugo-aerocool.netlify.app/articles/racer-vs-loft-air-vs-mesh/
-- [ ] https://dev--hugo-aerocool.netlify.app/articles/sky-light-vs-sky-360/
-- [ ] https://dev--hugo-aerocool.netlify.app/articles/sky-vs-wing-vs-xtal/
+- [ ] https://dev--hugo-aerocool.netlify.app/articles/sky-lite-vs-sky-360/
+- [ ] https://dev--hugo-aerocool.netlify.app/articles/sky-vs-wing-360-vs-xtal/
 - [ ] https://dev--hugo-aerocool.netlify.app/articles/sync4-sync5-mechanism-guide/
 - [ ] https://dev--hugo-aerocool.netlify.app/articles/what-is-dual-backrest/
 - [ ] https://dev--hugo-aerocool.netlify.app/articles/what-is-fully-replaceable-design/
 - [ ] https://dev--hugo-aerocool.netlify.app/articles/what-is-synchronous-tilt/
-- [ ] https://dev--hugo-aerocool.netlify.app/articles/wing-vs-xtal/
+- [ ] https://dev--hugo-aerocool.netlify.app/articles/wing-360-vs-xtal/
 
 ### 4.4. Новости
 
@@ -111,10 +111,10 @@ Schema.org Validator проверяет синтаксис и распознав
 - [ ] https://dev--hugo-aerocool.netlify.app/news/aerocool-practical-chair-guides-update/
 - [ ] https://dev--hugo-aerocool.netlify.app/news/loft-air-and-mesh-focus/
 - [ ] https://dev--hugo-aerocool.netlify.app/news/sky-360-launch/
-- [ ] https://dev--hugo-aerocool.netlify.app/news/sky-light-launch/
+- [ ] https://dev--hugo-aerocool.netlify.app/news/sky-lite-launch/
 - [ ] https://dev--hugo-aerocool.netlify.app/news/sky-series-launch/
 - [ ] https://dev--hugo-aerocool.netlify.app/news/sync4-sync5-mechanism-update/
-- [ ] https://dev--hugo-aerocool.netlify.app/news/wing-series-launch/
+- [ ] https://dev--hugo-aerocool.netlify.app/news/wing-360-series-launch/
 - [ ] https://dev--hugo-aerocool.netlify.app/news/xtal-series-launch/
 
 ## 5. Русские URL
@@ -133,13 +133,13 @@ Schema.org Validator проверяет синтаксис и распознав
 - [ ] https://dev--hugo-aerocool.netlify.app/ru/products/
 - [ ] https://dev--hugo-aerocool.netlify.app/ru/products/sky/
 - [ ] https://dev--hugo-aerocool.netlify.app/ru/products/sky/360/
-- [ ] https://dev--hugo-aerocool.netlify.app/ru/products/sky/light/
-- [ ] https://dev--hugo-aerocool.netlify.app/ru/products/wing/
-- [ ] https://dev--hugo-aerocool.netlify.app/ru/products/wing/loft-air-dark-grey/
-- [ ] https://dev--hugo-aerocool.netlify.app/ru/products/wing/loft-air-light-grey/
-- [ ] https://dev--hugo-aerocool.netlify.app/ru/products/wing/mesh-black/
-- [ ] https://dev--hugo-aerocool.netlify.app/ru/products/wing/racer-black/
-- [ ] https://dev--hugo-aerocool.netlify.app/ru/products/wing/racer-dark-grey/
+- [ ] https://dev--hugo-aerocool.netlify.app/ru/products/sky/lite/
+- [ ] https://dev--hugo-aerocool.netlify.app/ru/products/wing-360/
+- [ ] https://dev--hugo-aerocool.netlify.app/ru/products/wing-360/loft-air-dark-grey/
+- [ ] https://dev--hugo-aerocool.netlify.app/ru/products/wing-360/loft-air-light-grey/
+- [ ] https://dev--hugo-aerocool.netlify.app/ru/products/wing-360/mesh-black/
+- [ ] https://dev--hugo-aerocool.netlify.app/ru/products/wing-360/racer-black/
+- [ ] https://dev--hugo-aerocool.netlify.app/ru/products/wing-360/racer-dark-grey/
 - [ ] https://dev--hugo-aerocool.netlify.app/ru/products/xtal/
 - [ ] https://dev--hugo-aerocool.netlify.app/ru/products/xtal/loft-air-dark-grey/
 - [ ] https://dev--hugo-aerocool.netlify.app/ru/products/xtal/loft-air-light-grey/
@@ -159,13 +159,13 @@ Schema.org Validator проверяет синтаксис и распознав
 - [ ] https://dev--hugo-aerocool.netlify.app/ru/articles/how-to-choose-aerocool-chair/
 - [ ] https://dev--hugo-aerocool.netlify.app/ru/articles/how-to-choose-chair-by-adjustability/
 - [ ] https://dev--hugo-aerocool.netlify.app/ru/articles/racer-vs-loft-air-vs-mesh/
-- [ ] https://dev--hugo-aerocool.netlify.app/ru/articles/sky-light-vs-sky-360/
-- [ ] https://dev--hugo-aerocool.netlify.app/ru/articles/sky-vs-wing-vs-xtal/
+- [ ] https://dev--hugo-aerocool.netlify.app/ru/articles/sky-lite-vs-sky-360/
+- [ ] https://dev--hugo-aerocool.netlify.app/ru/articles/sky-vs-wing-360-vs-xtal/
 - [ ] https://dev--hugo-aerocool.netlify.app/ru/articles/sync4-sync5-mechanism-guide/
 - [ ] https://dev--hugo-aerocool.netlify.app/ru/articles/what-is-dual-backrest/
 - [ ] https://dev--hugo-aerocool.netlify.app/ru/articles/what-is-fully-replaceable-design/
 - [ ] https://dev--hugo-aerocool.netlify.app/ru/articles/what-is-synchronous-tilt/
-- [ ] https://dev--hugo-aerocool.netlify.app/ru/articles/wing-vs-xtal/
+- [ ] https://dev--hugo-aerocool.netlify.app/ru/articles/wing-360-vs-xtal/
 
 ### 5.4. Новости
 
@@ -174,10 +174,10 @@ Schema.org Validator проверяет синтаксис и распознав
 - [ ] https://dev--hugo-aerocool.netlify.app/ru/news/aerocool-practical-chair-guides-update/
 - [ ] https://dev--hugo-aerocool.netlify.app/ru/news/loft-air-and-mesh-focus/
 - [ ] https://dev--hugo-aerocool.netlify.app/ru/news/sky-360-launch/
-- [ ] https://dev--hugo-aerocool.netlify.app/ru/news/sky-light-launch/
+- [ ] https://dev--hugo-aerocool.netlify.app/ru/news/sky-lite-launch/
 - [ ] https://dev--hugo-aerocool.netlify.app/ru/news/sky-series-launch/
 - [ ] https://dev--hugo-aerocool.netlify.app/ru/news/sync4-sync5-mechanism-update/
-- [ ] https://dev--hugo-aerocool.netlify.app/ru/news/wing-series-launch/
+- [ ] https://dev--hugo-aerocool.netlify.app/ru/news/wing-360-series-launch/
 - [ ] https://dev--hugo-aerocool.netlify.app/ru/news/xtal-series-launch/
 
 ## 6. Что фиксировать после проверки

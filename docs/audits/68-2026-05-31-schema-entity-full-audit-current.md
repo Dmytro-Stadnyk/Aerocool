@@ -256,8 +256,8 @@ npm run build
 
 - [content/products/sky/360/index.md](../../content/products/sky/360/index.md);
 - [content/products/sky/360/index.ru.md](../../content/products/sky/360/index.ru.md);
-- [content/products/sky/light/index.md](../../content/products/sky/light/index.md);
-- [content/products/sky/light/index.ru.md](../../content/products/sky/light/index.ru.md).
+- [content/products/sky/lite/index.md](../../content/products/sky/lite/index.md);
+- [content/products/sky/lite/index.ru.md](../../content/products/sky/lite/index.ru.md).
 
 Вывод: front matter дисциплинирован. Source of truth для product facts остается product front matter, владелец бизнес-значений — команда Aerocool Украина.
 

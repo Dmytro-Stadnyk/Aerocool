@@ -1,6 +1,6 @@
 # Руководство по вспомогательным шаблонам Hugo
 
-Обновлено: 2026-07-13.
+Обновлено: 2026-07-15.
 
 ## Зачем нужен этот документ
 
@@ -138,7 +138,7 @@
 ## Быстрая карта shortcode-файлов
 
 - [layouts/_shortcodes/home-hero.html](../../layouts/_shortcodes/home-hero.html) — hero главной страницы и ее H1.
-- [layouts/_shortcodes/home-product-lines.html](../../layouts/_shortcodes/home-product-lines.html) — три входа в серии `SKY`, `WING`, `XTAL` на главной.
+- [layouts/_shortcodes/home-product-lines.html](../../layouts/_shortcodes/home-product-lines.html) — три входа в серии `SKY`, `WING 360`, `XTAL` на главной.
 - [layouts/_shortcodes/home-top-rated-products.html](../../layouts/_shortcodes/home-top-rated-products.html) — товарный блок главной на базе approved отзывов: до 10 товаров на desktop и 6 на mobile.
 - [layouts/_shortcodes/home-choice-benefits.html](../../layouts/_shortcodes/home-choice-benefits.html) — блок преимуществ выбора: механика, регулировки, материалы и сценарии.
 - [layouts/_shortcodes/seo-image.html](../../layouts/_shortcodes/seo-image.html) — контентные изображения с контролем LCP/lazy loading.
@@ -146,7 +146,7 @@
 - [layouts/_shortcodes/contact.html](../../layouts/_shortcodes/contact.html) — контактная `side-by-side` секция для `/contact/` и `/ru/contact/`; содержит Netlify form, WebMCP-аннотации `contact_aerocool_ukraine`, обязательное согласие и ссылку на локализованную политику конфиденциальности.
 - [layouts/_shortcodes/contact-success-alert.html](../../layouts/_shortcodes/contact-success-alert.html) — success alert после отправки контактной формы на `/contact/success/` и `/ru/contact/success/`.
 - [layouts/_shortcodes/about-intro.html](../../layouts/_shortcodes/about-intro.html) — верхний two-column description блок на `/about/` и `/ru/about/`.
-- [layouts/_shortcodes/about-series-preview.html](../../layouts/_shortcodes/about-series-preview.html) — три входа в серии `SKY`, `WING`, `XTAL` на about-странице.
+- [layouts/_shortcodes/about-series-preview.html](../../layouts/_shortcodes/about-series-preview.html) — три входа в серии `SKY`, `WING 360`, `XTAL` на about-странице.
 - [layouts/_shortcodes/about-ergonomics-features.html](../../layouts/_shortcodes/about-ergonomics-features.html) — feature-блок подхода к эргономике на about-странице.
 - [layouts/_shortcodes/about-service-features.html](../../layouts/_shortcodes/about-service-features.html) — feature-блок причин работать с Aerocool на about-странице.
 - [layouts/_shortcodes/about-product-facts.html](../../layouts/_shortcodes/about-product-facts.html) — description list ключевых терминов и характеристик Aerocool.
@@ -171,7 +171,7 @@
 
 ## Быстрая карта товарных шаблонов
 
-- [layouts/_partials/products/card.html](../../layouts/_partials/products/card.html) — товарная карточка для `/products/`, страниц серий, home-блоков и related-блоков. Выводит изображение, название, цену, наличие, rating summary при approved отзывах, color dots и product facts. Для фильтров и сортировки добавляет `data-product-*`: title, price, rating, order, series, material, adjustment, mechanism и availability. Поддерживает флаг `showSeriesInTitle`: в root-каталоге карточка показывает серию в названии товара, например `WING Mesh Black` и `XTAL Mesh Black`, а на страницах конкретных серий сохраняет короткий `linkTitle`, например `Mesh Black`. Видимый CTA остается компактным `Подробнее` / `Детальніше`, а его полное доступное имя формируется через `sr-only` и `$page.Title`, например `Подробнее о модели Aerocool WING Racer Black`.
+- [layouts/_partials/products/card.html](../../layouts/_partials/products/card.html) — товарная карточка для `/products/`, страниц серий, home-блоков и related-блоков. Выводит изображение, название, цену, наличие, rating summary при approved отзывах, color dots и product facts. Для фильтров и сортировки добавляет `data-product-*`: title, price, rating, order, series, material, adjustment, mechanism и availability. Поддерживает флаг `showSeriesInTitle`: в root-каталоге карточка показывает серию в названии товара, например `WING 360 Mesh Black` и `XTAL Mesh Black`, а на страницах конкретных серий сохраняет короткий `linkTitle`, например `Mesh Black`. Видимый CTA остается компактным `Подробнее` / `Детальніше`, а его полное доступное имя формируется через `sr-only` и `$page.Title`, например `Подробнее о модели Aerocool WING 360 Racer Black`.
 - [layouts/_partials/products/color-dots.html](../../layouts/_partials/products/color-dots.html) — компактные цветовые точки в карточках товаров. Для товаров с реальными вариантами главный источник — `product_group_id` и `data/entities.yaml`; если группы нет, helper берет `color` из главной product entity через `about_entities`. Это визуальный сигнал цвета в листинге, а не замена отдельным variant URL и не причина добавлять искусственный `product_group_id` одиночным товарам.
 - [layouts/_partials/products/filters.html](../../layouts/_partials/products/filters.html) — static-first фильтры каталога. На `/products/` показывает группы серии, материала, регулировок, механизма и наличия; на страницах конкретной серии скрывает группу серии. Фильтры не меняют URL и не создают индексируемые filter pages. Форма размечена как WebMCP-инструмент `filter_aerocool_products`; группы checkbox описаны через `fieldset`, чтобы Chrome строил валидную схему параметров.
 - [layouts/_partials/products/sort.html](../../layouts/_partials/products/sort.html) — сортировка каталога: по названию, рейтингу, цене от дешевых и цене от дорогих. Работает вместе с фильтрами через `assets/js/site.js`.
@@ -217,8 +217,8 @@
 
 - `layouts/products/list.html` отвечает за каталоговую структуру, а не обычный blog archive;
 - root `/products/` выводит карточки серий, затем все товары;
-- root `/products/` передает в `products/card.html` флаг `showSeriesInTitle`, чтобы одинаковые короткие `linkTitle` вроде `Mesh Black` и `Racer Black` не выглядели как дубликаты между сериями `WING` и `XTAL`;
-- страницы серий выводят быстрые бейдж-ссылки `SKY`, `WING`, `XTAL` и вторичный бейдж `Весь каталог`;
+- root `/products/` передает в `products/card.html` флаг `showSeriesInTitle`, чтобы одинаковые короткие `linkTitle` вроде `Mesh Black` и `Racer Black` не выглядели как дубликаты между сериями `WING 360` и `XTAL`;
+- страницы серий выводят быстрые бейдж-ссылки `SKY`, `WING 360`, `XTAL` и вторичный бейдж `Весь каталог`;
 - `products/filters.html` и `products/sort.html` подключаются из `layouts/products/list.html`;
 - фильтры должны оставаться static-first: без URL-параметров, без индексируемых filter pages, без canonical/noindex-сюрпризов;
 - активные фильтры, счетчик, reset, сортировка и empty state управляются внешним JS в `assets/js/site.js`;
@@ -521,7 +521,7 @@
 
 - определяет, к каким сериям относится текущая страница:
   - `sky`
-  - `wing`
+  - `wing-360`
   - `xtal`
 - берет данные из:
   - `related_series`
@@ -592,7 +592,7 @@
 - логотип;
 - переключатель языков;
 - desktop menu;
-- desktop catalog flyout для `Весь каталог`, `SKY`, `WING`, `XTAL`;
+- desktop catalog flyout для `Весь каталог`, `SKY`, `WING 360`, `XTAL`;
 - mobile menu с отдельной catalog group;
 - отделяет товарные входы от secondary links вроде FAQ и контактов.
 
@@ -981,7 +981,7 @@
   - `warranty`
   - `aggregateRating`
   - `brand`
-- берет `color` и ссылку `material` из главной товарной сущности `data/entities.yaml`;
+- берет официальный `Product.color` из `official_color`, ссылку `material` — из главной товарной сущности `data/entities.yaml`, а нормализованный `color` оставляет CSS-свотчам;
 - выводит `Product.material` только по подтвержденной сущности материала и использует ее локализованное название;
 - для product facts источником правды является front matter конкретной товарной страницы;
 - merchant-условия из `shippingDetails`, `hasMerchantReturnPolicy` и `acceptedPaymentMethod` читаются из front matter и должны оставаться синхронизированными с видимым товарным текстом и `/faq/` как policy-зеркалом.

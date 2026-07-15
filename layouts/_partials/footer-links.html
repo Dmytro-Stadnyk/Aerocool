@@ -18,7 +18,7 @@
 {{- with site.GetPage "/privacy" }}{{- $pagesScratch.SetInMap "sections" .RelPermalink . -}}{{- end -}}
 
 {{- $seriesScratch := newScratch -}}
-{{- range slice "sky" "wing" "xtal" -}}
+{{- range slice "sky" "wing-360" "xtal" -}}
   {{- with site.GetPage (printf "/products/%s" .) -}}
     {{- $seriesScratch.SetInMap "pages" .RelPermalink . -}}
   {{- end -}}
