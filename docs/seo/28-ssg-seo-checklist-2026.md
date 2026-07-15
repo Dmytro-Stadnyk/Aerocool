@@ -248,7 +248,7 @@ HTML `required` полезен, но не является серверной з
 5. Проверить готовый HTML: robots, canonical, hreflang, sitemap, JSON-LD, ссылки и изображения.
 6. Создать Deploy Preview и проверить 404, redirects, headers, формы и mobile/desktop интерфейс.
 7. Пройти [production quality gate](../quality/14-production-quality-gate-2026.md).
-8. Только после явного решения изменить production environment и включить индексацию.
+8. Выпустить `main` через настроенный Netlify production context и убедиться, что для сборки применено окружение `production`.
 9. После deploy повторить проверку реального URL без опоры на локальный HTML.
 10. Начать полевой мониторинг и не объявлять успех до появления данных.
 

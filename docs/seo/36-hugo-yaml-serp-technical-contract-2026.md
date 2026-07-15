@@ -1,6 +1,6 @@
 # `hugo.yaml` как технический контракт поисковой выдачи 2026
 
-Обновлено: 2026-07-13.
+Обновлено: 2026-07-15.
 
 Этот документ объясняет, как текущий [hugo.yaml](../../hugo.yaml) влияет на SEO, индексацию, мультиязычность, Core Web Vitals, structured data, Agentic Browsing и готовность проекта `Aerocool Ukraine` к борьбе за сильные позиции в Google Search.
 
@@ -33,7 +33,7 @@
 
 ## 2. Краткая оценка текущего `hugo.yaml`
 
-Оценка текущего состояния: **9.4 / 10**.
+Оценка текущего состояния: **9.7 / 10**.
 
 Почему высоко:
 
@@ -48,11 +48,11 @@
 - `x-default` намеренно отсутствует: отдельной нейтральной страницы выбора языка нет, а взаимные `uk-UA` и `ru-UA` соответствуют текущей архитектуре;
 - JSON-LD не включается ложным флагом в конфиге, а управляется локальными partials и `schema_types`;
 - Agentic Browsing слой не требует новых индексируемых URL: WebMCP живет в HTML-формах, а `llms.txt` отдается как статический корневой Markdown-файл;
-- Netlify development/noindex gate сохранен до отдельного production-решения.
+- Netlify разделяет окружения: Production Deploy использует `production`, а Branch Deploy и Deploy Preview сохраняют безопасный `development/noindex`.
 
 Почему не `10 / 10`:
 
-- production-индексация все еще заблокирована в Netlify через `--environment development`;
+- опубликованный основной домен после нового Production Deploy еще нужно проверить отдельно от локальной сборки;
 - `Goldmark unsafe: true` оправдан, но требует дисциплины по сырому HTML в `content/**/*.md`;
 - `params.keywords` остается только внутренним/theme-compatible fallback и не должен восприниматься как Google ranking lever;
 - финальная оценка SERP-готовности невозможна без опубликованного production URL, Google Search Console, PageSpeed Insights и проверки реальных запросов.
@@ -72,7 +72,7 @@
 | `build.buildStats` | включен | Tailwind видит классы из Hugo-шаблонов и контента | 10 |
 | `module.mounts` | `assets` + `hugo_stats.json` | Связка Hugo 0.164 + Tailwind 4.3 | 10 |
 | `Goldmark unsafe` | включен | Нужен для контролируемого HTML, но несет риск при плохом контенте | 8 |
-| `params.env` | `development` | Безопасный fallback, но Netlify production нужно переключать отдельно | 8 |
+| `params.env` | `development` | Безопасный fallback для preview; Production Deploy активируется через `hugo.IsProduction` | 10 |
 | `params.assets.inlineCSS` | `true` | Убирает render-blocking CSS request, требует PSI-контроля размера head | 9 |
 | `outputs.home` | HTML/RSS/JSON | RSS и search JSON для локального поиска | 10 |
 | `mainSections` | `articles`, `news` | Главная берет editorial-поток из нужных разделов | 9 |
@@ -84,10 +84,10 @@
 
 ### P1. Перед production
 
-1. Переключать Netlify на production только отдельным релизом:
-   - `hugo --environment production --gc --minify`;
-   - `HUGO_ENVIRONMENT = "production"`;
-   - проверить, что `params.env` не маскирует production-поведение локальных partials.
+1. Перед отдельным production-релизом проверить настроенный Netlify context:
+   - `[context.production]` запускает `hugo --environment production --gc --minify`;
+   - `[context.production.environment]` задает `HUGO_ENVIRONMENT = "production"`;
+   - общий build и `params.env: development` сохраняют безопасный `noindex` для Branch Deploy и Deploy Preview.
 2. После deploy проверить на опубликованном URL:
    - главная `/` и `/ru/`;
    - `/products/`, серия, товар, статья, новость в двух языках;
@@ -193,12 +193,12 @@ Google Search в обновлении от 2026-06-15 прямо указал, �
 
 WebMCP остается экспериментальным API. При добавлении imperative tools нужно учитывать indirect prompt injection, помечать внешнее или пользовательское содержимое через `untrustedContentHint`, применять `readOnlyHint` только к действиям без изменения состояния и придерживаться ориентиров Chrome: до `500` символов на описание инструмента, `150` на описание параметра, `30` на имя и `1.5K` на отдельный результат.
 
-Chrome отдельно рекомендует проверять агентный путь как систему: правильный выбор инструмента, корректность параметров и завершение пользовательской задачи. Такие проверки дополняют, но не заменяют детерминированные тесты обычного интерфейса. Автоматизированного набора WebMCP-сценариев в репозитории пока нет, поэтому перед production используется ручной протокол из [production gate](../quality/14-production-quality-gate-2026.md).
+Chrome отдельно рекомендует проверять агентный путь как систему: правильный выбор инструмента, корректность параметров и завершение пользовательской задачи. Такие проверки дополняют, но не заменяют детерминированные тесты обычного интерфейса. Автоматизированного набора WebMCP-сценариев в репозитории пока нет, поэтому для production-релиза используется ручной протокол из [production gate](../quality/14-production-quality-gate-2026.md).
 
 При изменении этого слоя читать [аудит 96 с уточнениями от 2026-07-10 и 2026-07-13](../audits/96-2026-07-08-webmcp-llms-agentic-readiness-audit.md), а результат проверять на опубликованном URL.
 
 ## 7. Итог
 
-Текущий `hugo.yaml` уже сильный для проекта на `Hugo 0.164.0` и `Tailwind CSS 4.3`. Главная оставшаяся работа для перехода от сильной технической базы к реальной SERP-конкуренции - production gate, Search Console, PageSpeed Insights на опубликованных URL, конкурентный анализ по кластерам и постоянное обновление контента по реальным данным.
+Текущий `hugo.yaml` уже сильный для проекта на `Hugo 0.164.0` и `Tailwind CSS 4.3`, а production context Netlify закрывает конфигурационный барьер индексации. Главная оставшаяся работа для перехода от сильной технической базы к реальной SERP-конкуренции - проверка фактического Production Deploy, Search Console, PageSpeed Insights на опубликованных URL, конкурентный анализ по кластерам и постоянное обновление контента по реальным данным.
 
-Итоговая оценка `hugo.yaml` как технического SERP-фундамента: **9.4 / 10**.
+Итоговая оценка `hugo.yaml` как технического SERP-фундамента: **9.7 / 10**.

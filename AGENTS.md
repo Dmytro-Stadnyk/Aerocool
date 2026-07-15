@@ -11,8 +11,9 @@
 - Рабочая ветка — `dev`.
 - Branch Deploy — `https://dev--hugo-aerocool.netlify.app/`.
 - `main` используется только для production-релизов `https://aerocool.ua/`.
-- В `netlify.toml` пока зафиксировано `HUGO_ENVIRONMENT = "development"`; это намеренно удерживает все HTML-страницы в `noindex,nofollow`.
-- Не включать production-индексацию без прохождения `docs/quality/14-production-quality-gate-2026.md`.
+- `[context.production]` в `netlify.toml` собирает `main` в окружении `production`; целевые страницы основного домена получают `index,follow`.
+- Общая сборка, Branch Deploy и Deploy Preview остаются в `development` и `noindex,nofollow`.
+- Не выпускать изменения в `main` без прохождения `docs/quality/14-production-quality-gate-2026.md` и повторной проверки опубликованных URL.
 
 ## 2. Зафиксированный стек
 
@@ -78,7 +79,7 @@ Hugo `0.164.0` запускает Tailwind через `css.TailwindCSS` и npm-�
 - серия `Aerocool XTAL`: `Racer Black`, `Racer Dark Grey`, `Loft Air Dark Grey`, `Loft Air Light Grey`, `Mesh Black`;
 - серия `Aerocool WING 360`: `Racer Black`, `Racer Dark Grey`, `Loft Air Dark Grey`, `Loft Air Light Grey`, `Mesh Black`.
 
-В текущем контенте, меню, ссылках, URL, сущностях и schema.org запрещены устаревшие варианты `SKY Light` и официальное название серии `WING` без `360`. Канонический URL серии WING 360 — `/products/wing-360/`, префикс ее ID — `wing-360-`. Проект еще не запущен в production, поэтому для исправленных URL не создавать `aliases` или redirects без отдельного решения владельца.
+В текущем контенте, меню, ссылках, URL, сущностях и schema.org запрещены устаревшие варианты `SKY Light` и официальное название серии `WING` без `360`. Канонический URL серии WING 360 — `/products/wing-360/`, префикс ее ID — `wing-360-`. Маршруты исправлены до первого production-релиза с этой номенклатурой, поэтому не создавать для них `aliases` или redirects без отдельного решения владельца.
 
 Ориентиры объема на каждую языковую версию:
 
@@ -195,7 +196,7 @@ npm run build:production
 - После изменений форм проверить WebMCP-аннотации и обычную отправку без AI-агента.
 - Для contact form отдельно проверить серверный или операционный контроль согласия: HTML-атрибут `required` сам по себе не защищает прямой POST.
 - После изменений отзывов проверить `pending -> approved -> export -> visible HTML`.
-- В development HTML должен оставаться `noindex,nofollow`; перед production отдельно подтвердить `index,follow` только на индексируемых URL.
+- В development и Netlify preview HTML должен оставаться `noindex,nofollow`; в Production Deploy отдельно подтвердить `index,follow` только на индексируемых URL.
 - После изменений документации запустить `npm run docs:check`.
 - Запустить `git diff --check` перед завершением работы.
 

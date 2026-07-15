@@ -86,7 +86,7 @@ npm run build:production
 - метрики кликов пользователей и вспомогательных конверсий отсутствуют;
 - относительный SEO-вес ссылки нельзя измерить одной локальной метрикой.
 
-## 4. Текущее ограничение развертывания
+## 4. Разделение окружений и проверка развертывания
 
 Структурная перелинковка проходит текущую локальную проверку: основные страницы имеют доступные входы, товары связаны с каталогом и сериями, локальные фрагменты существуют, а UK/RU-маршруты согласованы. Числовая оценка приводится только в [текущем полном аудите](../01-documentation-map.md#5-текущий-аудит), чтобы постоянный регламент не хранил устаревший балл.
 
@@ -96,9 +96,9 @@ npm run build:production
 <meta name="robots" content="noindex,nofollow">
 ```
 
-Причина закреплена в [netlify.toml](../../netlify.toml): общий build command использует `hugo --environment development`, а `HUGO_ENVIRONMENT` равен `development`.
+Этот результат относится к предыдущему production deploy. С `2026-07-15` в [netlify.toml](../../netlify.toml) настроен отдельный production context с `hugo --environment production` и `HUGO_ENVIRONMENT = "production"`. Общий build command намеренно остается в `development`, чтобы Branch Deploy и Deploy Preview продолжали получать `noindex,nofollow`.
 
-Это не дефект внутреннего графа, но критическое ограничение развертывания: поисковик не сможет реализовать SEO-эффект даже сильной перелинковки, пока production остается закрытым.
+Конфигурационный барьер снят, но результат считается подтвержденным только после нового Production Deploy и проверки robots meta, canonical, hreflang и sitemap на основном домене. До этой проверки нельзя считать фактическую production-индексацию доказанной.
 
 ## 5. Текущий проверяемый минимум
 
@@ -357,7 +357,7 @@ URL schema.org, пространства имен XML, `@id` и `sameAs` вну�
 
 ### P0. Индексируемость production-сборки
 
-Настроить отдельный Netlify production context с `hugo --environment production`, сохранив `development` и `noindex,nofollow` для `dev` Branch Deploy.
+Выполнено `2026-07-15`: настроен отдельный Netlify production context с `hugo --environment production`, а `development` и `noindex,nofollow` сохранены для Branch Deploy и Deploy Preview.
 
 После production-развертывания проверить:
 
@@ -464,7 +464,7 @@ npm run build:production
 - состояние внешних ссылок;
 - воспроизводимость контроля после каждой production-сборки.
 
-Максимальная оценка невозможна, пока контроль всего графа остается ручным, отсутствуют реальные данные Search Console, не подтверждена production-индексация и нет наблюдения за внешними URL во времени.
+Максимальная оценка невозможна, пока контроль всего графа остается ручным, отсутствуют реальные данные Search Console, не проверена фактическая индексация после нового Production Deploy и нет наблюдения за внешними URL во времени.
 
 ## 17. Официальные источники
 

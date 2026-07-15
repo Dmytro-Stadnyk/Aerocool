@@ -10,13 +10,22 @@
   HUGO_VERSION = "0.164.0"
   # Версия Hugo
   HUGO_ENVIRONMENT = "development"
-  # Временный безопасный режим Hugo: HTML-страницы остаются noindex,nofollow
+  # Безопасный режим по умолчанию: Branch Deploy и Deploy Preview остаются noindex,nofollow
   TZ = "Europe/Kyiv"
   # Часовой пояс
   NODE_VERSION = "24.16.0"
   # Версия Node.js для сборки Tailwind
   NPM_FLAGS = "--legacy-peer-deps"
   # Флаг npm для предотвращения конфликтов зависимостей
+
+# Только Production Deploy ветки main и основного домена получает индексируемый HTML.
+# Общий build выше намеренно остается development, чтобы технические URL веток и preview
+# не конкурировали с canonical URL https://aerocool.ua/ в поисковой выдаче.
+[context.production]
+  command = "git submodule update --init --recursive && node scripts/export_reviews.mjs && hugo --environment production --gc --minify"
+
+[context.production.environment]
+  HUGO_ENVIRONMENT = "production"
 
 # Блок Headers для безопасности, SEO и кеширования
 

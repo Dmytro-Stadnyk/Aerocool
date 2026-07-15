@@ -27,7 +27,7 @@
 - `search`, `404`, alias, `contact/success` и служебная пагинация остаются без JSON-LD;
 - даты `Article` и `NewsArticle` сериализуются как `+03:00`, без `&#43;`.
 
-Фактическая production-сборка от 2026-07-13 содержит `98` HTML-страниц с JSON-LD и `1864` узла верхнего уровня: `24` `Product`, `16` `ProductGroup`, `32` `Article`, `18` `NewsArticle`, `96` `BreadcrumbList`, `2` `FAQPage`, `12` `CollectionPage`, `2` `AboutPage`, `2` `ContactPage`, `196` `ImageObject`, а также узлы `DefinedTerm` и поясняющие `Thing` из реестра сущностей. В число `Thing` входит подтвержденная сущность политики конфиденциальности на двух локализованных страницах. URL пагинации `/page/2+`, `/articles/page/2+`, `/news/page/2+` и русские аналоги остаются навигационными страницами `noindex,follow` без JSON-LD. Из-за временного `HUGO_ENVIRONMENT = "development"` опубликованный Branch Deploy все еще получает `noindex,nofollow`; право на расширенные результаты нужно перепроверить после production-перехода.
+Фактическая production-сборка от 2026-07-13 содержит `98` HTML-страниц с JSON-LD и `1864` узла верхнего уровня: `24` `Product`, `16` `ProductGroup`, `32` `Article`, `18` `NewsArticle`, `96` `BreadcrumbList`, `2` `FAQPage`, `12` `CollectionPage`, `2` `AboutPage`, `2` `ContactPage`, `196` `ImageObject`, а также узлы `DefinedTerm` и поясняющие `Thing` из реестра сущностей. В число `Thing` входит подтвержденная сущность политики конфиденциальности на двух локализованных страницах. URL пагинации `/page/2+`, `/articles/page/2+`, `/news/page/2+` и русские аналоги остаются навигационными страницами `noindex,follow` без JSON-LD. Production context Netlify теперь собирает основной домен с `HUGO_ENVIRONMENT = "production"`, а опубликованный Branch Deploy сохраняет `noindex,nofollow`; право на расширенные результаты нужно перепроверить на реальных URL после Production Deploy.
 
 ### Качество расширенных результатов Google: `9.0/10`
 
@@ -208,7 +208,7 @@ Google отличает технически валидные структури
 
 ## 5. Приоритеты на следующий цикл
 
-1. Пройти [контроль перед production-релизом](../quality/14-production-quality-gate-2026.md): переключить окружение только после финальной проверки `index,follow`, sitemap, canonical, hreflang и опубликованных URL.
+1. Перед каждым релизом пройти [контроль перед production-релизом](../quality/14-production-quality-gate-2026.md): локально проверить `index,follow`, sitemap, canonical и hreflang, а после Production Deploy повторить контроль опубликованных URL.
 2. Выполнено `2026-06-24`: MPN и GTIN добавлены для `SKY 360` и `SKY Lite` в обеих локализациях. Дальше проверять эти идентификаторы по регламенту `31` при изменении официальных данных и в плановом квартальном контроле.
 3. Поддерживать регулярный [отчет по эффективности сущностей](32-entity-performance-report-2026.md) через `npm run entity:report`; поля GSC, AI и бизнеса заполнять после production.
 4. Исполнять регламент товарных фактов при каждом изменении коммерческих и товарных данных.

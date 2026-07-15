@@ -12,9 +12,9 @@
 - Тестовый сайт: `https://dev--hugo-aerocool.netlify.app/`.
 - Production-ветка: `main`.
 - Основной домен: `https://aerocool.ua/`.
-- Сборка Netlify пока намеренно использует окружение `development`.
-- Пока действует это окружение, HTML-страницы получают `noindex,nofollow`. Это защита незавершенного сайта, а не ошибка SEO.
-- Включать production-индексацию можно только после прохождения контрольного списка из `docs/quality/14-production-quality-gate-2026.md`.
+- Netlify Production Deploy использует окружение `production`; полезные страницы основного домена получают `index,follow`.
+- Общая сборка, Branch Deploy и Deploy Preview намеренно используют `development` и получают `noindex,nofollow`, чтобы технические URL не конкурировали с основным доменом.
+- Перед переносом изменений в `main` и после каждого production deploy нужно проходить контрольный список из `docs/quality/14-production-quality-gate-2026.md`.
 
 ## 2. Стек
 
@@ -208,7 +208,7 @@ npm run build
 npm run build:production
 ```
 
-Эта команда нужна для проверки production-HTML. Она не меняет `netlify.toml` и сама по себе не публикует сайт.
+Эта команда нужна для проверки production-HTML. Она не публикует сайт и не заменяет Netlify Production Deploy.
 
 ### Основной локальный контроль
 
@@ -240,7 +240,7 @@ npm run entity:report
 2. Перед push запустите локальные проверки.
 3. Проверьте Branch Deploy `https://dev--hugo-aerocool.netlify.app/`.
 4. Переносите изменения в `main` только как осознанный production-релиз.
-5. Перед production включите production-окружение и убедитесь, что индексируемые страницы получают `index,follow`.
+5. Убедитесь, что Netlify применил `context.production`, а опубликованные индексируемые страницы получают `index,follow`.
 
 Netlify использует атомарные deploy, но браузерный кэш не очищается новым deploy. Поэтому `immutable` допустим только для URL с отпечатком содержимого. Правила маршрутизации и кэширования описаны в `docs/deploy/16-netlify-routing.md`.
 

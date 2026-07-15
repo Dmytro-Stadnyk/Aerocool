@@ -1,8 +1,10 @@
 # Финальный контроль качества перед production-релизом
 
-Обновлено: 2026-07-14.
+Обновлено: 2026-07-15.
 
 Этот документ фиксирует короткий финальный чек перед production-релизом `Aerocool Ukraine`. Он дополняет [13-pagespeed-insights-audit.md](13-pagespeed-insights-audit.md), но не заменяет SEO/schema-проверки.
+
+С `2026-07-15` production context уже настроен в `netlify.toml`: Production Deploy ветки `main` запускает Hugo в окружении `production`, а Branch Deploy и Deploy Preview сохраняют `development` и `noindex,nofollow`. Это подтверждает готовность конфигурации, но не заменяет проверку реального основного домена после deploy. Секрет `REVIEW_EMAIL_HASH_SALT` и migrations production database branch по-прежнему проверяются в Netlify Dashboard без раскрытия значений в репозитории.
 
 Если релиз затрагивает `hugo.yaml`, языки, URL, `params.env`, sitemap, robots, canonical, hreflang или production indexing, сначала читать [36-hugo-yaml-serp-technical-contract-2026.md](../seo/36-hugo-yaml-serp-technical-contract-2026.md).
 
@@ -11,7 +13,7 @@
 Использовать перед:
 
 - переносом `dev` в `main`;
-- переключением Netlify с `development` на `production`;
+- первым выпуском или изменением настроек Netlify production context;
 - крупным изменением `layouts/`, `assets/`, `static/_redirects`, `netlify.toml`, `hugo.yaml`;
 - релизом новых товарных страниц, статей, новостей или серий.
 
@@ -25,6 +27,14 @@ npm run build:production
 mise exec -- hugo config --format json --lang uk
 mise exec -- hugo config --format json --lang ru
 ```
+
+Если менялись `netlify.toml` или production context, дополнительно выполнить:
+
+```bash
+netlify build --offline --context production
+```
+
+В выводе должна быть указана команда `hugo --environment production`, а упаковка Netlify Functions должна завершиться без ошибки.
 
 Если менялись redirects, headers, CSP или 404:
 
