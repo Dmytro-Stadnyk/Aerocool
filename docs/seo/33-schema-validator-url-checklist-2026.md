@@ -4,6 +4,8 @@
 
 Этот документ содержит полный список публичных URL для ручной проверки через [validator.schema.org](https://validator.schema.org/). Список собран из rendered HTML в `public/**/*.html`: сюда попали только страницы, где реально есть `application/ld+json`.
 
+Для последовательной проверки production-страниц без Markdown-разметки используйте [простой список из 98 URL](33-schema-validator-urls-production.txt). В нем каждый адрес `https://aerocool.ua/` находится на отдельной строке.
+
 Текущий base URL для ручной проверки:
 
 ```text

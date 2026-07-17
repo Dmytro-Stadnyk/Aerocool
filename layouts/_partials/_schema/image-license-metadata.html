@@ -5,11 +5,7 @@
 {{- return (dict
   "license" ($licensePath | absURL)
   "acquireLicensePage" ($licensePath | absURL)
-  "creator" (dict
-    "@type" "Organization"
-    "@id" "https://aerocool.io/#organization"
-    "name" "Aerocool Advanced Technologies Corp."
-  )
+  "creator" (dict "@id" "https://aerocool.io/#organization")
   "creditText" "Aerocool"
   "copyrightNotice" "Copyright Aerocool Advanced Technologies Corp. All rights reserved."
 ) -}}
