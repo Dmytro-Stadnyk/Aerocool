@@ -1,6 +1,6 @@
 # Документация Aerocool
 
-Обновлено: 2026-07-13.
+Обновлено: 2026-07-19.
 
 Эта карта задает единый порядок чтения всей документации проекта. Новичку не нужно открывать все файлы сразу: сначала изучите постоянные руководства, относящиеся к задаче, и только затем обращайтесь к историческим аудитам.
 
@@ -84,7 +84,7 @@
 31. `docs/seo/31-product-facts-maintenance-process-2026.md` — владельцы и подтверждение товарных фактов.
 32. `docs/seo/32-entity-performance-report-2026.md` — текущий генерируемый отчет; приложения: `docs/seo/32-entity-performance-report-2026.csv` и `docs/seo/32-entity-performance-overrides.csv`.
 33. `docs/seo/33-schema-validator-url-checklist-2026.md` — список URL для ручной проверки валидаторами.
-34. `docs/content/34-image-design-playbook-2026.md` — форматы, размеры, композиция и QA изображений.
+34. `docs/content/34-image-design-playbook-2026.md` — обязательный стиль "спокойная технологичность", форматы, размеры, промпты и QA изображений.
 35. `docs/seo/35-semantic-core-keyword-strategy-2026.md` — архитектура семантического ядра.
 36. `docs/seo/36-hugo-yaml-serp-technical-contract-2026.md` — canonical, hreflang, sitemap, robots и production SEO.
 37. `docs/content/37-page-content-design-dna-2026.md` — тональность, доказательность и визуальная ДНК страниц.
