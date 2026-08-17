@@ -60,7 +60,7 @@
     </header>
 
     {{- if and $pages (not $hasProductPages) }}
-    <div class="products-list__grid{{ if $hasProductPages }} products-list__grid--products{{ end }} mt-10 space-y-12 lg:grid lg:grid-cols-3 lg:space-y-0 lg:gap-x-8">
+    <div class="products-list__grid products-list__grid--series mt-10 space-y-12 lg:grid lg:grid-cols-3 lg:space-y-0 lg:gap-x-8">
       {{- range $pages }}
       {{- partial "products/card.html" (dict "page" . "context" $) }}
       {{- end }}

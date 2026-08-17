@@ -3082,6 +3082,10 @@ textarea.ui-field {
     gap: 1rem;
 }
 
+.products-list__grid--series {
+    gap: 1.5rem;
+}
+
 .products-list__grid--products {
     gap: 0;
     border-top: 1px solid var(--border);
@@ -3409,6 +3413,10 @@ textarea.ui-field {
     text-decoration: none;
 }
 
+.products-list__card--series {
+    max-width: 22rem;
+}
+
 .products-list__card--product {
     position: relative;
     z-index: 0;
@@ -3462,12 +3470,21 @@ textarea.ui-field {
     text-decoration: none;
 }
 
+.products-list__card--series .products-list__media-link {
+    aspect-ratio: 1 / 1;
+}
+
 .products-list__image {
     width: 100%;
     aspect-ratio: 3 / 2;
     object-fit: cover;
     border-radius: 0.25rem;
     transition: opacity 150ms ease, transform 220ms ease;
+}
+
+.products-list__card--series .products-list__image {
+    height: 100%;
+    aspect-ratio: 1 / 1;
 }
 
 .products-list__card--product .products-list__image {
@@ -3643,6 +3660,11 @@ textarea.ui-field {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
+    .products-list__grid--series {
+        grid-template-columns: repeat(3, minmax(0, 22rem));
+        justify-content: start;
+    }
+
     .products-catalog__layout {
         grid-template-columns: minmax(15rem, 17rem) minmax(0, 1fr);
         gap: 0;
@@ -3655,6 +3677,10 @@ textarea.ui-field {
 
     .products-list__image {
         aspect-ratio: 5 / 6;
+    }
+
+    .products-list__card--series .products-list__image {
+        aspect-ratio: 1 / 1;
     }
 
     .products-list__card--product .products-list__image {
