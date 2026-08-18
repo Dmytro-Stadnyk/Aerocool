@@ -90,29 +90,29 @@
 {{- $imageSrcset := slice -}}
 {{- $imageWidth := 384 -}}
 {{- $imageHeight := 256 -}}
-{{- $imageSizes := "(min-width: 1024px) 22rem, (min-width: 768px) calc((100vw - 5rem) / 2), calc(100vw - 2rem)" -}}
+{{- $imageSizes := "(min-width: 1280px) 360px, (min-width: 1024px) 30vw, (min-width: 640px) 320px, calc(100vw - 2rem)" -}}
 {{- if $isProductCard -}}
-  {{- $imageSizes = "(min-width: 1280px) 252px, (min-width: 1024px) 24vw, (min-width: 640px) 300px, calc(100vw - 2rem)" -}}
+  {{- $imageSizes = "(min-width: 1280px) 220px, (min-width: 1024px) 24vw, (min-width: 640px) 300px, calc(100vw - 2rem)" -}}
 {{- end -}}
 {{- with $coverImage -}}
   {{- $cardImage := ($page.Resources.ByType "image").GetMatch (printf "*%s*" .) -}}
   {{- $globalImage := (resources.ByType "image").GetMatch (printf "*%s*" .) -}}
   {{- $image := or $cardImage $globalImage -}}
   {{- if and $image (in (slice "jpg" "jpeg" "png" "webp") $image.MediaType.SubType) -}}
-    {{- $fallbackWidth := 768 -}}
+    {{- $fallbackWidth := 384 -}}
     {{- if $isProductCard -}}
-      {{- $fallbackWidth = 480 -}}
+      {{- $fallbackWidth = 320 -}}
     {{- end -}}
     {{- if lt $image.Width $fallbackWidth -}}
       {{- $fallbackWidth = $image.Width -}}
     {{- end -}}
-    {{- $fallback := $image.Resize (printf "%dx webp q86" $fallbackWidth) -}}
+    {{- $fallback := $image.Resize (printf "%dx webp q72" $fallbackWidth) -}}
     {{- $imageSrc = $fallback.RelPermalink -}}
     {{- $imageWidth = $fallback.Width -}}
     {{- $imageHeight = $fallback.Height -}}
-    {{- range slice 240 320 480 640 768 960 1200 -}}
+    {{- range slice 240 320 360 384 480 -}}
       {{- if le . $image.Width -}}
-        {{- $variant := $image.Resize (printf "%dx webp q86" .) -}}
+        {{- $variant := $image.Resize (printf "%dx webp q72" .) -}}
         {{- $imageSrcset = $imageSrcset | append (printf "%s %dw" $variant.RelPermalink $variant.Width) -}}
       {{- end -}}
     {{- end -}}
@@ -124,7 +124,7 @@
   {{- end -}}
 {{- end -}}
 <article
-  class="products-list__card{{ if $isProductCard }} products-list__card--product{{ else }} products-list__card--series{{ end }}{{ with $extraClass }} {{ . }}{{ end }} group"
+  class="products-list__card{{ if $isProductCard }} products-list__card--product{{ end }}{{ with $extraClass }} {{ . }}{{ end }} group"
   {{- if $isProductCard }}
   data-product-card
   data-product-title="{{ $cardDisplayTitle | plainify | htmlEscape }}"

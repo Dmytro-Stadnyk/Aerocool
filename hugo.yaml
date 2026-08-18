@@ -92,17 +92,6 @@ module:
       source: hugo_stats.json
       target: assets/notwatching/hugo_stats.json
 
-# Hugo 0.165+ требует явно разрешить запуск Tailwind CSS из Hugo Pipes.
-security:
-  exec:
-    allow:
-      - '^(dart-)?sass$'
-      - '^go$'
-      - '^git$'
-      - '^node$'
-      - '^postcss$'
-      - '^tailwindcss$'
-
 # Настройки Markdown-рендера Goldmark.
 # unsafe: true разрешает HTML внутри content/**/*.md; это нужно для локальных UI-блоков и shortcode-разметки.
 # Не использовать это как повод вставлять случайный HTML: для повторяемых блоков лучше делать shortcode или partial.
